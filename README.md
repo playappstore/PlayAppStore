@@ -1,2 +1,2 @@
 # PlayAppStore
-first init.
+first init, test git config.
