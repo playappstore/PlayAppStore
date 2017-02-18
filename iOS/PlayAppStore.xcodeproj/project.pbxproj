@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A52E36E81E5823E100EB1B5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E36E71E5823E100EB1B5C /* main.m */; };
+		A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E36EA1E5823E100EB1B5C /* AppDelegate.m */; };
+		A52E36F31E5823E100EB1B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A52E36F21E5823E100EB1B5C /* Assets.xcassets */; };
+		A52E36F61E5823E100EB1B5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52E36F41E5823E100EB1B5C /* LaunchScreen.storyboard */; };
+		A52E36FD1E582F5B00EB1B5C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A52E36F71E5823E100EB1B5C /* Info.plist */; };
+		A52E37121E583BB300EB1B5C /* TabControllers.plist in Resources */ = {isa = PBXBuildFile; fileRef = A52E37111E583BB300EB1B5C /* TabControllers.plist */; };
+		A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E372D1E58411C00EB1B5C /* PASTabBarController.m */; };
+		A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E372F1E58411C00EB1B5C /* PASViewController.m */; };
+		A52E37361E58419300EB1B5C /* PASDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37351E58419300EB1B5C /* PASDiscoverController.m */; };
+		A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37381E5841D900EB1B5C /* PASFollowController.m */; };
+		A52E373C1E58420400EB1B5C /* PASSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E373B1E58420400EB1B5C /* PASSettingController.m */; };
+		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.debug.xcconfig"; sourceTree = "<group>"; };
+		5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlayAppStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52E36E31E5823E100EB1B5C /* PlayAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52E36E71E5823E100EB1B5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A52E36E91E5823E100EB1B5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A52E36EA1E5823E100EB1B5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A52E36F21E5823E100EB1B5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A52E36F51E5823E100EB1B5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A52E36F71E5823E100EB1B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A52E37111E583BB300EB1B5C /* TabControllers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TabControllers.plist; sourceTree = "<group>"; };
+		A52E372C1E58411C00EB1B5C /* PASTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASTabBarController.h; sourceTree = "<group>"; };
+		A52E372D1E58411C00EB1B5C /* PASTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASTabBarController.m; sourceTree = "<group>"; };
+		A52E372E1E58411C00EB1B5C /* PASViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASViewController.h; sourceTree = "<group>"; };
+		A52E372F1E58411C00EB1B5C /* PASViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASViewController.m; sourceTree = "<group>"; };
+		A52E37341E58419300EB1B5C /* PASDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverController.h; sourceTree = "<group>"; };
+		A52E37351E58419300EB1B5C /* PASDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDiscoverController.m; sourceTree = "<group>"; };
+		A52E37371E5841D900EB1B5C /* PASFollowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowController.h; sourceTree = "<group>"; };
+		A52E37381E5841D900EB1B5C /* PASFollowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowController.m; sourceTree = "<group>"; };
+		A52E373A1E58420400EB1B5C /* PASSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASSettingController.h; sourceTree = "<group>"; };
+		A52E373B1E58420400EB1B5C /* PASSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASSettingController.m; sourceTree = "<group>"; };
+		A52E373F1E58447000EB1B5C /* PlayAppStorePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayAppStorePrefixHeader.pch; path = PlayAppStore/SubProject/VC/PlayAppStorePrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A52E36E01E5823E100EB1B5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A52E36DA1E5823E100EB1B5C = {
+			isa = PBXGroup;
+			children = (
+				A52E36E51E5823E100EB1B5C /* PlayAppStore */,
+				A52E36E41E5823E100EB1B5C /* Products */,
+				B77A9CAD0657707E09AE3665 /* Pods */,
+				E212502E18BCD25AB5BC6445 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A52E36E41E5823E100EB1B5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A52E36E31E5823E100EB1B5C /* PlayAppStore.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A52E36E51E5823E100EB1B5C /* PlayAppStore */ = {
+			isa = PBXGroup;
+			children = (
+				A52E373D1E58441B00EB1B5C /* Utility */,
+				A52E37321E58413500EB1B5C /* SubProject */,
+				A52E370C1E58399A00EB1B5C /* WorkFlow */,
+				A52E37091E58363500EB1B5C /* Parent */,
+				A52E37081E58361800EB1B5C /* Libs */,
+				A52E36F21E5823E100EB1B5C /* Assets.xcassets */,
+				A52E36F41E5823E100EB1B5C /* LaunchScreen.storyboard */,
+				A52E36F71E5823E100EB1B5C /* Info.plist */,
+				A52E36E61E5823E100EB1B5C /* Supporting Files */,
+			);
+			path = PlayAppStore;
+			sourceTree = "<group>";
+		};
+		A52E36E61E5823E100EB1B5C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A52E36E91E5823E100EB1B5C /* AppDelegate.h */,
+				A52E36EA1E5823E100EB1B5C /* AppDelegate.m */,
+				A52E36E71E5823E100EB1B5C /* main.m */,
+				A52E37111E583BB300EB1B5C /* TabControllers.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A52E37081E58361800EB1B5C /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		A52E37091E58363500EB1B5C /* Parent */ = {
+			isa = PBXGroup;
+			children = (
+				A52E372B1E58411C00EB1B5C /* VC */,
+			);
+			name = Parent;
+			path = Libs/Parent;
+			sourceTree = "<group>";
+		};
+		A52E370C1E58399A00EB1B5C /* WorkFlow */ = {
+			isa = PBXGroup;
+			children = (
+				A52E370D1E5839F300EB1B5C /* SafeCategory */,
+			);
+			path = WorkFlow;
+			sourceTree = "<group>";
+		};
+		A52E370D1E5839F300EB1B5C /* SafeCategory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SafeCategory;
+			sourceTree = "<group>";
+		};
+		A52E372B1E58411C00EB1B5C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A52E372C1E58411C00EB1B5C /* PASTabBarController.h */,
+				A52E372D1E58411C00EB1B5C /* PASTabBarController.m */,
+				A52E372E1E58411C00EB1B5C /* PASViewController.h */,
+				A52E372F1E58411C00EB1B5C /* PASViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A52E37321E58413500EB1B5C /* SubProject */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37331E58413500EB1B5C /* VC */,
+			);
+			path = SubProject;
+			sourceTree = "<group>";
+		};
+		A52E37331E58413500EB1B5C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37341E58419300EB1B5C /* PASDiscoverController.h */,
+				A52E37351E58419300EB1B5C /* PASDiscoverController.m */,
+				A52E37371E5841D900EB1B5C /* PASFollowController.h */,
+				A52E37381E5841D900EB1B5C /* PASFollowController.m */,
+				A52E373A1E58420400EB1B5C /* PASSettingController.h */,
+				A52E373B1E58420400EB1B5C /* PASSettingController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A52E373D1E58441B00EB1B5C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A52E373E1E58441B00EB1B5C /* Define */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		A52E373E1E58441B00EB1B5C /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				A52E373F1E58447000EB1B5C /* PlayAppStorePrefixHeader.pch */,
+			);
+			name = Define;
+			path = VC;
+			sourceTree = "<group>";
+		};
+		B77A9CAD0657707E09AE3665 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */,
+				AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E212502E18BCD25AB5BC6445 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A52E36E21E5823E100EB1B5C /* PlayAppStore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A52E36FA1E5823E100EB1B5C /* Build configuration list for PBXNativeTarget "PlayAppStore" */;
+			buildPhases = (
+				4800F7C13A429CA75C24393C /* [CP] Check Pods Manifest.lock */,
+				A52E36DF1E5823E100EB1B5C /* Sources */,
+				A52E36E01E5823E100EB1B5C /* Frameworks */,
+				A52E36E11E5823E100EB1B5C /* Resources */,
+				D4772DBF725B89B1B6C32512 /* [CP] Embed Pods Frameworks */,
+				914757DACADA400A9606552A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlayAppStore;
+			productName = PlayAppStore;
+			productReference = A52E36E31E5823E100EB1B5C /* PlayAppStore.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A52E36DB1E5823E100EB1B5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Winn;
+				TargetAttributes = {
+					A52E36E21E5823E100EB1B5C = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = VM4WE4CKS5;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A52E36DE1E5823E100EB1B5C /* Build configuration list for PBXProject "PlayAppStore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A52E36DA1E5823E100EB1B5C;
+			productRefGroup = A52E36E41E5823E100EB1B5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A52E36E21E5823E100EB1B5C /* PlayAppStore */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A52E36E11E5823E100EB1B5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52E37121E583BB300EB1B5C /* TabControllers.plist in Resources */,
+				A52E36F61E5823E100EB1B5C /* LaunchScreen.storyboard in Resources */,
+				A52E36F31E5823E100EB1B5C /* Assets.xcassets in Resources */,
+				A52E36FD1E582F5B00EB1B5C /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4800F7C13A429CA75C24393C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		914757DACADA400A9606552A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4772DBF725B89B1B6C32512 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A52E36DF1E5823E100EB1B5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
+				A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */,
+				A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */,
+				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
+				A52E37361E58419300EB1B5C /* PASDiscoverController.m in Sources */,
+				A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */,
+				A52E373C1E58420400EB1B5C /* PASSettingController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A52E36F41E5823E100EB1B5C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A52E36F51E5823E100EB1B5C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A52E36F81E5823E100EB1B5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A52E36F91E5823E100EB1B5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A52E36FB1E5823E100EB1B5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VM4WE4CKS5;
+				INFOPLIST_FILE = PlayAppStore/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = winnhe.PlayAppStore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A52E36FC1E5823E100EB1B5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VM4WE4CKS5;
+				INFOPLIST_FILE = PlayAppStore/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = winnhe.PlayAppStore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A52E36DE1E5823E100EB1B5C /* Build configuration list for PBXProject "PlayAppStore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A52E36F81E5823E100EB1B5C /* Debug */,
+				A52E36F91E5823E100EB1B5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A52E36FA1E5823E100EB1B5C /* Build configuration list for PBXNativeTarget "PlayAppStore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A52E36FB1E5823E100EB1B5C /* Debug */,
+				A52E36FC1E5823E100EB1B5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A52E36DB1E5823E100EB1B5C /* Project object */;
+}

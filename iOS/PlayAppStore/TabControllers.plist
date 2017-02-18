@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>发现</string>
+		<key>iconName</key>
+		<string>default_advice_bar</string>
+		<key>selectedIconName</key>
+		<string>selected_advice_bar</string>
+		<key>className</key>
+		<string>PASDiscoverController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>关注</string>
+		<key>iconName</key>
+		<string>default_service_bar</string>
+		<key>selectedIconName</key>
+		<string>selected_service_bar</string>
+		<key>className</key>
+		<string>PASFollowController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>设置</string>
+		<key>iconName</key>
+		<string>default_more_bar</string>
+		<key>selectedIconName</key>
+		<string>selected_more_bar</string>
+		<key>className</key>
+		<string>PASSettingController</string>
+	</dict>
+</array>
+</plist>
