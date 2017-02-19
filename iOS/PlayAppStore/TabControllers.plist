@@ -6,9 +6,9 @@
 		<key>title</key>
 		<string>发现</string>
 		<key>iconName</key>
-		<string>default_advice_bar</string>
+		<string>tabbar_Discover</string>
 		<key>selectedIconName</key>
-		<string>selected_advice_bar</string>
+		<string>tabbar_Discover_lighted</string>
 		<key>className</key>
 		<string>PASDiscoverController</string>
 	</dict>
@@ -16,9 +16,9 @@
 		<key>title</key>
 		<string>关注</string>
 		<key>iconName</key>
-		<string>default_service_bar</string>
+		<string>tabbar_Follow</string>
 		<key>selectedIconName</key>
-		<string>selected_service_bar</string>
+		<string>tabbar_Follow_lighted</string>
 		<key>className</key>
 		<string>PASFollowController</string>
 	</dict>
@@ -26,9 +26,9 @@
 		<key>title</key>
 		<string>设置</string>
 		<key>iconName</key>
-		<string>default_more_bar</string>
+		<string>tabbar_Setting</string>
 		<key>selectedIconName</key>
-		<string>selected_more_bar</string>
+		<string>tabbar_Setting_lighted</string>
 		<key>className</key>
 		<string>PASSettingController</string>
 	</dict>
