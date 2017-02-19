@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>QMUIKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +37,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>443A23B2C09C2293E20A193F09EECFE3</key>
+		<key>4EF186F82B9687BE68E7E4A581803018</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D1EB260A2D9497E56D5539AF68B99BFD</key>
+		<key>5ECB8C8093A2A3C0C3389BD0BB4AB85B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B963ED4096F8B845CCB0252B9B255977</key>
 		<dict>
 			<key>primary</key>
 			<true/>

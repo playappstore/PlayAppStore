@@ -43,18 +43,15 @@
         [viewControllers addObject:naviController];
         
         // create UITabBarItem
+        naviController.tabBarItem.image = [UIImage imageNamed:imageName];
+        naviController.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
         UITabBarItem *tabBarItem = nil;
         tabBarItem = [[UITabBarItem alloc] init];
         tabBarItem.title = controller.title;
-        [tabBarItem setFinishedSelectedImage:[UIImage imageNamed:imageName] withFinishedUnselectedImage:[UIImage imageNamed:selectedImageName]];
-            controller.tabBarItem = tabBarItem;
-            
         controller.tabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
     
     self.viewControllers = viewControllers;
-    
-
 }
 
 - (void)didReceiveMemoryWarning {

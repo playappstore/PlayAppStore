@@ -1,18 +1,21 @@
 PODS:
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
+  - QMUIKit (1.2)
   - TPKeyboardAvoiding (1.3.1)
 
 DEPENDENCIES:
   - Masonry
   - MBProgressHUD (~> 1.0.0)
+  - QMUIKit (~> 1.2)
   - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  QMUIKit: 8657144089e3a825ceb3c0f0ffd96c8f5de0653a
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
 
-PODFILE CHECKSUM: 1f92855de1dd0eb0cbb496090d1a1102ee778ea1
+PODFILE CHECKSUM: 897f604ea28a53adf4d1c7d8589c2170d5c22f1b
 
 COCOAPODS: 1.2.0

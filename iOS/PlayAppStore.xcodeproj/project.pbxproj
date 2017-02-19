@@ -18,6 +18,20 @@
 		A52E37361E58419300EB1B5C /* PASDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37351E58419300EB1B5C /* PASDiscoverController.m */; };
 		A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37381E5841D900EB1B5C /* PASFollowController.m */; };
 		A52E373C1E58420400EB1B5C /* PASSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E373B1E58420400EB1B5C /* PASSettingController.m */; };
+		A52E374F1E5984D800EB1B5C /* NSArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E374E1E5984D800EB1B5C /* NSArray+Safe.m */; };
+		A52E37551E59855700EB1B5C /* NSMutableArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37541E59855700EB1B5C /* NSMutableArray+Safe.m */; };
+		A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37591E59869E00EB1B5C /* NSString+Format.m */; };
+		A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E375D1E59878100EB1B5C /* NSData+PASAdd.m */; };
+		A52E37611E59895700EB1B5C /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37601E59895700EB1B5C /* NSDictionary+Safe.m */; };
+		A52E37641E59897200EB1B5C /* NSMutableDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37631E59897200EB1B5C /* NSMutableDictionary+Safe.m */; };
+		A52E376A1E598AAA00EB1B5C /* NSManagedObject+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37691E598AAA00EB1B5C /* NSManagedObject+Safe.m */; };
+		A52E376D1E598AFD00EB1B5C /* NSNumber+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E376C1E598AFD00EB1B5C /* NSNumber+Safe.m */; };
+		A52E37701E598B5C00EB1B5C /* NSObject+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E376F1E598B5C00EB1B5C /* NSObject+Safe.m */; };
+		A52E37761E598BA300EB1B5C /* NSMutableSet+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37751E598BA300EB1B5C /* NSMutableSet+Safe.m */; };
+		A52E37791E598BF800EB1B5C /* NSString+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37781E598BF800EB1B5C /* NSString+Safe.m */; };
+		A52E377C1E598C6200EB1B5C /* NSUserDefaults+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E377B1E598C6200EB1B5C /* NSUserDefaults+Safe.m */; };
+		A52E37801E598D6500EB1B5C /* NSDate+TimeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E377F1E598D6500EB1B5C /* NSDate+TimeStamp.m */; };
+		A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37821E598DC000EB1B5C /* NSDate+PASUitls.m */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +56,36 @@
 		A52E37381E5841D900EB1B5C /* PASFollowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowController.m; sourceTree = "<group>"; };
 		A52E373A1E58420400EB1B5C /* PASSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASSettingController.h; sourceTree = "<group>"; };
 		A52E373B1E58420400EB1B5C /* PASSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASSettingController.m; sourceTree = "<group>"; };
-		A52E373F1E58447000EB1B5C /* PlayAppStorePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayAppStorePrefixHeader.pch; path = PlayAppStore/SubProject/VC/PlayAppStorePrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		A52E37411E5982AB00EB1B5C /* SafeCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeCategory.h; sourceTree = "<group>"; };
+		A52E374D1E5984D800EB1B5C /* NSArray+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Safe.h"; sourceTree = "<group>"; };
+		A52E374E1E5984D800EB1B5C /* NSArray+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Safe.m"; sourceTree = "<group>"; };
+		A52E37531E59855700EB1B5C /* NSMutableArray+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Safe.h"; sourceTree = "<group>"; };
+		A52E37541E59855700EB1B5C /* NSMutableArray+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Safe.m"; sourceTree = "<group>"; };
+		A52E37581E59869E00EB1B5C /* NSString+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Format.h"; sourceTree = "<group>"; };
+		A52E37591E59869E00EB1B5C /* NSString+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Format.m"; sourceTree = "<group>"; };
+		A52E375C1E59878100EB1B5C /* NSData+PASAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+PASAdd.h"; sourceTree = "<group>"; };
+		A52E375D1E59878100EB1B5C /* NSData+PASAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+PASAdd.m"; sourceTree = "<group>"; };
+		A52E375F1E59895700EB1B5C /* NSDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Safe.h"; sourceTree = "<group>"; };
+		A52E37601E59895700EB1B5C /* NSDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Safe.m"; sourceTree = "<group>"; };
+		A52E37621E59897200EB1B5C /* NSMutableDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Safe.h"; sourceTree = "<group>"; };
+		A52E37631E59897200EB1B5C /* NSMutableDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Safe.m"; sourceTree = "<group>"; };
+		A52E37681E598AAA00EB1B5C /* NSManagedObject+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Safe.h"; sourceTree = "<group>"; };
+		A52E37691E598AAA00EB1B5C /* NSManagedObject+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Safe.m"; sourceTree = "<group>"; };
+		A52E376B1E598AFD00EB1B5C /* NSNumber+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Safe.h"; sourceTree = "<group>"; };
+		A52E376C1E598AFD00EB1B5C /* NSNumber+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Safe.m"; sourceTree = "<group>"; };
+		A52E376E1E598B5C00EB1B5C /* NSObject+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Safe.h"; sourceTree = "<group>"; };
+		A52E376F1E598B5C00EB1B5C /* NSObject+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Safe.m"; sourceTree = "<group>"; };
+		A52E37741E598BA300EB1B5C /* NSMutableSet+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableSet+Safe.h"; sourceTree = "<group>"; };
+		A52E37751E598BA300EB1B5C /* NSMutableSet+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableSet+Safe.m"; sourceTree = "<group>"; };
+		A52E37771E598BF800EB1B5C /* NSString+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Safe.h"; sourceTree = "<group>"; };
+		A52E37781E598BF800EB1B5C /* NSString+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Safe.m"; sourceTree = "<group>"; };
+		A52E377A1E598C6200EB1B5C /* NSUserDefaults+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Safe.h"; sourceTree = "<group>"; };
+		A52E377B1E598C6200EB1B5C /* NSUserDefaults+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Safe.m"; sourceTree = "<group>"; };
+		A52E377E1E598D6500EB1B5C /* NSDate+TimeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeStamp.h"; sourceTree = "<group>"; };
+		A52E377F1E598D6500EB1B5C /* NSDate+TimeStamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeStamp.m"; sourceTree = "<group>"; };
+		A52E37811E598DC000EB1B5C /* NSDate+PASUitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PASUitls.h"; sourceTree = "<group>"; };
+		A52E37821E598DC000EB1B5C /* NSDate+PASUitls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PASUitls.m"; sourceTree = "<group>"; };
+		A52E37841E5990EF00EB1B5C /* PlayAppStorePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayAppStorePrefixHeader.pch; path = PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +165,7 @@
 		A52E370C1E58399A00EB1B5C /* WorkFlow */ = {
 			isa = PBXGroup;
 			children = (
+				A52E37561E59866C00EB1B5C /* Format */,
 				A52E370D1E5839F300EB1B5C /* SafeCategory */,
 			);
 			path = WorkFlow;
@@ -130,6 +174,15 @@
 		A52E370D1E5839F300EB1B5C /* SafeCategory */ = {
 			isa = PBXGroup;
 			children = (
+				A52E37411E5982AB00EB1B5C /* SafeCategory.h */,
+				A52E37421E59839E00EB1B5C /* NSArray */,
+				A52E37431E59839E00EB1B5C /* NSDictionary */,
+				A52E37441E59839E00EB1B5C /* NSManagedObject */,
+				A52E37451E59839E00EB1B5C /* NSNumber */,
+				A52E37461E59839E00EB1B5C /* NSObject */,
+				A52E37471E59839E00EB1B5C /* NSSet */,
+				A52E37481E59839E00EB1B5C /* NSSting */,
+				A52E37491E59839E00EB1B5C /* NSUserDefault */,
 			);
 			path = SafeCategory;
 			sourceTree = "<group>";
@@ -177,10 +230,126 @@
 		A52E373E1E58441B00EB1B5C /* Define */ = {
 			isa = PBXGroup;
 			children = (
-				A52E373F1E58447000EB1B5C /* PlayAppStorePrefixHeader.pch */,
+				A52E37841E5990EF00EB1B5C /* PlayAppStorePrefixHeader.pch */,
 			);
 			name = Define;
 			path = VC;
+			sourceTree = "<group>";
+		};
+		A52E37421E59839E00EB1B5C /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				A52E374D1E5984D800EB1B5C /* NSArray+Safe.h */,
+				A52E374E1E5984D800EB1B5C /* NSArray+Safe.m */,
+				A52E37531E59855700EB1B5C /* NSMutableArray+Safe.h */,
+				A52E37541E59855700EB1B5C /* NSMutableArray+Safe.m */,
+			);
+			path = NSArray;
+			sourceTree = "<group>";
+		};
+		A52E37431E59839E00EB1B5C /* NSDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				A52E375F1E59895700EB1B5C /* NSDictionary+Safe.h */,
+				A52E37601E59895700EB1B5C /* NSDictionary+Safe.m */,
+				A52E37621E59897200EB1B5C /* NSMutableDictionary+Safe.h */,
+				A52E37631E59897200EB1B5C /* NSMutableDictionary+Safe.m */,
+			);
+			path = NSDictionary;
+			sourceTree = "<group>";
+		};
+		A52E37441E59839E00EB1B5C /* NSManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37681E598AAA00EB1B5C /* NSManagedObject+Safe.h */,
+				A52E37691E598AAA00EB1B5C /* NSManagedObject+Safe.m */,
+			);
+			name = NSManagedObject;
+			path = NSManagerObject;
+			sourceTree = "<group>";
+		};
+		A52E37451E59839E00EB1B5C /* NSNumber */ = {
+			isa = PBXGroup;
+			children = (
+				A52E376B1E598AFD00EB1B5C /* NSNumber+Safe.h */,
+				A52E376C1E598AFD00EB1B5C /* NSNumber+Safe.m */,
+			);
+			path = NSNumber;
+			sourceTree = "<group>";
+		};
+		A52E37461E59839E00EB1B5C /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				A52E376E1E598B5C00EB1B5C /* NSObject+Safe.h */,
+				A52E376F1E598B5C00EB1B5C /* NSObject+Safe.m */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
+		A52E37471E59839E00EB1B5C /* NSSet */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37741E598BA300EB1B5C /* NSMutableSet+Safe.h */,
+				A52E37751E598BA300EB1B5C /* NSMutableSet+Safe.m */,
+			);
+			path = NSSet;
+			sourceTree = "<group>";
+		};
+		A52E37481E59839E00EB1B5C /* NSSting */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37771E598BF800EB1B5C /* NSString+Safe.h */,
+				A52E37781E598BF800EB1B5C /* NSString+Safe.m */,
+			);
+			path = NSSting;
+			sourceTree = "<group>";
+		};
+		A52E37491E59839E00EB1B5C /* NSUserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				A52E377A1E598C6200EB1B5C /* NSUserDefaults+Safe.h */,
+				A52E377B1E598C6200EB1B5C /* NSUserDefaults+Safe.m */,
+			);
+			path = NSUserDefault;
+			sourceTree = "<group>";
+		};
+		A52E37561E59866C00EB1B5C /* Format */ = {
+			isa = PBXGroup;
+			children = (
+				A52E377D1E598D4400EB1B5C /* NSDate */,
+				A52E375B1E59876600EB1B5C /* NSData */,
+				A52E37571E59868300EB1B5C /* NSString */,
+			);
+			path = Format;
+			sourceTree = "<group>";
+		};
+		A52E37571E59868300EB1B5C /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37581E59869E00EB1B5C /* NSString+Format.h */,
+				A52E37591E59869E00EB1B5C /* NSString+Format.m */,
+			);
+			path = NSString;
+			sourceTree = "<group>";
+		};
+		A52E375B1E59876600EB1B5C /* NSData */ = {
+			isa = PBXGroup;
+			children = (
+				A52E375C1E59878100EB1B5C /* NSData+PASAdd.h */,
+				A52E375D1E59878100EB1B5C /* NSData+PASAdd.m */,
+			);
+			path = NSData;
+			sourceTree = "<group>";
+		};
+		A52E377D1E598D4400EB1B5C /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37811E598DC000EB1B5C /* NSDate+PASUitls.h */,
+				A52E37821E598DC000EB1B5C /* NSDate+PASUitls.m */,
+				A52E377E1E598D6500EB1B5C /* NSDate+TimeStamp.h */,
+				A52E377F1E598D6500EB1B5C /* NSDate+TimeStamp.m */,
+			);
+			path = NSDate;
 			sourceTree = "<group>";
 		};
 		B77A9CAD0657707E09AE3665 /* Pods */ = {
@@ -324,13 +493,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */,
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
 				A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */,
+				A52E37611E59895700EB1B5C /* NSDictionary+Safe.m in Sources */,
+				A52E37791E598BF800EB1B5C /* NSString+Safe.m in Sources */,
+				A52E37701E598B5C00EB1B5C /* NSObject+Safe.m in Sources */,
 				A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */,
+				A52E374F1E5984D800EB1B5C /* NSArray+Safe.m in Sources */,
+				A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
 				A52E37361E58419300EB1B5C /* PASDiscoverController.m in Sources */,
+				A52E37801E598D6500EB1B5C /* NSDate+TimeStamp.m in Sources */,
+				A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */,
+				A52E37641E59897200EB1B5C /* NSMutableDictionary+Safe.m in Sources */,
 				A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */,
+				A52E37551E59855700EB1B5C /* NSMutableArray+Safe.m in Sources */,
+				A52E376A1E598AAA00EB1B5C /* NSManagedObject+Safe.m in Sources */,
+				A52E376D1E598AFD00EB1B5C /* NSNumber+Safe.m in Sources */,
 				A52E373C1E58420400EB1B5C /* PASSettingController.m in Sources */,
+				A52E37761E598BA300EB1B5C /* NSMutableSet+Safe.m in Sources */,
+				A52E377C1E598C6200EB1B5C /* NSUserDefaults+Safe.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +627,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VM4WE4CKS5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = winnhe.PlayAppStore;
@@ -457,6 +642,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VM4WE4CKS5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = winnhe.PlayAppStore;
