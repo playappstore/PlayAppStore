@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,22 +42,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>15D5D929ED22714338A2A5A703121B57</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2925578A44E1AACF2F22B7D10157EF59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>390DBBD7BF5DD14089AD95025D207EFF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4EF186F82B9687BE68E7E4A581803018</key>
+		<key>77D952C88EB1901681F5A18548A9213B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5ECB8C8093A2A3C0C3389BD0BB4AB85B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B963ED4096F8B845CCB0252B9B255977</key>
+		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

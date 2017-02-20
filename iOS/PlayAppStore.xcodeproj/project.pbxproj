@@ -15,9 +15,6 @@
 		A52E37121E583BB300EB1B5C /* TabControllers.plist in Resources */ = {isa = PBXBuildFile; fileRef = A52E37111E583BB300EB1B5C /* TabControllers.plist */; };
 		A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E372D1E58411C00EB1B5C /* PASTabBarController.m */; };
 		A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E372F1E58411C00EB1B5C /* PASViewController.m */; };
-		A52E37361E58419300EB1B5C /* PASDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37351E58419300EB1B5C /* PASDiscoverController.m */; };
-		A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37381E5841D900EB1B5C /* PASFollowController.m */; };
-		A52E373C1E58420400EB1B5C /* PASSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E373B1E58420400EB1B5C /* PASSettingController.m */; };
 		A52E374F1E5984D800EB1B5C /* NSArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E374E1E5984D800EB1B5C /* NSArray+Safe.m */; };
 		A52E37551E59855700EB1B5C /* NSMutableArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37541E59855700EB1B5C /* NSMutableArray+Safe.m */; };
 		A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37591E59869E00EB1B5C /* NSString+Format.m */; };
@@ -32,6 +29,12 @@
 		A52E377C1E598C6200EB1B5C /* NSUserDefaults+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E377B1E598C6200EB1B5C /* NSUserDefaults+Safe.m */; };
 		A52E37801E598D6500EB1B5C /* NSDate+TimeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E377F1E598D6500EB1B5C /* NSDate+TimeStamp.m */; };
 		A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37821E598DC000EB1B5C /* NSDate+PASUitls.m */; };
+		A52E37911E5A88A500EB1B5C /* PASDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37901E5A88A500EB1B5C /* PASDiscoverController.m */; };
+		A52E37941E5A88B000EB1B5C /* PASFollowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37931E5A88B000EB1B5C /* PASFollowController.m */; };
+		A52E37971E5A88BF00EB1B5C /* PASSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37961E5A88BF00EB1B5C /* PASSettingController.m */; };
+		A52E37A31E5AC4BE00EB1B5C /* PASNetwrokManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37A21E5AC4BE00EB1B5C /* PASNetwrokManager.m */; };
+		A52E37A81E5AC50300EB1B5C /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37A51E5AC50300EB1B5C /* CheckNetwork.m */; };
+		A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37A71E5AC50300EB1B5C /* Reachability.m */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,12 +53,6 @@
 		A52E372D1E58411C00EB1B5C /* PASTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASTabBarController.m; sourceTree = "<group>"; };
 		A52E372E1E58411C00EB1B5C /* PASViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASViewController.h; sourceTree = "<group>"; };
 		A52E372F1E58411C00EB1B5C /* PASViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASViewController.m; sourceTree = "<group>"; };
-		A52E37341E58419300EB1B5C /* PASDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverController.h; sourceTree = "<group>"; };
-		A52E37351E58419300EB1B5C /* PASDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDiscoverController.m; sourceTree = "<group>"; };
-		A52E37371E5841D900EB1B5C /* PASFollowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowController.h; sourceTree = "<group>"; };
-		A52E37381E5841D900EB1B5C /* PASFollowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowController.m; sourceTree = "<group>"; };
-		A52E373A1E58420400EB1B5C /* PASSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASSettingController.h; sourceTree = "<group>"; };
-		A52E373B1E58420400EB1B5C /* PASSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASSettingController.m; sourceTree = "<group>"; };
 		A52E37411E5982AB00EB1B5C /* SafeCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeCategory.h; sourceTree = "<group>"; };
 		A52E374D1E5984D800EB1B5C /* NSArray+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Safe.h"; sourceTree = "<group>"; };
 		A52E374E1E5984D800EB1B5C /* NSArray+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Safe.m"; sourceTree = "<group>"; };
@@ -86,6 +83,18 @@
 		A52E37811E598DC000EB1B5C /* NSDate+PASUitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PASUitls.h"; sourceTree = "<group>"; };
 		A52E37821E598DC000EB1B5C /* NSDate+PASUitls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PASUitls.m"; sourceTree = "<group>"; };
 		A52E37841E5990EF00EB1B5C /* PlayAppStorePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayAppStorePrefixHeader.pch; path = PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		A52E378F1E5A88A500EB1B5C /* PASDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverController.h; sourceTree = "<group>"; };
+		A52E37901E5A88A500EB1B5C /* PASDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDiscoverController.m; sourceTree = "<group>"; };
+		A52E37921E5A88B000EB1B5C /* PASFollowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowController.h; sourceTree = "<group>"; };
+		A52E37931E5A88B000EB1B5C /* PASFollowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowController.m; sourceTree = "<group>"; };
+		A52E37951E5A88BF00EB1B5C /* PASSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASSettingController.h; sourceTree = "<group>"; };
+		A52E37961E5A88BF00EB1B5C /* PASSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASSettingController.m; sourceTree = "<group>"; };
+		A52E37A11E5AC4BE00EB1B5C /* PASNetwrokManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASNetwrokManager.h; sourceTree = "<group>"; };
+		A52E37A21E5AC4BE00EB1B5C /* PASNetwrokManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASNetwrokManager.m; sourceTree = "<group>"; };
+		A52E37A41E5AC50300EB1B5C /* CheckNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetwork.h; sourceTree = "<group>"; };
+		A52E37A51E5AC50300EB1B5C /* CheckNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetwork.m; sourceTree = "<group>"; };
+		A52E37A61E5AC50300EB1B5C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A52E37A71E5AC50300EB1B5C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,27 +210,17 @@
 		A52E37321E58413500EB1B5C /* SubProject */ = {
 			isa = PBXGroup;
 			children = (
-				A52E37331E58413500EB1B5C /* VC */,
+				A52E37871E5A877300EB1B5C /* Discover */,
+				A52E37861E5A876C00EB1B5C /* Follow */,
+				A52E37851E5A876300EB1B5C /* Setting */,
 			);
 			path = SubProject;
-			sourceTree = "<group>";
-		};
-		A52E37331E58413500EB1B5C /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				A52E37341E58419300EB1B5C /* PASDiscoverController.h */,
-				A52E37351E58419300EB1B5C /* PASDiscoverController.m */,
-				A52E37371E5841D900EB1B5C /* PASFollowController.h */,
-				A52E37381E5841D900EB1B5C /* PASFollowController.m */,
-				A52E373A1E58420400EB1B5C /* PASSettingController.h */,
-				A52E373B1E58420400EB1B5C /* PASSettingController.m */,
-			);
-			path = VC;
 			sourceTree = "<group>";
 		};
 		A52E373D1E58441B00EB1B5C /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				A52E37A01E5AC48700EB1B5C /* Network */,
 				A52E373E1E58441B00EB1B5C /* Define */,
 			);
 			path = Utility;
@@ -350,6 +349,166 @@
 				A52E377F1E598D6500EB1B5C /* NSDate+TimeStamp.m */,
 			);
 			path = NSDate;
+			sourceTree = "<group>";
+		};
+		A52E37851E5A876300EB1B5C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A52E378D1E5A882A00EB1B5C /* Api */,
+				A52E378C1E5A880600EB1B5C /* View */,
+				A52E378B1E5A87F400EB1B5C /* Model */,
+				A52E378A1E5A87D500EB1B5C /* Manager */,
+				A52E37891E5A87AC00EB1B5C /* VC */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		A52E37861E5A876C00EB1B5C /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37981E5A894500EB1B5C /* Api */,
+				A52E37991E5A894500EB1B5C /* Manager */,
+				A52E379A1E5A894500EB1B5C /* Model */,
+				A52E379B1E5A894500EB1B5C /* View */,
+				A52E378E1E5A885500EB1B5C /* VC */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		A52E37871E5A877300EB1B5C /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				A52E379C1E5A895700EB1B5C /* Api */,
+				A52E379D1E5A895700EB1B5C /* Manager */,
+				A52E379E1E5A895700EB1B5C /* Model */,
+				A52E379F1E5A895700EB1B5C /* View */,
+				A52E37881E5A878A00EB1B5C /* VC */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		A52E37881E5A878A00EB1B5C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A52E378F1E5A88A500EB1B5C /* PASDiscoverController.h */,
+				A52E37901E5A88A500EB1B5C /* PASDiscoverController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A52E37891E5A87AC00EB1B5C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37951E5A88BF00EB1B5C /* PASSettingController.h */,
+				A52E37961E5A88BF00EB1B5C /* PASSettingController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A52E378A1E5A87D500EB1B5C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		A52E378B1E5A87F400EB1B5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A52E378C1E5A880600EB1B5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A52E378D1E5A882A00EB1B5C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		A52E378E1E5A885500EB1B5C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37921E5A88B000EB1B5C /* PASFollowController.h */,
+				A52E37931E5A88B000EB1B5C /* PASFollowController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A52E37981E5A894500EB1B5C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		A52E37991E5A894500EB1B5C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		A52E379A1E5A894500EB1B5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A52E379B1E5A894500EB1B5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A52E379C1E5A895700EB1B5C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		A52E379D1E5A895700EB1B5C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		A52E379E1E5A895700EB1B5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A52E379F1E5A895700EB1B5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A52E37A01E5AC48700EB1B5C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A52E37A41E5AC50300EB1B5C /* CheckNetwork.h */,
+				A52E37A51E5AC50300EB1B5C /* CheckNetwork.m */,
+				A52E37A61E5AC50300EB1B5C /* Reachability.h */,
+				A52E37A71E5AC50300EB1B5C /* Reachability.m */,
+				A52E37A11E5AC4BE00EB1B5C /* PASNetwrokManager.h */,
+				A52E37A21E5AC4BE00EB1B5C /* PASNetwrokManager.m */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		B77A9CAD0657707E09AE3665 /* Pods */ = {
@@ -495,23 +654,26 @@
 			files = (
 				A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */,
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
-				A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */,
+				A52E37911E5A88A500EB1B5C /* PASDiscoverController.m in Sources */,
+				A52E37A81E5AC50300EB1B5C /* CheckNetwork.m in Sources */,
 				A52E37611E59895700EB1B5C /* NSDictionary+Safe.m in Sources */,
 				A52E37791E598BF800EB1B5C /* NSString+Safe.m in Sources */,
 				A52E37701E598B5C00EB1B5C /* NSObject+Safe.m in Sources */,
 				A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */,
 				A52E374F1E5984D800EB1B5C /* NSArray+Safe.m in Sources */,
 				A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */,
+				A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
-				A52E37361E58419300EB1B5C /* PASDiscoverController.m in Sources */,
 				A52E37801E598D6500EB1B5C /* NSDate+TimeStamp.m in Sources */,
 				A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */,
 				A52E37641E59897200EB1B5C /* NSMutableDictionary+Safe.m in Sources */,
+				A52E37971E5A88BF00EB1B5C /* PASSettingController.m in Sources */,
 				A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */,
 				A52E37551E59855700EB1B5C /* NSMutableArray+Safe.m in Sources */,
+				A52E37941E5A88B000EB1B5C /* PASFollowController.m in Sources */,
 				A52E376A1E598AAA00EB1B5C /* NSManagedObject+Safe.m in Sources */,
 				A52E376D1E598AFD00EB1B5C /* NSNumber+Safe.m in Sources */,
-				A52E373C1E58420400EB1B5C /* PASSettingController.m in Sources */,
+				A52E37A31E5AC4BE00EB1B5C /* PASNetwrokManager.m in Sources */,
 				A52E37761E598BA300EB1B5C /* NSMutableSet+Safe.m in Sources */,
 				A52E377C1E598C6200EB1B5C /* NSUserDefaults+Safe.m in Sources */,
 			);
