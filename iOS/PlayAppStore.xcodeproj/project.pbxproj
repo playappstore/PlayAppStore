@@ -35,6 +35,9 @@
 		A52E37A31E5AC4BE00EB1B5C /* PASNetwrokManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37A21E5AC4BE00EB1B5C /* PASNetwrokManager.m */; };
 		A52E37A81E5AC50300EB1B5C /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37A51E5AC50300EB1B5C /* CheckNetwork.m */; };
 		A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37A71E5AC50300EB1B5C /* Reachability.m */; };
+		A540D25E1E5D6B0700DD6756 /* PASApplicationDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = A540D25D1E5D6B0700DD6756 /* PASApplicationDetailController.m */; };
+		A540D2621E5D6E8300DD6756 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A540D2641E5D6E8300DD6756 /* InfoPlist.strings */; };
+		A540D2681E5D711B00DD6756 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A540D26A1E5D711B00DD6756 /* Localizable.strings */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +98,13 @@
 		A52E37A51E5AC50300EB1B5C /* CheckNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetwork.m; sourceTree = "<group>"; };
 		A52E37A61E5AC50300EB1B5C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A52E37A71E5AC50300EB1B5C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A540D25C1E5D6B0700DD6756 /* PASApplicationDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASApplicationDetailController.h; sourceTree = "<group>"; };
+		A540D25D1E5D6B0700DD6756 /* PASApplicationDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASApplicationDetailController.m; sourceTree = "<group>"; };
+		A540D25F1E5D6DEC00DD6756 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		A540D2631E5D6E8300DD6756 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A540D2651E5D6EA300DD6756 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A540D2691E5D711B00DD6756 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A540D26B1E5D711D00DD6756 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +149,8 @@
 				A52E36F21E5823E100EB1B5C /* Assets.xcassets */,
 				A52E36F41E5823E100EB1B5C /* LaunchScreen.storyboard */,
 				A52E36F71E5823E100EB1B5C /* Info.plist */,
+				A540D26A1E5D711B00DD6756 /* Localizable.strings */,
+				A540D2641E5D6E8300DD6756 /* InfoPlist.strings */,
 				A52E36E61E5823E100EB1B5C /* Supporting Files */,
 			);
 			path = PlayAppStore;
@@ -392,6 +404,8 @@
 			children = (
 				A52E378F1E5A88A500EB1B5C /* PASDiscoverController.h */,
 				A52E37901E5A88A500EB1B5C /* PASDiscoverController.m */,
+				A540D25C1E5D6B0700DD6756 /* PASApplicationDetailController.h */,
+				A540D25D1E5D6B0700DD6756 /* PASApplicationDetailController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -574,6 +588,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = A52E36DA1E5823E100EB1B5C;
 			productRefGroup = A52E36E41E5823E100EB1B5C /* Products */;
@@ -591,9 +606,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52E37121E583BB300EB1B5C /* TabControllers.plist in Resources */,
+				A540D2681E5D711B00DD6756 /* Localizable.strings in Resources */,
 				A52E36F61E5823E100EB1B5C /* LaunchScreen.storyboard in Resources */,
 				A52E36F31E5823E100EB1B5C /* Assets.xcassets in Resources */,
 				A52E36FD1E582F5B00EB1B5C /* Info.plist in Resources */,
+				A540D2621E5D6E8300DD6756 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +681,7 @@
 				A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */,
 				A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
+				A540D25E1E5D6B0700DD6756 /* PASApplicationDetailController.m in Sources */,
 				A52E37801E598D6500EB1B5C /* NSDate+TimeStamp.m in Sources */,
 				A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */,
 				A52E37641E59897200EB1B5C /* NSMutableDictionary+Safe.m in Sources */,
@@ -686,8 +704,27 @@
 			isa = PBXVariantGroup;
 			children = (
 				A52E36F51E5823E100EB1B5C /* Base */,
+				A540D25F1E5D6DEC00DD6756 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A540D2641E5D6E8300DD6756 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A540D2631E5D6E8300DD6756 /* en */,
+				A540D2651E5D6EA300DD6756 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A540D26A1E5D711B00DD6756 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A540D2691E5D711B00DD6756 /* en */,
+				A540D26B1E5D711D00DD6756 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -697,6 +734,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -745,6 +783,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -792,6 +831,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = winnhe.PlayAppStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -807,6 +847,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = winnhe.PlayAppStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
