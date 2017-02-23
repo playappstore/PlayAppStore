@@ -10,6 +10,7 @@
 
 @interface PASViewController : UIViewController
 
+@property (nonatomic, weak) UIView *navLine;
 
 @end
 
