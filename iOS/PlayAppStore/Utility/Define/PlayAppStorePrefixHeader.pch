@@ -10,5 +10,7 @@
 #define PlayAppStorePrefixHeader_pch
 
 #import "SafeCategory.h"
+#import "PASBasicDefine.h"
+#import "Masonry.h"
 
 #endif /* PlayAppStorePrefixHeader_pch */

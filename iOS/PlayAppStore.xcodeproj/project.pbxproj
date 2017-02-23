@@ -38,6 +38,9 @@
 		A540D25E1E5D6B0700DD6756 /* PASApplicationDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = A540D25D1E5D6B0700DD6756 /* PASApplicationDetailController.m */; };
 		A540D2621E5D6E8300DD6756 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A540D2641E5D6E8300DD6756 /* InfoPlist.strings */; };
 		A540D2681E5D711B00DD6756 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A540D26A1E5D711B00DD6756 /* Localizable.strings */; };
+		A540D26F1E5D83DA00DD6756 /* PASApplicationDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A540D26E1E5D83DA00DD6756 /* PASApplicationDetailCell.m */; };
+		A540D2721E5E78FA00DD6756 /* PASApplicationDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A540D2711E5E78FA00DD6756 /* PASApplicationDetailHeadView.m */; };
+		A540D2751E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A540D2741E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.m */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +108,13 @@
 		A540D2651E5D6EA300DD6756 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		A540D2691E5D711B00DD6756 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A540D26B1E5D711D00DD6756 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A540D26C1E5D82F200DD6756 /* PASBasicDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASBasicDefine.h; path = PlayAppStore/PASBasicDefine.h; sourceTree = SOURCE_ROOT; };
+		A540D26D1E5D83DA00DD6756 /* PASApplicationDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASApplicationDetailCell.h; sourceTree = "<group>"; };
+		A540D26E1E5D83DA00DD6756 /* PASApplicationDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASApplicationDetailCell.m; sourceTree = "<group>"; };
+		A540D2701E5E78FA00DD6756 /* PASApplicationDetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASApplicationDetailHeadView.h; sourceTree = "<group>"; };
+		A540D2711E5E78FA00DD6756 /* PASApplicationDetailHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASApplicationDetailHeadView.m; sourceTree = "<group>"; };
+		A540D2731E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASApplicationDetailSwitchCell.h; sourceTree = "<group>"; };
+		A540D2741E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASApplicationDetailSwitchCell.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				A52E37841E5990EF00EB1B5C /* PlayAppStorePrefixHeader.pch */,
+				A540D26C1E5D82F200DD6756 /* PASBasicDefine.h */,
 			);
 			name = Define;
 			path = VC;
@@ -508,6 +519,12 @@
 		A52E379F1E5A895700EB1B5C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A540D2701E5E78FA00DD6756 /* PASApplicationDetailHeadView.h */,
+				A540D2711E5E78FA00DD6756 /* PASApplicationDetailHeadView.m */,
+				A540D26D1E5D83DA00DD6756 /* PASApplicationDetailCell.h */,
+				A540D26E1E5D83DA00DD6756 /* PASApplicationDetailCell.m */,
+				A540D2731E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.h */,
+				A540D2741E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -670,6 +687,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */,
+				A540D2721E5E78FA00DD6756 /* PASApplicationDetailHeadView.m in Sources */,
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
 				A52E37911E5A88A500EB1B5C /* PASDiscoverController.m in Sources */,
 				A52E37A81E5AC50300EB1B5C /* CheckNetwork.m in Sources */,
@@ -681,12 +699,14 @@
 				A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */,
 				A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
+				A540D26F1E5D83DA00DD6756 /* PASApplicationDetailCell.m in Sources */,
 				A540D25E1E5D6B0700DD6756 /* PASApplicationDetailController.m in Sources */,
 				A52E37801E598D6500EB1B5C /* NSDate+TimeStamp.m in Sources */,
 				A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */,
 				A52E37641E59897200EB1B5C /* NSMutableDictionary+Safe.m in Sources */,
 				A52E37971E5A88BF00EB1B5C /* PASSettingController.m in Sources */,
 				A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */,
+				A540D2751E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.m in Sources */,
 				A52E37551E59855700EB1B5C /* NSMutableArray+Safe.m in Sources */,
 				A52E37941E5A88B000EB1B5C /* PASFollowController.m in Sources */,
 				A52E376A1E598AAA00EB1B5C /* NSManagedObject+Safe.m in Sources */,
