@@ -10,11 +10,15 @@
 #import "PASApplicationDetailCell.h"
 #import "PASApplicationDetailSwitchCell.h"
 #import "PASApplicationDetailHeadView.h"
+#import "PASShareActivity.h"
+#import "PASQRCodeActionSheet.h"
 
-@interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailHeadViewDelegate, PASApplicationDetailSwitchCellDelegate>
+
+@interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailHeadViewDelegate, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate>
 
 @property (nonatomic, strong) PASApplicationDetailHeadView *headerView;
 @property (nonatomic, strong) UITableView *detailTableView;
+@property (nonatomic, strong) PASQRCodeActionSheet *qrCodeView;
 
 
 @end
@@ -41,6 +45,42 @@
 }
 - (void)shareButtonDidTap:(UIButton *)shareButton {
     NSLog(@"========ShareButtonAleadyClicked, please do next!=====");
+    NSString *text = @"分享内容";
+    
+    UIImage *image = [UIImage imageNamed:@"pas_QRCode"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://www.baidu.com"];
+    
+    //数组中放入分享的内容
+    
+    NSArray *activityItems = @[text, image, url];
+    
+    //自定义 customActivity继承于UIActivity,创建自定义的Activity加在数组Activities中。
+    PASShareActivity * custom = [[PASShareActivity alloc] initWithTitie:@"二维码" withActivityImage:[UIImage imageNamed:@"pas_QRCode"] withUrl:url withType:@"customActivity" withShareContext:activityItems];
+    custom.delegate = self;
+    NSArray *activities = @[custom];
+    
+    // 实现服务类型控制器
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:activities];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo, UIActivityTypePrint, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToTencentWeibo, UIActivityTypeCopyToPasteboard];
+    // 分享类型
+    [activityViewController setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
+        
+        // 显示选中的分享类型
+        NSLog(@"当前选择分享平台 %@",activityType);
+        
+        if (completed) {
+            
+            NSLog(@"分享成功");
+            
+        }else {
+            
+            NSLog(@"分享失败");
+            
+        }
+    }];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 
@@ -50,6 +90,12 @@
 
 }
 
+#pragma mark - PASShareActivityDelegate
+- (void)qrCodeTaped {
+    NSLog(@"二维码被点击了");
+    _qrCodeView = [[PASQRCodeActionSheet alloc] initWithDownloadURLString:@"www.google.com"];
+    [_qrCodeView show];
+}
 
 #pragma mark - UITableView Delegate & DataResource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
