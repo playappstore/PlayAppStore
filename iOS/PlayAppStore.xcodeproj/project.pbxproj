@@ -28,8 +28,6 @@
 		D3C052531E63FAFA002268B1 /* FindCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C0524B1E63FAFA002268B1 /* FindCollectionViewCell.m */; };
 		D3C052541E63FAFA002268B1 /* LCStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C0524D1E63FAFA002268B1 /* LCStarView.m */; };
 		D3C0525C1E63FC57002268B1 /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C0525B1E63FC57002268B1 /* UIImageView+CornerRadius.m */; };
-		D3C0525F1E63FCBE002268B1 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C0525D1E63FCBE002268B1 /* Icon-60@2x.png */; };
-		D3C052601E63FCBE002268B1 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C0525E1E63FCBE002268B1 /* Icon-60@3x.png */; };
 		D3C052631E63FEB7002268B1 /* PASDescoverListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C052621E63FEB7002268B1 /* PASDescoverListViewController.m */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
@@ -80,8 +78,6 @@
 		D3C052571E63FBD4002268B1 /* PlayAppStorePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayAppStorePrefixHeader.pch; sourceTree = "<group>"; };
 		D3C0525A1E63FC57002268B1 /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
 		D3C0525B1E63FC57002268B1 /* UIImageView+CornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CornerRadius.m"; sourceTree = "<group>"; };
-		D3C0525D1E63FCBE002268B1 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
-		D3C0525E1E63FCBE002268B1 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
 		D3C052611E63FEB7002268B1 /* PASDescoverListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDescoverListViewController.h; sourceTree = "<group>"; };
 		D3C052621E63FEB7002268B1 /* PASDescoverListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDescoverListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,8 +225,6 @@
 		D3C0523C1E63FAFA002268B1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D3C0525D1E63FCBE002268B1 /* Icon-60@2x.png */,
-				D3C0525E1E63FCBE002268B1 /* Icon-60@3x.png */,
 				D3C0523D1E63FAFA002268B1 /* PASDiscoverController.h */,
 				D3C0523E1E63FAFA002268B1 /* PASDiscoverController.m */,
 				D3C052611E63FEB7002268B1 /* PASDescoverListViewController.h */,
@@ -384,9 +378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3C052601E63FCBE002268B1 /* Icon-60@3x.png in Resources */,
 				A52E37121E583BB300EB1B5C /* TabControllers.plist in Resources */,
-				D3C0525F1E63FCBE002268B1 /* Icon-60@2x.png in Resources */,
 				A52E36F61E5823E100EB1B5C /* LaunchScreen.storyboard in Resources */,
 				A52E36F31E5823E100EB1B5C /* Assets.xcassets in Resources */,
 				A52E36FD1E582F5B00EB1B5C /* Info.plist in Resources */,

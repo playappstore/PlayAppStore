@@ -27,7 +27,7 @@
 - (void)initMySuber {
 
     UIImage *topImage = [UIImage imageNamed:@"Icon-60.png"];
-    self.logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, topImage.size.width, topImage.size.height)];
+    self.logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
     [self.logoImageView zy_cornerRadiusAdvance:10.0 rectCornerType:UIRectCornerAllCorners];
     self.logoImageView.image = topImage;
     [self.contentView addSubview:self.logoImageView];

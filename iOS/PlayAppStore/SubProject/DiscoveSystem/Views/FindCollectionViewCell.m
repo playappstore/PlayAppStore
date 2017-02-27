@@ -22,8 +22,8 @@
 
     //icon
     UIImage *topImage = [UIImage imageNamed:@"Icon-60.png"];
-    CGFloat  multiple = self.frame.size.width/topImage.size.width;
-    _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, topImage.size.height *multiple)];
+    CGFloat  multiple = self.frame.size.width/60;
+    _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 60 *multiple)];
      [_topImageView zy_cornerRadiusAdvance:5.0 rectCornerType:UIRectCornerAllCorners];
     _topImageView.image = topImage;
     [self.contentView addSubview:_topImageView];
