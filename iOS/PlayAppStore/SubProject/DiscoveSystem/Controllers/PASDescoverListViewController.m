@@ -8,7 +8,7 @@
 
 #import "PASDescoverListViewController.h"
 #import "PASDisListTableViewCell.h"
-static NSString *cellRes = @"PASDisListTableViewCell";
+NSString * const cellRes = @"PASDisListTableViewCell";
 @interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource> {
 
     UITableView *_listTableView;
