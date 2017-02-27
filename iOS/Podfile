@@ -9,5 +9,8 @@ target 'PlayAppStore'  do
 pod 'Masonry'
 pod 'TPKeyboardAvoiding'
 pod 'MBProgressHUD', '~> 1.0.0'
+pod 'QMUIKit', '~>1.2'
+pod 'AFNetworking', '~> 3.0'
+pod 'SDWebImage', '~>3.8'
 
 end

@@ -10,6 +10,8 @@
 
 @interface PASViewController ()
 
+
+
 @end
 
 @implementation PASViewController
@@ -19,6 +21,12 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    UIView *backgroundView = [self.navigationController.navigationBar subviews].firstObject;
+    _navLine = backgroundView.subviews.firstObject;
 }
 
 
