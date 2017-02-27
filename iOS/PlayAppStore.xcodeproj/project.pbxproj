@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8DBA3B8D1E647A62001D9FF4 /* PASNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3B8C1E647A62001D9FF4 /* PASNavigationViewController.m */; };
+		8DBA3B9B1E647B82001D9FF4 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3B901E647B82001D9FF4 /* BEMAnimationManager.m */; };
+		8DBA3B9C1E647B82001D9FF4 /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3B921E647B82001D9FF4 /* BEMCheckBox.m */; };
+		8DBA3B9D1E647B82001D9FF4 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3B941E647B82001D9FF4 /* BEMCheckBoxGroup.m */; };
+		8DBA3B9E1E647B82001D9FF4 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3B961E647B82001D9FF4 /* BEMPathManager.m */; };
+		8DBA3B9F1E647B82001D9FF4 /* FindCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3B981E647B82001D9FF4 /* FindCollectionViewCell.m */; };
+		8DBA3BA01E647B82001D9FF4 /* LCStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3B9A1E647B82001D9FF4 /* LCStarView.m */; };
+		8DBA3BA31E647B8D001D9FF4 /* PASDisListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3BA21E647B8D001D9FF4 /* PASDisListTableViewCell.m */; };
+		8DBA3BB01E647CD3001D9FF4 /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3BAD1E647CD3001D9FF4 /* UIImageView+CornerRadius.m */; };
+		8DBA3BB11E647CD3001D9FF4 /* UIView+ViewAddtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3BAF1E647CD3001D9FF4 /* UIView+ViewAddtions.m */; };
+		8DBA3BB41E647DC2001D9FF4 /* PASDescoverListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3BB31E647DC2001D9FF4 /* PASDescoverListViewController.m */; };
 		A52E36E81E5823E100EB1B5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E36E71E5823E100EB1B5C /* main.m */; };
 		A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E36EA1E5823E100EB1B5C /* AppDelegate.m */; };
 		A52E36F31E5823E100EB1B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A52E36F21E5823E100EB1B5C /* Assets.xcassets */; };
@@ -50,6 +61,33 @@
 /* Begin PBXFileReference section */
 		1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.debug.xcconfig"; sourceTree = "<group>"; };
 		5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlayAppStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DBA3B8B1E647A62001D9FF4 /* PASNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASNavigationViewController.h; sourceTree = "<group>"; };
+		8DBA3B8C1E647A62001D9FF4 /* PASNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASNavigationViewController.m; sourceTree = "<group>"; };
+		8DBA3B8F1E647B82001D9FF4 /* BEMAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimationManager.h; sourceTree = "<group>"; };
+		8DBA3B901E647B82001D9FF4 /* BEMAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimationManager.m; sourceTree = "<group>"; };
+		8DBA3B911E647B82001D9FF4 /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
+		8DBA3B921E647B82001D9FF4 /* BEMCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBox.m; sourceTree = "<group>"; };
+		8DBA3B931E647B82001D9FF4 /* BEMCheckBoxGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxGroup.h; sourceTree = "<group>"; };
+		8DBA3B941E647B82001D9FF4 /* BEMCheckBoxGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxGroup.m; sourceTree = "<group>"; };
+		8DBA3B951E647B82001D9FF4 /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
+		8DBA3B961E647B82001D9FF4 /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
+		8DBA3B971E647B82001D9FF4 /* FindCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCollectionViewCell.h; sourceTree = "<group>"; };
+		8DBA3B981E647B82001D9FF4 /* FindCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindCollectionViewCell.m; sourceTree = "<group>"; };
+		8DBA3B991E647B82001D9FF4 /* LCStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCStarView.h; sourceTree = "<group>"; };
+		8DBA3B9A1E647B82001D9FF4 /* LCStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCStarView.m; sourceTree = "<group>"; };
+		8DBA3BA11E647B8D001D9FF4 /* PASDisListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDisListTableViewCell.h; sourceTree = "<group>"; };
+		8DBA3BA21E647B8D001D9FF4 /* PASDisListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDisListTableViewCell.m; sourceTree = "<group>"; };
+		8DBA3BA51E647C64001D9FF4 /* PASAPIDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASAPIDefine.h; sourceTree = "<group>"; };
+		8DBA3BA61E647C64001D9FF4 /* PASColorDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASColorDefine.h; sourceTree = "<group>"; };
+		8DBA3BA71E647C64001D9FF4 /* PASDeviceDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDeviceDefine.h; sourceTree = "<group>"; };
+		8DBA3BA81E647C64001D9FF4 /* PlayAppStorePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayAppStorePrefixHeader.pch; sourceTree = "<group>"; };
+		8DBA3BA91E647CA8001D9FF4 /* PASBasicDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PASBasicDefine.h; sourceTree = "<group>"; };
+		8DBA3BAC1E647CD3001D9FF4 /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
+		8DBA3BAD1E647CD3001D9FF4 /* UIImageView+CornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CornerRadius.m"; sourceTree = "<group>"; };
+		8DBA3BAE1E647CD3001D9FF4 /* UIView+ViewAddtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewAddtions.h"; sourceTree = "<group>"; };
+		8DBA3BAF1E647CD3001D9FF4 /* UIView+ViewAddtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewAddtions.m"; sourceTree = "<group>"; };
+		8DBA3BB21E647DC2001D9FF4 /* PASDescoverListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDescoverListViewController.h; sourceTree = "<group>"; };
+		8DBA3BB31E647DC2001D9FF4 /* PASDescoverListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDescoverListViewController.m; sourceTree = "<group>"; };
 		A52E36E31E5823E100EB1B5C /* PlayAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52E36E71E5823E100EB1B5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A52E36E91E5823E100EB1B5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,7 +129,6 @@
 		A52E377F1E598D6500EB1B5C /* NSDate+TimeStamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeStamp.m"; sourceTree = "<group>"; };
 		A52E37811E598DC000EB1B5C /* NSDate+PASUitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PASUitls.h"; sourceTree = "<group>"; };
 		A52E37821E598DC000EB1B5C /* NSDate+PASUitls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PASUitls.m"; sourceTree = "<group>"; };
-		A52E37841E5990EF00EB1B5C /* PlayAppStorePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayAppStorePrefixHeader.pch; path = PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		A52E378F1E5A88A500EB1B5C /* PASDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverController.h; sourceTree = "<group>"; };
 		A52E37901E5A88A500EB1B5C /* PASDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDiscoverController.m; sourceTree = "<group>"; };
 		A52E37921E5A88B000EB1B5C /* PASFollowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowController.h; sourceTree = "<group>"; };
@@ -111,7 +148,6 @@
 		A540D2651E5D6EA300DD6756 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		A540D2691E5D711B00DD6756 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A540D26B1E5D711D00DD6756 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		A540D26C1E5D82F200DD6756 /* PASBasicDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASBasicDefine.h; path = PlayAppStore/PASBasicDefine.h; sourceTree = SOURCE_ROOT; };
 		A540D26D1E5D83DA00DD6756 /* PASApplicationDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASApplicationDetailCell.h; sourceTree = "<group>"; };
 		A540D26E1E5D83DA00DD6756 /* PASApplicationDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASApplicationDetailCell.m; sourceTree = "<group>"; };
 		A540D2701E5E78FA00DD6756 /* PASApplicationDetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASApplicationDetailHeadView.h; sourceTree = "<group>"; };
@@ -139,6 +175,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8DBA3B8E1E647B82001D9FF4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8DBA3B8F1E647B82001D9FF4 /* BEMAnimationManager.h */,
+				8DBA3B901E647B82001D9FF4 /* BEMAnimationManager.m */,
+				8DBA3B911E647B82001D9FF4 /* BEMCheckBox.h */,
+				8DBA3B921E647B82001D9FF4 /* BEMCheckBox.m */,
+				8DBA3B931E647B82001D9FF4 /* BEMCheckBoxGroup.h */,
+				8DBA3B941E647B82001D9FF4 /* BEMCheckBoxGroup.m */,
+				8DBA3B951E647B82001D9FF4 /* BEMPathManager.h */,
+				8DBA3B961E647B82001D9FF4 /* BEMPathManager.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8DBA3BA41E647C64001D9FF4 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				8DBA3BA51E647C64001D9FF4 /* PASAPIDefine.h */,
+				8DBA3BA61E647C64001D9FF4 /* PASColorDefine.h */,
+				8DBA3BA71E647C64001D9FF4 /* PASDeviceDefine.h */,
+				8DBA3BA91E647CA8001D9FF4 /* PASBasicDefine.h */,
+				8DBA3BA81E647C64001D9FF4 /* PlayAppStorePrefixHeader.pch */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		8DBA3BAA1E647CD3001D9FF4 /* Categorys */ = {
+			isa = PBXGroup;
+			children = (
+				8DBA3BAB1E647CD3001D9FF4 /* CornerRadiusCategory */,
+				8DBA3BAE1E647CD3001D9FF4 /* UIView+ViewAddtions.h */,
+				8DBA3BAF1E647CD3001D9FF4 /* UIView+ViewAddtions.m */,
+			);
+			path = Categorys;
+			sourceTree = "<group>";
+		};
+		8DBA3BAB1E647CD3001D9FF4 /* CornerRadiusCategory */ = {
+			isa = PBXGroup;
+			children = (
+				8DBA3BAC1E647CD3001D9FF4 /* UIImageView+CornerRadius.h */,
+				8DBA3BAD1E647CD3001D9FF4 /* UIImageView+CornerRadius.m */,
+			);
+			path = CornerRadiusCategory;
+			sourceTree = "<group>";
+		};
 		A52E36DA1E5823E100EB1B5C = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +313,8 @@
 		A52E372B1E58411C00EB1B5C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				8DBA3B8B1E647A62001D9FF4 /* PASNavigationViewController.h */,
+				8DBA3B8C1E647A62001D9FF4 /* PASNavigationViewController.m */,
 				A52E372C1E58411C00EB1B5C /* PASTabBarController.h */,
 				A52E372D1E58411C00EB1B5C /* PASTabBarController.m */,
 				A52E372E1E58411C00EB1B5C /* PASViewController.h */,
@@ -252,20 +336,11 @@
 		A52E373D1E58441B00EB1B5C /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				8DBA3BAA1E647CD3001D9FF4 /* Categorys */,
+				8DBA3BA41E647C64001D9FF4 /* Define */,
 				A52E37A01E5AC48700EB1B5C /* Network */,
-				A52E373E1E58441B00EB1B5C /* Define */,
 			);
 			path = Utility;
-			sourceTree = "<group>";
-		};
-		A52E373E1E58441B00EB1B5C /* Define */ = {
-			isa = PBXGroup;
-			children = (
-				A52E37841E5990EF00EB1B5C /* PlayAppStorePrefixHeader.pch */,
-				A540D26C1E5D82F200DD6756 /* PASBasicDefine.h */,
-			);
-			name = Define;
-			path = VC;
 			sourceTree = "<group>";
 		};
 		A52E37421E59839E00EB1B5C /* NSArray */ = {
@@ -424,6 +499,8 @@
 		A52E37881E5A878A00EB1B5C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				8DBA3BB21E647DC2001D9FF4 /* PASDescoverListViewController.h */,
+				8DBA3BB31E647DC2001D9FF4 /* PASDescoverListViewController.m */,
 				A52E378F1E5A88A500EB1B5C /* PASDiscoverController.h */,
 				A52E37901E5A88A500EB1B5C /* PASDiscoverController.m */,
 				A540D25C1E5D6B0700DD6756 /* PASApplicationDetailController.h */,
@@ -530,6 +607,13 @@
 		A52E379F1E5A895700EB1B5C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8DBA3BA11E647B8D001D9FF4 /* PASDisListTableViewCell.h */,
+				8DBA3BA21E647B8D001D9FF4 /* PASDisListTableViewCell.m */,
+				8DBA3B8E1E647B82001D9FF4 /* Classes */,
+				8DBA3B971E647B82001D9FF4 /* FindCollectionViewCell.h */,
+				8DBA3B981E647B82001D9FF4 /* FindCollectionViewCell.m */,
+				8DBA3B991E647B82001D9FF4 /* LCStarView.h */,
+				8DBA3B9A1E647B82001D9FF4 /* LCStarView.m */,
 				A540D2701E5E78FA00DD6756 /* PASApplicationDetailHeadView.h */,
 				A540D2711E5E78FA00DD6756 /* PASApplicationDetailHeadView.m */,
 				A540D26D1E5D83DA00DD6756 /* PASApplicationDetailCell.h */,
@@ -717,19 +801,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBA3BB41E647DC2001D9FF4 /* PASDescoverListViewController.m in Sources */,
 				A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */,
 				A540D2721E5E78FA00DD6756 /* PASApplicationDetailHeadView.m in Sources */,
+				8DBA3B9F1E647B82001D9FF4 /* FindCollectionViewCell.m in Sources */,
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
 				A52E37911E5A88A500EB1B5C /* PASDiscoverController.m in Sources */,
 				A52E37A81E5AC50300EB1B5C /* CheckNetwork.m in Sources */,
 				A52E37611E59895700EB1B5C /* NSDictionary+Safe.m in Sources */,
 				A52E37791E598BF800EB1B5C /* NSString+Safe.m in Sources */,
+				8DBA3B9C1E647B82001D9FF4 /* BEMCheckBox.m in Sources */,
 				A52E37701E598B5C00EB1B5C /* NSObject+Safe.m in Sources */,
 				A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */,
 				A52E374F1E5984D800EB1B5C /* NSArray+Safe.m in Sources */,
 				A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */,
+				8DBA3B9B1E647B82001D9FF4 /* BEMAnimationManager.m in Sources */,
+				8DBA3B8D1E647A62001D9FF4 /* PASNavigationViewController.m in Sources */,
+				8DBA3BA31E647B8D001D9FF4 /* PASDisListTableViewCell.m in Sources */,
 				A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
+				8DBA3BA01E647B82001D9FF4 /* LCStarView.m in Sources */,
 				A540D26F1E5D83DA00DD6756 /* PASApplicationDetailCell.m in Sources */,
 				A540D25E1E5D6B0700DD6756 /* PASApplicationDetailController.m in Sources */,
 				A5DAB44D1E601598006B0CFA /* PASQRCodeActionSheet.m in Sources */,
@@ -737,13 +828,17 @@
 				A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */,
 				A52E37641E59897200EB1B5C /* NSMutableDictionary+Safe.m in Sources */,
 				A52E37971E5A88BF00EB1B5C /* PASSettingController.m in Sources */,
+				8DBA3B9D1E647B82001D9FF4 /* BEMCheckBoxGroup.m in Sources */,
 				A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */,
 				A540D2751E5E8CE100DD6756 /* PASApplicationDetailSwitchCell.m in Sources */,
+				8DBA3BB01E647CD3001D9FF4 /* UIImageView+CornerRadius.m in Sources */,
 				A52E37551E59855700EB1B5C /* NSMutableArray+Safe.m in Sources */,
 				A52E37941E5A88B000EB1B5C /* PASFollowController.m in Sources */,
 				A52E376A1E598AAA00EB1B5C /* NSManagedObject+Safe.m in Sources */,
 				A52E376D1E598AFD00EB1B5C /* NSNumber+Safe.m in Sources */,
+				8DBA3BB11E647CD3001D9FF4 /* UIView+ViewAddtions.m in Sources */,
 				A5DAB4441E600F6E006B0CFA /* PASShareActivity.m in Sources */,
+				8DBA3B9E1E647B82001D9FF4 /* BEMPathManager.m in Sources */,
 				A52E37A31E5AC4BE00EB1B5C /* PASNetwrokManager.m in Sources */,
 				A52E37761E598BA300EB1B5C /* NSMutableSet+Safe.m in Sources */,
 				A52E377C1E598C6200EB1B5C /* NSUserDefaults+Safe.m in Sources */,
