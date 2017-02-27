@@ -18,6 +18,8 @@
 		A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E37381E5841D900EB1B5C /* PASFollowController.m */; };
 		A52E373C1E58420400EB1B5C /* PASSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E373B1E58420400EB1B5C /* PASSettingController.m */; };
 		D3A302091E6400D1007494A4 /* PASNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A302081E6400D1007494A4 /* PASNavigationViewController.m */; };
+		D3A302601E641119007494A4 /* PASDisListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A3025F1E641119007494A4 /* PASDisListTableViewCell.m */; };
+		D3A302641E641494007494A4 /* UIView+ViewAddtions.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A302631E641494007494A4 /* UIView+ViewAddtions.m */; };
 		D3C0524E1E63FAFA002268B1 /* PASDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C0523E1E63FAFA002268B1 /* PASDiscoverController.m */; };
 		D3C0524F1E63FAFA002268B1 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C052431E63FAFA002268B1 /* BEMAnimationManager.m */; };
 		D3C052501E63FAFA002268B1 /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C052451E63FAFA002268B1 /* BEMCheckBox.m */; };
@@ -54,6 +56,13 @@
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 		D3A302071E6400D1007494A4 /* PASNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASNavigationViewController.h; sourceTree = "<group>"; };
 		D3A302081E6400D1007494A4 /* PASNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASNavigationViewController.m; sourceTree = "<group>"; };
+		D3A3025E1E641119007494A4 /* PASDisListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDisListTableViewCell.h; sourceTree = "<group>"; };
+		D3A3025F1E641119007494A4 /* PASDisListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDisListTableViewCell.m; sourceTree = "<group>"; };
+		D3A302621E641494007494A4 /* UIView+ViewAddtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewAddtions.h"; sourceTree = "<group>"; };
+		D3A302631E641494007494A4 /* UIView+ViewAddtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewAddtions.m"; sourceTree = "<group>"; };
+		D3A302661E6414F3007494A4 /* PASColorDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PASColorDefine.h; sourceTree = "<group>"; };
+		D3A302671E641524007494A4 /* PASDeviceDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PASDeviceDefine.h; sourceTree = "<group>"; };
+		D3A302681E641567007494A4 /* PASAPIDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PASAPIDefine.h; sourceTree = "<group>"; };
 		D3C0523D1E63FAFA002268B1 /* PASDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverController.h; sourceTree = "<group>"; };
 		D3C0523E1E63FAFA002268B1 /* PASDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDiscoverController.m; sourceTree = "<group>"; };
 		D3C052421E63FAFA002268B1 /* BEMAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimationManager.h; sourceTree = "<group>"; };
@@ -245,6 +254,8 @@
 				D3C0524B1E63FAFA002268B1 /* FindCollectionViewCell.m */,
 				D3C0524C1E63FAFA002268B1 /* LCStarView.h */,
 				D3C0524D1E63FAFA002268B1 /* LCStarView.m */,
+				D3A3025E1E641119007494A4 /* PASDisListTableViewCell.h */,
+				D3A3025F1E641119007494A4 /* PASDisListTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,6 +288,9 @@
 			isa = PBXGroup;
 			children = (
 				D3C052571E63FBD4002268B1 /* PlayAppStorePrefixHeader.pch */,
+				D3A302661E6414F3007494A4 /* PASColorDefine.h */,
+				D3A302671E641524007494A4 /* PASDeviceDefine.h */,
+				D3A302681E641567007494A4 /* PASAPIDefine.h */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -285,6 +299,8 @@
 			isa = PBXGroup;
 			children = (
 				D3C052591E63FC57002268B1 /* CornerRadiusCategory */,
+				D3A302621E641494007494A4 /* UIView+ViewAddtions.h */,
+				D3A302631E641494007494A4 /* UIView+ViewAddtions.m */,
 			);
 			path = Categorys;
 			sourceTree = "<group>";
@@ -434,6 +450,7 @@
 			files = (
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
 				D3C052521E63FAFA002268B1 /* BEMPathManager.m in Sources */,
+				D3A302601E641119007494A4 /* PASDisListTableViewCell.m in Sources */,
 				A52E37391E5841D900EB1B5C /* PASFollowController.m in Sources */,
 				D3C052631E63FEB7002268B1 /* PASDescoverListViewController.m in Sources */,
 				D3C0524E1E63FAFA002268B1 /* PASDiscoverController.m in Sources */,
@@ -442,6 +459,7 @@
 				D3C052541E63FAFA002268B1 /* LCStarView.m in Sources */,
 				A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */,
 				D3C052531E63FAFA002268B1 /* FindCollectionViewCell.m in Sources */,
+				D3A302641E641494007494A4 /* UIView+ViewAddtions.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
 				D3A302091E6400D1007494A4 /* PASNavigationViewController.m in Sources */,
 				A52E37301E58411C00EB1B5C /* PASTabBarController.m in Sources */,

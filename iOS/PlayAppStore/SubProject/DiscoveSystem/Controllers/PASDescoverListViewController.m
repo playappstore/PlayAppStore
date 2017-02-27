@@ -7,8 +7,14 @@
 //
 
 #import "PASDescoverListViewController.h"
+#import "PASDisListTableViewCell.h"
+static NSString *cellRes = @"PASDisListTableViewCell";
+@interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource> {
 
-@interface PASDescoverListViewController ()
+    UITableView *_listTableView;
+
+
+}
 
 @end
 
@@ -16,9 +22,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initData];
+    [self initView];
+  
     // Do any additional setup after loading the view.
 }
+- (void)initData {
+    
+    self.navigationItem.title = @"应用列表";
+}
+- (void)initView {
 
+    [self initTableView];
+}
+- (void)initTableView {
+    _listTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    _listTableView.delegate = self;
+    _listTableView.dataSource = self;
+    _listTableView.rowHeight = 100;
+    [_listTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes];
+    [self.view addSubview:_listTableView];
+}
+#pragma mark -- tableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 100;
+
+
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
+    return cell;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
