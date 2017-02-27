@@ -7,7 +7,7 @@
 //
 
 #import "PASTabBarController.h"
-
+#import "PASNavigationViewController.h"
 @interface PASTabBarController ()
 
 @end
@@ -39,7 +39,7 @@
         controller = [[class alloc] init];
         controller.title = title;
         
-        UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:controller];
+        PASNavigationViewController *naviController = [[PASNavigationViewController alloc] initWithRootViewController:controller];
         [viewControllers addObject:naviController];
         
         // create UITabBarItem

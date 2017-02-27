@@ -8,6 +8,7 @@
 
 #import "PASDiscoverController.h"
 #import "FindCollectionViewCell.h"
+#import "PASDescoverListViewController.h"
 #define sideGap 20
 #define findIconHeight 130
 #define findIconWide ([UIScreen mainScreen].bounds.size.width - sideGap*4)/3.0
@@ -74,6 +75,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSLog(@"点击第几个：%ld",(long)indexPath.row);
+    PASDescoverListViewController *listViewC = [[PASDescoverListViewController alloc] init];
+    [self.navigationController pushViewController:listViewC animated:YES];
     
 }
 //设置垂直距离
