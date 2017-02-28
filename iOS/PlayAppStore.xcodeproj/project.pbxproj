@@ -476,10 +476,10 @@
 		A52E37861E5A876C00EB1B5C /* Follow */ = {
 			isa = PBXGroup;
 			children = (
-				A52E37981E5A894500EB1B5C /* Api */,
-				A52E37991E5A894500EB1B5C /* Manager */,
-				A52E379A1E5A894500EB1B5C /* Model */,
-				A52E379B1E5A894500EB1B5C /* View */,
+				D33F41B91E657D9D009CAAF7 /* Api */,
+				D33F41BA1E657D9D009CAAF7 /* Manager */,
+				D33F41BB1E657D9D009CAAF7 /* Model */,
+				D33F41BC1E657D9D009CAAF7 /* View */,
 				A52E378E1E5A885500EB1B5C /* VC */,
 			);
 			path = Follow;
@@ -556,34 +556,6 @@
 				A52E37931E5A88B000EB1B5C /* PASFollowController.m */,
 			);
 			path = VC;
-			sourceTree = "<group>";
-		};
-		A52E37981E5A894500EB1B5C /* Api */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Api;
-			sourceTree = "<group>";
-		};
-		A52E37991E5A894500EB1B5C /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		A52E379A1E5A894500EB1B5C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		A52E379B1E5A894500EB1B5C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		A52E379C1E5A895700EB1B5C /* Api */ = {
@@ -667,6 +639,34 @@
 				AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D33F41B91E657D9D009CAAF7 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		D33F41BA1E657D9D009CAAF7 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		D33F41BB1E657D9D009CAAF7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D33F41BC1E657D9D009CAAF7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E212502E18BCD25AB5BC6445 /* Frameworks */ = {
