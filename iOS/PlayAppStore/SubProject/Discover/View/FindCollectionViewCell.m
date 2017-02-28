@@ -21,7 +21,7 @@
 - (void)initWithSuber {
 
     //icon
-    UIImage *topImage = [UIImage imageNamed:@"Icon-60.png"];
+    UIImage *topImage = [UIImage imageNamed:@"images-2.jpeg"];
     CGFloat  multiple = self.frame.size.width/60;
     _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 60 *multiple)];
      [_topImageView zy_cornerRadiusAdvance:5.0 rectCornerType:UIRectCornerAllCorners];

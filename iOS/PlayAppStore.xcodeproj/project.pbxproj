@@ -55,6 +55,7 @@
 		A5DAB4441E600F6E006B0CFA /* PASShareActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4431E600F6E006B0CFA /* PASShareActivity.m */; };
 		A5DAB4471E600F7F006B0CFA /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4461E600F7F006B0CFA /* UIImage+Category.m */; };
 		A5DAB44D1E601598006B0CFA /* PASQRCodeActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB44C1E601598006B0CFA /* PASQRCodeActionSheet.m */; };
+		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +162,7 @@
 		A5DAB44B1E601598006B0CFA /* PASQRCodeActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASQRCodeActionSheet.h; sourceTree = "<group>"; };
 		A5DAB44C1E601598006B0CFA /* PASQRCodeActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASQRCodeActionSheet.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
+		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,6 +501,7 @@
 		A52E37881E5A878A00EB1B5C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				D315E10D1E65141900195B92 /* images-2.jpeg */,
 				8DBA3BB21E647DC2001D9FF4 /* PASDescoverListViewController.h */,
 				8DBA3BB31E647DC2001D9FF4 /* PASDescoverListViewController.m */,
 				A52E378F1E5A88A500EB1B5C /* PASDiscoverController.h */,
@@ -708,7 +711,7 @@
 				TargetAttributes = {
 					A52E36E21E5823E100EB1B5C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VM4WE4CKS5;
+						DevelopmentTeam = LWY3F6V55K;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -737,6 +740,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D315E10E1E65141900195B92 /* images-2.jpeg in Resources */,
 				A52E37121E583BB300EB1B5C /* TabControllers.plist in Resources */,
 				A540D2681E5D711B00DD6756 /* Localizable.strings in Resources */,
 				A52E36F61E5823E100EB1B5C /* LaunchScreen.storyboard in Resources */,
@@ -976,7 +980,7 @@
 			baseConfigurationReference = 1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VM4WE4CKS5;
+				DEVELOPMENT_TEAM = LWY3F6V55K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
@@ -992,7 +996,7 @@
 			baseConfigurationReference = AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VM4WE4CKS5;
+				DEVELOPMENT_TEAM = LWY3F6V55K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;

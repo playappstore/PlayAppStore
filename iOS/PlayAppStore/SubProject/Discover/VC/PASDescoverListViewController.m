@@ -8,18 +8,20 @@
 
 #import "PASDescoverListViewController.h"
 #import "PASDisListTableViewCell.h"
+#import "PASApplicationDetailController.h"
 NSString * const cellRes = @"PASDisListTableViewCell";
 @interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource> {
 
     UITableView *_listTableView;
-
-
 }
 
 @end
 
 @implementation PASDescoverListViewController
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
@@ -29,7 +31,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 }
 - (void)initData {
     
-    self.navigationItem.title = @"应用列表";
+    self.navigationItem.title = @"这是应用名字";
 }
 - (void)initView {
 
@@ -52,6 +54,12 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
+    [self.navigationController pushViewController:detailController animated:YES];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

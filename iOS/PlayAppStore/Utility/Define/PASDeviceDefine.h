@@ -8,7 +8,7 @@
 
 #ifndef PASDeviceDefine_h
 #define PASDeviceDefine_h
-
 #import "UIView+ViewAddtions.h"
+
 
 #endif /* PASDeviceDefine_h */
