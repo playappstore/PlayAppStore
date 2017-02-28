@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Discover</string>
+		<key>iconName</key>
+		<string>tabbar_Discover</string>
+		<key>selectedIconName</key>
+		<string>tabbar_Discover_lighted</string>
+		<key>className</key>
+		<string>PASDiscoverController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Follow</string>
+		<key>iconName</key>
+		<string>tabbar_Follow</string>
+		<key>selectedIconName</key>
+		<string>tabbar_Follow_lighted</string>
+		<key>className</key>
+		<string>PASFollowController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Setting</string>
+		<key>iconName</key>
+		<string>tabbar_Setting</string>
+		<key>selectedIconName</key>
+		<string>tabbar_Setting_lighted</string>
+		<key>className</key>
+		<string>PASSettingController</string>
+	</dict>
+</array>
+</plist>

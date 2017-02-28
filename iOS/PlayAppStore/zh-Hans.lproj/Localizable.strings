@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  PlayAppStore
+
+  Created by Winn on 2017/2/22.
+  Copyright © 2017年 Winn. All rights reserved.
+*/
+
+"Discover" = "发现";
+"Follow" = "关注";
+"Setting" = "设置";
+
+"Push Notification" = "推送通知";
+"save" = "保存";
+"share" = "分享";
