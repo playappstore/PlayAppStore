@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PASDisListTableViewCell : UITableViewCell
+#import "PKDownloadButton.h"
+#import "UIImage+PKDownloadButton.h"
+#import "UIButton+PKDownloadButton.h"
+#define PASDisListTableViewCellHeight 120
+@interface PASDisListTableViewCell : UITableViewCell <PKDownloadButtonDelegate>
 @property (nonatomic ,strong) UIImageView *logoImageView;
 //更新时间
 @property (nonatomic ,strong) UILabel *upDataTimeLabel;
@@ -16,4 +19,7 @@
 @property (nonatomic ,strong) UILabel *versionsLabel;
 //描述
 @property (nonatomic ,strong) UILabel *describeLabel;
+//下载按钮
+@property (nonatomic ,strong) PKDownloadButton *downloadButton;
 @end
+

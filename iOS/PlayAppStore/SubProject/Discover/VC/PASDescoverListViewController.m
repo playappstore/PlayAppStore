@@ -41,7 +41,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     _listTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     _listTableView.delegate = self;
     _listTableView.dataSource = self;
-    _listTableView.rowHeight = 100;
+    _listTableView.rowHeight = PASDisListTableViewCellHeight;
     [_listTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes];
     [self.view addSubview:_listTableView];
 }
