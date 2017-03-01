@@ -59,16 +59,18 @@
     }];
     
     // indicatorImageView
+    UIImage *indicatorImage = [UIImage imageNamed:@"oc_cm_youjiantou"];
+    CGSize indicatorSize = indicatorImage.size;
     UIImageView *indicator = [[UIImageView alloc] init];
-    indicator.image = [UIImage imageNamed:@"oc_cm_youjiantou"];
+    indicator.image = indicatorImage;
     indicator.hidden = NO;
     self.indicatorImageView = indicator;
     [self addSubview:self.indicatorImageView];
     [self.indicatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.contentView.mas_right).offset(-15);
         make.centerY.mas_equalTo(self.contentView);
-        make.width.equalTo(@7);
-        make.height.equalTo(@16);
+        make.width.equalTo([NSNumber numberWithDouble:indicatorSize.width]);
+        make.height.equalTo([NSNumber numberWithDouble:indicatorSize.height]);
     }];
 
     // detailLabel
