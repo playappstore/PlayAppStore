@@ -7,7 +7,7 @@
 //
 
 #import "PASTabBarController.h"
-
+#import "PASNavigationViewController.h"
 @interface PASTabBarController ()
 
 @end
@@ -37,9 +37,9 @@
         Class class = NSClassFromString([dict objectForKey:@"className"]);
         UIViewController *controller;
         controller = [[class alloc] init];
-        controller.title = title;
+        controller.title = NSLocalizedString(title, nil);
         
-        UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:controller];
+        PASNavigationViewController *naviController = [[PASNavigationViewController alloc] initWithRootViewController:controller];
         [viewControllers addObject:naviController];
         
         // create UITabBarItem
@@ -47,7 +47,7 @@
         naviController.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
         UITabBarItem *tabBarItem = nil;
         tabBarItem = [[UITabBarItem alloc] init];
-        tabBarItem.title = controller.title;
+        tabBarItem.title = NSLocalizedString(title, nil);
         controller.tabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
     

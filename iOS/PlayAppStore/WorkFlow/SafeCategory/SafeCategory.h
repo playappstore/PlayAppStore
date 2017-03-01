@@ -29,5 +29,6 @@
 
 #import "NSDate+TimeStamp.h"
 
+#import "UIImage+Category.h"
 
 #endif /* Header_h */
