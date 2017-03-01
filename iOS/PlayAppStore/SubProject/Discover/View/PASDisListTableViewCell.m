@@ -60,8 +60,8 @@
     
     self.downloadButton.stopDownloadButton.tintColor = [UIColor blackColor];
     self.downloadButton.stopDownloadButton.filledLineStyleOuter = YES;
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"下载" attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
-    [self.downloadButton.startDownloadButton setAttributedTitle:title forState:UIControlStateNormal];;
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",NSLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
+    [self.downloadButton.startDownloadButton setAttributedTitle:title forState:UIControlStateNormal];
     self.downloadButton.pendingView.tintColor = [UIColor defaultDwonloadButtonBlueColor];
     self.downloadButton.stopDownloadButton.tintColor = [UIColor defaultDwonloadButtonBlueColor];
     self.downloadButton.pendingView.radius = 14.f;
@@ -73,7 +73,7 @@
     
 
     //更新能容
-    _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(_upDataTimeLabel.left, self.downloadButton.bottom + 5, SCREEN_WIDTH -_upDataTimeLabel.left - 10 , PASDisListTableViewCellHeight -self.downloadButton.bottom - 5 )];
+    _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(_upDataTimeLabel.left, self.downloadButton.bottom + 5, SCREEN_WIDTH -_upDataTimeLabel.left - 10 , PASDisListTableViewCellHeight -self.downloadButton.bottom - 10 )];
     _describeLabel.textColor = _upDataTimeLabel.textColor;
     _describeLabel.font = _upDataTimeLabel.font;
     _describeLabel.text = @"这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容";

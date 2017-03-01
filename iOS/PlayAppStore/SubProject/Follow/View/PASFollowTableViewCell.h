@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PASFollowTableViewCell : UITableViewCell
-
+//应用名称
+@property (nonatomic ,strong) UILabel *nameLabel;
+//更多按钮
+@property (nonatomic ,strong) UIButton *moreButton;
 @end
