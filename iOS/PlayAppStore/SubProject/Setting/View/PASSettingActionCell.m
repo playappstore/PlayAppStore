@@ -81,7 +81,7 @@
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.indicatorImageView.mas_left).offset(-3);
         make.centerY.mas_equalTo(self.contentView);
-        make.width.equalTo(@50);
+        make.width.equalTo(@80);
         make.height.equalTo(@17);
     }];
     

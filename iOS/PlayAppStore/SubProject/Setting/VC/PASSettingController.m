@@ -9,9 +9,15 @@
 #import "PASSettingController.h"
 #import "PASSettingActionCell.h"
 #import "PASServerAddressController.h"
+#import "PASLoacalDataManager.h"
+#import "MBProgressHUD.h"
+#import "PASChangeLanguageController.h"
+#import "PASPushNotificationController.h"
 
 
-@interface PASSettingController () <UITableViewDelegate, UITableViewDataSource>
+
+
+@interface PASSettingController () <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
 @property (nonatomic, copy) NSArray *settingArray;
 @property (nonatomic, copy) NSArray *manualArray;
@@ -57,11 +63,16 @@
         case 101:
         {
             //language
+            PASChangeLanguageController *listViewC = [[PASChangeLanguageController alloc] init];
+            [self.navigationController pushViewController:listViewC animated:YES];
         }
             break;
         case 102:
         {
             //notifications
+            PASPushNotificationController *listViewC = [[PASPushNotificationController alloc] init];
+            [self.navigationController pushViewController:listViewC animated:YES];
+
         }
             break;
         case 103:
@@ -90,19 +101,22 @@
         case 107:
         {
            //clear cache
-            NSLog(@"dddd");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认清除缓存" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alert show];
         }
             break;
 
         case 108:
         {
            //share app to your frieds
+            [self shareAppToFriends];
         }
             break;
 
         case 109:
         {
             //designer
+            [self openScheme:@"https://github.com/playappstore/PlayAppStore"];
         }
             break;
         case 110:
@@ -115,6 +129,97 @@
             break;
     }
 }
+
+#pragma mark - Share
+- (void)shareAppToFriends {
+    NSString *text = @"分享内容";
+    
+    UIImage *image = [UIImage imageNamed:@"pas_QRCode"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://github.com/playappstore/PlayAppStore"];
+    
+    //数组中放入分享的内容
+    
+    NSArray *activityItems = @[text, image, url];
+    
+    //自定义 customActivity继承于UIActivity,创建自定义的Activity加在数组Activities中。
+//    PASShareActivity * custom = [[PASShareActivity alloc] initWithTitie:@"二维码" withActivityImage:[UIImage imageNamed:@"pas_QRCode"] withUrl:url withType:@"customActivity" withShareContext:activityItems];
+//    custom.delegate = self;
+//    NSArray *activities = @[custom];
+    
+    // 实现服务类型控制器
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+//    activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo, UIActivityTypePrint, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToTencentWeibo, UIActivityTypeCopyToPasteboard];
+    // 分享类型
+    [activityViewController setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
+        
+        // 显示选中的分享类型
+        NSLog(@"当前选择分享平台 %@",activityType);
+        
+        if (completed) {
+            
+            NSLog(@"分享成功");
+            
+        }else {
+            
+            NSLog(@"分享失败");
+            
+        }
+    }];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+#pragma mark -AboutUS
+- (void)openScheme:(NSString *)scheme {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *URL = [NSURL URLWithString:scheme];
+    
+    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [application openURL:URL options:@{}
+           completionHandler:^(BOOL success) {
+               NSLog(@"Open %@: %d",scheme,success);
+           }];
+    } else {
+        BOOL success = [application openURL:URL];
+        NSLog(@"Open %@: %d",scheme,success);
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self clearCacheButtonClicked];
+    }
+}
+
+- (void)clearCacheButtonClicked
+{
+    
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    if (_cacheSize > 0) {
+        
+        [PASLoacalDataManager clearDiskCache];
+        hub.mode = MBProgressHUDModeText;
+        
+        hub.label.text = NSLocalizedString(@"清除成功", nil);
+        hub.completionBlock = ^ {
+            [self.tableView reloadData];
+        };
+        [hub hideAnimated:YES afterDelay:2];
+    } else {
+        
+        hub.mode = MBProgressHUDModeText;
+        
+        hub.label.text = NSLocalizedString(@"还没有缓存", nil);
+        hub.completionBlock = ^ {
+        };
+        [hub hideAnimated:YES afterDelay:2];
+    }
+}
+
 
 #pragma mark - UITableViewDataSource
 
@@ -150,7 +255,7 @@
     if (indexPath.section == 1 && indexPath.row == 0) {
         // 清除缓存
         cell.isFirstCell = YES;
-        _cacheSize = [[NSString stringWithFormat:@"%@", @"3.53"] floatValue];
+        _cacheSize = [PASLoacalDataManager diskCacheSize];
         cell.detailLabel.text = [NSString stringWithFormat:@"%.2fMB", _cacheSize];
     }
     
