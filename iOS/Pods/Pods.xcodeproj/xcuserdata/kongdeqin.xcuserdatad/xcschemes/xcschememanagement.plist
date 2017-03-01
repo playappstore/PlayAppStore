@@ -9,12 +9,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DownloadButton-DownloadButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DownloadButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PlayAppStoreSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,17 +62,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15D5D929ED22714338A2A5A703121B57</key>
+		<key>15530ACAFBFBDB4806456B5C3C411164</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2925578A44E1AACF2F22B7D10157EF59</key>
+		<key>1F53003C44E17F4E78B733385CAB3716</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>390DBBD7BF5DD14089AD95025D207EFF</key>
+		<key>20A0DDDB3649657BDCE0CE65545A67CA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2F9473A31C725CD2B60B7D026D865278</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3BD80C626024B16F01E687E6F4E8D8E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +92,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77D952C88EB1901681F5A18548A9213B</key>
+		<key>70390E60BC789F91538A2C7F5CA15252</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9333FDBD138CBFCB10665133664BE29F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -73,6 +108,11 @@
 			<true/>
 		</dict>
 		<key>D52144DE9D7255DE912490FF5A806573</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E14A62900910444707A5504D25EC98DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
