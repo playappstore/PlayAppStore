@@ -59,7 +59,7 @@ NSString * const cellRes1 = @"PASDisListTableViewCell1";
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    return [UIView new];
+    return [[UIView alloc] init];
 
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
