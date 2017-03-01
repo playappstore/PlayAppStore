@@ -63,6 +63,7 @@
 		A5DAB4621E66AFC8006B0CFA /* PASPushNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4611E66AFC8006B0CFA /* PASPushNotificationController.m */; };
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
 		D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D383468F1E66733000A0343F /* PASFollowTableViewCell.m */; };
+		D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */; };
 		D3EB06BA1E66B95B008002F1 /* PASDiscoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB06B91E66B95B008002F1 /* PASDiscoverModel.m */; };
 		D3EB06BD1E66BD0E008002F1 /* PASDiscoverCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB06BC1E66BD0E008002F1 /* PASDiscoverCollectionViewCell.m */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
@@ -186,6 +187,8 @@
 		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
 		D383468E1E66733000A0343F /* PASFollowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowTableViewCell.h; sourceTree = "<group>"; };
 		D383468F1E66733000A0343F /* PASFollowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowTableViewCell.m; sourceTree = "<group>"; };
+		D3D2BA761E66C5FC008BE837 /* PAS_3DTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAS_3DTouch.h; sourceTree = "<group>"; };
+		D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAS_3DTouch.m; sourceTree = "<group>"; };
 		D3EB06B81E66B95B008002F1 /* PASDiscoverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverModel.h; sourceTree = "<group>"; };
 		D3EB06B91E66B95B008002F1 /* PASDiscoverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDiscoverModel.m; sourceTree = "<group>"; };
 		D3EB06BB1E66BD0E008002F1 /* PASDiscoverCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverCollectionViewCell.h; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 				A52E36EA1E5823E100EB1B5C /* AppDelegate.m */,
 				A52E36E71E5823E100EB1B5C /* main.m */,
 				A52E37111E583BB300EB1B5C /* TabControllers.plist */,
+				D3D2BA761E66C5FC008BE837 /* PAS_3DTouch.h */,
+				D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -851,6 +856,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DBA3BB41E647DC2001D9FF4 /* PASDescoverListViewController.m in Sources */,
+				D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */,
 				A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */,
 				A540D2721E5E78FA00DD6756 /* PASApplicationDetailHeadView.m in Sources */,
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
