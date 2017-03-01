@@ -55,6 +55,7 @@
 		A5DAB4441E600F6E006B0CFA /* PASShareActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4431E600F6E006B0CFA /* PASShareActivity.m */; };
 		A5DAB4471E600F7F006B0CFA /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4461E600F7F006B0CFA /* UIImage+Category.m */; };
 		A5DAB44D1E601598006B0CFA /* PASQRCodeActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB44C1E601598006B0CFA /* PASQRCodeActionSheet.m */; };
+		A5DAB4501E656C0E006B0CFA /* PASSettingAdderssView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB44F1E656C0E006B0CFA /* PASSettingAdderssView.m */; };
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
@@ -161,6 +162,8 @@
 		A5DAB4461E600F7F006B0CFA /* UIImage+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Category.m"; sourceTree = "<group>"; };
 		A5DAB44B1E601598006B0CFA /* PASQRCodeActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASQRCodeActionSheet.h; sourceTree = "<group>"; };
 		A5DAB44C1E601598006B0CFA /* PASQRCodeActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASQRCodeActionSheet.m; sourceTree = "<group>"; };
+		A5DAB44E1E656C0E006B0CFA /* PASSettingAdderssView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASSettingAdderssView.h; sourceTree = "<group>"; };
+		A5DAB44F1E656C0E006B0CFA /* PASSettingAdderssView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASSettingAdderssView.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -538,6 +541,8 @@
 		A52E378C1E5A880600EB1B5C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A5DAB44E1E656C0E006B0CFA /* PASSettingAdderssView.h */,
+				A5DAB44F1E656C0E006B0CFA /* PASSettingAdderssView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -824,6 +829,7 @@
 				8DBA3BA31E647B8D001D9FF4 /* PASDisListTableViewCell.m in Sources */,
 				A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
+				A5DAB4501E656C0E006B0CFA /* PASSettingAdderssView.m in Sources */,
 				8DBA3BA01E647B82001D9FF4 /* LCStarView.m in Sources */,
 				A540D26F1E5D83DA00DD6756 /* PASApplicationDetailCell.m in Sources */,
 				A540D25E1E5D6B0700DD6756 /* PASApplicationDetailController.m in Sources */,

@@ -116,16 +116,18 @@
     
 }
 
-
 - (void)show {
     
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     
     self.hidden = NO;
-  
+
+    CGRect temp = self.frame;
+    temp.origin.y = SCREEN_HEIGHT;
+    self.frame = temp;
     [UIView animateWithDuration:0.3f animations:^{
-        
+        self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }];
 }
 
@@ -144,15 +146,5 @@
 - (void)doneButtonClicked:(id)sender {
     [self hide];
 }
-
-
-- (UIImageView *)qrCodeView {
-    if (!_qrCodeView) {
-        _qrCodeView = [[UIImageView alloc] init];
-        
-    }
-    return _qrCodeView;
-}
-
 
 @end
