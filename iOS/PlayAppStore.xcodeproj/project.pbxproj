@@ -59,6 +59,7 @@
 		A5DAB4531E65D391006B0CFA /* PASSettingActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4521E65D391006B0CFA /* PASSettingActionCell.m */; };
 		A5DAB4561E665822006B0CFA /* PASServerAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4551E665822006B0CFA /* PASServerAddressController.m */; };
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
+		D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D383468F1E66733000A0343F /* PASFollowTableViewCell.m */; };
 		D88315EDA2375C1C56088154 /* Pods_PlayAppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBF7D481F89D82E5C3C3520 /* Pods_PlayAppStore.framework */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,8 @@
 		A5DAB4551E665822006B0CFA /* PASServerAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASServerAddressController.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
+		D383468E1E66733000A0343F /* PASFollowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowTableViewCell.h; sourceTree = "<group>"; };
+		D383468F1E66733000A0343F /* PASFollowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,7 +491,7 @@
 				D33F41B91E657D9D009CAAF7 /* Api */,
 				D33F41BA1E657D9D009CAAF7 /* Manager */,
 				D33F41BB1E657D9D009CAAF7 /* Model */,
-				D33F41BC1E657D9D009CAAF7 /* View */,
+				D383468D1E66731A00A0343F /* View */,
 				A52E378E1E5A885500EB1B5C /* VC */,
 			);
 			path = Follow;
@@ -677,9 +680,11 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		D33F41BC1E657D9D009CAAF7 /* View */ = {
+		D383468D1E66731A00A0343F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D383468E1E66733000A0343F /* PASFollowTableViewCell.h */,
+				D383468F1E66733000A0343F /* PASFollowTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -837,6 +842,7 @@
 				8DBA3B9B1E647B82001D9FF4 /* BEMAnimationManager.m in Sources */,
 				8DBA3B8D1E647A62001D9FF4 /* PASNavigationViewController.m in Sources */,
 				8DBA3BA31E647B8D001D9FF4 /* PASDisListTableViewCell.m in Sources */,
+				D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */,
 				A5DAB4531E65D391006B0CFA /* PASSettingActionCell.m in Sources */,
 				A52E37A91E5AC50300EB1B5C /* Reachability.m in Sources */,
 				A52E36E81E5823E100EB1B5C /* main.m in Sources */,
