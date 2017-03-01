@@ -1,0 +1,13 @@
+{
+        "id": 1,
+        "guid": "46269d71-9fda-76fc-3442-a118d6b08bf1",
+        "bundleID": "com.lashou.LaShouGroup",
+        "version": "2.11.4",
+        "build": "1608051045",
+        "icon": "https://cdn.worldvectorlogo.com/logos/wechat.svg",
+        "name": "WeeChat",
+        "uploadTime": "2016-12-01 20:50:05",
+        "platform": "ios",
+        "url": "itms-services://?action=download-manifest&url=https://dl.dropboxusercontent.com/s/9ppyicsss4b4fri/Manifest.plist",
+        "changelog": "new feature: do whatever you want"
+    }
