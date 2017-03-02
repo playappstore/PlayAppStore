@@ -7,12 +7,12 @@
 //
 
 #import "PASChangeLanguageController.h"
-#import "PASChangeLanguageCell.h"
 #import "PASLocalizableManager.h"
 
 @interface PASChangeLanguageController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 
 @end
@@ -21,14 +21,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configLanguageData];
     [self loadNav];
     [self addSubviews];
 
 }
 
 #pragma mark - PASChangeLanguageDelegate 
-- (void)defaultLanguageCharged {
-    [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE];
+- (void)changeLanguageButtonTapedWithIndex:(NSIndexPath *)index {
+    if (index.row == 0) {
+        return;
+    }
+    
+    NSString *str = [self.dataArray safeObjectAtIndex:0];
+    if ([str isEqualToString:@"简体中文"]) {
+        [self.dataArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
+        [self.tableView reloadData];
+        [[PASLocalizableManager shareInstance] setUserlanguage:PASENGLISH];
+    } else {
+        [self.dataArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
+        [self.tableView reloadData];
+        [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE];
+    }
 }
 
 
@@ -41,35 +55,70 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PASChangeLanguageCell * cell = [PASChangeLanguageCell cellCreatedWithTableView:tableView];
-    if (indexPath.row == 0) {
-        //cell.defaultCard.selected = YES;
+
+    static NSString * ID = @"PASChangeLanguageCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
     }
-    //cell.delegate = self;
+    if (indexPath.row == 0) {
+        cell.imageView.image = [UIImage imageNamed:@"morenka-xuanzhong"];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"morenka-weixuan"];
+    }
+    cell.textLabel.text = [self.dataArray  safeObjectAtIndex:indexPath.row];
     return cell;
+
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self changeLanguageButtonTapedWithIndex:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return  50;
 }
 
 #pragma mark - Setter && Getter
+- (void)setExtraCellLineHidden: (UITableView *)tableView
+{
+    UIView *view =[ [UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+}
+
+- (void)configLanguageData {
+    
+    self.dataArray = [NSMutableArray arrayWithCapacity:2];
+    NSString *languageString = [[NSUserDefaults standardUserDefaults] valueForKey:PASLanguageKey];
+    NSArray *languagesArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+    languageString = languagesArray.firstObject;
+    if ([[[PASLocalizableManager shareInstance] chinese] containsObject:languageString]) {
+        [self.dataArray safeAddObject:@"简体中文"];
+        [self.dataArray safeAddObject:@"English"];
+    } else {
+        [self.dataArray safeAddObject:@"English"];
+        [self.dataArray safeAddObject:@"简体中文"];
+    }
+}
+
 - (void)loadNav {
     self.title = NSLocalizedString(@"Language setting", nil);
     self.view.backgroundColor = RGBCodeColor(0xf2f2f2);
-
 }
 
 - (void)addSubviews {
-    
     [self.view addSubview:self.tableView];
+    [self setExtraCellLineHidden:self.tableView];
 }
 
 - (UITableView *)tableView {
@@ -77,7 +126,7 @@
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     return _tableView;
 }
