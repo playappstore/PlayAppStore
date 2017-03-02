@@ -41,8 +41,9 @@
     _upDataTimeLabel = [[UILabel alloc] init];
 //                        WithFrame:CGRectMake(self.logoImageView.right + 20, self.logoImageView.top , SCREEN_WIDTH - (self.logoImageView.right + 20) , 15)];
     _upDataTimeLabel.text = @"更新时间：2017.02.28 10:10 2234444444";
-    _upDataTimeLabel.font = [UIFont systemFontOfSize:13];
-    _upDataTimeLabel.textColor = RGBCodeColor(0x666666);
+    _upDataTimeLabel.font = [UIFont systemFontOfSize:15];
+//    _upDataTimeLabel.textColor = RGBCodeColor(0x666666);
+    _upDataTimeLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:_upDataTimeLabel];
     
     //版本
@@ -65,7 +66,7 @@
     self.downloadButton.stopDownloadButton.tintColor = [UIColor blackColor];
     self.downloadButton.stopDownloadButton.filledLineStyleOuter = YES;
     NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",NSLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
-    self.downloadButton.startDownloadButton.contentEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
+    self.downloadButton.startDownloadButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
     [self.downloadButton.startDownloadButton setAttributedTitle:title forState:UIControlStateNormal];
     self.downloadButton.pendingView.tintColor = [UIColor defaultDwonloadButtonBlueColor];
     self.downloadButton.stopDownloadButton.tintColor = [UIColor defaultDwonloadButtonBlueColor];
@@ -76,10 +77,11 @@
     [self.contentView addSubview:_downloadButton];
     
     //更新能容
-    _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(_upDataTimeLabel.left, self.downloadButton.bottom + 5, SCREEN_WIDTH -_upDataTimeLabel.left - 10 , PASDisListTableViewCellHeight -self.downloadButton.bottom - 10 )];
+    _describeLabel = [[UILabel alloc] init];
+//                      WithFrame:CGRectMake(_upDataTimeLabel.left, self.downloadButton.bottom + 5, SCREEN_WIDTH -_upDataTimeLabel.left - 10 , PASDisListTableViewCellHeight -self.downloadButton.bottom - 10 )];
     _describeLabel.textColor = _upDataTimeLabel.textColor;
     _describeLabel.font = _upDataTimeLabel.font;
-//    _describeLabel.text = @"这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容";
+    _describeLabel.text = @"这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容";
     _describeLabel.numberOfLines = 0;
     [self.contentView addSubview:_describeLabel];
 //    [self.describeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,6 +104,15 @@
         make.right.equalTo(self.downloadButton.mas_left).offset(- 10).priorityLow();
         make.top.equalTo(self.logoImageView.mas_top);
         make.left.equalTo(self.logoImageView.mas_right).offset(20);
+    }];
+    [self.describeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.logoImageView.mas_bottom).offset(5);
+        make.bottom.equalTo(self.mas_bottom).offset(-5);
+        make.left.mas_equalTo(self).offset(10);
+        make.right.mas_equalTo(self).offset(-10);
+
+        
+        
     }];
 
     
