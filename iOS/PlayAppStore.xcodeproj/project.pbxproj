@@ -58,7 +58,6 @@
 		A5DAB4561E665822006B0CFA /* PASServerAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4551E665822006B0CFA /* PASServerAddressController.m */; };
 		A5DAB4591E669F92006B0CFA /* PASLoacalDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4581E669F92006B0CFA /* PASLoacalDataManager.m */; };
 		A5DAB45C1E66AD5A006B0CFA /* PASChangeLanguageController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB45B1E66AD5A006B0CFA /* PASChangeLanguageController.m */; };
-		A5DAB45F1E66AE57006B0CFA /* PASChangeLanguageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB45E1E66AE57006B0CFA /* PASChangeLanguageCell.m */; };
 		A5DAB4621E66AFC8006B0CFA /* PASPushNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4611E66AFC8006B0CFA /* PASPushNotificationController.m */; };
 		A5DAB4651E67F2D0006B0CFA /* PASLocalizableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4641E67F2D0006B0CFA /* PASLocalizableManager.m */; };
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
@@ -177,8 +176,6 @@
 		A5DAB4581E669F92006B0CFA /* PASLoacalDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASLoacalDataManager.m; sourceTree = "<group>"; };
 		A5DAB45A1E66AD5A006B0CFA /* PASChangeLanguageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASChangeLanguageController.h; sourceTree = "<group>"; };
 		A5DAB45B1E66AD5A006B0CFA /* PASChangeLanguageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASChangeLanguageController.m; sourceTree = "<group>"; };
-		A5DAB45D1E66AE57006B0CFA /* PASChangeLanguageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASChangeLanguageCell.h; sourceTree = "<group>"; };
-		A5DAB45E1E66AE57006B0CFA /* PASChangeLanguageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASChangeLanguageCell.m; sourceTree = "<group>"; };
 		A5DAB4601E66AFC8006B0CFA /* PASPushNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASPushNotificationController.h; sourceTree = "<group>"; };
 		A5DAB4611E66AFC8006B0CFA /* PASPushNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASPushNotificationController.m; sourceTree = "<group>"; };
 		A5DAB4631E67F2D0006B0CFA /* PASLocalizableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASLocalizableManager.h; sourceTree = "<group>"; };
@@ -582,8 +579,6 @@
 			children = (
 				A5DAB44E1E656C0E006B0CFA /* PASSettingAdderssView.h */,
 				A5DAB44F1E656C0E006B0CFA /* PASSettingAdderssView.m */,
-				A5DAB45D1E66AE57006B0CFA /* PASChangeLanguageCell.h */,
-				A5DAB45E1E66AE57006B0CFA /* PASChangeLanguageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -885,7 +880,6 @@
 				A5DAB4651E67F2D0006B0CFA /* PASLocalizableManager.m in Sources */,
 				A540D26F1E5D83DA00DD6756 /* PASApplicationDetailCell.m in Sources */,
 				A540D25E1E5D6B0700DD6756 /* PASApplicationDetailController.m in Sources */,
-				A5DAB45F1E66AE57006B0CFA /* PASChangeLanguageCell.m in Sources */,
 				A5DAB44D1E601598006B0CFA /* PASQRCodeActionSheet.m in Sources */,
 				A52E37801E598D6500EB1B5C /* NSDate+TimeStamp.m in Sources */,
 				A52E37831E598DC000EB1B5C /* NSDate+PASUitls.m in Sources */,
