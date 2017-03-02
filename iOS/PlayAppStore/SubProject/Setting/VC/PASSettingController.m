@@ -7,7 +7,6 @@
 //
 
 #import "PASSettingController.h"
-#import "PASSettingActionCell.h"
 #import "PASServerAddressController.h"
 #import "PASLoacalDataManager.h"
 #import "MBProgressHUD.h"
@@ -133,29 +132,15 @@
 #pragma mark - Share
 - (void)shareAppToFriends {
     NSString *text = @"分享内容";
-    
     UIImage *image = [UIImage imageNamed:@"pas_QRCode"];
-    
     NSURL *url = [NSURL URLWithString:@"https://github.com/playappstore/PlayAppStore"];
-    
-    //数组中放入分享的内容
-    
     NSArray *activityItems = @[text, image, url];
-    
-    //自定义 customActivity继承于UIActivity,创建自定义的Activity加在数组Activities中。
-//    PASShareActivity * custom = [[PASShareActivity alloc] initWithTitie:@"二维码" withActivityImage:[UIImage imageNamed:@"pas_QRCode"] withUrl:url withType:@"customActivity" withShareContext:activityItems];
-//    custom.delegate = self;
-//    NSArray *activities = @[custom];
     
     // 实现服务类型控制器
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-//    activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo, UIActivityTypePrint, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToTencentWeibo, UIActivityTypeCopyToPasteboard];
-    // 分享类型
     [activityViewController setCompletionWithItemsHandler:^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
-        
-        // 显示选中的分享类型
+
         NSLog(@"当前选择分享平台 %@",activityType);
-        
         if (completed) {
             
             NSLog(@"分享成功");
@@ -220,7 +205,6 @@
     }
 }
 
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -241,7 +225,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PASSettingActionCell * cell = [PASSettingActionCell cellCreatedWithTableView:tableView];
+    
+    static NSString * ID = @"PASSettingActionCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+    }
     NSArray *targetArray = [NSArray array];
     if (indexPath.section == 0) {
         targetArray = self.settingArray;
@@ -250,19 +239,14 @@
     } else {
         targetArray = self.aboutArray;
     }
-
-    cell.titleLabel.text = [targetArray[indexPath.row] objectForKey:@"title"];
+    
+    cell.textLabel.text = [targetArray[indexPath.row] objectForKey:@"title"];
     if (indexPath.section == 1 && indexPath.row == 0) {
         // 清除缓存
-        cell.isFirstCell = YES;
         _cacheSize = [PASLoacalDataManager diskCacheSize];
-        cell.detailLabel.text = [NSString stringWithFormat:@"%.2fMB", _cacheSize];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2fMB", _cacheSize];
     }
-    
-    if (indexPath.row == targetArray.count-1) {
-        cell.isLastCell = YES;
-    }
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -313,6 +297,12 @@
     return view;
 }
 
+- (void)setExtraCellLineHidden: (UITableView *)tableView
+{
+    UIView *view =[ [UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+}
 
 #pragma mark - Setter && Getter
 - (void)loadNav {
@@ -320,21 +310,14 @@
 }
 
 - (void)addSubviews {
-
     [self.view addSubview:self.tableView];
-    [self layoutSubviews];
+    [self setExtraCellLineHidden:self.tableView];
 }
-
-- (void)layoutSubviews
-{
-
-}
-
 
 - (void)configData {
     self.settingArray = @[
-                    @{@"title":NSLocalizedString(@"Server address", nil), @"action":@(100)},
-                    @{@"title":NSLocalizedString(@"Language", nil), @"action":@(101)},
+                    @{@"title":PASLocalizedString(@"Server address", nil), @"action":@(100)},
+                    @{@"title":PASLocalizedString(@"Language", nil), @"action":@(101)},
                     @{@"title":NSLocalizedString(@"Notifications", nil), @"action":@(102)},
                     @{@"title":NSLocalizedString(@"Shortcut", nil), @"action":@(103)},
                     @{@"title":NSLocalizedString(@"Display setting", nil), @"action":@(104)}
@@ -358,11 +341,10 @@
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     return _tableView;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
