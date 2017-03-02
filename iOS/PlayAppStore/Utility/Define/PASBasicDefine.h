@@ -19,6 +19,10 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define kDefaultWindowSize [UIScreen mainScreen].bounds.size
 
+#define kNSUserDefaultMainAddress @"MainIPAddress"
+#define kNSUserDefaultMainPort @"MainPort"
+
+
 
 
 #endif /* PASBasicDefine_h */
