@@ -52,7 +52,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整的IP地址与端口" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please fill in the full IP address with the port", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
         [alert show];
     }
 }
@@ -145,14 +145,14 @@
 
 - (PASSettingAdderssView *)ipView {
     if (!_ipView) {
-        _ipView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:@"IP Address:" placeHolder:@"请输入服务器IP地址" isNeedTopSpitLine:YES];
+        _ipView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:NSLocalizedString(@"IP Address:", nil) placeHolder:NSLocalizedString(@"Please enter the server IP address", nil) isNeedTopSpitLine:YES];
     }
     return _ipView;
 }
 
 - (PASSettingAdderssView *)portView {
     if (!_portView) {
-        _portView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:@"Port:" placeHolder:@"请输入端口地址" isNeedTopSpitLine:NO];
+        _portView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:NSLocalizedString(@"Port:", nil) placeHolder:NSLocalizedString(@"Please enter the port address", nil) isNeedTopSpitLine:NO];
     }
     return _portView;
 }

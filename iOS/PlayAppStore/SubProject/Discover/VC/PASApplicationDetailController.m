@@ -124,7 +124,7 @@
 
 #pragma mark - Setter && Getter
 - (void)loadNav {
-    self.title = @"Application Detail";
+    self.title = NSLocalizedString(@"Application Detail", nil);
     self.view.backgroundColor = [UIColor whiteColor];    
 }
 

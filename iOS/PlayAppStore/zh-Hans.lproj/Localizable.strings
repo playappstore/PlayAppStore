@@ -10,7 +10,7 @@
 "Follow" = "关注";
 "Setting" = "设置";
 
-"Push Notification" = "推送通知";
+"Push notification" = "推送通知";
 "save" = "保存";
 "share" = "分享";
 
@@ -29,14 +29,22 @@
 "Follow us on twitter" = "微博联系我们";
 "more" = "更多";
 "DOWNLOAD" = "下载";
-"Push notification" = "推送";
 "Language setting" = "语言设置";
 
 "Server address" = "服务器地址";
+"PlayAppStore is the platform to help the team quickly and reliably test its own application software. If you close the push, you will not receive the updated push notification for the first time." = "PlayAppStore是帮助团队快速可靠地测试自己应用软件的平台。如果关闭推送，您将不会第一时间收到更新的推送通知。";
 
-
-
-
+"Application Detail" = "应用详情";
+"Clear success" = "清除成功";
+"There is no cache yet" = "还没有缓存";
+"Are you sure to clear the cache?" = "确认清楚缓存";
+"Cancel" = "取消";
+"Confirm" = "确认";
+"Please fill in the full IP address with the port" = "请填写完整的IP地址与端口";
+"IP Address:" = "IP地址:";
+"Port:" = "端口:";
+"Please enter the server IP address" = "请输入服务器IP地址";
+"Please enter the port address" = "请输入端口地址";
 
 
 
