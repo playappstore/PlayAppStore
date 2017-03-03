@@ -15,4 +15,5 @@ pod 'SDWebImage', '~>3.8'
 pod "DownloadButton"
 pod 'PlayAppStoreSDK'
 pod 'MJRefresh'
+pod 'YYModel'
 end

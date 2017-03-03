@@ -11,6 +11,8 @@
 #import "PASDescoverListViewController.h"
 #import "MJRefresh.h"
 #import "PASDiscoverModel.h"
+#import "PASConfiguration.h"
+#import "PASDataProvider.h"
 #define sideGap 20
 #define findIconWide ([UIScreen mainScreen].bounds.size.width - sideGap*4)/3.0
 #define findIconGap ([UIScreen mainScreen].bounds.size.width - findIconWide*3)/4.0
@@ -38,13 +40,7 @@
 - (void)initData {
 
     _dataArr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 10; i++) {
-        
-        PASDiscoverModel *model = [[PASDiscoverModel alloc] init];
-        model.PAS_AppName = [NSString stringWithFormat:@"应用%d",i];
-        model.PAS_AppLogo = @"images-2.jpeg";
-        [_dataArr addObject:model];
-    }
+    [self requestGetAllApp];
 }
 - (void)initCollectionView {
     //初始化layout
@@ -63,6 +59,40 @@
     
     _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(discoverRefresh)];
 }
+- (void)requestGetAllApp {
+
+
+    PASConfiguration *config = [PASConfiguration shareInstance];
+    config.baseURL = [NSURL URLWithString:@"http://45.77.13.248:3000/apps/ios"];
+
+    [[[PASDataProvider alloc] initWithConfiguration:config] getAllAppsWithParameters:nil completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+     
+        [self handleRequestWithResponseObject:responseObject];
+        
+    }];
+}
+#pragma mark - 刷新
+- (void)discoverRefresh {
+    
+    [self requestGetAllApp];
+    [_collectionView.mj_header endRefreshing];
+    [_collectionView reloadData];
+}
+
+- (void)handleRequestWithResponseObject:(id)responseObject {
+
+    if ([responseObject isKindOfClass:[NSArray class]]) {
+        [_dataArr removeAllObjects];
+        NSArray *dataArr = (NSArray *)responseObject;
+        for (int i = 0; i < dataArr.count; i++) {
+            NSDictionary *dataDic = dataArr[i];
+            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataDic];
+            model.pas_id = [dataDic objectForKey:@"id"];
+            [_dataArr addObject:model];
+        }
+        [_collectionView reloadData];
+    }
+}
 #pragma mark collectionView代理方法
 //每个section的item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -74,8 +104,10 @@
     
     PASDiscoverCollectionViewCell *cell = (PASDiscoverCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PASDiscoverCollectionViewCell" forIndexPath:indexPath];
     PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
-    cell.PAS_AppLogoImageView.image = [UIImage imageNamed:model.PAS_AppLogo];
-    cell.PAS_AppNameLabel.text = model.PAS_AppName;
+    [cell.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+    cell.PAS_AppNameLabel.text = model.name;
     cell.favoriteClicked = ^(BOOL selected) {
         //点击收藏按钮
         NSLog(@"%d",selected);
@@ -90,8 +122,10 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"点击第几个：%ld",(long)indexPath.row);
+    PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
     PASDescoverListViewController *listViewC = [[PASDescoverListViewController alloc] init];
+    listViewC.bundleID = model.bundleID;
+    listViewC.name = model.name;
     [self.navigationController pushViewController:listViewC animated:YES];
     
 }
@@ -99,25 +133,7 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 20;
 }
-#pragma mark - 刷新
-- (void)discoverRefresh {
 
-    [self performSelector:@selector(refreshData) withObject:nil afterDelay:3];
-
-}
-- (void)refreshData {
-    int dataCount = _dataArr.count;
-    for (int i = 0; i < 2; i++) {
-        
-        PASDiscoverModel *model = [[PASDiscoverModel alloc] init];
-        model.PAS_AppName = [NSString stringWithFormat:@"应用%d",i + dataCount];
-        model.PAS_AppLogo = @"images-2.jpeg";
-        [_dataArr addObject:model];
-    }
-    [_collectionView.mj_header endRefreshing];
-    [_collectionView reloadData];
-   
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

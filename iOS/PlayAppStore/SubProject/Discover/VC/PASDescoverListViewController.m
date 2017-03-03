@@ -9,10 +9,14 @@
 #import "PASDescoverListViewController.h"
 #import "PASDisListTableViewCell.h"
 #import "PASApplicationDetailController.h"
+#import "PASConfiguration.h"
+#import "PASDataProvider.h"
+#import "PASDiscoverModel.h"
 NSString * const cellRes = @"PASDisListTableViewCell";
 @interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource> {
 
     UITableView *_listTableView;
+    NSMutableArray *_dataArr;
 }
 
 @end
@@ -31,13 +35,16 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 }
 - (void)initData {
     
-    self.navigationItem.title = @"这是应用名字";
+    self.navigationItem.title = self.name;
+    _dataArr = [[NSMutableArray alloc] init];
+    [self requestApp];
 }
 - (void)initView {
 
     [self initTableView];
 }
 - (void)initTableView {
+    
     _listTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     _listTableView.delegate = self;
     _listTableView.dataSource = self;
@@ -45,14 +52,44 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     [_listTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes];
     [self.view addSubview:_listTableView];
 }
+- (void)requestApp {
+
+    PASConfiguration *config = [PASConfiguration shareInstance];
+    config.baseURL = [NSURL URLWithString:@"http://45.77.13.248:3000/apps/ios"];
+    [[[PASDataProvider alloc] initWithConfiguration:config] getAllBuildsWithParameters:nil bundleID:self.bundleID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+        [self handleRequestWithResponseObject:responseObject];
+    }];
+
+}
+- (void)handleRequestWithResponseObject:(id)responseObject {
+    
+    if ([responseObject isKindOfClass:[NSArray class]]) {
+        [_dataArr removeAllObjects];
+        NSArray *dataArr = (NSArray *)responseObject;
+        for (int i = 0; i < dataArr.count; i++) {
+            NSDictionary *dataDic = dataArr[i];
+            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataDic];
+            model.pas_id = [dataDic objectForKey:@"id"];
+            [_dataArr addObject:model];
+        }
+        [_listTableView reloadData];
+    }
+}
+
 #pragma mark -- tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 100;
-
+   
+    return _dataArr.count;
 
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
+//    [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
+    cell.upDataTimeLabel.text = [NSString stringWithFormat:@"更新时间：%@", model.uploadTime];
+    cell.versionsLabel.text = [NSString stringWithFormat:@"版本：%@", model.version];
+    cell.describeLabel.text = model.changelog;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
