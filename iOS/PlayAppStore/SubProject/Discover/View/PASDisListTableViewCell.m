@@ -59,7 +59,7 @@
     [self.downloadButton.downloadedButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.downloadButton.downloadedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     self.downloadButton.stopDownloadButton.tintColor = [UIColor blackColor];
-    self.downloadButton.stopDownloadButton.filledLineStyleOuter = YES;
+    self.downloadButton.stopDownloadButton.filledLineStyleOuter = NO;
     NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",NSLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
     self.downloadButton.startDownloadButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
     [self.downloadButton.startDownloadButton setAttributedTitle:title forState:UIControlStateNormal];
@@ -71,7 +71,7 @@
     self.downloadButton.delegate = self;
     [self.contentView addSubview:_downloadButton];
     
-    //更新能容
+    //更新内容
     _describeLabel = [[UILabel alloc] init];
     _describeLabel.textColor = RGBCodeColor(0x666666);
     _describeLabel.font = _upDataTimeLabel.font;
@@ -112,6 +112,9 @@
         case kPKDownloadButtonState_StartDownload:
             self.downloadButton.state = kPKDownloadButtonState_Pending;
 //            [self.pendingSimulator startDownload];
+            if (self.downloadClicked) {
+                self.downloadClicked ();
+            }
             [self performSelector:@selector(delay3:) withObject:downloadButton afterDelay:3];
             break;
         case kPKDownloadButtonState_Pending:

@@ -12,6 +12,7 @@
 #import "PASConfiguration.h"
 #import "PASDataProvider.h"
 #import "PASDiscoverModel.h"
+#import "PASApplication.h"
 NSString * const cellRes = @"PASDisListTableViewCell";
 @interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource> {
 
@@ -75,7 +76,33 @@ NSString * const cellRes = @"PASDisListTableViewCell";
         [_listTableView reloadData];
     }
 }
+- (void)downLoadAppWithBundleIdentifier:(NSString *)bundleIdentifier
+                            manifestURL:(NSURL *)manifestURL
+                          bundleVersion:(NSString *)bundleVersion
+                       PKDownloadButton:(PKDownloadButton *)downloadButton{
+    PASApplication *app = [[PASApplication alloc] initWithBundleIdentifier:bundleIdentifier manifestURL:manifestURL bundleVersion:bundleVersion];
+    NSProgress *progress;
+    [app installWithProgress:&progress completion:^(BOOL finished, NSError *error) {
+       
+        NSLog(@"完成");
+        downloadButton.stopDownloadButton.progress =1;
+        
+    }];
+    if (progress) {
 
+        [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(downloadButton)];
+    }
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"fractionCompleted"]) {
+        NSProgress *progress = (NSProgress *)object;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"progress: %@", @(progress.fractionCompleted));
+            PKDownloadButton *downloadButton = (__bridge PKDownloadButton*)context;
+            downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
+        });
+    }
+}
 #pragma mark -- tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    
@@ -90,6 +117,14 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     cell.upDataTimeLabel.text = [NSString stringWithFormat:@"更新时间：%@", model.uploadTime];
     cell.versionsLabel.text = [NSString stringWithFormat:@"版本：%@", model.version];
     cell.describeLabel.text = model.changelog;
+    cell.downloadButton.state = kPKDownloadButtonState_StartDownload;
+    __weak PASDescoverListViewController *weakself = self;
+    cell.downloadClicked = ^() {
+        //点击下载按钮
+        [weakself downLoadAppWithBundleIdentifier:model.bundleID manifestURL:[NSURL URLWithString:model.url] bundleVersion:model.version PKDownloadButton:cell.downloadButton];
+        
+    };
+
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
