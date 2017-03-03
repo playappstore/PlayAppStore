@@ -100,7 +100,7 @@
         case 107:
         {
            //clear cache
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认清除缓存" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Are you sure to clear the cache?", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
             [alert show];
         }
             break;
@@ -189,7 +189,7 @@
         [PASLoacalDataManager clearDiskCache];
         hub.mode = MBProgressHUDModeText;
         
-        hub.label.text = NSLocalizedString(@"清除成功", nil);
+        hub.label.text = NSLocalizedString(@"Clear success", nil);
         hub.completionBlock = ^ {
             [self.tableView reloadData];
         };
@@ -198,7 +198,7 @@
         
         hub.mode = MBProgressHUDModeText;
         
-        hub.label.text = NSLocalizedString(@"还没有缓存", nil);
+        hub.label.text = NSLocalizedString(@"There is no cache yet", nil);
         hub.completionBlock = ^ {
         };
         [hub hideAnimated:YES afterDelay:2];

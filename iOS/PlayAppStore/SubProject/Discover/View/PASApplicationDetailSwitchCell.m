@@ -67,7 +67,7 @@
 {
     UILabel *titleLabel = [UILabel new];
     titleLabel.font = [UIFont systemFontOfSize:15.];
-    titleLabel.text = @"Push Notification";
+    titleLabel.text = NSLocalizedString(@"Push notification", nil);
     [self.contentView addSubview:titleLabel];
     
     self.titleLabel = titleLabel;
