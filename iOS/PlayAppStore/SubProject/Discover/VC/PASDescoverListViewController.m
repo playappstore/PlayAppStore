@@ -13,19 +13,26 @@
 #import "PASDataProvider.h"
 #import "PASDiscoverModel.h"
 #import "PASApplication.h"
+#import "PAS_DownLoadingApps.h"
 NSString * const cellRes = @"PASDisListTableViewCell";
 @interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource> {
 
     UITableView *_listTableView;
     NSMutableArray *_dataArr;
 }
-
+@property (nonatomic ,weak) NSProgress *weakProgress;
 @end
 
 @implementation PASDescoverListViewController
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+}
+- (void)dealloc {
+    
+    if (self.weakProgress) {
+        [_weakProgress removeObserver:self forKeyPath:@"fractionCompleted"];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,12 +91,14 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     NSProgress *progress;
     [app installWithProgress:&progress completion:^(BOOL finished, NSError *error) {
        
-        NSLog(@"完成");
+//        NSLog(@"完成");
         downloadButton.stopDownloadButton.progress =1;
+        downloadButton.state = kPKDownloadButtonState_Downloaded;
         
     }];
     if (progress) {
 
+        _weakProgress = progress;
         [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(downloadButton)];
     }
 }
@@ -97,10 +106,20 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     if ([keyPath isEqualToString:@"fractionCompleted"]) {
         NSProgress *progress = (NSProgress *)object;
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"progress: %@", @(progress.fractionCompleted));
+//            NSLog(@"progress: %@", @(progress.fractionCompleted));
+            
             PKDownloadButton *downloadButton = (__bridge PKDownloadButton*)context;
+            if (progress.fractionCompleted >0) {
+                //大于0的时候开始走进度
+                 downloadButton.state = kPKDownloadButtonState_Downloading;
+                //假如开始安装
+            }
             downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
         });
+    }else {
+    
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    
     }
 }
 #pragma mark -- tableViewDelegate
@@ -119,6 +138,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     cell.describeLabel.text = model.changelog;
     cell.downloadButton.state = kPKDownloadButtonState_StartDownload;
     __weak PASDescoverListViewController *weakself = self;
+//    [cell setDownloadButtonEnable:YES];
     cell.downloadClicked = ^() {
         //点击下载按钮
         [weakself downLoadAppWithBundleIdentifier:model.bundleID manifestURL:[NSURL URLWithString:model.url] bundleVersion:model.version PKDownloadButton:cell.downloadButton];

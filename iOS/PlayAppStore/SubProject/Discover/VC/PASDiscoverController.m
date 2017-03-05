@@ -61,7 +61,6 @@
 }
 - (void)requestGetAllApp {
 
-
     PASConfiguration *config = [PASConfiguration shareInstance];
     config.baseURL = [NSURL URLWithString:@"http://45.77.13.248:3000/apps/ios"];
 
@@ -104,9 +103,7 @@
     
     PASDiscoverCollectionViewCell *cell = (PASDiscoverCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PASDiscoverCollectionViewCell" forIndexPath:indexPath];
     PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
-    [cell.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
+    [cell.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
     cell.PAS_AppNameLabel.text = model.name;
     cell.favoriteClicked = ^(BOOL selected) {
         //点击收藏按钮

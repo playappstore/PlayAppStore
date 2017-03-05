@@ -21,6 +21,7 @@
 @property (nonatomic ,strong) UILabel *describeLabel;
 //下载按钮
 @property (nonatomic ,strong) PKDownloadButton *downloadButton;
+@property (nonatomic ,assign) BOOL downloadButtonEnable;
 @property (nonatomic ,copy) void (^downloadClicked)();
 @end
 

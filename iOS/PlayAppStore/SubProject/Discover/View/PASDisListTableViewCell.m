@@ -115,7 +115,7 @@
             if (self.downloadClicked) {
                 self.downloadClicked ();
             }
-            [self performSelector:@selector(delay3:) withObject:downloadButton afterDelay:3];
+//            [self performSelector:@selector(delay3:) withObject:downloadButton afterDelay:0];
             break;
         case kPKDownloadButtonState_Pending:
 //            [self.pendingSimulator cancelDownload];
@@ -137,6 +137,12 @@
 - (void)delay3:(PKDownloadButton *)downloadButton {
 
     downloadButton.state = kPKDownloadButtonState_Downloading;
+
+}
+- (void)setDownloadButtonEnable:(BOOL)downloadButtonEnable {
+
+
+    
 
 }
 

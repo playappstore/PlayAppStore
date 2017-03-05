@@ -17,6 +17,7 @@
 		8DBA3BB01E647CD3001D9FF4 /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3BAD1E647CD3001D9FF4 /* UIImageView+CornerRadius.m */; };
 		8DBA3BB11E647CD3001D9FF4 /* UIView+ViewAddtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3BAF1E647CD3001D9FF4 /* UIView+ViewAddtions.m */; };
 		8DBA3BB41E647DC2001D9FF4 /* PASDescoverListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA3BB31E647DC2001D9FF4 /* PASDescoverListViewController.m */; };
+		8DEE01BF1E6C1B550088FEB7 /* PAS_DownLoadingApps.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE01BE1E6C1B550088FEB7 /* PAS_DownLoadingApps.m */; };
 		A52E36E81E5823E100EB1B5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E36E71E5823E100EB1B5C /* main.m */; };
 		A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A52E36EA1E5823E100EB1B5C /* AppDelegate.m */; };
 		A52E36F31E5823E100EB1B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A52E36F21E5823E100EB1B5C /* Assets.xcassets */; };
@@ -97,6 +98,8 @@
 		8DBA3BAF1E647CD3001D9FF4 /* UIView+ViewAddtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewAddtions.m"; sourceTree = "<group>"; };
 		8DBA3BB21E647DC2001D9FF4 /* PASDescoverListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDescoverListViewController.h; sourceTree = "<group>"; };
 		8DBA3BB31E647DC2001D9FF4 /* PASDescoverListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDescoverListViewController.m; sourceTree = "<group>"; };
+		8DEE01BD1E6C1B550088FEB7 /* PAS_DownLoadingApps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAS_DownLoadingApps.h; sourceTree = "<group>"; };
+		8DEE01BE1E6C1B550088FEB7 /* PAS_DownLoadingApps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAS_DownLoadingApps.m; sourceTree = "<group>"; };
 		A52E36E31E5823E100EB1B5C /* PlayAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52E36E71E5823E100EB1B5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A52E36E91E5823E100EB1B5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -715,6 +718,8 @@
 			children = (
 				D3EB06B81E66B95B008002F1 /* PASDiscoverModel.h */,
 				D3EB06B91E66B95B008002F1 /* PASDiscoverModel.m */,
+				8DEE01BD1E6C1B550088FEB7 /* PAS_DownLoadingApps.h */,
+				8DEE01BE1E6C1B550088FEB7 /* PAS_DownLoadingApps.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -865,6 +870,7 @@
 				A52E37611E59895700EB1B5C /* NSDictionary+Safe.m in Sources */,
 				A52E37791E598BF800EB1B5C /* NSString+Safe.m in Sources */,
 				8DBA3B9C1E647B82001D9FF4 /* BEMCheckBox.m in Sources */,
+				8DEE01BF1E6C1B550088FEB7 /* PAS_DownLoadingApps.m in Sources */,
 				A5DAB45C1E66AD5A006B0CFA /* PASChangeLanguageController.m in Sources */,
 				A5DAB4621E66AFC8006B0CFA /* PASPushNotificationController.m in Sources */,
 				A52E37701E598B5C00EB1B5C /* NSObject+Safe.m in Sources */,
