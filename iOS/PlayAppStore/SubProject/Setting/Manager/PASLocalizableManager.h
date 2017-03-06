@@ -11,6 +11,7 @@
 
 #define PASLanguageKey @"userLanguage"
 #define PASCHINESE @"zh-Hans"
+#define PASCHINESE_IOS9 @"zh-Hans-CN"
 #define PASENGLISH @"en"
 #define PASNotificationLanguageChanged @"rdLanguageChanged"
 

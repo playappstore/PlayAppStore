@@ -100,7 +100,7 @@
         case 107:
         {
            //clear cache
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Are you sure to clear the cache?", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"Are you sure to clear the cache?", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
             [alert show];
         }
             break;
@@ -189,7 +189,7 @@
         [PASLoacalDataManager clearDiskCache];
         hub.mode = MBProgressHUDModeText;
         
-        hub.label.text = NSLocalizedString(@"Clear success", nil);
+        hub.label.text = PASLocalizedString(@"Clear success", nil);
         hub.completionBlock = ^ {
             [self.tableView reloadData];
         };
@@ -198,7 +198,7 @@
         
         hub.mode = MBProgressHUDModeText;
         
-        hub.label.text = NSLocalizedString(@"There is no cache yet", nil);
+        hub.label.text = PASLocalizedString(@"There is no cache yet", nil);
         hub.completionBlock = ^ {
         };
         [hub hideAnimated:YES afterDelay:2];
@@ -289,7 +289,7 @@
     }
 
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH, 30)];
-    label.text = NSLocalizedString(sectionTitle, nil);
+    label.text = PASLocalizedString(sectionTitle, nil);
     label.textColor = RGBColor(153, 153, 153);
     label.font = [UIFont systemFontOfSize:14];
     [view addSubview:label];
@@ -318,21 +318,21 @@
     self.settingArray = @[
                     @{@"title":PASLocalizedString(@"Server address", nil), @"action":@(100)},
                     @{@"title":PASLocalizedString(@"Language", nil), @"action":@(101)},
-                    @{@"title":NSLocalizedString(@"Notifications", nil), @"action":@(102)},
-                    @{@"title":NSLocalizedString(@"Shortcut", nil), @"action":@(103)},
-                    @{@"title":NSLocalizedString(@"Display setting", nil), @"action":@(104)}
+                    @{@"title":PASLocalizedString(@"Notifications", nil), @"action":@(102)},
+                    @{@"title":PASLocalizedString(@"Shortcut", nil), @"action":@(103)},
+                    @{@"title":PASLocalizedString(@"Display setting", nil), @"action":@(104)}
                     ];
     self.manualArray = @[
-                         @{@"title":NSLocalizedString(@"Manual", nil), @"action":@(105)},
-                         @{@"title":NSLocalizedString(@"Faq", nil), @"action":@(106)}
+                         @{@"title":PASLocalizedString(@"Manual", nil), @"action":@(105)},
+                         @{@"title":PASLocalizedString(@"Faq", nil), @"action":@(106)}
                          ];
     self.otherArray = @[
-                         @{@"title":NSLocalizedString(@"Clear cache", nil), @"action":@(107)},
-                         @{@"title":NSLocalizedString(@"Share app to your friends", nil), @"action":@(108)}
+                         @{@"title":PASLocalizedString(@"Clear cache", nil), @"action":@(107)},
+                         @{@"title":PASLocalizedString(@"Share app to your friends", nil), @"action":@(108)}
                          ];
     self.aboutArray = @[
-                        @{@"title":NSLocalizedString(@"Designer PlayAppStore", nil), @"action":@(109)},
-                        @{@"title":NSLocalizedString(@"Follow us on twitter", nil), @"action":@(110)}
+                        @{@"title":PASLocalizedString(@"Designer PlayAppStore", nil), @"action":@(109)},
+                        @{@"title":PASLocalizedString(@"Follow us on twitter", nil), @"action":@(110)}
                         ];
 }
 

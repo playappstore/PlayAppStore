@@ -60,7 +60,7 @@
     
     self.downloadButton.stopDownloadButton.tintColor = [UIColor blackColor];
     self.downloadButton.stopDownloadButton.filledLineStyleOuter = YES;
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",NSLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",PASLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
     [self.downloadButton.startDownloadButton setAttributedTitle:title forState:UIControlStateNormal];
     self.downloadButton.pendingView.tintColor = [UIColor defaultDwonloadButtonBlueColor];
     self.downloadButton.stopDownloadButton.tintColor = [UIColor defaultDwonloadButtonBlueColor];

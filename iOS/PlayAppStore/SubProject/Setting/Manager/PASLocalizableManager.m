@@ -38,7 +38,11 @@ static NSBundle *bundle = nil;
             }
             // 避免缓存会出现 zh-Hans-CN 及其他语言的的情况
             if ([[self chinese] containsObject:languageString]) {
+                if (IOS9_OR_LATER) {
+                    languageString = [[self chinese] lastObject]; //iOS9及以上
+                } else {
                 languageString = [[self chinese] firstObject]; // 中文
+                }
             } else if ([[self english] containsObject:languageString]) {
                 languageString = [[self english] firstObject]; // 英文
             } else {
@@ -69,7 +73,7 @@ static NSBundle *bundle = nil;
 
 // 中文类型数组
 - (NSArray *)chinese {
-    return @[@"zh-Hans", @"zh-Hant"];
+    return @[@"zh-Hans", @"zh-Hant", @"zh-Hans-US", @"zh-Hans-CN"];
 }
 
 // 获取应用当前语言

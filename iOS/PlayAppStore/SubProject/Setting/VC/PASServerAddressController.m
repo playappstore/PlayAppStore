@@ -49,10 +49,10 @@
         
         [PASConfiguration shareInstance].baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/", self.ipTextField.text, self.portTextField.text]];
         NSLog(@"address is %@",[NSString stringWithFormat:@"http://%@:%@/", self.ipTextField.text, self.portTextField.text]);
-        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please fill in the full IP address with the port", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"Please fill in the full IP address with the port", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
         [alert show];
     }
 }
@@ -61,21 +61,23 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
 #pragma mark - Setter && Getter
 - (void)loadNav {
-    self.title = NSLocalizedString(@"Server address", nil);
-    self.navigationItem.leftBarButtonItem = nil;
+    self.title = PASLocalizedString(@"Server address", nil);
+    //self.navigationItem.leftBarButtonItem = nil;
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *image = [UIImage imageNamed:@"pas_back"];
     btn.frame = CGRectMake(0, 0, image.size.width, image.size.height);
     [btn setImage:image forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(textFieldEndEditing:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *billItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:billItem, nil];
+    //UIBarButtonItem *billItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:billItem, nil];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(textFieldEndEditing:)];
 
 }
 
@@ -145,14 +147,14 @@
 
 - (PASSettingAdderssView *)ipView {
     if (!_ipView) {
-        _ipView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:NSLocalizedString(@"IP Address:", nil) placeHolder:NSLocalizedString(@"Please enter the server IP address", nil) isNeedTopSpitLine:YES];
+        _ipView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:PASLocalizedString(@"IP Address:", nil) placeHolder:PASLocalizedString(@"Please enter the server IP address", nil) isNeedTopSpitLine:YES];
     }
     return _ipView;
 }
 
 - (PASSettingAdderssView *)portView {
     if (!_portView) {
-        _portView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:NSLocalizedString(@"Port:", nil) placeHolder:NSLocalizedString(@"Please enter the port address", nil) isNeedTopSpitLine:NO];
+        _portView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:PASLocalizedString(@"Port:", nil) placeHolder:PASLocalizedString(@"Please enter the port address", nil) isNeedTopSpitLine:NO];
     }
     return _portView;
 }
