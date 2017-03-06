@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) UITextField *ipTextField;
 @property (nonatomic, strong) UITextField *portTextField;
-@property(nonatomic, strong) QMUIButton *testCAButton;
+@property (nonatomic, strong) QMUIButton *testCAButton;
 
 
 @end
@@ -45,6 +45,8 @@
     if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
         [[NSUserDefaults standardUserDefaults] setObject:self.ipView.cardNumTextField.text forKey:kNSUserDefaultMainAddress];
         [[NSUserDefaults standardUserDefaults] setObject:self.portView.cardNumTextField.text forKey:kNSUserDefaultMainPort];
+        NSString *str = [NSString stringWithFormat:@"http://%@:%@/", self.ipTextField.text, self.portTextField.text];
+        [[NSUserDefaults standardUserDefaults] setObject:str forKey:kNSUserDefaultMainHost];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self dismissViewControllerAnimated:YES completion:nil];
         
