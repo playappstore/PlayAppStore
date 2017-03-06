@@ -23,6 +23,7 @@
 
 #define kNSUserDefaultMainAddress @"MainIPAddress"
 #define kNSUserDefaultMainPort @"MainPort"
+#define kNSUserDefaultMainHost @"MainHost"
 
 
 
