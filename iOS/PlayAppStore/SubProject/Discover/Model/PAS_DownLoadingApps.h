@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface PAS_DownLoadingApps : NSObject
++ (instancetype )sharedInstance;
 @property (nonatomic ,strong) NSMutableDictionary *appDic;
 @end

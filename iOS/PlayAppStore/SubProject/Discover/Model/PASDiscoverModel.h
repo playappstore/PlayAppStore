@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface PASDiscoverModel : NSObject
-//应用ID
+
 @property (nonatomic ,copy) NSString *build;
+//应用ID
 @property (nonatomic ,copy) NSString *bundleID;
 @property (nonatomic ,copy) NSString *changelog;
 @property (nonatomic ,copy) NSString *guid;

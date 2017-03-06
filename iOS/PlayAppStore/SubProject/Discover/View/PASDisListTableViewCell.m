@@ -29,7 +29,6 @@
 }
 - (void)initMySuber {
 
-    NSLog(@"%f",self.height);
     UIImage *topImage = [UIImage imageNamed:@"images-2.jpeg"];
     self.logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 60, 60)];
     [self.logoImageView zy_cornerRadiusAdvance:10.0 rectCornerType:UIRectCornerAllCorners];
@@ -55,8 +54,8 @@
     _downloadButton = [[PKDownloadButton alloc] init];
     _downloadButton.backgroundColor = [UIColor clearColor];
     [self.downloadButton.downloadedButton cleanDefaultAppearance];
-    [self.downloadButton.downloadedButton setTitle:@"h" forState:UIControlStateNormal];
-    [self.downloadButton.downloadedButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.downloadButton.downloadedButton setTitle:NSLocalizedString(@"OPEN", nil) forState:UIControlStateNormal];
+    [self.downloadButton.downloadedButton setTitleColor:[UIColor defaultDwonloadButtonBlueColor] forState:UIControlStateNormal];
     [self.downloadButton.downloadedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     self.downloadButton.stopDownloadButton.tintColor = [UIColor blackColor];
     self.downloadButton.stopDownloadButton.filledLineStyleOuter = NO;
@@ -111,23 +110,21 @@
     switch (state) {
         case kPKDownloadButtonState_StartDownload:
             self.downloadButton.state = kPKDownloadButtonState_Pending;
-//            [self.pendingSimulator startDownload];
             if (self.downloadClicked) {
-                self.downloadClicked ();
+                self.downloadClicked (self.downloadButton.state);
             }
-//            [self performSelector:@selector(delay3:) withObject:downloadButton afterDelay:0];
             break;
         case kPKDownloadButtonState_Pending:
-//            [self.pendingSimulator cancelDownload];
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
             break;
         case kPKDownloadButtonState_Downloading:
-//            [self.downloaderSimulator cancelDownload];
-            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+//            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
             break;
         case kPKDownloadButtonState_Downloaded:
-            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
-            self.imageView.hidden = YES;
+            if (self.downloadClicked) {
+                self.downloadClicked (self.downloadButton.state);
+            }
+//            self.imageView.hidden = YES;
             break;
         default:
             NSAssert(NO, @"unsupported state");
@@ -137,6 +134,16 @@
 - (void)delay3:(PKDownloadButton *)downloadButton {
 
     downloadButton.state = kPKDownloadButtonState_Downloading;
+
+}
+- (void)setValueWithUploadTime:(NSString *)uploadTime
+                       version:(NSString *)version
+                     changelog:(NSString *)changelog {
+
+    self.upDataTimeLabel.text = [NSString stringWithFormat:@"更新时间：%@", uploadTime];
+    self.versionsLabel.text = [NSString stringWithFormat:@"版本：%@", version];
+    self.describeLabel.text = changelog;
+
 
 }
 - (void)setDownloadButtonEnable:(BOOL)downloadButtonEnable {

@@ -21,6 +21,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     NSMutableArray *_dataArr;
 }
 @property (nonatomic ,weak) NSProgress *weakProgress;
+@property (nonatomic ,strong) PASDiscoverModel *downloadingModel;
 @end
 
 @implementation PASDescoverListViewController
@@ -113,6 +114,10 @@ NSString * const cellRes = @"PASDisListTableViewCell";
                 //大于0的时候开始走进度
                  downloadButton.state = kPKDownloadButtonState_Downloading;
                 //假如开始安装
+                
+                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.uploadTime};
+                [[PAS_DownLoadingApps sharedInstance].appDic setObject:dataDic forKey:_downloadingModel.name];
+                
             }
             downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
         });
@@ -133,16 +138,28 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
 //    [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
-    cell.upDataTimeLabel.text = [NSString stringWithFormat:@"更新时间：%@", model.uploadTime];
-    cell.versionsLabel.text = [NSString stringWithFormat:@"版本：%@", model.version];
-    cell.describeLabel.text = model.changelog;
-    cell.downloadButton.state = kPKDownloadButtonState_StartDownload;
+    //给cell赋值显示
+    [cell setValueWithUploadTime:model.uploadTime version:model.name changelog:model.changelog];
+    //设置下载按钮的状态
+    [self setDownLoadButtonStateWithCell:cell model:model];
+    
+   
+    
     __weak PASDescoverListViewController *weakself = self;
-//    [cell setDownloadButtonEnable:YES];
-    cell.downloadClicked = ^() {
-        //点击下载按钮
-        [weakself downLoadAppWithBundleIdentifier:model.bundleID manifestURL:[NSURL URLWithString:model.url] bundleVersion:model.version PKDownloadButton:cell.downloadButton];
+
+    cell.downloadClicked = ^(PKDownloadButtonState state) {
+        if (state == kPKDownloadButtonState_Pending) {
+           weakself.downloadingModel = model;
+            //点击下载按钮
+            [weakself downLoadAppWithBundleIdentifier:model.bundleID manifestURL:[NSURL URLWithString:model.url] bundleVersion:model.version PKDownloadButton:cell.downloadButton];
+        }else if (state == kPKDownloadButtonState_Downloaded){
         
+        //打开应用
+            
+            PASApplication *app = [[PASApplication alloc] initWithBundleIdentifier:model.bundleID manifestURL:[NSURL URLWithString:model.url] bundleVersion:model.version];
+            [app launch];
+          
+        }
     };
 
     return cell;
@@ -152,6 +169,28 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
     [self.navigationController pushViewController:detailController animated:YES];
 
+}
+- (void)setDownLoadButtonStateWithCell:(PASDisListTableViewCell *)cell model:(PASDiscoverModel*)model{
+    
+    NSDictionary *app =  [PAS_DownLoadingApps sharedInstance].appDic;
+    NSArray *appNameArr = app.allKeys;
+    
+    if ([appNameArr containsObject:model.name]) {
+        
+        NSDictionary *dataDic =[app objectForKey:model.name];
+        if ([[dataDic objectForKey:@"version"] isEqualToString:model.version]&&[[dataDic objectForKey:@"bundleID"] isEqualToString:model.bundleID]&&[[dataDic objectForKey:@"uploadTime"] isEqualToString:model.uploadTime]) {
+            
+            _downloadingModel = model;
+            NSProgress *progress = [dataDic objectForKey:@"progress"];
+            cell.downloadButton.state = kPKDownloadButtonState_Downloading;
+            cell.downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
+            [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(cell.downloadButton)];
+        }
+    }else {
+        
+        cell.downloadButton.state = kPKDownloadButtonState_StartDownload;
+        
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

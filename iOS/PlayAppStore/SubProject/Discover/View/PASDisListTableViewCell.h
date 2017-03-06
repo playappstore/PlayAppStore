@@ -22,6 +22,9 @@
 //下载按钮
 @property (nonatomic ,strong) PKDownloadButton *downloadButton;
 @property (nonatomic ,assign) BOOL downloadButtonEnable;
-@property (nonatomic ,copy) void (^downloadClicked)();
+@property (nonatomic ,copy) void (^downloadClicked)(PKDownloadButtonState state);
+- (void)setValueWithUploadTime:(NSString *)uploadTime
+                    version:(NSString *)version
+                  changelog:(NSString *)changelog;
 @end
 
