@@ -25,7 +25,7 @@
             break;
     }
 //	if (!isExistenceNetwork) {
-//		UIAlertView *myalert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"提示", @"") message:NSLocalizedString(@"网络好像有点问题", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"确定", @"") otherButtonTitles:nil,nil];
+//		UIAlertView *myalert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"提示", @"") message:PASLocalizedString(@"网络好像有点问题", @"") delegate:self cancelButtonTitle:PASLocalizedString(@"确定", @"") otherButtonTitles:nil,nil];
 //		[myalert show];
 //	}
 	return isExistenceNetwork;

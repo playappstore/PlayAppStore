@@ -17,9 +17,9 @@
 }
 + (void)addItems {
     
-    UIApplicationShortcutItem * item1 = [[UIApplicationShortcutItem alloc]initWithType:@"Follow" localizedTitle:NSLocalizedString(@"Follow", nil) localizedSubtitle:@"" icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeLove] userInfo:nil];
+    UIApplicationShortcutItem * item1 = [[UIApplicationShortcutItem alloc]initWithType:@"Follow" localizedTitle:PASLocalizedString(@"Follow", nil) localizedSubtitle:@"" icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeLove] userInfo:nil];
     
-    UIApplicationShortcutItem * item2 = [[UIApplicationShortcutItem alloc]initWithType:@"Setting" localizedTitle:NSLocalizedString(@"Setting", nil) localizedSubtitle:@"" icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeLocation] userInfo:nil];
+    UIApplicationShortcutItem * item2 = [[UIApplicationShortcutItem alloc]initWithType:@"Setting" localizedTitle:PASLocalizedString(@"Setting", nil) localizedSubtitle:@"" icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeLocation] userInfo:nil];
     
     [UIApplication sharedApplication].shortcutItems = @[item1,item2];
    

@@ -54,7 +54,7 @@
         return cell;
     } else {
         PASTextLabelCell *cell = [PASTextLabelCell cellCreatedWithTableView:tableView];
-        cell.des1.text = NSLocalizedString(@"PlayAppStore is the platform to help the team quickly and reliably test its own application software. If you close the push, you will not receive the updated push notification for the first time.", nil);
+        cell.des1.text = PASLocalizedString(@"PlayAppStore is the platform to help the team quickly and reliably test its own application software. If you close the push, you will not receive the updated push notification for the first time.", nil);
         return cell;
     }
 }
@@ -90,7 +90,7 @@
 
 #pragma mark - Setter && Getter
 - (void)loadNav {
-    self.title = NSLocalizedString(@"Push notification", nil);
+    self.title = PASLocalizedString(@"Push notification", nil);
 }
 
 - (void)addSubviews {

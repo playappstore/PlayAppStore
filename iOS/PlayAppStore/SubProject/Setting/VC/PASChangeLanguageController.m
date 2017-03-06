@@ -41,7 +41,11 @@
     } else {
         [self.dataArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
         [self.tableView reloadData];
-        [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE];
+        if (IOS9_OR_LATER) {
+            [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE_IOS9];
+        } else {
+            [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE];
+        }
     }
 }
 
@@ -100,8 +104,6 @@
     
     self.dataArray = [NSMutableArray arrayWithCapacity:2];
     NSString *languageString = [[NSUserDefaults standardUserDefaults] valueForKey:PASLanguageKey];
-    NSArray *languagesArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    languageString = languagesArray.firstObject;
     if ([[[PASLocalizableManager shareInstance] chinese] containsObject:languageString]) {
         [self.dataArray safeAddObject:@"简体中文"];
         [self.dataArray safeAddObject:@"English"];
@@ -112,7 +114,7 @@
 }
 
 - (void)loadNav {
-    self.title = NSLocalizedString(@"Language setting", nil);
+    self.title = PASLocalizedString(@"Language setting", nil);
     self.view.backgroundColor = RGBCodeColor(0xf2f2f2);
 }
 
