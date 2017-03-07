@@ -8,6 +8,21 @@
 
 #import "PASDiscoverCollectionViewCell.h"
 #import "UIImageView+CornerRadius.h"
+#import "PASDiscoverModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+
+@interface PASDiscoverCollectionViewCell ()
+
+//应用logo
+@property (nonatomic ,strong) UIImageView *PAS_AppLogoImageView;
+//应用名称
+@property (nonatomic ,strong) UILabel *PAS_AppNameLabel;
+//收藏按钮
+@property (nonatomic ,strong)BEMCheckBox *checkBox;
+
+@end
+
 @implementation PASDiscoverCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame {
     
@@ -46,6 +61,11 @@
     _PAS_AppNameLabel.font = [UIFont systemFontOfSize:13];
     [self.contentView addSubview:_PAS_AppNameLabel];
     
+}
+
+- (void)configViewWithData:(PASDiscoverModel *)model {
+    [self.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.PAS_AppLogo] placeholderImage:[UIImage imageNamed:@"images-2.jpeg"] options:SDWebImageRefreshCached];
+    self.PAS_AppNameLabel.text = model.PAS_AppName;
 }
 - (void)animationDidStopForCheckBox:(BEMCheckBox *)checkBox {
     

@@ -9,6 +9,29 @@
 #import "PASDisListTableViewCell.h"
 #import "UIImageView+CornerRadius.h"
 #import "UIColor+PKDownloadButton.h"
+#import "PKDownloadButton.h"
+#import "UIImage+PKDownloadButton.h"
+#import "UIButton+PKDownloadButton.h"
+#import "PASDiscoverModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+
+
+@interface PASDisListTableViewCell () <PKDownloadButtonDelegate>
+
+@property (nonatomic ,strong) UIImageView *logoImageView;
+//更新时间
+@property (nonatomic ,strong) UILabel *upDataTimeLabel;
+//版本
+@property (nonatomic ,strong) UILabel *versionsLabel;
+//描述
+@property (nonatomic ,strong) UILabel *describeLabel;
+//下载按钮
+@property (nonatomic ,strong) PKDownloadButton *downloadButton;
+
+@end
+
+
 @implementation PASDisListTableViewCell
 
 - (void)awakeFromNib {
@@ -28,16 +51,14 @@
 - (void)initMySuber {
 
     NSLog(@"%f",self.height);
-    UIImage *topImage = [UIImage imageNamed:@"images-2.jpeg"];
     self.logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 60, 60)];
     [self.logoImageView zy_cornerRadiusAdvance:10.0 rectCornerType:UIRectCornerAllCorners];
-    self.logoImageView.image = topImage;
     self.logoImageView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.logoImageView];
     
     //更新时间
     _upDataTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.logoImageView.right + 20, self.logoImageView.top , SCREEN_WIDTH - (self.logoImageView.right + 20) , 15)];
-    _upDataTimeLabel.text = @"更新时间：2017.02.28 10:10";
+    //_upDataTimeLabel.text = @"更新时间：2017.02.28 10:10";
     _upDataTimeLabel.font = [UIFont systemFontOfSize:13];
     _upDataTimeLabel.textColor = RGBCodeColor(0x666666);
     [self.contentView addSubview:_upDataTimeLabel];
@@ -46,7 +67,7 @@
     _versionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(_upDataTimeLabel.left, _upDataTimeLabel.bottom + 10, _upDataTimeLabel.width - 40, _upDataTimeLabel.height)];
     _versionsLabel.textColor = _upDataTimeLabel.textColor;
     _versionsLabel.font = _upDataTimeLabel.font;
-    _versionsLabel.text = @"版本：5.0.1";
+    //_versionsLabel.text = @"版本：5.0.1";
     [self.contentView addSubview:_versionsLabel];
     
 
@@ -76,10 +97,17 @@
     _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(_upDataTimeLabel.left, self.downloadButton.bottom + 5, SCREEN_WIDTH -_upDataTimeLabel.left - 10 , PASDisListTableViewCellHeight -self.downloadButton.bottom - 10 )];
     _describeLabel.textColor = _upDataTimeLabel.textColor;
     _describeLabel.font = _upDataTimeLabel.font;
-    _describeLabel.text = @"这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容";
+    //_describeLabel.text = @"这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容这是更新内容";
     _describeLabel.numberOfLines = 0;
     [self.contentView addSubview:_describeLabel];
 
+}
+
+- (void)configViewWithData:(PASDiscoverModel *)model {
+      [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:model.PAS_AppLogo] placeholderImage:[UIImage imageNamed:@"images-2.jpeg"] options:SDWebImageRefreshCached];
+    self.upDataTimeLabel.text = model.PAS_uploadTime;
+    self.versionsLabel.text = model.version;
+    self.describeLabel.text = model.chengelog;
 }
 - (void)downloadButtonTapped:(PKDownloadButton *)downloadButton
                 currentState:(PKDownloadButtonState)state {

@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "PASChangeLanguageController.h"
 #import "PASPushNotificationController.h"
+#import "PASDesignerController.h"
 
 
 
@@ -114,7 +115,8 @@
         case 109:
         {
             //designer
-            [self openScheme:@"https://github.com/playappstore/PlayAppStore"];
+            PASDesignerController *listViewC = [[PASDesignerController alloc] init];
+            [self.navigationController pushViewController:listViewC animated:YES];
         }
             break;
         case 110:
@@ -155,20 +157,20 @@
 }
 
 #pragma mark -AboutUS
-- (void)openScheme:(NSString *)scheme {
-    UIApplication *application = [UIApplication sharedApplication];
-    NSURL *URL = [NSURL URLWithString:scheme];
-    
-    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
-        [application openURL:URL options:@{}
-           completionHandler:^(BOOL success) {
-               NSLog(@"Open %@: %d",scheme,success);
-           }];
-    } else {
-        BOOL success = [application openURL:URL];
-        NSLog(@"Open %@: %d",scheme,success);
-    }
-}
+//- (void)openScheme:(NSString *)scheme {
+//    UIApplication *application = [UIApplication sharedApplication];
+//    NSURL *URL = [NSURL URLWithString:scheme];
+//    
+//    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+//        [application openURL:URL options:@{}
+//           completionHandler:^(BOOL success) {
+//               NSLog(@"Open %@: %d",scheme,success);
+//           }];
+//    } else {
+//        BOOL success = [application openURL:URL];
+//        NSLog(@"Open %@: %d",scheme,success);
+//    }
+//}
 
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

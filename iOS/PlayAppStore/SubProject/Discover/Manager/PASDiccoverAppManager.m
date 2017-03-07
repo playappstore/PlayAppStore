@@ -79,4 +79,32 @@
     }];
 }
 
+- (void)refreshWithBundleID:(NSString *)bundleID buildID:(NSString *)buildID {
+    NSMutableArray *modelList = [NSMutableArray arrayWithCapacity:10];
+    [_dataProvider getBuildDetailWithBundleID:bundleID buildID:buildID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(requestBuildDetailFailureWithError:)]) {
+                [self.delegate requestBuildDetailFailureWithError:error];
+            }
+            return ;
+        }
+        
+        NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
+        for (NSDictionary *dic in listArr) {
+            PASDiscoverModel *cardApplyModel = [[PASDiscoverModel alloc] init];
+            [cardApplyModel setModelWithDic:dic];
+            [modelList safeAddObject:cardApplyModel];
+        }
+        self.appListArr = modelList;
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(requestBuildDetailSuccessed)]) {
+            [self.delegate requestBuildDetailSuccessed];
+        }
+    }];
+    
+
+}
+
+
+
 @end
