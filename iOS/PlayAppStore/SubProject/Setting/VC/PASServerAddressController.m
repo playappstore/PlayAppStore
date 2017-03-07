@@ -11,6 +11,9 @@
 #import "PASSettingAdderssView.h"
 #import "PASConfiguration.h"
 #import <QMUIKit/QMUIKit.h>
+#import "PASNetwrokManager.h"
+
+
 
 
 @interface PASServerAddressController () <UITextFieldDelegate, UIAlertViewDelegate>
@@ -38,7 +41,22 @@
 
 #pragma mark - Actions
 - (void)testTheCAAvailabilitableImmidately {
-    NSLog(@"ddddd");
+    NSLog(@"testCAbuttonClicked!");
+    //NSString *str = [NSString stringWithFormat:@"http://45.77.13.248:3000%@%@", self.ipTextField.text, self.portTextField.text];
+    PASNetwrokManager *manager = [PASNetwrokManager defaultManager];
+    [manager getWithUrlString:@"http://45.77.13.248:3000" success:^(id response) {
+        NSLog(@"response is %@", response);
+    } failure:^(NSError *error) {
+        NSLog(@"error is %@", error);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You should Install CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
+        alert.tag = 999;
+        [alert show];
+
+
+    }];
+    
+    
+    
 }
 
 - (void)textFieldEndEditing:(UITextField *)textField {
@@ -66,8 +84,26 @@
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (alertView.tag == 999 && buttonIndex == 1) {
+        [self openScheme:@"https://github.com/playappstore/PlayAppStore"];
+    }
     if (buttonIndex == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)openScheme:(NSString *)scheme {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *URL = [NSURL URLWithString:scheme];
+
+    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [application openURL:URL options:@{}
+           completionHandler:^(BOOL success) {
+               NSLog(@"Open %@: %d",scheme,success);
+           }];
+    } else {
+        BOOL success = [application openURL:URL];
+        NSLog(@"Open %@: %d",scheme,success);
     }
 }
 
@@ -127,11 +163,11 @@
 - (void)judegeWhetherHadValue {
     NSString *ip =  [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainAddress];
     NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainPort];
-    if (ip.length > 6) {
+    if (ip.length > 6 && port.length > 0) {
         self.ipTextField.text = ip;
-    }
-    if (port.length > 0) {
         self.portTextField.text = port;
+        self.testCAButton.highlighted = YES;
+        self.testCAButton.userInteractionEnabled = YES;
     }
 }
 
