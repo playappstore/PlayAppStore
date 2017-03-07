@@ -9,19 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "PASDiscoverModel.h"
 
-@protocol PASDiccoverAllAppManagerDelegate <NSObject>
+@protocol PASDiccoverAppManagerDelegate <NSObject>
 
+@optional
 - (void)requestAllAppsSuccessed;
 - (void)requestAllAppsFailureWithError:(NSError *)error;
+
+- (void)requestAllBuildsSuccessed;
+- (void)requestAllBuildsFailureWithError:(NSError *)error;
 
 @end
 
 
-@interface PASDiccoverAllAppManager : NSObject
+@interface PASDiccoverAppManager : NSObject
 
 @property (nonatomic, strong) NSArray<PASDiscoverModel *> *appListArr;
-@property (nonatomic, weak) id <PASDiccoverAllAppManagerDelegate> delegate;
-
-- (void)refresh;
+@property (nonatomic, weak) id <PASDiccoverAppManagerDelegate> delegate;
+// All apps
+- (void)refreshAllApps;
+//One apps
+- (void)refreshWithBundleID:(NSString *)bundleID;
 
 @end

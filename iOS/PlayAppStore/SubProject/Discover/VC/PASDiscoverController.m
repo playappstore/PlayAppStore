@@ -11,19 +11,20 @@
 #import "PASDescoverListViewController.h"
 #import "MJRefresh.h"
 #import "PASDiscoverModel.h"
-#import "PASDiccoverAllAppManager.h"
+#import "PASDiccoverAppManager.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define sideGap 20
 #define findIconWide ([UIScreen mainScreen].bounds.size.width - sideGap*4)/3.0
 #define findIconGap ([UIScreen mainScreen].bounds.size.width - findIconWide*3)/4.0
 #define findIconHeight findIconWide + 25
-@interface PASDiscoverController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, PASDiccoverAllAppManagerDelegate> {
+@interface PASDiscoverController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, PASDiccoverAppManagerDelegate> {
     
     UICollectionView *_collectionView;
     NSMutableArray *_dataArr;
 }
 
-@property (nonatomic, strong) PASDiccoverAllAppManager *appManager;
+@property (nonatomic, strong) PASDiccoverAppManager *appManager;
 @end
 
 @implementation PASDiscoverController
@@ -39,7 +40,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.appManager refresh];
+    [self.appManager refreshAllApps];
 }
 
 
@@ -88,7 +89,9 @@
     
     PASDiscoverCollectionViewCell *cell = (PASDiscoverCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PASDiscoverCollectionViewCell" forIndexPath:indexPath];
     PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
-    cell.PAS_AppLogoImageView.image = [UIImage imageNamed:model.PAS_AppLogo];
+    cell.PAS_AppLogoImageView.image = [UIImage imageNamed:model.PAS_AppLogo]
+;
+    [cell.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.PAS_AppLogo] placeholderImage:[UIImage imageNamed:@"images-2.jpeg"] options:SDWebImageRefreshCached];
     cell.PAS_AppNameLabel.text = model.PAS_AppName;
     cell.favoriteClicked = ^(BOOL selected) {
         //点击收藏按钮
@@ -105,7 +108,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSLog(@"点击第几个：%ld",(long)indexPath.row);
+    PASDiscoverModel *model = [_appManager.appListArr safeObjectAtIndex:indexPath.row];
     PASDescoverListViewController *listViewC = [[PASDescoverListViewController alloc] init];
+    listViewC.bundleID = model.bundleID;
+    listViewC.model = model;
     [self.navigationController pushViewController:listViewC animated:YES];
     
 }
@@ -133,9 +139,9 @@
    
 }
 
-- (PASDiccoverAllAppManager *)appManager {
+- (PASDiccoverAppManager *)appManager {
     if (!_appManager) {
-        _appManager = [[PASDiccoverAllAppManager alloc] init];
+        _appManager = [[PASDiccoverAppManager alloc] init];
         _appManager.delegate = self;
     }
     return _appManager;
