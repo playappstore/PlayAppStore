@@ -29,6 +29,7 @@
 "Follow us on twitter" = "微博联系我们";
 "more" = "更多";
 "DOWNLOAD" = "下载";
+"OPEN" = "打开";
 "Language setting" = "语言设置";
 
 "Server address" = "服务器地址";
@@ -45,7 +46,5 @@
 "Port:" = "端口:";
 "Please enter the server IP address" = "请输入服务器IP地址";
 "Please enter the port address" = "请输入端口地址";
-
-
 
 

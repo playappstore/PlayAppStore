@@ -14,6 +14,8 @@
 #import "PASBasicDefine.h"
 #import "Masonry.h"
 #import "PASColorDefine.h"
+#import <YYModel/YYModel.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "PASLocalizableManager.h"
 
 // Include any system framework and library headers here that should be included in all compilation units.

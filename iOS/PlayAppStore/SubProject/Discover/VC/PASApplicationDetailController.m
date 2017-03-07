@@ -42,7 +42,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.appManager refreshWithBundleID:self.model.bundleID buildID:self.model.PAS_bulid];
+    [self.appManager refreshWithBundleID:self.model.bundleID buildID:self.model.bundleID];
 }
 
 #pragma mark - PASAppManagerDelegate

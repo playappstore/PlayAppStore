@@ -9,29 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @interface PASDiscoverModel : NSObject
-//应用名称
-@property (nonatomic ,copy) NSString *PAS_AppName;
-//应用LOGO--icon
-@property (nonatomic ,copy) NSString *PAS_AppLogo;
-//应用ID
-@property (nonatomic ,copy) NSString *PAS_AppID;
-//bulid
-@property(nonatomic, copy) NSString *PAS_bulid;
-//uploadTime
-@property(nonatomic, copy) NSString *PAS_uploadTime;
-//
-@property(nonatomic, copy) NSString *PAS_platform;
-//
-@property(nonatomic, copy) NSString *url;
-//
-@property(nonatomic, copy) NSString *chengelog;
-//
-@property(nonatomic, copy) NSString *version;
-//
-@property(nonatomic, copy) NSString *guid;
-//
-@property(nonatomic, copy) NSString *bundleID;
-//set model
--(void)setModelWithDic:(NSDictionary*)dataDic;
 
+@property (nonatomic ,copy) NSString *build;
+//应用ID
+@property (nonatomic ,copy) NSString *bundleID;
+@property (nonatomic ,copy) NSString *changelog;
+@property (nonatomic ,copy) NSString *guid;
+//应用LOGO
+@property (nonatomic ,copy) NSString *icon;
+@property (nonatomic ,copy) NSString *pas_id;
+//应用名称
+@property (nonatomic ,copy) NSString *name;
+@property (nonatomic ,copy) NSString *platform;
+@property (nonatomic ,copy) NSString *uploadTime;
+@property (nonatomic ,copy) NSString *url;
+@property (nonatomic ,copy) NSString *version;
+-(void)setModelWithDic:(NSDictionary*)dataDic;
 @end
