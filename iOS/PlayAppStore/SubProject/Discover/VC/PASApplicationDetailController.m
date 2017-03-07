@@ -12,14 +12,15 @@
 #import "PASApplicationDetailHeadView.h"
 #import "PASShareActivity.h"
 #import "PASQRCodeActionSheet.h"
+#import "PASDiccoverAppManager.h"
 
 
-@interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailHeadViewDelegate, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate>
+@interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailHeadViewDelegate, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
 
 @property (nonatomic, strong) PASApplicationDetailHeadView *headerView;
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) PASQRCodeActionSheet *qrCodeView;
-
+@property (nonatomic, strong) PASDiccoverAppManager *appManager;
 
 @end
 
@@ -38,6 +39,21 @@
     self.navLine.hidden = YES;
     self.navigationController.navigationBarHidden = YES;
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.appManager refreshWithBundleID:self.model.bundleID buildID:self.model.PAS_bulid];
+}
+
+#pragma mark - PASAppManagerDelegate
+- (void)requestBuildDetailSuccessed {
+    //Todo detailInfo
+
+}
+- (void)requestBuildDetailFailureWithError:(NSError *)error {
+    //
+}
+
 
 #pragma mark - PASApplicationDetailHeaderViewDelegate
 - (void)backButtonDidTap:(UIButton *)cityButton {
@@ -152,6 +168,15 @@
     }
     return _headerView;
 }
+
+- (PASDiccoverAppManager *)appManager {
+    if (!_appManager) {
+        _appManager = [[PASDiccoverAppManager alloc] init];
+        _appManager.delegate = self;
+    }
+    return _appManager;
+}
+
 
 - (void)configData {
     

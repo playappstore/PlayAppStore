@@ -18,6 +18,9 @@
 - (void)requestAllBuildsSuccessed;
 - (void)requestAllBuildsFailureWithError:(NSError *)error;
 
+- (void)requestBuildDetailSuccessed;
+- (void)requestBuildDetailFailureWithError:(NSError *)error;
+
 @end
 
 
@@ -29,5 +32,7 @@
 - (void)refreshAllApps;
 //One apps
 - (void)refreshWithBundleID:(NSString *)bundleID;
+//detail
+- (void)refreshWithBundleID:(NSString *)bundleID buildID:(NSString *)buildID;
 
 @end

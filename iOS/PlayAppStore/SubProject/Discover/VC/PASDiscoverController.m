@@ -12,7 +12,6 @@
 #import "MJRefresh.h"
 #import "PASDiscoverModel.h"
 #import "PASDiccoverAppManager.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 #define sideGap 20
 #define findIconWide ([UIScreen mainScreen].bounds.size.width - sideGap*4)/3.0
@@ -89,10 +88,7 @@
     
     PASDiscoverCollectionViewCell *cell = (PASDiscoverCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PASDiscoverCollectionViewCell" forIndexPath:indexPath];
     PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
-    cell.PAS_AppLogoImageView.image = [UIImage imageNamed:model.PAS_AppLogo]
-;
-    [cell.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.PAS_AppLogo] placeholderImage:[UIImage imageNamed:@"images-2.jpeg"] options:SDWebImageRefreshCached];
-    cell.PAS_AppNameLabel.text = model.PAS_AppName;
+    [cell configViewWithData:model];
     cell.favoriteClicked = ^(BOOL selected) {
         //点击收藏按钮
         NSLog(@"%d",selected);

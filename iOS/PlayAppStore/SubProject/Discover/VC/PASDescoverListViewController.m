@@ -10,6 +10,7 @@
 #import "PASDisListTableViewCell.h"
 #import "PASApplicationDetailController.h"
 #import "PASDiccoverAppManager.h"
+#import "PASDiscoverModel.h"
 
 NSString * const cellRes = @"PASDisListTableViewCell";
 @interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource, PASDiccoverAppManagerDelegate> {
@@ -56,6 +57,8 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
+    PASDiscoverModel *model = [_appManager.appListArr safeObjectAtIndex:indexPath.row];
+    [cell configViewWithData:model];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
