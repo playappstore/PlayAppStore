@@ -24,5 +24,5 @@
 @property (nonatomic ,copy) NSString *uploadTime;
 @property (nonatomic ,copy) NSString *url;
 @property (nonatomic ,copy) NSString *version;
-
+-(void)setModelWithDic:(NSDictionary*)dataDic;
 @end

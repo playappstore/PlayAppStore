@@ -37,7 +37,7 @@
         Class class = NSClassFromString([dict objectForKey:@"className"]);
         UIViewController *controller;
         controller = [[class alloc] init];
-        controller.title = NSLocalizedString(title, nil);
+        controller.title = PASLocalizedString(title, nil);
         
         PASNavigationViewController *naviController = [[PASNavigationViewController alloc] initWithRootViewController:controller];
         [viewControllers addObject:naviController];
@@ -47,7 +47,7 @@
         naviController.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
         UITabBarItem *tabBarItem = nil;
         tabBarItem = [[UITabBarItem alloc] init];
-        tabBarItem.title = NSLocalizedString(title, nil);
+        tabBarItem.title = PASLocalizedString(title, nil);
         controller.tabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
     

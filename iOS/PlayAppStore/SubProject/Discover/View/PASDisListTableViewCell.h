@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+CornerRadius.h"
+#import "UIColor+PKDownloadButton.h"
+#import <Masonry/Masonry.h>
 #import "PKDownloadButton.h"
 #import "UIImage+PKDownloadButton.h"
 #import "UIButton+PKDownloadButton.h"
+#import "PASDiscoverModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+//@class PASDiscoverModel;
+
 #define PASDisListTableViewCellHeight 120
 @interface PASDisListTableViewCell : UITableViewCell <PKDownloadButtonDelegate>
 @property (nonatomic ,strong) UIImageView *logoImageView;
@@ -27,5 +34,8 @@
                     version:(NSString *)version
                      changelog:(NSString *)changelog
                        iconUrl:(NSString *)iconUrl ;
+
+
+
 @end
 

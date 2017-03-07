@@ -40,7 +40,7 @@
     //更多
     _moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _moreButton.frame = CGRectMake(SCREEN_WIDTH - 60, 0, 50, self.height) ;
-    [_moreButton setTitle:[NSString stringWithFormat:@"%@ >",NSLocalizedString(@"more", nil)] forState:UIControlStateNormal];
+    [_moreButton setTitle:[NSString stringWithFormat:@"%@ >",PASLocalizedString(@"more", nil)] forState:UIControlStateNormal];
     _moreButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [_moreButton setTitleColor:RGBCodeColor(0x666666) forState:UIControlStateNormal];
     _moreButton.userInteractionEnabled = NO;

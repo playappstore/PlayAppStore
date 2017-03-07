@@ -14,19 +14,24 @@
 #import "PASConfiguration.h"
 #import "PASDataProvider.h"
 #import "PAS_DownLoadingApps.h"
+#import "PASDiccoverAppManager.h"
+
 #define sideGap 20
 #define findIconWide ([UIScreen mainScreen].bounds.size.width - sideGap*4)/3.0
 #define findIconGap ([UIScreen mainScreen].bounds.size.width - findIconWide*3)/4.0
 #define findIconHeight findIconWide + 25
-@interface PASDiscoverController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout> {
+@interface PASDiscoverController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, PASDiccoverAppManagerDelegate> {
     
     UICollectionView *_collectionView;
     NSMutableArray *_dataArr;
 }
+
+@property (nonatomic, strong) PASDiccoverAppManager *appManager;
 @end
 
 @implementation PASDiscoverController
 
+#pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
@@ -34,12 +39,28 @@
     
     // Do any additional setup after loading the view.
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.appManager refreshAllApps];
+}
+
+
+#pragma mark - PASDiscoverAllAppsDelegate 
+- (void)requestAllAppsSuccessed {
+    //
+    [_collectionView reloadData];
+
+}
+- (void)requestAllAppsFailureWithError:(NSError *)error {
+
+//
+}
 - (void)initView {
     
     [self initCollectionView];
 }
 - (void)initData {
-
     _dataArr = [[NSMutableArray alloc] init];
     [self requestGetAllApp];
 }
@@ -115,7 +136,6 @@
     }
     cell.favoriteClicked = ^(BOOL selected) {
         //点击收藏按钮
-        NSLog(@"%d",selected);
         if (selected) {
             
             [[PAS_DownLoadingApps sharedInstance] addFollowAppsWithBuildId:model.bundleID];
@@ -145,7 +165,19 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 20;
 }
+- (void)refreshData {
+    [_collectionView.mj_header endRefreshing];
+    [_collectionView reloadData];
+   
+}
 
+- (PASDiccoverAppManager *)appManager {
+    if (!_appManager) {
+        _appManager = [[PASDiccoverAppManager alloc] init];
+        _appManager.delegate = self;
+    }
+    return _appManager;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

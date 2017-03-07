@@ -14,17 +14,23 @@
 #import "PASDiscoverModel.h"
 #import "PASApplication.h"
 #import "PAS_DownLoadingApps.h"
+#import "PASDiccoverAppManager.h"
+#import "PASDiscoverModel.h"
+
 NSString * const cellRes = @"PASDisListTableViewCell";
-@interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource> {
+@interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource, PASDiccoverAppManagerDelegate> {
 
     UITableView *_listTableView;
     NSMutableArray *_dataArr;
 }
 @property (nonatomic ,weak) NSProgress *weakProgress;
 @property (nonatomic ,strong) PASDiscoverModel *downloadingModel;
+
 @end
 
 @implementation PASDescoverListViewController
+
+#pragma mark - LifeCycle
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
@@ -39,9 +45,24 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     [super viewDidLoad];
     [self initData];
     [self initView];
-  
-    // Do any additional setup after loading the view.
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+
+#pragma mark - PASDiscoverAllAppsDelegate
+- (void)requestAllBuildsSuccessed {
+    //
+    [_listTableView reloadData];
+    
+}
+- (void)requestAllBuildsFailureWithError:(NSError *)error {
+    
+    //
+}
+
 - (void)initData {
     
     self.navigationItem.title = self.name;
@@ -49,7 +70,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     [self requestApp];
 }
 - (void)initView {
-
+    
     [self initTableView];
 }
 - (void)initTableView {
@@ -162,12 +183,8 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
-    [self.navigationController pushViewController:detailController animated:YES];
 
-}
 - (void)setDownLoadButtonStateWithCell:(PASDisListTableViewCell *)cell model:(PASDiscoverModel*)model{
     
     NSDictionary *app =  [PAS_DownLoadingApps sharedInstance].appDic;
@@ -194,15 +211,5 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

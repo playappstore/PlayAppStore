@@ -36,6 +36,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         [self requestFollowApps];
     }else {
         //没有收藏的应用
+        [_followTableView reloadData];
     }
 }
 - (void)viewDidLoad {
@@ -43,7 +44,6 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     [self initData];
     [self initView];
     
-    // Do any additional setup after loading the view.
 }
 - (void)initData {
   
@@ -83,7 +83,6 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         
     }
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        NSLog(@"%@",_dataDic);
         [_followTableView reloadData];
     });
 }

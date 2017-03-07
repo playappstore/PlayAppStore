@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "PASTabBarController.h"
 #import "PAS_3DTouch.h"
+#import "PASLocalizableManager.h"
 
 
 @interface AppDelegate ()
@@ -21,13 +22,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    PASTabBarController *tabBarController = [[PASTabBarController alloc] init];
-    self.window.rootViewController = tabBarController;
+    [self initRootTabController];
     [self add3DTouch];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-   
 
+    [self localizableLanguage];
+   
     return YES;
 }
 //添加3dTouch功能
@@ -49,6 +48,32 @@
     
     [PAS_3DTouch PAS_Handle3DTouchPerformActionForShortcutItem:shortcutItem];
 }
+
+- (void)localizableLanguage {
+    [PASLocalizableManager shareInstance];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChanged:) name:PASNotificationLanguageChanged object:nil];
+}
+
+- (void)languageChanged:(NSNotification *)note {
+    [self initRootTabController];
+    
+    
+//    UIWindow* window = [UIApplication sharedApplication].keyWindow;
+//    for (UIView* view in window.subviews) {
+//        [view removeFromSuperview];
+//        [window addSubview:view];
+//    }
+//    [window makeKeyWindow];
+}
+
+- (void)initRootTabController {
+    self.window.rootViewController = nil;
+    PASTabBarController *tabBarController = [[PASTabBarController alloc] init];
+    self.window.rootViewController = tabBarController;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -73,6 +98,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PASNotificationLanguageChanged object:nil];
 }
 
 

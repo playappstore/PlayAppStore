@@ -10,7 +10,7 @@
 "Follow" = "Follow";
 "Setting" = "Setting";
 
-"Push Notification" = "Push Notification";
+"Push notification" = "Push notification";
 "save" = "save";
 "share" = "share";
 
@@ -30,4 +30,21 @@
 "more" = "More";
 "DOWNLOAD" = "DOWNLOAD";
 "OPEN" = "OPEN";
+"Language setting" = "Language setting";
+"Server address" = "Server address";
+"PlayAppStore is the platform to help the team quickly and reliably test its own application software. If you close the push, you will not receive the updated push notification for the first time." = "PlayAppStore is the platform to help the team quickly and reliably test its own application software. If you close the push, you will not receive the updated push notification for the first time.";
+
+"Application Detail" = "Application Detail";
+"Clear success" = "Clear success";
+"There is no cache yet" = "There is no cache yet";
+"Are you sure to clear the cache?" = "Are you sure to clear the cache?";
+"Cancel" = "Cancel";
+"Confirm" = "Confirm";
+"Please fill in the full IP address with the port" = "Please fill in the full IP address with the port";
+"IP Address:" = "IP Address:";
+"Port:" = "Port:";
+"Please enter the server IP address" = "Please enter the server IP address";
+"Please enter the port address" = "Please enter the port address";
+
+
 

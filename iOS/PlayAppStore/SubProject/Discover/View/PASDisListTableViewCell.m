@@ -7,9 +7,22 @@
 //
 
 #import "PASDisListTableViewCell.h"
-#import "UIImageView+CornerRadius.h"
-#import "UIColor+PKDownloadButton.h"
-#import <Masonry/Masonry.h>
+
+
+@interface PASDisListTableViewCell () <PKDownloadButtonDelegate>
+
+//@property (nonatomic ,strong) UIImageView *logoImageView;
+////更新时间
+//@property (nonatomic ,strong) UILabel *upDataTimeLabel;
+////版本
+//@property (nonatomic ,strong) UILabel *versionsLabel;
+////描述
+//@property (nonatomic ,strong) UILabel *describeLabel;
+////下载按钮
+//@property (nonatomic ,strong) PKDownloadButton *downloadButton;
+
+@end
+
 
 @implementation PASDisListTableViewCell
 
@@ -32,15 +45,16 @@
     UIImage *topImage = [UIImage imageNamed:@"images-2.jpeg"];
     self.logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 60, 60)];
     [self.logoImageView zy_cornerRadiusAdvance:10.0 rectCornerType:UIRectCornerAllCorners];
-    self.logoImageView.image = topImage;
     self.logoImageView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.logoImageView];
     
     //更新时间
     _upDataTimeLabel = [[UILabel alloc] init];
     _upDataTimeLabel.font = [UIFont systemFontOfSize:15];
-//    _upDataTimeLabel.textColor = RGBCodeColor(0x666666);
     _upDataTimeLabel.textColor = [UIColor blackColor];
+    _upDataTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.logoImageView.right + 20, self.logoImageView.top , SCREEN_WIDTH - (self.logoImageView.right + 20) , 15)];
+    _upDataTimeLabel.font = [UIFont systemFontOfSize:13];
+    _upDataTimeLabel.textColor = RGBCodeColor(0x666666);
     [self.contentView addSubview:_upDataTimeLabel];
     
     //版本
@@ -59,8 +73,8 @@
     [self.downloadButton.downloadedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     self.downloadButton.stopDownloadButton.tintColor = [UIColor blackColor];
     self.downloadButton.stopDownloadButton.filledLineStyleOuter = NO;
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",NSLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
     self.downloadButton.startDownloadButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",PASLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
     [self.downloadButton.startDownloadButton setAttributedTitle:title forState:UIControlStateNormal];
     self.downloadButton.pendingView.tintColor = [UIColor defaultDwonloadButtonBlueColor];
     self.downloadButton.stopDownloadButton.tintColor = [UIColor defaultDwonloadButtonBlueColor];
@@ -148,12 +162,7 @@
 
 
 }
-- (void)setDownloadButtonEnable:(BOOL)downloadButtonEnable {
 
-
-    
-
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
