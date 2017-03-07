@@ -168,7 +168,13 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
+    detailController.model = [_appManager.appListArr objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:detailController animated:YES];
+
+}
 - (void)setDownLoadButtonStateWithCell:(PASDisListTableViewCell *)cell model:(PASDiscoverModel*)model{
     
     NSDictionary *app =  [PAS_DownLoadingApps sharedInstance].appDic;
