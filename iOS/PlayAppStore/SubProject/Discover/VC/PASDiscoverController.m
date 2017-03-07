@@ -40,29 +40,13 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.appManager refreshAllApps];
-}
-
-
-#pragma mark - PASDiscoverAllAppsDelegate 
-- (void)requestAllAppsSuccessed {
-    //
-    [_collectionView reloadData];
-
-}
-- (void)requestAllAppsFailureWithError:(NSError *)error {
-
-//
-}
 - (void)initView {
     
     [self initCollectionView];
 }
 - (void)initData {
     _dataArr = [[NSMutableArray alloc] init];
-    [self requestGetAllApp];
+     [self.appManager refreshAllApps];
 }
 - (void)initCollectionView {
     //初始化layout
@@ -81,50 +65,35 @@
     
     _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(discoverRefresh)];
 }
-- (void)requestGetAllApp {
-
-    PASConfiguration *config = [PASConfiguration shareInstance];
-    config.baseURL = [NSURL URLWithString:@"http://45.77.13.248:3000/apps/ios"];
-
-    [[[PASDataProvider alloc] initWithConfiguration:config] getAllAppsWithParameters:nil completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-     
-        [self handleRequestWithResponseObject:responseObject];
-        
-    }];
+#pragma mark - PASDiscoverAllAppsDelegate
+- (void)requestAllAppsSuccessed {
+    //
+    [_collectionView reloadData];
+    
 }
+- (void)requestAllAppsFailureWithError:(NSError *)error {
+    
+    //
+}
+
 #pragma mark - 刷新
 - (void)discoverRefresh {
     
-    [self requestGetAllApp];
+    [self.appManager refreshAllApps];
     [_collectionView.mj_header endRefreshing];
-    [_collectionView reloadData];
 }
 
-- (void)handleRequestWithResponseObject:(id)responseObject {
-
-    if ([responseObject isKindOfClass:[NSArray class]]) {
-        [_dataArr removeAllObjects];
-        NSArray *dataArr = (NSArray *)responseObject;
-        for (int i = 0; i < dataArr.count; i++) {
-            NSDictionary *dataDic = dataArr[i];
-            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataDic];
-            model.pas_id = [dataDic objectForKey:@"id"];
-            [_dataArr addObject:model];
-        }
-        [_collectionView reloadData];
-    }
-}
 #pragma mark collectionView代理方法
 //每个section的item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return _dataArr.count;
+    return _appManager.appListArr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     PASDiscoverCollectionViewCell *cell = (PASDiscoverCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PASDiscoverCollectionViewCell" forIndexPath:indexPath];
-    PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
+    PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
     [cell.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
     cell.PAS_AppNameLabel.text = model.name;
     if ([[PAS_DownLoadingApps sharedInstance].followApps containsObject:model.bundleID]) {
@@ -154,7 +123,7 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
+    PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
     PASDescoverListViewController *listViewC = [[PASDescoverListViewController alloc] init];
     listViewC.bundleID = model.bundleID;
     listViewC.name = model.name;
@@ -165,12 +134,6 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 20;
 }
-- (void)refreshData {
-    [_collectionView.mj_header endRefreshing];
-    [_collectionView reloadData];
-   
-}
-
 - (PASDiccoverAppManager *)appManager {
     if (!_appManager) {
         _appManager = [[PASDiccoverAppManager alloc] init];
