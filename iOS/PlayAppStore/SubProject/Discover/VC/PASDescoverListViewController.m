@@ -137,14 +137,12 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     
     PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
-//    [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.uploadTime version:model.name changelog:model.changelog];
+    [cell setValueWithUploadTime:model.uploadTime version:model.name changelog:model.changelog iconUrl:model.icon];
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     
    
-    
     __weak PASDescoverListViewController *weakself = self;
 
     cell.downloadClicked = ^(PKDownloadButtonState state) {

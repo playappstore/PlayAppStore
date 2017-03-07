@@ -23,5 +23,29 @@ static PAS_DownLoadingApps *_instance;
 - (void)initData {
 
     _appDic = [[NSMutableDictionary alloc] init];
+    _followApps = [[NSMutableArray alloc] init];
+}
+- (void)addFollowAppsWithBuildId:(NSString *)buildId; {
+
+   NSMutableArray *dataArr= [[NSMutableArray alloc] initWithArray:[PAS_DownLoadingApps sharedInstance].followApps ];
+    [dataArr addObject:buildId];
+    [[NSUserDefaults standardUserDefaults] setObject:dataArr forKey:@"Pas_followApps"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSMutableArray *)followApps {
+
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"Pas_followApps"];
+
+}
+- (void)removeFollowAppsWithBuildId:(NSString *)buildId {
+
+
+    NSMutableArray *dataArr= [[NSMutableArray alloc] initWithArray:[PAS_DownLoadingApps sharedInstance].followApps ];
+    if ([dataArr containsObject:buildId]) {
+        [dataArr removeObject:buildId];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:dataArr forKey:@"Pas_followApps"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 @end

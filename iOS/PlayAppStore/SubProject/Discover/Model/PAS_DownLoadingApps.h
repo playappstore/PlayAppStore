@@ -11,4 +11,8 @@
 @interface PAS_DownLoadingApps : NSObject
 + (instancetype )sharedInstance;
 @property (nonatomic ,strong) NSMutableDictionary *appDic;
+@property (nonatomic ,strong) NSMutableArray *followApps;
+- (void)addFollowAppsWithBuildId:(NSString *)buildId;
+- (void)removeFollowAppsWithBuildId:(NSString *)buildId;
+
 @end

@@ -25,6 +25,7 @@
 @property (nonatomic ,copy) void (^downloadClicked)(PKDownloadButtonState state);
 - (void)setValueWithUploadTime:(NSString *)uploadTime
                     version:(NSString *)version
-                  changelog:(NSString *)changelog;
+                     changelog:(NSString *)changelog
+                       iconUrl:(NSString *)iconUrl ;
 @end
 

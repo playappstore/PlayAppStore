@@ -13,6 +13,7 @@
 #import "PASDiscoverModel.h"
 #import "PASConfiguration.h"
 #import "PASDataProvider.h"
+#import "PAS_DownLoadingApps.h"
 #define sideGap 20
 #define findIconWide ([UIScreen mainScreen].bounds.size.width - sideGap*4)/3.0
 #define findIconGap ([UIScreen mainScreen].bounds.size.width - findIconWide*3)/4.0
@@ -105,9 +106,23 @@
     PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
     [cell.PAS_AppLogoImageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
     cell.PAS_AppNameLabel.text = model.name;
+    if ([[PAS_DownLoadingApps sharedInstance].followApps containsObject:model.bundleID]) {
+        //已经收藏
+        cell.checkBox.on = YES;
+    }else {
+        //未收藏
+        cell.checkBox.on = NO;
+    }
     cell.favoriteClicked = ^(BOOL selected) {
         //点击收藏按钮
         NSLog(@"%d",selected);
+        if (selected) {
+            
+            [[PAS_DownLoadingApps sharedInstance] addFollowAppsWithBuildId:model.bundleID];
+        }else {
+           
+            [[PAS_DownLoadingApps sharedInstance] removeFollowAppsWithBuildId:model.bundleID];
+        }
         
     };
     return cell;
