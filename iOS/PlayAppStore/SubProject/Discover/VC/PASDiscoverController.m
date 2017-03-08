@@ -42,18 +42,21 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [DejalActivityView activityViewForView:self.view withLabel:@"Processing..."];
     [self.appManager refreshAllApps];
 }
 
 
 #pragma mark - PASDiscoverAllAppsDelegate 
 - (void)requestAllAppsSuccessed {
-    //
+    [DejalActivityView removeView];
+
     [_collectionView reloadData];
 
 }
 - (void)requestAllAppsFailureWithError:(NSError *)error {
-
+    [DejalActivityView removeView];
+    [MBHUDHelper showWarningWithText:@"您的网络地址不可达"];
 //
 }
 - (void)initView {
