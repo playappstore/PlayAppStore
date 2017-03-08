@@ -48,11 +48,6 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     [self initView];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-
 - (void)initData {
     
     self.navigationItem.title = self.name;

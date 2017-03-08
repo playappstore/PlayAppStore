@@ -15,15 +15,15 @@
 #import "PASConfiguration.h"
 #import "PASDataProvider.h"
 #import "PASDiscoverModel.h"
+#import "PASFollowManager.h"
 NSString * const cellRes1 = @"PASDisListTableViewCell1";
 NSString * const cellRes2 = @"PASFollowTableViewCell";
 @interface PASFollowController ()<UITableViewDataSource,UITableViewDelegate>{
     
     UITableView *_followTableView;
-    NSMutableDictionary *_dataDic;
 
 }
-
+@property (nonatomic ,strong) NSDictionary *dataDic;
 @end
 
 @implementation PASFollowController
@@ -31,7 +31,6 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     
-    _dataDic = [[NSMutableDictionary alloc] init];
     if ([PAS_DownLoadingApps sharedInstance].followApps.count) {
         [self requestFollowApps];
     }else {
@@ -43,7 +42,6 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     [super viewDidLoad];
     [self initData];
     [self initView];
-    
 }
 - (void)initData {
   
@@ -59,49 +57,30 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     _followTableView.delegate = self;
     _followTableView.dataSource = self;
     [_followTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes1];
-     [_followTableView registerClass:[PASFollowTableViewCell class] forCellReuseIdentifier:cellRes2];
+    [_followTableView registerClass:[PASFollowTableViewCell class] forCellReuseIdentifier:cellRes2];
     [self.view addSubview:_followTableView];
 }
-- (void)requestFollowApps {
+- (NSDictionary *)dataDic {
 
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    for (int i = 0; i < [PAS_DownLoadingApps sharedInstance].followApps.count; i++) {
-        
-        NSString *bundleID = [PAS_DownLoadingApps sharedInstance].followApps[i];
-        dispatch_group_async(group, queue, ^{
-          
-            PASConfiguration *config = [PASConfiguration shareInstance];
-            config.baseURL = [NSURL URLWithString:@"http://45.77.13.248:3000/apps/ios"];
-            [[[PASDataProvider alloc] initWithConfiguration:config] getAllBuildsWithParameters:nil bundleID:bundleID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                [self handleRequestWithResponseObject:responseObject];
-                 dispatch_group_leave(group);
-            }];
-           
-        });
-        dispatch_group_enter(group);
-        
+    if (!_dataDic) {
+        _dataDic = [[NSDictionary alloc] init];
     }
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [_followTableView reloadData];
-    });
+
+    return _dataDic;
 }
-- (void)handleRequestWithResponseObject:(id)responseObject {
+- (void)requestFollowApps {
     
-    if ([responseObject isKindOfClass:[NSArray class]]) {
-        NSArray *dataArr = (NSArray *)responseObject;
-        NSMutableArray *dataArra = [[NSMutableArray alloc] init];
-        for (int i = 0; i < dataArr.count; i++) {
-            NSDictionary *dataDic = dataArr[i];
-            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataDic];
-            model.pas_id = [dataDic objectForKey:@"id"];
-            [dataArra addObject:model];
-            if (i == dataArr.count -1) {
-                [_dataDic setObject:dataArra forKey:model.name];
-            }
-        }
-    }
+    [[[PASFollowManager alloc] init] requestAllFollowAppsWithBundleIDs:[PAS_DownLoadingApps sharedInstance].followApps success:^(NSDictionary *dataDic) {
+        
+        _dataDic = dataDic;
+        [_followTableView reloadData];
+    } fail:^(NSString *code, NSString *message) {
+        
+        [_followTableView reloadData];
+        
+    }];
 }
+
 #pragma mark -- tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *key = [[_dataDic allKeys] objectAtIndex:section];
@@ -137,14 +116,21 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *key = [[_dataDic allKeys] objectAtIndex:indexPath.section];
+    NSArray *dataArr = [_dataDic objectForKey:key];
     if (indexPath.row == 0) {
         //更多
+        PASDiscoverModel *model = [dataArr objectAtIndex:0];
         PASDescoverListViewController *listViewController = [[PASDescoverListViewController alloc] init];
+        listViewController.bundleID = model.bundleID;
          [self.navigationController pushViewController:listViewController animated:YES];
         
     }else {
-    
+   
+        PASDiscoverModel *model = [dataArr objectAtIndex:indexPath.row - 1];
         PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
+        detailController.model = model;
         [self.navigationController pushViewController:detailController animated:YES];
         
     }
