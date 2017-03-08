@@ -64,6 +64,8 @@
 		A5DAB4681E690400006B0CFA /* PASTextLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4671E690400006B0CFA /* PASTextLabelCell.m */; };
 		A5DAB46E1E6D9AB6006B0CFA /* PASDiccoverAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB46D1E6D9AB6006B0CFA /* PASDiccoverAppManager.m */; };
 		A5DAB4711E6E538B006B0CFA /* PASDesignerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4701E6E538B006B0CFA /* PASDesignerController.m */; };
+		A5FBDA5B1E6FF36D00273A85 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FBDA5A1E6FF36D00273A85 /* DejalActivityView.m */; };
+		A5FBDA5E1E6FF6D900273A85 /* MBHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FBDA5D1E6FF6D900273A85 /* MBHUDHelper.m */; };
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
 		D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D383468F1E66733000A0343F /* PASFollowTableViewCell.m */; };
 		D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */; };
@@ -192,6 +194,10 @@
 		A5DAB46D1E6D9AB6006B0CFA /* PASDiccoverAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDiccoverAppManager.m; sourceTree = "<group>"; };
 		A5DAB46F1E6E538B006B0CFA /* PASDesignerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDesignerController.h; sourceTree = "<group>"; };
 		A5DAB4701E6E538B006B0CFA /* PASDesignerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDesignerController.m; sourceTree = "<group>"; };
+		A5FBDA591E6FF36D00273A85 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
+		A5FBDA5A1E6FF36D00273A85 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
+		A5FBDA5C1E6FF6D900273A85 /* MBHUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBHUDHelper.h; sourceTree = "<group>"; };
+		A5FBDA5D1E6FF6D900273A85 /* MBHUDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBHUDHelper.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
 		D383468E1E66733000A0343F /* PASFollowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowTableViewCell.h; sourceTree = "<group>"; };
@@ -249,6 +255,10 @@
 				8DBA3BAB1E647CD3001D9FF4 /* CornerRadiusCategory */,
 				8DBA3BAE1E647CD3001D9FF4 /* UIView+ViewAddtions.h */,
 				8DBA3BAF1E647CD3001D9FF4 /* UIView+ViewAddtions.m */,
+				A5FBDA591E6FF36D00273A85 /* DejalActivityView.h */,
+				A5FBDA5A1E6FF36D00273A85 /* DejalActivityView.m */,
+				A5FBDA5C1E6FF6D900273A85 /* MBHUDHelper.h */,
+				A5FBDA5D1E6FF6D900273A85 /* MBHUDHelper.m */,
 			);
 			path = Categorys;
 			sourceTree = "<group>";
@@ -876,7 +886,9 @@
 				A540D2721E5E78FA00DD6756 /* PASApplicationDetailHeadView.m in Sources */,
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
 				A5DAB46E1E6D9AB6006B0CFA /* PASDiccoverAppManager.m in Sources */,
+				A5FBDA5B1E6FF36D00273A85 /* DejalActivityView.m in Sources */,
 				A52E37911E5A88A500EB1B5C /* PASDiscoverController.m in Sources */,
+				A5FBDA5E1E6FF6D900273A85 /* MBHUDHelper.m in Sources */,
 				A52E37A81E5AC50300EB1B5C /* CheckNetwork.m in Sources */,
 				A52E37611E59895700EB1B5C /* NSDictionary+Safe.m in Sources */,
 				A52E37791E598BF800EB1B5C /* NSString+Safe.m in Sources */,
