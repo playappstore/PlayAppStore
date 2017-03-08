@@ -25,6 +25,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 }
 @property (nonatomic ,weak) NSProgress *weakProgress;
 @property (nonatomic ,strong) PASDiscoverModel *downloadingModel;
+@property (nonatomic, strong) PASDiccoverAppManager *appManager;
 
 @end
 
@@ -47,27 +48,11 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     [self initView];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-
-#pragma mark - PASDiscoverAllAppsDelegate
-- (void)requestAllBuildsSuccessed {
-    //
-    [_listTableView reloadData];
-    
-}
-- (void)requestAllBuildsFailureWithError:(NSError *)error {
-    
-    //
-}
-
 - (void)initData {
     
     self.navigationItem.title = self.name;
-    _dataArr = [[NSMutableArray alloc] init];
-    [self requestApp];
+   [self.appManager refreshWithBundleID:self.bundleID];
+
 }
 - (void)initView {
     
@@ -82,28 +67,12 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     [_listTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes];
     [self.view addSubview:_listTableView];
 }
-- (void)requestApp {
-
-    PASConfiguration *config = [PASConfiguration shareInstance];
-    config.baseURL = [NSURL URLWithString:@"http://45.77.13.248:3000/apps/ios"];
-    [[[PASDataProvider alloc] initWithConfiguration:config] getAllBuildsWithParameters:nil bundleID:self.bundleID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-        [self handleRequestWithResponseObject:responseObject];
-    }];
-
-}
-- (void)handleRequestWithResponseObject:(id)responseObject {
-    
-    if ([responseObject isKindOfClass:[NSArray class]]) {
-        [_dataArr removeAllObjects];
-        NSArray *dataArr = (NSArray *)responseObject;
-        for (int i = 0; i < dataArr.count; i++) {
-            NSDictionary *dataDic = dataArr[i];
-            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataDic];
-            model.pas_id = [dataDic objectForKey:@"id"];
-            [_dataArr addObject:model];
-        }
-        [_listTableView reloadData];
+- (PASDiccoverAppManager *)appManager {
+    if (!_appManager) {
+        _appManager = [[PASDiccoverAppManager alloc] init];
+        _appManager.delegate = self;
     }
+    return _appManager;
 }
 - (void)downLoadAppWithBundleIdentifier:(NSString *)bundleIdentifier
                             manifestURL:(NSURL *)manifestURL
@@ -148,15 +117,25 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     
     }
 }
+#pragma mark - PASDiscoverAllAppsDelegate
+- (void)requestAllBuildsSuccessed {
+    //
+    [_listTableView reloadData];
+    
+}
+- (void)requestAllBuildsFailureWithError:(NSError *)error {
+    
+    //失败
+}
 #pragma mark -- tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    
-    return _dataArr.count;
+    return _appManager.appListArr.count;
 
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    PASDiscoverModel *model = [_dataArr objectAtIndex:indexPath.row];
+    PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
     //给cell赋值显示
     [cell setValueWithUploadTime:model.uploadTime version:model.name changelog:model.changelog iconUrl:model.icon];
@@ -184,7 +163,13 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
+    detailController.model = [_appManager.appListArr objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:detailController animated:YES];
+
+}
 - (void)setDownLoadButtonStateWithCell:(PASDisListTableViewCell *)cell model:(PASDiscoverModel*)model{
     
     NSDictionary *app =  [PAS_DownLoadingApps sharedInstance].appDic;
