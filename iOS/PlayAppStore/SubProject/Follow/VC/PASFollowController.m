@@ -21,7 +21,6 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
 @interface PASFollowController ()<UITableViewDataSource,UITableViewDelegate>{
     
     UITableView *_followTableView;
-
 }
 @property (nonatomic ,strong) NSDictionary *dataDic;
 @end
@@ -58,6 +57,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     _followTableView.dataSource = self;
     [_followTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes1];
     [_followTableView registerClass:[PASFollowTableViewCell class] forCellReuseIdentifier:cellRes2];
+    _followTableView.tableFooterView = [UIView new];
     [self.view addSubview:_followTableView];
 }
 - (NSDictionary *)dataDic {
@@ -80,7 +80,6 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         
     }];
 }
-
 #pragma mark -- tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *key = [[_dataDic allKeys] objectAtIndex:section];
@@ -111,7 +110,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes1];
     PASDiscoverModel *model = [dataArr objectAtIndex:indexPath.row - 1];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.uploadTime version:model.name changelog:model.changelog iconUrl:model.icon];
+    [cell setValueWithUploadTime:model.uploadTime version:model.version changelog:model.changelog iconUrl:model.icon];
 
     return cell;
 }
@@ -135,7 +134,6 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         
     }
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

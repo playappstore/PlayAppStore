@@ -138,7 +138,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.uploadTime version:model.name changelog:model.changelog iconUrl:model.icon];
+    [cell setValueWithUploadTime:model.uploadTime version:model.version changelog:model.changelog iconUrl:model.icon];
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     
