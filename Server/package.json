@@ -9,6 +9,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1"
+    "adm-zip": "^0.4.7",
+    "express": "^4.14.1",
+    "ipa-extract-info": "^1.2.2",
+    "mongodb": "^2.2.24",
+    "mongodb-runner": "*",
+    "multer": "^1.3.0",
+    "mustache": "^2.1.2",
+    "parse": "~1.8.0",
+    "parse-server": "*",
+    "pngdefry": "*",
+    "prettysize": "*",
+    "underscore": "^1.8.3",
+    "uuid": "^3.0.1"
   }
 }
