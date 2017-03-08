@@ -33,17 +33,15 @@
     return manager;
 }
 
-+ (void)postWithUrlString:(NSString *)urlString
+- (void)postWithUrlString:(NSString *)urlString
                parameters:(id)parameters
                   success:(void (^)(id))success
                   failure:(void (^)(NSError *))failure
 {
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager POST:urlString
        parameters:parameters
+        progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               success(responseObject);
           }
@@ -52,44 +50,19 @@
           }];
 }
 
-+ (void)getWithUrlString:(NSString *)urlString
+- (void)getWithUrlString:(NSString *)urlString
                  success:(void (^)(id))success
                  failure:(void (^)(NSError *))failure
 {
-    [[self class] getWithUrlString:urlString success:success failure:failure cache:NO];
-    
-}
-
-
-+ (void)getWithUrlString:(NSString *)urlString
-                 success:(void (^)(id))success
-                 failure:(void (^)(NSError *))failure
-                   cache:(BOOL)yesOrNo
-{
-    
     NSString *string = [NSString stringWithFormat:@"%@", urlString];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
-    [manager GET:string parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager GET:string parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
         //
         failure(error);
     }];
 }
-
-+ (NSDictionary *) indexKeyedDictionaryFromArray:(NSArray *)array
-{
-    id objectInstance;
-    NSUInteger indexKey = 0;
-    
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init];
-    for (objectInstance in array)
-        [mutableDictionary setObject:objectInstance forKey:[NSNumber numberWithUnsignedInteger:indexKey++]];
-    
-    return (NSDictionary *)mutableDictionary;
-}
-
 
 @end
