@@ -66,6 +66,7 @@
 		A5DAB4711E6E538B006B0CFA /* PASDesignerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DAB4701E6E538B006B0CFA /* PASDesignerController.m */; };
 		A5FBDA5B1E6FF36D00273A85 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FBDA5A1E6FF36D00273A85 /* DejalActivityView.m */; };
 		A5FBDA5E1E6FF6D900273A85 /* MBHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FBDA5D1E6FF6D900273A85 /* MBHUDHelper.m */; };
+		A5FBDA611E70424C00273A85 /* PASAcknowledgementController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FBDA601E70424C00273A85 /* PASAcknowledgementController.m */; };
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
 		D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D383468F1E66733000A0343F /* PASFollowTableViewCell.m */; };
 		D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */; };
@@ -198,6 +199,8 @@
 		A5FBDA5A1E6FF36D00273A85 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		A5FBDA5C1E6FF6D900273A85 /* MBHUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBHUDHelper.h; sourceTree = "<group>"; };
 		A5FBDA5D1E6FF6D900273A85 /* MBHUDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBHUDHelper.m; sourceTree = "<group>"; };
+		A5FBDA5F1E70424C00273A85 /* PASAcknowledgementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASAcknowledgementController.h; sourceTree = "<group>"; };
+		A5FBDA601E70424C00273A85 /* PASAcknowledgementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASAcknowledgementController.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
 		D383468E1E66733000A0343F /* PASFollowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowTableViewCell.h; sourceTree = "<group>"; };
@@ -576,6 +579,8 @@
 				A5DAB4611E66AFC8006B0CFA /* PASPushNotificationController.m */,
 				A5DAB46F1E6E538B006B0CFA /* PASDesignerController.h */,
 				A5DAB4701E6E538B006B0CFA /* PASDesignerController.m */,
+				A5FBDA5F1E70424C00273A85 /* PASAcknowledgementController.h */,
+				A5FBDA601E70424C00273A85 /* PASAcknowledgementController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -883,6 +888,7 @@
 				8DBA3BB41E647DC2001D9FF4 /* PASDescoverListViewController.m in Sources */,
 				D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */,
 				A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */,
+				A5FBDA611E70424C00273A85 /* PASAcknowledgementController.m in Sources */,
 				A540D2721E5E78FA00DD6756 /* PASApplicationDetailHeadView.m in Sources */,
 				A52E36EB1E5823E100EB1B5C /* AppDelegate.m in Sources */,
 				A5DAB46E1E6D9AB6006B0CFA /* PASDiccoverAppManager.m in Sources */,
