@@ -130,6 +130,7 @@
             break;
     }
 }
+
 - (void)setValueWithUploadTime:(NSString *)uploadTime
                        version:(NSString *)version
                      changelog:(NSString *)changelog

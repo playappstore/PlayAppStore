@@ -156,7 +156,6 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     
-   
     __weak PASDescoverListViewController *weakself = self;
 
     cell.downloadClicked = ^(PKDownloadButtonState state) {
