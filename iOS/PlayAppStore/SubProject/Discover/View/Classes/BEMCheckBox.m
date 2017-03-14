@@ -138,11 +138,13 @@
         } else {
             [self.onBoxLayer removeFromSuperlayer];
             [self.checkMarkLayer removeFromSuperlayer];
+            [self drawplusSignLayer];
         }
     }
     
     if(notifyGroup){
         [self.group _checkBoxSelectionChanged:self];
+      
     }
 }
 

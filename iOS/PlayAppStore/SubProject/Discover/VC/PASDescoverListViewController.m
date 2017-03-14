@@ -16,17 +16,18 @@
 #import "PAS_DownLoadingApps.h"
 #import "PASDiccoverAppManager.h"
 #import "PASDiscoverModel.h"
-
+#import "MJRefresh.h"
 NSString * const cellRes = @"PASDisListTableViewCell";
 @interface PASDescoverListViewController ()<UITableViewDelegate,UITableViewDataSource, PASDiccoverAppManagerDelegate> {
 
-    UITableView *_listTableView;
+   
     NSMutableArray *_dataArr;
 }
 @property (nonatomic ,weak) NSProgress *weakProgress;
 @property (nonatomic ,strong) PASDiscoverModel *downloadingModel;
 @property (nonatomic, strong) PASDiccoverAppManager *appManager;
-
+@property (nonatomic ,strong) UITableView *listTableView;
+@property (nonatomic ,strong) PASMBView *hubView;
 @end
 
 @implementation PASDescoverListViewController
@@ -51,21 +52,31 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 - (void)initData {
     
     self.navigationItem.title = self.name;
-   [self.appManager refreshWithBundleID:self.bundleID];
+    [self.appManager refreshWithBundleID:self.bundleID];
+     _hubView = [PASMBView showPVAddedTo:self.listTableView message:PASLocalizedString(@"Processing", nil)];
 
 }
 - (void)initView {
     
-    [self initTableView];
+
 }
-- (void)initTableView {
-    
-    _listTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    _listTableView.delegate = self;
-    _listTableView.dataSource = self;
-    _listTableView.rowHeight = PASDisListTableViewCellHeight;
-    [_listTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes];
-    [self.view addSubview:_listTableView];
+- (UITableView *)listTableView {
+
+    if (!_listTableView) {
+        _listTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        _listTableView.delegate = self;
+        _listTableView.dataSource = self;
+        _listTableView.rowHeight = PASDisListTableViewCellHeight;
+        [_listTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes];
+        __weak PASDescoverListViewController *weakSelf = self;
+        _listTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            [weakSelf.appManager refreshWithBundleID:weakSelf.bundleID];
+        }];
+        [self.view addSubview:_listTableView];
+    }
+    return _listTableView;
+
 }
 - (PASDiccoverAppManager *)appManager {
     if (!_appManager) {
@@ -120,12 +131,15 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 #pragma mark - PASDiscoverAllAppsDelegate
 - (void)requestAllBuildsSuccessed {
     //
-    [_listTableView reloadData];
-    
+    [self.listTableView reloadData];
+    [self.listTableView.mj_header endRefreshing];
+    [_hubView hidden];
 }
 - (void)requestAllBuildsFailureWithError:(NSError *)error {
     
     //失败
+    [_hubView hidden];
+    _hubView = [PASMBView showErrorPVAddedTo:self.view message:@"请求失败请稍候再试"];
 }
 #pragma mark -- tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -13,6 +13,7 @@
 #import "PASChangeLanguageController.h"
 #import "PASPushNotificationController.h"
 #import "PASDesignerController.h"
+#import "PASAcknowledgementController.h"
 
 
 
@@ -124,6 +125,13 @@
             //follow us
         }
             break;
+        case 111:
+        {
+            PASAcknowledgementController *listViewC = [[PASAcknowledgementController alloc] init];
+            [self.navigationController pushViewController:listViewC animated:YES];
+        }
+            break;
+
 
         default:
             break;
@@ -333,7 +341,8 @@
                          ];
     self.aboutArray = @[
                         @{@"title":PASLocalizedString(@"Designer PlayAppStore", nil), @"action":@(109)},
-                        @{@"title":PASLocalizedString(@"Follow us on twitter", nil), @"action":@(110)}
+                        @{@"title":PASLocalizedString(@"Follow us on twitter", nil), @"action":@(110)},
+                        @{@"title":PASLocalizedString(@"Acknowledgement", nil), @"action":@(111)},
                         ];
 }
 

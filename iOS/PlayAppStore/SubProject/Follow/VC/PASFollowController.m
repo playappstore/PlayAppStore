@@ -16,13 +16,13 @@
 #import "PASDataProvider.h"
 #import "PASDiscoverModel.h"
 #import "PASFollowManager.h"
+#import "MJRefresh.h"
 NSString * const cellRes1 = @"PASDisListTableViewCell1";
 NSString * const cellRes2 = @"PASFollowTableViewCell";
-@interface PASFollowController ()<UITableViewDataSource,UITableViewDelegate>{
-    
-    UITableView *_followTableView;
-}
+@interface PASFollowController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong) NSDictionary *dataDic;
+@property (nonatomic ,strong) PASMBView *hubView;
+@property (nonatomic ,strong) UITableView *followTableView;
 @end
 
 @implementation PASFollowController
@@ -31,6 +31,8 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     self.navigationController.navigationBarHidden = NO;
     
     if ([PAS_DownLoadingApps sharedInstance].followApps.count) {
+
+       _hubView = [PASMBView showPVAddedTo:self.followTableView message:PASLocalizedString(@"Processing", nil)];
         [self requestFollowApps];
     }else {
         //没有收藏的应用
@@ -52,13 +54,31 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
 }
 - (void)initTableView {
     
-    _followTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    _followTableView.delegate = self;
-    _followTableView.dataSource = self;
-    [_followTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes1];
-    [_followTableView registerClass:[PASFollowTableViewCell class] forCellReuseIdentifier:cellRes2];
-    _followTableView.tableFooterView = [UIView new];
-    [self.view addSubview:_followTableView];
+    [self.view addSubview:self.followTableView];
+}
+- (UITableView *)followTableView {
+
+    if (!_followTableView) {
+        _followTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        _followTableView.delegate = self;
+        _followTableView.dataSource = self;
+        [_followTableView registerClass:[PASDisListTableViewCell class] forCellReuseIdentifier:cellRes1];
+        [_followTableView registerClass:[PASFollowTableViewCell class] forCellReuseIdentifier:cellRes2];
+        __weak PASFollowController *weakself = self;
+        _followTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            //下拉刷新
+            if ([PAS_DownLoadingApps sharedInstance].followApps.count) {
+                [weakself requestFollowApps];
+            }else {
+            
+                [weakself.followTableView.mj_header endRefreshing];
+            
+            }
+        }];
+        _followTableView.tableFooterView = [UIView new];
+    }
+    return _followTableView;
 }
 - (NSDictionary *)dataDic {
 
@@ -74,10 +94,15 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         
         _dataDic = dataDic;
         [_followTableView reloadData];
+        [_followTableView.mj_header endRefreshing];
+        [_hubView hidden];
     } fail:^(NSString *code, NSString *message) {
         
         [_followTableView reloadData];
-        
+        [_followTableView.mj_header endRefreshing];
+        [_hubView hidden];
+        _hubView = [PASMBView showErrorPVAddedTo:self.followTableView message:@"请求失败请稍候再试"];
+
     }];
 }
 #pragma mark -- tableViewDelegate

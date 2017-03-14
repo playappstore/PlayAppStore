@@ -12,6 +12,7 @@
 #import "PASConfiguration.h"
 #import <QMUIKit/QMUIKit.h>
 #import "PASNetwrokManager.h"
+#import "QMUIButton.h"
 
 
 
@@ -24,7 +25,7 @@
 
 @property (nonatomic, strong) UITextField *ipTextField;
 @property (nonatomic, strong) UITextField *portTextField;
-@property (nonatomic, strong) QMUIButton *testCAButton;
+@property (nonatomic, strong) UIButton *testCAButton;
 
 
 @end
@@ -51,12 +52,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You should Install CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
         alert.tag = 999;
         [alert show];
-
-
     }];
-    
-    
-    
 }
 
 - (void)textFieldEndEditing:(UITextField *)textField {
@@ -76,8 +72,11 @@
 
 - (void)textFieldEndEdit {
     if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
-        self.testCAButton.highlighted = YES;
-        self.testCAButton.userInteractionEnabled = YES;
+        self.testCAButton.enabled = YES;
+        [self updateTestButtonState];
+    } else {
+        self.testCAButton.enabled = NO;
+        [self updateTestButtonState];
     }
 }
 
@@ -120,16 +119,16 @@
         make.height.equalTo(@17);
     }];
     
-    
+    //closeButton
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pas_back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(textFieldEndEditing:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).offset(33);
         make.leading.mas_equalTo(self.view.mas_leading).offset(15);
-        make.width.equalTo(@7);
-        make.height.equalTo(@16);
+        make.width.equalTo(@13);
+        make.height.equalTo(@21);
     }];
 }
 
@@ -166,8 +165,19 @@
     if (ip.length > 6 && port.length > 0) {
         self.ipTextField.text = ip;
         self.portTextField.text = port;
-        self.testCAButton.highlighted = YES;
-        self.testCAButton.userInteractionEnabled = YES;
+        self.testCAButton.enabled = YES;
+        [self updateTestButtonState];
+    } else {
+        self.testCAButton.enabled = NO;
+        [self updateTestButtonState];
+    }
+}
+
+- (void)updateTestButtonState {
+    if (self.testCAButton.enabled) {
+        self.testCAButton.backgroundColor = RGBCodeColor(0x2abfff);
+    } else {
+        self.testCAButton.backgroundColor = RGBCodeColor(0xcccccc);
     }
 }
 
@@ -209,18 +219,16 @@
     return _portView;
 }
 
-- (QMUIButton *)testCAButton {
+- (UIButton *)testCAButton {
     
     if (!_testCAButton) {
-        _testCAButton = [[QMUIButton alloc] init];
+        _testCAButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_testCAButton setTitle:PASLocalizedString(@"Test your CA certificate immediately", nil) forState:UIControlStateNormal];
-        _testCAButton.adjustsButtonWhenHighlighted = YES;
         [_testCAButton setTitleColor:ButtonTintColor forState:UIControlStateNormal];
         _testCAButton.titleLabel.font = UIFontMake(18);
         _testCAButton.backgroundColor = RGBCodeColor(0xcccccc);
-        _testCAButton.highlightedBackgroundColor = RGBCodeColor(0x2abfff);
         _testCAButton.layer.cornerRadius = 5;
-        _testCAButton.userInteractionEnabled = NO;
+        _testCAButton.enabled = NO;
         [_testCAButton addTarget:self action:@selector(testTheCAAvailabilitableImmidately) forControlEvents:UIControlEventTouchUpInside];
     }
     return _testCAButton;

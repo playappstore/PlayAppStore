@@ -15,7 +15,7 @@
 #import "PASDiccoverAppManager.h"
 
 
-@interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailHeadViewDelegate, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
+@interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
 
 @property (nonatomic, strong) PASApplicationDetailHeadView *headerView;
 @property (nonatomic, strong) UITableView *detailTableView;
@@ -31,34 +31,38 @@
     [super viewDidLoad];
     [self loadNav];
     [self addSubviews];
-    [self configData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navLine.hidden = YES;
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [DejalActivityView activityViewForView:self.view withLabel:@"Loading..."];
     [self.appManager refreshWithBundleID:self.model.bundleID buildID:self.model.bundleID];
 }
 
 #pragma mark - PASAppManagerDelegate
 - (void)requestBuildDetailSuccessed {
     //Todo detailInfo
+    [DejalActivityView removeView];
+    self.headerView.titleImageView.image = [UIImage imageNamed:@"images-2.jpeg"];
+    self.headerView.wholeImageView.image = self.headerView.titleImageView.image;
+    self.headerView.titleLabel.text = @"WeChat";
+    [self.detailTableView reloadData];
+
 
 }
 - (void)requestBuildDetailFailureWithError:(NSError *)error {
     //
+    [DejalActivityView removeView];
+
 }
 
 
 #pragma mark - PASApplicationDetailHeaderViewDelegate
-- (void)backButtonDidTap:(UIButton *)cityButton {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 - (void)shareButtonDidTap:(UIButton *)shareButton {
     NSLog(@"========ShareButtonAleadyClicked, please do next!=====");
     NSString *text = @"分享内容";
@@ -109,13 +113,13 @@
 #pragma mark - PASShareActivityDelegate
 - (void)qrCodeTaped {
     NSLog(@"二维码被点击了");
-    _qrCodeView = [[PASQRCodeActionSheet alloc] initWithDownloadURLString:@"www.google.com"];
+    _qrCodeView = [[PASQRCodeActionSheet alloc] initWithDownloadURLString:@"https://github.com/playappstore/PlayAppStore"];
     [_qrCodeView show];
 }
 
 #pragma mark - UITableView Delegate & DataResource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 1 : 5;
+    return section == 0 ? 1 : 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,20 +145,26 @@
 #pragma mark - Setter && Getter
 - (void)loadNav {
     self.title = PASLocalizedString(@"Application Detail", nil);
-    self.view.backgroundColor = [UIColor whiteColor];    
+    self.view.backgroundColor = [UIColor whiteColor];
+    UIImage *image = [UIImage imageNamed:@"pas_share"];
+    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    [btn setImage:image forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(shareButtonDidTap:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
 - (void)addSubviews {
     [self.view addSubview:self.detailTableView];
-    self.detailTableView.backgroundColor = [UIColor greenColor];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self.view addSubview:self.headerView];
-    self.headerView.scrollView = self.detailTableView;
+    self.detailTableView.tableHeaderView = self.headerView;
+    self.detailTableView.rowHeight = UITableViewAutomaticDimension;
+    self.detailTableView.estimatedRowHeight = 60;
 }
 
 - (UITableView *)detailTableView {
     if (!_detailTableView) {
-        _detailTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 150, SCREEN_WIDTH, SCREEN_HEIGHT-150)];
+        _detailTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _detailTableView.delegate = self;
         _detailTableView.dataSource = self;
         _detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -164,7 +174,6 @@
 - (PASApplicationDetailHeadView *)headerView {
     if (!_headerView) {
         _headerView = [[PASApplicationDetailHeadView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
-        _headerView.delegate = self;
     }
     return _headerView;
 }
@@ -176,12 +185,6 @@
     }
     return _appManager;
 }
-
-
-- (void)configData {
-    
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -22,11 +22,13 @@
 #define findIconHeight findIconWide + 25
 @interface PASDiscoverController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, PASDiccoverAppManagerDelegate> {
     
-    UICollectionView *_collectionView;
+    
     NSMutableArray *_dataArr;
 }
 
 @property (nonatomic, strong) PASDiccoverAppManager *appManager;
+@property (nonatomic ,strong) PASMBView *hubView;
+@property (nonatomic ,strong) UICollectionView *collectionView;;
 @end
 
 @implementation PASDiscoverController
@@ -40,6 +42,23 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    _hubView = [PASMBView showPVAddedTo:self.collectionView message:PASLocalizedString(@"Processing", nil)];
+    [self.appManager refreshAllApps];
+}
+#pragma mark - PASDiscoverAllAppsDelegate 
+- (void)requestAllAppsSuccessed {
+    [DejalActivityView removeView];
+    [_collectionView reloadData];
+    [_hubView hidden];
+}
+- (void)requestAllAppsFailureWithError:(NSError *)error {
+    [DejalActivityView removeView];
+    [MBHUDHelper showWarningWithText:@"您的网络地址不可达"];
+    [_hubView hidden];
+//
+}
 - (void)initView {
     
     [self initCollectionView];
@@ -49,33 +68,29 @@
      [self.appManager refreshAllApps];
 }
 - (void)initCollectionView {
-    //初始化layout
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    //该方法也可以设置itemSize
-    layout.itemSize =CGSizeMake(findIconWide, findIconHeight);
-    //初始化collectionView
-    _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    //设置代理
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
-    [self.view addSubview:_collectionView];
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    //注册collectionViewCell
-    [_collectionView registerClass:[PASDiscoverCollectionViewCell class] forCellWithReuseIdentifier:@"PASDiscoverCollectionViewCell"];
-    
-    _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(discoverRefresh)];
+    [self.view addSubview:self.collectionView];
 }
-#pragma mark - PASDiscoverAllAppsDelegate
-- (void)requestAllAppsSuccessed {
-    //
-    [_collectionView reloadData];
-    
-}
-- (void)requestAllAppsFailureWithError:(NSError *)error {
-    
-    //
-}
+- (UICollectionView *)collectionView {
 
+    if (!_collectionView) {
+        //初始化layout
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        //该方法也可以设置itemSize
+        layout.itemSize =CGSizeMake(findIconWide, findIconHeight);
+        //初始化collectionView
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        //设置代理
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        //注册collectionViewCell
+        [_collectionView registerClass:[PASDiscoverCollectionViewCell class] forCellWithReuseIdentifier:@"PASDiscoverCollectionViewCell"];
+        
+        _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(discoverRefresh)];
+    }
+    return _collectionView;
+
+}
 #pragma mark - 刷新
 - (void)discoverRefresh {
     
