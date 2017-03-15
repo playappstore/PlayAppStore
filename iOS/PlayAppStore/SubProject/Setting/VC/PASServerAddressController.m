@@ -40,6 +40,14 @@
     [self judegeWhetherHadValue];
 }
 
+//- (void)dealloc {
+//    [[PASNetwrokManager defaultManager] cancelRequest];
+//}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [[PASNetwrokManager defaultManager] cancelRequest];
+}
+
 #pragma mark - Actions
 - (void)testTheCAAvailabilitableImmidately {
     NSLog(@"testCAbuttonClicked!");
