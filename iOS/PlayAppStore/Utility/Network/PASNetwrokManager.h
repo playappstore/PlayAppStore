@@ -34,4 +34,6 @@
                  success:(void (^)(id response))success
                  failure:(void (^)(NSError *error))failure;
 
+- (void)cancelRequest;
+
 @end

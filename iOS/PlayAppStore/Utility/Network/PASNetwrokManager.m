@@ -65,4 +65,8 @@
     }];
 }
 
+- (void)cancelRequest {
+    [[manager.dataTasks lastObject] cancel];
+}
+
 @end
