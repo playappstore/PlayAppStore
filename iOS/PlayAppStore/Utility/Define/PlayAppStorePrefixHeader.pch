@@ -19,7 +19,7 @@
 #import "PASLocalizableManager.h"
 #import "DejalActivityView.h"
 #import "MBHUDHelper.h"
-
+#import "PASMBView.h"
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

@@ -23,7 +23,9 @@
     if (self = [super init])
     {
         PASConfiguration *config = [PASConfiguration shareInstance];
-        NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
+//        NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
+        NSString *strURL = @"http://45.77.13.248:3000/apps/ios";
+
         config.baseURL = [NSURL URLWithString:strURL];
         _dataProvider = [[PASDataProvider alloc] initWithConfiguration:config];
     }
@@ -31,7 +33,7 @@
 }
 
 - (void)refreshAllApps {
-    NSMutableArray *modelList = [NSMutableArray arrayWithCapacity:10];
+    NSMutableArray *modelList = [[NSMutableArray alloc] init];
     [_dataProvider getAllAppsWithParameters:nil completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(requestAllAppsFailureWithError:)]) {
@@ -39,14 +41,17 @@
             }
             return ;
         }
-        NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
-        for (NSDictionary *dic in listArr) {
-            PASDiscoverModel *cardApplyModel = [[PASDiscoverModel alloc] init];
-            [cardApplyModel setModelWithDic:dic];
-            [modelList safeAddObject:cardApplyModel];
-        }
-        self.appListArr = modelList;
         
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
+            for (NSDictionary *dic in listArr) {
+                PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dic];
+                model.pas_id = [dic objectForKey:@"id"];
+                [modelList safeAddObject:model];
+            }
+            self.appListArr = modelList;
+        }
+
         if (self.delegate && [self.delegate respondsToSelector:@selector(requestAllAppsSuccessed)]) {
             [self.delegate requestAllAppsSuccessed];
         }
@@ -56,7 +61,7 @@
 
 //One App all builds
 - (void)refreshWithBundleID:(NSString *)bundleID {
-    NSMutableArray *modelList = [NSMutableArray arrayWithCapacity:10];
+    NSMutableArray *modelList = [[NSMutableArray alloc] init];
     [_dataProvider getAllBuildsWithParameters:nil bundleID:bundleID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(requestAllBuildsFailureWithError:)]) {
@@ -67,9 +72,9 @@
         
         NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
         for (NSDictionary *dic in listArr) {
-            PASDiscoverModel *cardApplyModel = [[PASDiscoverModel alloc] init];
-            [cardApplyModel setModelWithDic:dic];
-            [modelList safeAddObject:cardApplyModel];
+            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dic];
+            model.pas_id = [dic objectForKey:@"id"];
+            [modelList safeAddObject:model];
         }
         self.appListArr = modelList;
         
@@ -91,9 +96,9 @@
         
         NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
         for (NSDictionary *dic in listArr) {
-            PASDiscoverModel *cardApplyModel = [[PASDiscoverModel alloc] init];
-            [cardApplyModel setModelWithDic:dic];
-            [modelList safeAddObject:cardApplyModel];
+            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dic];
+            model.pas_id = [dic objectForKey:@"id"];
+            [modelList safeAddObject:model];
         }
         self.appListArr = modelList;
         

@@ -68,7 +68,9 @@
 		A5FBDA5E1E6FF6D900273A85 /* MBHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FBDA5D1E6FF6D900273A85 /* MBHUDHelper.m */; };
 		A5FBDA611E70424C00273A85 /* PASAcknowledgementController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FBDA601E70424C00273A85 /* PASAcknowledgementController.m */; };
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
+		D32106EF1E778EFF001AE9A5 /* PASMBView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32106EE1E778EFF001AE9A5 /* PASMBView.m */; };
 		D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D383468F1E66733000A0343F /* PASFollowTableViewCell.m */; };
+		D3C46B471E6F9B1F00AEBD77 /* PASFollowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C46B461E6F9B1F00AEBD77 /* PASFollowManager.m */; };
 		D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */; };
 		D3EB06BA1E66B95B008002F1 /* PASDiscoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB06B91E66B95B008002F1 /* PASDiscoverModel.m */; };
 		D3EB06BD1E66BD0E008002F1 /* PASDiscoverCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB06BC1E66BD0E008002F1 /* PASDiscoverCollectionViewCell.m */; };
@@ -203,8 +205,12 @@
 		A5FBDA601E70424C00273A85 /* PASAcknowledgementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASAcknowledgementController.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
 		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
+		D32106ED1E778EFF001AE9A5 /* PASMBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASMBView.h; sourceTree = "<group>"; };
+		D32106EE1E778EFF001AE9A5 /* PASMBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASMBView.m; sourceTree = "<group>"; };
 		D383468E1E66733000A0343F /* PASFollowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowTableViewCell.h; sourceTree = "<group>"; };
 		D383468F1E66733000A0343F /* PASFollowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowTableViewCell.m; sourceTree = "<group>"; };
+		D3C46B451E6F9B1F00AEBD77 /* PASFollowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowManager.h; sourceTree = "<group>"; };
+		D3C46B461E6F9B1F00AEBD77 /* PASFollowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowManager.m; sourceTree = "<group>"; };
 		D3D2BA761E66C5FC008BE837 /* PAS_3DTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAS_3DTouch.h; sourceTree = "<group>"; };
 		D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAS_3DTouch.m; sourceTree = "<group>"; };
 		D3EB06B81E66B95B008002F1 /* PASDiscoverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDiscoverModel.h; sourceTree = "<group>"; };
@@ -262,6 +268,8 @@
 				A5FBDA5A1E6FF36D00273A85 /* DejalActivityView.m */,
 				A5FBDA5C1E6FF6D900273A85 /* MBHUDHelper.h */,
 				A5FBDA5D1E6FF6D900273A85 /* MBHUDHelper.m */,
+				D32106ED1E778EFF001AE9A5 /* PASMBView.h */,
+				D32106EE1E778EFF001AE9A5 /* PASMBView.m */,
 			);
 			path = Categorys;
 			sourceTree = "<group>";
@@ -531,7 +539,7 @@
 			isa = PBXGroup;
 			children = (
 				D33F41B91E657D9D009CAAF7 /* Api */,
-				D33F41BA1E657D9D009CAAF7 /* Manager */,
+				D3C46B411E6F9AE000AEBD77 /* Manager */,
 				D33F41BB1E657D9D009CAAF7 /* Model */,
 				D383468D1E66731A00A0343F /* View */,
 				A52E378E1E5A885500EB1B5C /* VC */,
@@ -715,13 +723,6 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		D33F41BA1E657D9D009CAAF7 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
 		D33F41BB1E657D9D009CAAF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -736,6 +737,15 @@
 				D383468F1E66733000A0343F /* PASFollowTableViewCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D3C46B411E6F9AE000AEBD77 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D3C46B451E6F9B1F00AEBD77 /* PASFollowManager.h */,
+				D3C46B461E6F9B1F00AEBD77 /* PASFollowManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		D3EB06B71E66B92D008002F1 /* Model */ = {
@@ -894,6 +904,7 @@
 				A5DAB46E1E6D9AB6006B0CFA /* PASDiccoverAppManager.m in Sources */,
 				A5FBDA5B1E6FF36D00273A85 /* DejalActivityView.m in Sources */,
 				A52E37911E5A88A500EB1B5C /* PASDiscoverController.m in Sources */,
+				D3C46B471E6F9B1F00AEBD77 /* PASFollowManager.m in Sources */,
 				A5FBDA5E1E6FF6D900273A85 /* MBHUDHelper.m in Sources */,
 				A52E37A81E5AC50300EB1B5C /* CheckNetwork.m in Sources */,
 				A52E37611E59895700EB1B5C /* NSDictionary+Safe.m in Sources */,
@@ -908,6 +919,7 @@
 				A52E374F1E5984D800EB1B5C /* NSArray+Safe.m in Sources */,
 				A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */,
 				8DBA3B9B1E647B82001D9FF4 /* BEMAnimationManager.m in Sources */,
+				D32106EF1E778EFF001AE9A5 /* PASMBView.m in Sources */,
 				8DBA3B8D1E647A62001D9FF4 /* PASNavigationViewController.m in Sources */,
 				8DBA3BA31E647B8D001D9FF4 /* PASDisListTableViewCell.m in Sources */,
 				D3EB06BA1E66B95B008002F1 /* PASDiscoverModel.m in Sources */,
