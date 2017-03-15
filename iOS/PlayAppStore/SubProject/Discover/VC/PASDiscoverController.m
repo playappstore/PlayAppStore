@@ -44,6 +44,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [_hubView hidden];
     _hubView = [PASMBView showPVAddedTo:self.collectionView message:PASLocalizedString(@"Processing", nil)];
     [self.appManager refreshAllApps];
 }
