@@ -13,6 +13,7 @@
 #import "PASShareActivity.h"
 #import "PASQRCodeActionSheet.h"
 #import "PASDiccoverAppManager.h"
+#import "PASDiscoverModel.h"
 
 
 @interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
@@ -41,19 +42,17 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [DejalActivityView activityViewForView:self.view withLabel:@"Loading..."];
-    [self.appManager refreshWithBundleID:self.model.bundleID buildID:self.model.bundleID];
+    [self.appManager refreshWithBundleID:self.model.bundleID buildID:self.model.build];
 }
 
 #pragma mark - PASAppManagerDelegate
 - (void)requestBuildDetailSuccessed {
-    //Todo detailInfo
     [DejalActivityView removeView];
-    self.headerView.titleImageView.image = [UIImage imageNamed:@"images-2.jpeg"];
+    PASDiscoverModel *model = [_appManager.appListArr safeObjectAtIndex:0];
+    self.headerView.titleImageView.image = [UIImage imageNamed:model.url];
     self.headerView.wholeImageView.image = self.headerView.titleImageView.image;
-    self.headerView.titleLabel.text = @"WeChat";
+    self.headerView.titleLabel.text = model.name;
     [self.detailTableView reloadData];
-
-
 }
 - (void)requestBuildDetailFailureWithError:(NSError *)error {
     //
@@ -119,7 +118,7 @@
 
 #pragma mark - UITableView Delegate & DataResource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 1 : 2;
+    return section == 0 ? 1 : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,6 +129,7 @@
         return cell;
     } else {
         PASApplicationDetailCell *cell = [PASApplicationDetailCell cellCreatedWithTableView:tableView];
+        [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0]];
         return cell;
     }
 }

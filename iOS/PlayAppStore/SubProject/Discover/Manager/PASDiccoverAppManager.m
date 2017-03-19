@@ -94,10 +94,9 @@
             return ;
         }
         
-        NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
-        for (NSDictionary *dic in listArr) {
-            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dic];
-            model.pas_id = [dic objectForKey:@"id"];
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:responseObject];
+            model.pas_id = [responseObject objectForKey:@"id"];
             [modelList safeAddObject:model];
         }
         self.appListArr = modelList;
@@ -106,8 +105,6 @@
             [self.delegate requestBuildDetailSuccessed];
         }
     }];
-    
-
 }
 
 
