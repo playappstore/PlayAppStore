@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class PASDiscoverModel;
 
 @interface PASApplicationDetailCell : UITableViewCell
 
 + (instancetype)cellCreatedWithTableView:(UITableView *)tableView;
+
+- (void)configWithModel:(PASDiscoverModel *)model;
 
 @end
