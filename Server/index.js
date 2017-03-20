@@ -52,37 +52,75 @@ app.get('/', function(req, res) {
 
 
 // POST method route
-
 app.post('/apps', upload.single('package'), function (req, res) {
   // req.file is the `package` file
   var file = req.file;
   var promise = IPA.publish(file);
   promise.then(function(app) {
-    res.send('success, ' + app.toJSON());
+    res.send(app.toJSON());
     //res.send('success, ' + app.id);
-
   }, function(error) {
     res.send('fail, ' + error.message);
   });
-
-
 })
 
 
 app.get('/apps/:platform', function(req, res) {
 
-  var jsonArray = [];
-  var promise = IPA.getAllApps('ios');
-  promise.then(function(apps) {
-    console.log(apps);
-    for (var i=0; i<apps.length; i++) {
-      jsonArray.push(apps[i].toJSON());
-    }
-    res.send(jsonArray);
-  }, function(err) {
-    res.end('fail,' + err);
-  })  
+  if(req.params.platform === 'ios') {
+    var jsonArray = [];
+    var promise = IPA.getAllApps();
+    promise.then(function(apps) {
+      console.log(apps);
+      for (var i=0; i<apps.length; i++) {
+        jsonArray.push(apps[i].toJSON());
+      }
+      res.send(jsonArray);
+    }, function(err) {
+      res.send('fail,' + err);
+    })
+
+  }
+  
 })
+
+var route = ['/apps/:platform/:bundleID', '/apps/:platform/:bundleID/:page', '/apps/:platform/:bundleID/:page/:count'];
+app.get(route, function(req, res) {
+  var page = parseInt(req.params.page ? req.params.page : 1);
+  var count = parseInt(req.params.count ? req.params.count : 10);
+  var bundleID = req.params.bundleID;
+  if (req.params.platform === 'ios') {
+
+    var jsonArray = [];
+    var promise = IPA.getAllVersions(bundleID, page, count);
+    promise.then(function(apps) {
+      console.log(apps);
+      for (var i=0; i<apps.length; i++) {
+        jsonArray.push(apps[i].toJSON());
+      }
+      res.send(jsonArray);
+    }, function(err) {
+      res.send('fail,' + err);
+    })  
+
+  }
+
+});
+
+  app.get(['/apps/:platform/:bundleID', '/apps/:platform/:bundleID/:page'], function(req, res, next) {
+  	  res.set('Access-Control-Allow-Origin','*');
+      res.set('Content-Type', 'application/json');
+      var page = parseInt(req.params.page ? req.params.page : 1);
+      if (req.params.platform === 'android' || req.params.platform === 'ios') {
+        queryDB("select * from info where platform=? and bundleID=? order by uploadTime desc limit ?,? ", [req.params.platform, req.params.bundleID, (page - 1) * pageCount, page * pageCount], function(error, result) {
+          if (result) {
+            res.send(mapIconAndUrl(result))
+          } else {
+            errorHandler(error, res)
+          }
+        })
+      }
+  });
 
 
 
