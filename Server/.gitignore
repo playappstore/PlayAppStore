@@ -1,5 +1,8 @@
 # certs dir
 .playappstore/
+# temp files
+tmp_file/
+.srl
 # Logs
 logs
 *.log
