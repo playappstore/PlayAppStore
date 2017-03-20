@@ -13,6 +13,7 @@
 #import "PASChangeLanguageController.h"
 #import "PASPushNotificationController.h"
 #import "PASDesignerController.h"
+#import "PASAcknowledgementController.h"
 
 
 
@@ -124,6 +125,13 @@
             //follow us
         }
             break;
+        case 111:
+        {
+            PASAcknowledgementController *listViewC = [[PASAcknowledgementController alloc] init];
+            [self.navigationController pushViewController:listViewC animated:YES];
+        }
+            break;
+
 
         default:
             break;
@@ -157,20 +165,6 @@
 }
 
 #pragma mark -AboutUS
-//- (void)openScheme:(NSString *)scheme {
-//    UIApplication *application = [UIApplication sharedApplication];
-//    NSURL *URL = [NSURL URLWithString:scheme];
-//    
-//    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
-//        [application openURL:URL options:@{}
-//           completionHandler:^(BOOL success) {
-//               NSLog(@"Open %@: %d",scheme,success);
-//           }];
-//    } else {
-//        BOOL success = [application openURL:URL];
-//        NSLog(@"Open %@: %d",scheme,success);
-//    }
-//}
 
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -333,7 +327,8 @@
                          ];
     self.aboutArray = @[
                         @{@"title":PASLocalizedString(@"Designer PlayAppStore", nil), @"action":@(109)},
-                        @{@"title":PASLocalizedString(@"Follow us on twitter", nil), @"action":@(110)}
+                        @{@"title":PASLocalizedString(@"Follow us on twitter", nil), @"action":@(110)},
+                        @{@"title":PASLocalizedString(@"Acknowledgement", nil), @"action":@(111)},
                         ];
 }
 

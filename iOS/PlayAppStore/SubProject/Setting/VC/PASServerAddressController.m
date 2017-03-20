@@ -12,6 +12,7 @@
 #import "PASConfiguration.h"
 #import <QMUIKit/QMUIKit.h>
 #import "PASNetwrokManager.h"
+#import "QMUIButton.h"
 
 
 
@@ -24,7 +25,9 @@
 
 @property (nonatomic, strong) UITextField *ipTextField;
 @property (nonatomic, strong) UITextField *portTextField;
-@property (nonatomic, strong) QMUIButton *testCAButton;
+@property (nonatomic, strong) UIButton *testCAButton;
+
+@property (nonatomic) NSInteger hadTested;
 
 
 @end
@@ -39,34 +42,41 @@
     [self judegeWhetherHadValue];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [[PASNetwrokManager defaultManager] cancelRequest];
+}
+
 #pragma mark - Actions
 - (void)testTheCAAvailabilitableImmidately {
     NSLog(@"testCAbuttonClicked!");
-    //NSString *str = [NSString stringWithFormat:@"http://45.77.13.248:3000%@%@", self.ipTextField.text, self.portTextField.text];
+    NSString *str = [NSString stringWithFormat:@"https://%@:%@", self.ipTextField.text, self.portTextField.text];
     PASNetwrokManager *manager = [PASNetwrokManager defaultManager];
-    [manager getWithUrlString:@"http://45.77.13.248:3000" success:^(id response) {
+    [manager getWithUrlString:str success:^(id response) {
         NSLog(@"response is %@", response);
+        self.hadTested = YES;
     } failure:^(NSError *error) {
         NSLog(@"error is %@", error);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You should Install CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
         alert.tag = 999;
         [alert show];
-
-
     }];
-    
-    
-    
 }
 
 - (void)textFieldEndEditing:(UITextField *)textField {
     if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
         [[NSUserDefaults standardUserDefaults] setObject:self.ipView.cardNumTextField.text forKey:kNSUserDefaultMainAddress];
         [[NSUserDefaults standardUserDefaults] setObject:self.portView.cardNumTextField.text forKey:kNSUserDefaultMainPort];
-        NSString *str = [NSString stringWithFormat:@"http://%@:%@/", self.ipTextField.text, self.portTextField.text];
+        NSString *str = [NSString stringWithFormat:@"https://%@:%@/", self.ipTextField.text, self.portTextField.text];
         [[NSUserDefaults standardUserDefaults] setObject:str forKey:kNSUserDefaultMainHost];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.hadTested) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You Test your CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
+            alert.tag = 888;
+            [alert show];
+        }
         
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"Please fill in the full IP address with the port", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
@@ -76,8 +86,11 @@
 
 - (void)textFieldEndEdit {
     if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
-        self.testCAButton.highlighted = YES;
-        self.testCAButton.userInteractionEnabled = YES;
+        self.testCAButton.enabled = YES;
+        [self updateTestButtonState];
+    } else {
+        self.testCAButton.enabled = NO;
+        [self updateTestButtonState];
     }
 }
 
@@ -85,7 +98,10 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 999 && buttonIndex == 1) {
-        [self openScheme:@"https://github.com/playappstore/PlayAppStore"];
+        [self openScheme:@"https://169.254.8.74:1337/public/diy"];
+    }
+    if (alertView.tag == 888 && buttonIndex == 1) {
+        [self testTheCAAvailabilitableImmidately];
     }
     if (buttonIndex == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -120,16 +136,16 @@
         make.height.equalTo(@17);
     }];
     
-    
+    //closeButton
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pas_back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(textFieldEndEditing:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).offset(33);
         make.leading.mas_equalTo(self.view.mas_leading).offset(15);
-        make.width.equalTo(@7);
-        make.height.equalTo(@16);
+        make.width.equalTo(@13);
+        make.height.equalTo(@21);
     }];
 }
 
@@ -166,8 +182,19 @@
     if (ip.length > 6 && port.length > 0) {
         self.ipTextField.text = ip;
         self.portTextField.text = port;
-        self.testCAButton.highlighted = YES;
-        self.testCAButton.userInteractionEnabled = YES;
+        self.testCAButton.enabled = YES;
+        [self updateTestButtonState];
+    } else {
+        self.testCAButton.enabled = NO;
+        [self updateTestButtonState];
+    }
+}
+
+- (void)updateTestButtonState {
+    if (self.testCAButton.enabled) {
+        self.testCAButton.backgroundColor = RGBCodeColor(0x2abfff);
+    } else {
+        self.testCAButton.backgroundColor = RGBCodeColor(0xcccccc);
     }
 }
 
@@ -209,18 +236,16 @@
     return _portView;
 }
 
-- (QMUIButton *)testCAButton {
+- (UIButton *)testCAButton {
     
     if (!_testCAButton) {
-        _testCAButton = [[QMUIButton alloc] init];
+        _testCAButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_testCAButton setTitle:PASLocalizedString(@"Test your CA certificate immediately", nil) forState:UIControlStateNormal];
-        _testCAButton.adjustsButtonWhenHighlighted = YES;
         [_testCAButton setTitleColor:ButtonTintColor forState:UIControlStateNormal];
         _testCAButton.titleLabel.font = UIFontMake(18);
         _testCAButton.backgroundColor = RGBCodeColor(0xcccccc);
-        _testCAButton.highlightedBackgroundColor = RGBCodeColor(0x2abfff);
         _testCAButton.layer.cornerRadius = 5;
-        _testCAButton.userInteractionEnabled = NO;
+        _testCAButton.enabled = NO;
         [_testCAButton addTarget:self action:@selector(testTheCAAvailabilitableImmidately) forControlEvents:UIControlEventTouchUpInside];
     }
     return _testCAButton;
