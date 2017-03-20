@@ -21,16 +21,15 @@ module.exports = {
       return publishApk(file);
     }
   },
-  getAllApps: function (platform) {
-    return allApps(platform);
+  getAllApps: function () {
+    return allApps();
   },
   getAllVersions: function (bundleID, page, count) {
-
+    return allVersions(bundleID, page, count);
   }
-
 };
 
-function allApps(platform, page, count)  {
+function allApps(page, count)  {
   // usaully, a company may not have more than 20 apps.
   var page = 1;
   var count = 100;
@@ -40,12 +39,46 @@ function allApps(platform, page, count)  {
     var taskArray = bundleIDArray.map(findApp);
     return Promise.all(taskArray)
       .then(values => {
-        return values;
-      }, reason => {
+        return mapIpas(values);
+      }
+      , reason => {
         console.log(reason);
         return Promise.reject(reason);
     });
   });
+}
+
+function allVersions(bundleID, page, count) {
+
+  var Application = Parse.Object.extend('Application');
+  var query = new Parse.Query(Application);
+  query.equalTo("bundleID", bundleID);
+  query.descending("updatedAt");  
+  query.limit(count);
+  query.skip((page-1)*count); // for pagination
+  return new Promise(function(resolve, reject) {
+    query.find({
+      success: function(apps) {
+        resolve(mapIpas(apps));
+      },
+      error: function(err) {
+        reject(err);
+      }
+    })
+  });
+}
+
+// map icon, package, manifest property.
+function mapIpas(apps) {
+  var mapedIpas = apps.map(function(ipa) {
+    ipa.set('icon', ipa.get('icon').url());
+    ipa.set('package', ipa.get('package').url());
+    var manifest = util.format('itms-services://?action=download-manifest&url=%s', ipa.get('manifest').url());
+    ipa.set('manifest', manifest);
+    return ipa;
+  })
+  
+  return mapedIpas;
 }
 
 function findApp(bundleID) {
