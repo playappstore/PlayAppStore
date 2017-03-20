@@ -41,13 +41,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [DejalActivityView activityViewForView:self.view withLabel:@"Loading..."];
+    [DejalBezelActivityView activityViewForView:self.view withLabel:@"Loading..."];
     [self.appManager refreshWithBundleID:self.model.bundleID buildID:self.model.build];
 }
 
 #pragma mark - PASAppManagerDelegate
 - (void)requestBuildDetailSuccessed {
-    [DejalActivityView removeView];
+    [DejalBezelActivityView removeViewAnimated:NO];
     PASDiscoverModel *model = [_appManager.appListArr safeObjectAtIndex:0];
     self.headerView.titleImageView.image = [UIImage imageNamed:model.url];
     self.headerView.wholeImageView.image = self.headerView.titleImageView.image;
@@ -56,8 +56,7 @@
 }
 - (void)requestBuildDetailFailureWithError:(NSError *)error {
     //
-    [DejalActivityView removeView];
-
+    [DejalBezelActivityView removeViewAnimated:NO];
 }
 
 
