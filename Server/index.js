@@ -38,6 +38,13 @@ var app = express();
 var mountPath = process.env.PARSE_MOUNT || '/cgi';
 app.use(mountPath, api);
 
+// enable to visit this page to install customize cert
+app.get('/public/diy', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/cert.html'));
+});
+// Serve static assets from the /public folder
+app.use('/public', express.static(path.join(__dirname, '/public')));
+
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function(req, res) {
   res.status(200).send('I dream of being a website!');
@@ -78,11 +85,6 @@ app.get('/apps/:platform', function(req, res) {
 })
 
 
-// There will be a test page available on the /test path of your server url
-// Remove this before launching your app
-app.get('/test', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/test.html'));
-});
 
 var port = process.env.PORT || 1337;
 var ipAddress = Cert.getIP();
