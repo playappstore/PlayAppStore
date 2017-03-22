@@ -98,7 +98,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 999 && buttonIndex == 1) {
-        [self openScheme:@"https://169.254.8.74:1337/public/diy"];
+        //[self openScheme:@"https://169.254.8.74:1337/public/diy"];
+        [self openScheme:@"https://45.77.13.248:1337/public/diy"];
     }
     if (alertView.tag == 888 && buttonIndex == 1) {
         [self testTheCAAvailabilitableImmidately];
