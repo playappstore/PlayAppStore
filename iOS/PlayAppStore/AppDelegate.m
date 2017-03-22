@@ -56,14 +56,6 @@
 
 - (void)languageChanged:(NSNotification *)note {
     [self initRootTabController];
-    
-    
-//    UIWindow* window = [UIApplication sharedApplication].keyWindow;
-//    for (UIView* view in window.subviews) {
-//        [view removeFromSuperview];
-//        [window addSubview:view];
-//    }
-//    [window makeKeyWindow];
 }
 
 - (void)initRootTabController {
