@@ -22,7 +22,7 @@
     if (self = [super init])
     {
         PASConfiguration *config = [PASConfiguration shareInstance];
-        //        NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
+//                NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
         NSString *strURL = @"http://45.77.13.248:3000/apps/ios";
         
         config.baseURL = [NSURL URLWithString:strURL];
