@@ -11,6 +11,7 @@
 @interface PASViewController : UIViewController
 
 @property (nonatomic, weak) UIView *navLine;
+@property (nonatomic, strong) NSURLSessionDataTask *task;
 - (void)changeLanguage;
 
 @end

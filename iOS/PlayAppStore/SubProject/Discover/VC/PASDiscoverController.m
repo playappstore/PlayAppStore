@@ -38,27 +38,21 @@
     [super viewDidLoad];
     [self initData];
     [self initView];
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_hubView hidden];
     _hubView = [PASMBView showPVAddedTo:self.collectionView message:PASLocalizedString(@"Processing", nil)];
     [self.appManager refreshAllApps];
 }
-#pragma mark - PASDiscoverAllAppsDelegate 
+#pragma mark - PASDiscoverAllAppsDelegate
 - (void)requestAllAppsSuccessed {
-    [DejalActivityView removeView];
     [_collectionView reloadData];
     [_hubView hidden];
 }
 - (void)requestAllAppsFailureWithError:(NSError *)error {
-    [DejalActivityView removeView];
-    [MBHUDHelper showWarningWithText:@"您的网络地址不可达"];
     [_hubView hidden];
-//
+    [MBHUDHelper showWarningWithText:@"您的网络地址不可达"];
 }
 - (void)initView {
     
@@ -66,7 +60,6 @@
 }
 - (void)initData {
     _dataArr = [[NSMutableArray alloc] init];
-     [self.appManager refreshAllApps];
 }
 - (void)initCollectionView {
     [self.view addSubview:self.collectionView];

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Install Cer</title>
+<!--H5页面窗口自动调整到设备宽度，并禁止用户缩放页面-->
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<!--将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式  -->  
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+<!--忽略将页面中的数字识别为电话号码-->
+    <meta content="telephone=no" name="format-detection">
+<!--忽略Android平台中对邮箱地址的识别 -->   
+    <meta name="format-detection" content="email=no" />
+    <!--winphone系统a、input标签被点击时产生的半透明灰色背景怎么去掉-->
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="css/index.css">
+	<script>
+	function size(){ 
+	  var Wwidth = $(window).width();
+	  if( Wwidth > 640 ){ Wwidth = 640}
+	  var bs = (Wwidth/320)*10;
+	  var bspx = bs+"px";
+	  $("html").css("font-size",bs);  
+		}
+	$(function(){ 
+		size();
+	})
+	$(window).resize(function(){ 
+	  size();
+	});
+  </script>
+</head>
+<body>
+<div class="wrapper">
+	<header class="header">
+    	<h2>PlayAppStore</h2><br>
+        <a class="attention" href="/cer/my-root-ca.cer">请点击链接安装证书</a>
+    </header>
+
+ 
+    <p class="support">网站由<a href="https://github.com/PlayAppStore/PlayAppStore">PlayAppStore</a>项目支持</p>
+</div>
+</body>
+</html>

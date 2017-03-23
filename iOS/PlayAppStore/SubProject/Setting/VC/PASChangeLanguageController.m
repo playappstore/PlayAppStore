@@ -41,11 +41,13 @@
     } else {
         [self.dataArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
         [self.tableView reloadData];
-        if (IOS9_OR_LATER) {
-            [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE_IOS9];
-        } else {
-            [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE];
-        }
+//        if (IOS9_OR_LATER) {
+//            [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE_IOS9];
+//        } else {
+//            [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE];
+//        }
+        [[PASLocalizableManager shareInstance] setUserlanguage:PASCHINESE];
+
     }
 }
 
