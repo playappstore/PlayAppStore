@@ -73,6 +73,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
             
             [weakSelf.appManager refreshWithBundleID:weakSelf.bundleID];
         }];
+        _listTableView.tableFooterView = [UIView new];
         [self.view addSubview:_listTableView];
     }
     return _listTableView;
@@ -116,7 +117,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
                  downloadButton.state = kPKDownloadButtonState_Downloading;
                 //假如开始安装
                 
-                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.uploadTime};
+                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.updatedAt};
                 [[PAS_DownLoadingApps sharedInstance].appDic setObject:dataDic forKey:_downloadingModel.name];
                 
             }
@@ -152,7 +153,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.uploadTime version:model.version changelog:model.changelog iconUrl:model.icon];
+    [cell setValueWithUploadTime:model.updatedAt version:model.version changelog:model.changelog iconUrl:model.icon];
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     
@@ -191,7 +192,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     if ([appNameArr containsObject:model.name]) {
         
         NSDictionary *dataDic =[app objectForKey:model.name];
-        if ([[dataDic objectForKey:@"version"] isEqualToString:model.version]&&[[dataDic objectForKey:@"bundleID"] isEqualToString:model.bundleID]&&[[dataDic objectForKey:@"uploadTime"] isEqualToString:model.uploadTime]) {
+        if ([[dataDic objectForKey:@"version"] isEqualToString:model.version]&&[[dataDic objectForKey:@"bundleID"] isEqualToString:model.bundleID]&&[[dataDic objectForKey:@"uploadTime"] isEqualToString:model.updatedAt]) {
             
             _downloadingModel = model;
             NSProgress *progress = [dataDic objectForKey:@"progress"];

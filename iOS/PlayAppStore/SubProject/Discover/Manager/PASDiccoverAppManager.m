@@ -24,7 +24,7 @@
     {
         PASConfiguration *config = [PASConfiguration shareInstance];
 //        NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
-        NSString *strURL = @"http://45.77.13.248:3000/apps/ios";
+        NSString *strURL = @"https://45.77.13.248:1337/apps/ios";
 
         config.baseURL = [NSURL URLWithString:strURL];
         _dataProvider = [[PASDataProvider alloc] initWithConfiguration:config];
@@ -46,7 +46,6 @@
             NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
             for (NSDictionary *dic in listArr) {
                 PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dic];
-                model.pas_id = [dic objectForKey:@"id"];
                 [modelList safeAddObject:model];
             }
             self.appListArr = modelList;
@@ -73,7 +72,6 @@
         NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
         for (NSDictionary *dic in listArr) {
             PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dic];
-            model.pas_id = [dic objectForKey:@"id"];
             [modelList safeAddObject:model];
         }
         self.appListArr = modelList;
@@ -96,7 +94,6 @@
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:responseObject];
-            model.pas_id = [responseObject objectForKey:@"id"];
             [modelList safeAddObject:model];
         }
         self.appListArr = modelList;
