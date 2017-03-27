@@ -77,7 +77,6 @@
         for (int i = 0; i < dataArr.count; i++) {
             NSDictionary *dataDic = dataArr[i];
             PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataDic];
-            model.pas_id = [dataDic objectForKey:@"id"];
             [dataArra addObject:model];
             if (i == dataArr.count -1) {
                 [self.dataDic setObject:dataArra forKey:model.name];

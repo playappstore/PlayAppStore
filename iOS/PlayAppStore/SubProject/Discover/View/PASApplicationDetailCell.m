@@ -60,7 +60,7 @@
 - (void)configWithModel:(PASDiscoverModel *)model {
     self.title.text = @"What's new";
     self.des1.text = model.build;
-    self.des2.text = model.uploadTime;
+    self.des2.text = model.updatedAt;
     self.des3.text = model.changelog;
 }
 
