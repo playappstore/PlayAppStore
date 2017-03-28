@@ -2,6 +2,7 @@ var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var Parse = require('parse/node');
 var IPA = require('./ipa.js');
+var APK = require('./apk.js');
 var Cert = require('./cert.js');
 var util = require('util')
 var path = require('path');
@@ -55,7 +56,14 @@ app.get('/', function(req, res) {
 app.post('/apps', upload.single('package'), function (req, res) {
   // req.file is the `package` file
   var file = req.file;
-  var promise = IPA.publish(file);
+  var filepath = file.originalname;
+  var promise;
+  if (path.extname(filepath) === ".ipa") {
+    promise = IPA.publish(file);
+  }
+  if (path.extname(filepath) === ".apk") {
+    promise = APK.publish(file);
+  }
   promise.then(function(app) {
     res.send(app.toJSON());
     //res.send('success, ' + app.id);
