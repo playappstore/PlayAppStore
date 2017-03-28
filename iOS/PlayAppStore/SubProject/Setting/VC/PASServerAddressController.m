@@ -48,27 +48,25 @@
 
 #pragma mark - Actions
 - (void)testTheCAAvailabilitableImmidately {
-    NSLog(@"testCAbuttonClicked!");
-    NSString *str = [NSString stringWithFormat:@"https://%@:%@", self.ipTextField.text, self.portTextField.text];
+    NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
     PASNetwrokManager *manager = [PASNetwrokManager defaultManager];
     [manager getWithUrlString:str success:^(id response) {
         NSLog(@"response is %@", response);
         self.hadTested = YES;
     } failure:^(NSError *error) {
         NSLog(@"error is %@", error);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You should Install CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
-        alert.tag = 999;
-        [alert show];
+#warning 怎么知道安装了新证书
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You should Install CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
+            alert.tag = 999;
+            [alert show];
     }];
 }
 
-- (void)textFieldEndEditing:(UITextField *)textField {
+- (void)exitButtonClicked:(UITextField *)textField {
     if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
-        [[NSUserDefaults standardUserDefaults] setObject:self.ipView.cardNumTextField.text forKey:kNSUserDefaultMainAddress];
-        [[NSUserDefaults standardUserDefaults] setObject:self.portView.cardNumTextField.text forKey:kNSUserDefaultMainPort];
-        NSString *str = [NSString stringWithFormat:@"https://%@:%@/", self.ipTextField.text, self.portTextField.text];
-        [[NSUserDefaults standardUserDefaults] setObject:str forKey:kNSUserDefaultMainHost];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self validURLStringWithIPAddress:self.ipTextField.text];
+        
         if (self.hadTested) {
             [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -94,12 +92,27 @@
     }
 }
 
+- (void)validURLStringWithIPAddress:(NSString *)ipAddress {
+    
+    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"http:" withString:@""];
+    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"http" withString:@""];
+    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"s:" withString:@""];
+    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"s" withString:@""];
+   
+    [[NSUserDefaults standardUserDefaults] setObject:ipAddress forKey:kNSUserDefaultMainAddress];
+    [[NSUserDefaults standardUserDefaults] setObject:self.portView.cardNumTextField.text forKey:kNSUserDefaultMainPort];
+    NSString *str = [NSString stringWithFormat:@"https://%@:%@/", ipAddress, self.portTextField.text];
+    [[NSUserDefaults standardUserDefaults] setObject:str forKey:kNSUserDefaultMainHost];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 999 && buttonIndex == 1) {
-        //[self openScheme:@"https://169.254.8.74:1337/public/diy"];
         [self openScheme:@"https://45.77.13.248:1337/public/diy"];
+        self.hadTested = YES;
     }
     if (alertView.tag == 888 && buttonIndex == 1) {
         [self testTheCAAvailabilitableImmidately];
@@ -140,7 +153,7 @@
     //closeButton
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(textFieldEndEditing:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(exitButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).offset(33);
