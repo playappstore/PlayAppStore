@@ -61,3 +61,5 @@ typings/
 
 # dotenv environment variables file
 .env
+# realm db
+realm-object-server/

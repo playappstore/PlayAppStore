@@ -2,7 +2,10 @@
 
 var Realm = require('realm');
 var util = require('util')
-var dateFormat = require('dateformat');
+var fs = require('fs');
+var os = require('os');
+
+Realm.defaultPath = os.homedir() + "/.playappstore/realm/default.realm"
 
 const AppIconSchema = {
   name: 'AppIcon',
@@ -53,9 +56,7 @@ const AppInfoSchema = {
   }
 };
 
-
-
-var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema], schemaVersion: 5});
+var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema]});
 
 
 function RealmDB() {
