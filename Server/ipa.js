@@ -15,13 +15,7 @@ var fl = new FileHelper();
 
 module.exports = {
   publish : function (file) {
-    var filepath = file.originalname;
-    if (path.extname(filepath) === ".ipa") {
-      return publishIpa(file);
-    }
-    if (path.extname(filepath) === ".apk") {
-      return publishApk(file);
-    }
+    return publishIpa(file);
   },
   getRecords: function () {
     return allRecords();
@@ -48,25 +42,6 @@ function allInfos(bundleID, page, count)  {
     resolve(records);
   });
 }
-function allVersions(bundleID, page, count) {
-
-  var Application = Parse.Object.extend('Application');
-  var query = new Parse.Query(Application);
-  query.equalTo("bundleID", bundleID);
-  query.descending("updatedAt");  
-  query.limit(count);
-  query.skip((page-1)*count); // for pagination
-  return new Promise(function(resolve, reject) {
-    query.find({
-      success: function(apps) {
-        resolve(mapIpas(apps));
-      },
-      error: function(err) {
-        reject(err);
-      }
-    })
-  });
-}
 
 // map icon, package, manifest property.
 function mapIpas(apps) {
@@ -81,30 +56,14 @@ function mapIpas(apps) {
   return mapedIpas;
 }
 
-function findApp(bundleID) {
-    var Application = Parse.Object.extend('Application');
-    var query = new Parse.Query(Application);
-    query.equalTo("bundleID", bundleID);
-     // query.descending("updatedAt"); 
-    return new Promise(function(resolve, reject) {
-      query.first({
-        success: function(app) {
-          resolve(app);
-        },
-        error: function(err) {
-          reject(err);
-        }
-      })
-    });
-}
 
-function publishIpa(filepath) {
+function publishIpa(file) {
     // 1. save icon 2. parse info.plist 3. save ipa
-    var size =  '7 M';
+    var filepath = file.path;
+    var size =  pretty(file.size);
     var info = {};
     return Promise.all([extractIpaIcon(filepath), parseIpa(filepath)])
     .then(values => {
-        console.log('begin');
       var tmpIconPath = values[0];
       info = values[1];
       var iconPath = db.findAppIcon(info);
@@ -144,56 +103,8 @@ function publishIpa(filepath) {
     })
 } 
 
-function publishApk(file) {
-  console.log('publishApk');
-  
-}
-    
-function newSaveFile(input, output) {
-
-  return new Promise(function(resolve, reject) {
-    fs.rename(input, output, function(err) {
-      if (err) reject(err);
-      resolve(output);
-    })
-  });
-}
-
-function saveFile(filename, mimeType) {
-
-  return new Promise(function(resolve, reject) {
-
-    fs.readFile(filename, function(err, data) {
-      if (err) {reject(err)};
-
-      var base64 = {
-        base64: new Buffer(data).toString('base64')
-      };
-
-      var parseFile = new Parse.File(mimeType, base64);
-      parseFile.save().then(function() {
-        // this file has been saved to Parse.
-        resolve(parseFile);
-      }, function(err) {
-        reject(err);
-      });
-    })
-
-
-  // delete file
-  // fs.unlink(req.files.path, function (err) {
-  //   if (err) throw err;
-  //   console.log('successfully deleted ' + req.files.path);
-  // }); 
-
-  });
-
-}
-
-
 function parseIpa(filename) {
 
-	
   return new Promise(function(resolve,reject){
     var fd = fs.openSync(filename, 'r');
     extract(fd, function(err, info, raw){
@@ -208,14 +119,6 @@ function parseIpa(filename) {
       resolve(info)
     });
   });
-}
-
-function extractAndSaveIpaIcon(filename) {
-  var promise = extractIpaIcon(filename);
-  return promise.then(function(icon_path) {
-    return saveFile(icon_path, 'icon.png')
-  });
-
 }
 
 
@@ -258,26 +161,13 @@ function extractIpaIcon(filename) {
 }
 
 
-var pro = allInfos('com.lashou.StartupCycle.BusinessMembers');
-pro.then(function(result) {
-  console.log(result);
-}, function(error) {
-  console.log(error);
+// var pro = allInfos('com.lashou.StartupCycle.BusinessMembers');
+// pro.then(function(result) {
+//   console.log(result);
+// }, function(error) {
+//   console.log(error);
 
-})
-
-// var path = path.join(__dirname) + "/xxx.ipa";
-// console.log(path);
-
-// var p = test(path).then(function(info) {
-//   console.log(info);
-
-// });
-
-// var p = parseIpa(path).then(function(info) {
-//   console.log(info);
-// });
-
+// })
 
 
 
