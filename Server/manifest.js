@@ -1,18 +1,17 @@
-var fs = require('fs-extra');  
+var fs = require('fs');  
 var path = require('path');  
 var mustache = require('mustache');
-var Parse = require('parse/node');
 
 
 
 module.exports = {
-  generate : function (app) {
+  generate : function (app, output) {
 
-    return renderManifest(app);
+    return renderManifest(app, output);
   }
 }
 
-function renderManifest(app) {
+function renderManifest(app, output) {
 
   return new Promise(function(resolve, reject) {
     var filepath = path.join(__dirname, 'templates', 'template.plist');
@@ -21,24 +20,21 @@ function renderManifest(app) {
 
       var template = data.toString();
       var rendered = mustache.render(template, {
-        name: app.get('name'),
-        bundleID: app.get('bundleID'),
-        url: app.get('package')['url'],
-        version: app.get('version'),
+        name: app['name'],
+        bundleID: app['bundleID'],
+        url: app['package'],
+        version: app['version'],
       });
 
-      var base64 = {
-        base64: new Buffer(rendered).toString('base64')
-      };
-      var parseFile = new Parse.File('manifest.plist', base64);
-      parseFile.save().then(function() {
-        resolve(parseFile);
-      }, function(err) {
-        console.log('manifest fail, ' + err.message);
-        reject(err);
+      var buffer = new Buffer(rendered);
+      fs.writeFile(output, buffer, function(err){  
+        if(err) {
+          reject(err);
+        }
+        resolve(output);
       });
     });
-  });
+  })
 }
 
 
