@@ -1,5 +1,4 @@
 var express = require('express');
-var ParseServer = require('parse-server').ParseServer;
 var Parse = require('parse/node');
 var IPA = require('./ipa.js');
 var APK = require('./apk.js');
@@ -13,31 +12,8 @@ var multer  = require('multer')
 var upload = multer({ dest: 'tmp_file/' })
 
 
-var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
-
-if (!databaseUri) {
-  databaseUri = 'mongodb://localhost:27017/dev';
-  process.env.MONGODB_URI = databaseUri;
-  console.log('DATABASE_URI not specified, falling back to localhost.');
-}
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-var api = new ParseServer({
-  databaseURI: databaseUri,
-  appId: process.env.APP_ID || 'playappstore',
-  masterKey: process.env.MASTER_KEY || 'masterKey', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/cgi',  // Don't forget to change to https if needed
-  maxUploadSize: '200mb', 
-});
-
 
 var app = express();
-
-// Serve static assets from the /public folder
-// app.use('/public', express.static(path.join(__dirname, '/public')));
-
-
-var mountPath = process.env.PARSE_MOUNT || '/cgi';
-app.use(mountPath, api);
 
 // enable to visit this page to install customize cert
 app.get('/public/diy', function(req, res) {
@@ -131,6 +107,22 @@ app.get(route, function(req, res) {
   });
 
 
+function mapApps(apps) {
+  var mapedApps = apps.map(function(app) {
+    app.icon = util.format('%s/icon/%s', baseUrl, app.icon);
+    if (app.hasOwnProperty(package)) {
+      app.package = util.format('%s/app/%s', baseUrl, app.package);
+    }
+    if (app.hasOwnProperty('manifest')) {
+      if (app.platform === 'ios') {
+        app.manifest = util.format('itms-services://?action=download-manifest&url=%s/plist/%s', baseUrl, path.basename(app.manifest, '.plist'));
+      }
+    }
+    return app;
+  })
+  return mapedApps;
+}
+
 
 var port = process.env.PORT || 1337;
 var ipAddress = Cert.getIP();
@@ -142,13 +134,9 @@ Cert.configCerts(ipAddress, function (options, path) {
 })
 
 
-Parse.initialize("playappstore");
-var baseUrl =  util.format('https://%s:%d/', ipAddress, port)
-Parse.serverURL = baseUrl + 'cgi'
-
 app.use('/cer', express.static(certsPath));
 console.log('please visit this url to install ca cert: ' + baseUrl + 'cer/my-root-ca.cer');
 var httpsServer = require('https').createServer(certsOptions, app);
 httpsServer.listen(port, function() {
-    console.log('parse-server-example running on: ' + baseUrl );
+    console.log('playappstore running on: ' + baseUrl );
 });
