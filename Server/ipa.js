@@ -68,7 +68,7 @@ function publishIpa(file) {
       info = values[1];
       var iconPath = db.findAppIcon(info);
       if (iconPath == '') {
-        console.log('miss hit icon');
+        console.log('not hit icon');
         iconPath = fl.iconDir + util.format('%s.png', uuidV4());
       }
       return fl.rename(tmpIconPath, iconPath);
