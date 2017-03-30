@@ -1,18 +1,18 @@
-var fs = require('fs-extra');  
+var fs = require('fs');  
 var path = require('path');  
 var mustache = require('mustache');
-var Parse = require('parse/node');
-
-
+var util = require('util')
 
 module.exports = {
-  generate : function (app) {
-
-    return renderManifest(app);
+  generate : function (app, output) {
+    return generateManifest(app, output);
+  },
+  render: function(input, basePath) {
+    return renderManifest(input, basePath)
   }
 }
 
-function renderManifest(app) {
+function generateManifest(app, output) {
 
   return new Promise(function(resolve, reject) {
     var filepath = path.join(__dirname, 'templates', 'template.plist');
@@ -21,24 +21,35 @@ function renderManifest(app) {
 
       var template = data.toString();
       var rendered = mustache.render(template, {
-        name: app.get('name'),
-        bundleID: app.get('bundleID'),
-        url: app.get('package')['url'],
-        version: app.get('version'),
+        name: app['name'],
+        bundleID: app['bundleID'],
+        path:  util.format('{{{basePath}}}/%s', app['package']),
+        version: app['version'],
       });
 
-      var base64 = {
-        base64: new Buffer(rendered).toString('base64')
-      };
-      var parseFile = new Parse.File('manifest.plist', base64);
-      parseFile.save().then(function() {
-        resolve(parseFile);
-      }, function(err) {
-        console.log('manifest fail, ' + err.message);
-        reject(err);
+      var buffer = new Buffer(rendered);
+      fs.writeFile(output, buffer, function(err){  
+        if(err) {
+          reject(err);
+        }
+        resolve(output);
       });
     });
-  });
+  })
+}
+
+function renderManifest(input, basePath) {
+  return new Promise(function(resolve, reject) {
+    fs.readFile(input, function(err, data) {
+      if (err) {reject(err)};
+
+      var template = data.toString();
+      var rendered = mustache.render(template, {
+        basePath: path.join(basePath, 'app'),
+      });
+      resolve(rendered);     
+    });
+  })
 }
 
 

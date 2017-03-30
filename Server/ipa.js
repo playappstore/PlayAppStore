@@ -1,4 +1,3 @@
-var Parse = require('parse/node');
 var path = require('path');
 var fs = require('fs');
 var pngdefry = require('pngdefry');
@@ -7,64 +6,44 @@ var uuidV4 = require('uuid/v4');
 var util = require('util')
 var extract = require('ipa-extract-info');
 var Manifest = require('./manifest.js');
-var DB = require('./dbhelper')
 var pretty = require('prettysize');
 var tmp_dir = path.join(__dirname, 'tmp_file');
+var DB = require('./realmDB.js');
+var db = new DB();
+var FileHelper = require('./file-helper.js');
+var fl = new FileHelper();
 
 module.exports = {
   publish : function (file) {
-    var filepath = file.originalname;
-    if (path.extname(filepath) === ".ipa") {
-      return publishIpa(file);
-    }
-    if (path.extname(filepath) === ".apk") {
-      return publishApk(file);
-    }
+    return publishIpa(file);
   },
-  getAllApps: function () {
-    return allApps();
+  getRecords: function () {
+    return allRecords();
   },
   getAllVersions: function (bundleID, page, count) {
-    return allVersions(bundleID, page, count);
+    return allInfos(bundleID, page, count);
+  },
+  renderManifist: function(guid, basePath) {
+    var input = path.join(fl.manifestDir, util.format('%s.plist', guid));
+    return Manifest.render(input, basePath);      
   }
 };
 
-function allApps(page, count)  {
+function allRecords()  {
   // usaully, a company may not have more than 20 apps.
   var page = 1;
   var count = 100;
-  var promise = DB.groupby('bundleID');
-  return promise.then(function(result) {
-    var bundleIDArray = result;
-    var taskArray = bundleIDArray.map(findApp);
-    return Promise.all(taskArray)
-      .then(values => {
-        return mapIpas(values);
-      }
-      , reason => {
-        console.log(reason);
-        return Promise.reject(reason);
-    });
+  return new Promise(function(resolve, reject) {
+    var records = db.getRecords('ios');
+    resolve(records);
   });
 }
-
-function allVersions(bundleID, page, count) {
-
-  var Application = Parse.Object.extend('Application');
-  var query = new Parse.Query(Application);
-  query.equalTo("bundleID", bundleID);
-  query.descending("updatedAt");  
-  query.limit(count);
-  query.skip((page-1)*count); // for pagination
+function allInfos(bundleID, page, count)  {
+  var page = 1;
+  var count = 100;
   return new Promise(function(resolve, reject) {
-    query.find({
-      success: function(apps) {
-        resolve(mapIpas(apps));
-      },
-      error: function(err) {
-        reject(err);
-      }
-    })
+    var records = db.getAppInfos('ios', bundleID);
+    resolve(records);
   });
 }
 
@@ -81,113 +60,55 @@ function mapIpas(apps) {
   return mapedIpas;
 }
 
-function findApp(bundleID) {
-    var Application = Parse.Object.extend('Application');
-    var query = new Parse.Query(Application);
-    query.equalTo("bundleID", bundleID);
-     // query.descending("updatedAt"); 
-    return new Promise(function(resolve, reject) {
-      query.first({
-        success: function(app) {
-          resolve(app);
-        },
-        error: function(err) {
-          reject(err);
-        }
-      })
-    });
-}
 
 function publishIpa(file) {
     // 1. save icon 2. parse info.plist 3. save ipa
     var filepath = file.path;
     var size =  pretty(file.size);
-    var save_icon = extractAndSaveIpaIcon(filepath);
-    var parse_info = parseIpa(filepath);
-    var save_ipa = saveFile(filepath, 'app.ipa');
-    return Promise.all([save_icon, parse_info, save_ipa])
+    var info = {};
+    return Promise.all([extractIpaIcon(filepath), parseIpa(filepath)])
     .then(values => {
-
-      return new Promise(function(resolve, reject) {
-
-        var icon_file = values[0];
-        var info = values[1];
-        var ipa_file = values[2];
-
-        var Application = Parse.Object.extend('Application');
-        var app = new Application();
-        app.set('icon', icon_file);
-        app.set('package', ipa_file);
-        app.set('size', size);
-        
-        Object.keys(info).forEach(function(key) {
-          var val = info[key];
-          app.set(key, val);
-        });
-
-        var promise = Manifest.generate(app);
-        return promise.then(function(manifestFile) {
-
-          app.set('manifest', manifestFile);
-          app.save(null, {
-            success: function(app) {
-              resolve(app);
-            },
-            error: function(obj, err) {
-              reject(err);
-            }
-          });
-        });
-
-      });
-
+      var tmpIconPath = values[0];
+      info = values[1];
+      var iconPath = db.findAppIcon(info);
+      if (iconPath == '') {
+        console.log('not hit icon');
+        iconPath = fl.iconDir + util.format('%s.png', uuidV4());
+      }
+      return fl.rename(tmpIconPath, iconPath);
     }, reason => {
       console.log(reason);
       return Promise.reject(reason);
-    });
-} 
-
-function publishApk(file) {
-  console.log('publishApk');
-  
-}
-    
-
-function saveFile(filename, mimeType) {
-
-  return new Promise(function(resolve, reject) {
-
-    fs.readFile(filename, function(err, data) {
-      if (err) {reject(err)};
-
-      var base64 = {
-        base64: new Buffer(data).toString('base64')
-      };
-
-      var parseFile = new Parse.File(mimeType, base64);
-      parseFile.save().then(function() {
-        // this file has been saved to Parse.
-        resolve(parseFile);
-      }, function(err) {
-        reject(err);
-      });
     })
+    .then(function(iconPath) {
+      info['icon'] = path.basename(iconPath);
+      return db.updateAppIcon(info);
+    })
+    .then(function(appIcon) {
+      return db.updateAppRecord(info);
+    })
+    .then(function(appRecord) {
+      var appPath = path.join(fl.appDir, util.format('%s.ipa', uuidV4()));
+      console.log('app path : ' + appPath);
+      return fl.rename(filepath, appPath);
+    }) 
+    .then(function(ipaPath) {
+      info['package'] = path.basename(ipaPath);
+      var manifestPath = path.join(fl.manifestDir, util.format('%s.plist', uuidV4()));
+      console.log('manifest path : ' + manifestPath);
+      return Manifest.generate(info, manifestPath);      
+    })
+    .then(function(manifestPath) {
+      info['objectId'] = uuidV4();
+      info['manifest'] = path.basename(manifestPath);
+      info['size'] = size;
 
-
-  // delete file
-  // fs.unlink(req.files.path, function (err) {
-  //   if (err) throw err;
-  //   console.log('successfully deleted ' + req.files.path);
-  // }); 
-
-  });
-
-}
-
+      return db.updateAppInfo(info);
+    })
+} 
 
 function parseIpa(filename) {
 
-	
   return new Promise(function(resolve,reject){
     var fd = fs.openSync(filename, 'r');
     extract(fd, function(err, info, raw){
@@ -202,14 +123,6 @@ function parseIpa(filename) {
       resolve(info)
     });
   });
-}
-
-function extractAndSaveIpaIcon(filename) {
-  var promise = extractIpaIcon(filename);
-  return promise.then(function(icon_path) {
-    return saveFile(icon_path, 'icon.png')
-  });
-
 }
 
 
@@ -252,18 +165,13 @@ function extractIpaIcon(filename) {
 }
 
 
-// var path = path.join(__dirname) + "/xxx.ipa";
-// console.log(path);
+// var pro = allInfos('com.lashou.StartupCycle.BusinessMembers');
+// pro.then(function(result) {
+//   console.log(result);
+// }, function(error) {
+//   console.log(error);
 
-// var p = test(path).then(function(info) {
-//   console.log(info);
-
-// });
-
-// var p = parseIpa(path).then(function(info) {
-//   console.log(info);
-// });
-
+// })
 
 
 
