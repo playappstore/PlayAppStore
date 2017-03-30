@@ -1,13 +1,15 @@
-var Parse = require('parse/node');
 var path = require('path');
 var fs = require('fs');
 var AdmZip = require("adm-zip");
 var uuidV4 = require('uuid/v4');
 var util = require('util')
 var apkParser3 = require("apk-parser3");
-var DB = require('./dbhelper')
 var pretty = require('prettysize');
 var tmp_dir = path.join(__dirname, 'tmp_file');
+var DB = require('./realmDB.js');
+var db = new DB();
+var FileHelper = require('./file-helper.js');
+var fl = new FileHelper();
 
 module.exports = {
   publish : function (file) {
@@ -17,7 +19,7 @@ module.exports = {
     return allRecords();
   },
   getAllVersions: function (bundleID, page, count) {
-    return allVersions(bundleID, page, count);
+    return allInfos(bundleID, page, count);
   }
 };
 
@@ -46,7 +48,7 @@ function publishApk(file) {
     var size =  pretty(file.size);
     var info = {};
 
-    return new Promise.all([extractApkIcon(filepath), parseApk(filepath)])
+    return Promise.all([extractApkIcon(filepath), parseApk(filepath)])
     .then(values => {
       var tmpIconPath = values[0];
       info = values[1];
@@ -75,13 +77,9 @@ function publishApk(file) {
     .then(function(ipaPath) {
       info['package'] = path.basename(ipaPath);
       info['objectId'] = uuidV4();
-      info['manifest'] = path.basename(manifestPath);
       info['size'] = size;
-
       return db.updateAppInfo(info);
-          
     })
-  
 }
 
 function parseText(text) {

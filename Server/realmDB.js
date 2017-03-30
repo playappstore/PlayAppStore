@@ -108,7 +108,12 @@ RealmDB.prototype.getRecords = function (platform) {
   var filter = util.format('platform = "%s"', platform);
   console.log(filter);
   var records = realm.objects('AppRecord').filtered(filter);
-  return records;
+  var copy = records.slice();
+  // for set property values out a transaction.
+  var mappedArray = copy.map(function(record) {
+    return JSON.parse(JSON.stringify(record));
+  })
+  return mappedArray;
 }
 
 RealmDB.prototype.getAppInfos = function (platform, bundleID, page, count) {
@@ -117,11 +122,14 @@ RealmDB.prototype.getAppInfos = function (platform, bundleID, page, count) {
 
   var filter = util.format('platform = "%s" AND bundleID = "%s"', platform, bundleID);
   console.log(filter);
-  var infos = realm.objects('AppRecord').filtered(filter);
+  var infos = realm.objects('AppInfo').filtered(filter);
   // for pagination
   var start = (page-1)*count;
-  var firstInfos = infos.slice(start, page);
-  return firstInfos;
+  var firstInfos = infos.slice(start, count);
+  var mappedArray = firstInfos.map(function(info) {
+    return JSON.parse(JSON.stringify(info));
+  })
+  return mappedArray;
 }
 
 

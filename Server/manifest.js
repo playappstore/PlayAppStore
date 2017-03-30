@@ -1,17 +1,18 @@
 var fs = require('fs');  
 var path = require('path');  
 var mustache = require('mustache');
-
-
+var util = require('util')
 
 module.exports = {
   generate : function (app, output) {
-
-    return renderManifest(app, output);
+    return generateManifest(app, output);
+  },
+  render: function(input, basePath) {
+    return renderManifest(input, basePath)
   }
 }
 
-function renderManifest(app, output) {
+function generateManifest(app, output) {
 
   return new Promise(function(resolve, reject) {
     var filepath = path.join(__dirname, 'templates', 'template.plist');
@@ -22,7 +23,7 @@ function renderManifest(app, output) {
       var rendered = mustache.render(template, {
         name: app['name'],
         bundleID: app['bundleID'],
-        url: app['package'],
+        path:  util.format('{{{basePath}}}/%s', app['package']),
         version: app['version'],
       });
 
@@ -33,6 +34,20 @@ function renderManifest(app, output) {
         }
         resolve(output);
       });
+    });
+  })
+}
+
+function renderManifest(input, basePath) {
+  return new Promise(function(resolve, reject) {
+    fs.readFile(input, function(err, data) {
+      if (err) {reject(err)};
+
+      var template = data.toString();
+      var rendered = mustache.render(template, {
+        basePath: path.join(basePath, 'app'),
+      });
+      resolve(rendered);     
     });
   })
 }

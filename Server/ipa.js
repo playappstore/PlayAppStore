@@ -21,7 +21,11 @@ module.exports = {
     return allRecords();
   },
   getAllVersions: function (bundleID, page, count) {
-    return allVersions(bundleID, page, count);
+    return allInfos(bundleID, page, count);
+  },
+  renderManifist: function(guid, basePath) {
+    var input = path.join(fl.manifestDir, util.format('%s.plist', guid));
+    return Manifest.render(input, basePath);      
   }
 };
 
