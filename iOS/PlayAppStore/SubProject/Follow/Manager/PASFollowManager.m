@@ -22,7 +22,7 @@
     if (self = [super init])
     {
         PASConfiguration *config = [PASConfiguration shareInstance];
-        //        NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
+//                NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
         NSString *strURL = @"http://45.77.13.248:3000/apps/ios";
         
         config.baseURL = [NSURL URLWithString:strURL];
@@ -77,7 +77,6 @@
         for (int i = 0; i < dataArr.count; i++) {
             NSDictionary *dataDic = dataArr[i];
             PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataDic];
-            model.pas_id = [dataDic objectForKey:@"id"];
             [dataArra addObject:model];
             if (i == dataArr.count -1) {
                 [self.dataDic setObject:dataArra forKey:model.name];

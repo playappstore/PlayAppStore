@@ -146,7 +146,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
                 downloadButton.state = kPKDownloadButtonState_Downloading;
                 //假如开始安装
                 
-                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.uploadTime};
+                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.updatedAt};
                 [[PAS_DownLoadingApps sharedInstance].appDic setObject:dataDic forKey:_downloadingModel.name];
                 
             }
@@ -166,7 +166,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     if ([appNameArr containsObject:model.name]) {
         
         NSDictionary *dataDic =[app objectForKey:model.name];
-        if ([[dataDic objectForKey:@"version"] isEqualToString:model.version]&&[[dataDic objectForKey:@"bundleID"] isEqualToString:model.bundleID]&&[[dataDic objectForKey:@"uploadTime"] isEqualToString:model.uploadTime]) {
+        if ([[dataDic objectForKey:@"version"] isEqualToString:model.version]&&[[dataDic objectForKey:@"bundleID"] isEqualToString:model.bundleID]&&[[dataDic objectForKey:@"uploadTime"] isEqualToString:model.updatedAt]) {
             
             _downloadingModel = model;
             NSProgress *progress = [dataDic objectForKey:@"progress"];
@@ -210,7 +210,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes1];
     PASDiscoverModel *model = [dataArr objectAtIndex:indexPath.row - 1];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.uploadTime version:model.version changelog:model.changelog iconUrl:model.icon];
+    [cell setValueWithUploadTime:model.updatedAt version:model.version changelog:model.changelog iconUrl:model.icon];
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     __weak PASFollowController *weakself = self;
