@@ -56,7 +56,23 @@ const AppInfoSchema = {
   }
 };
 
-var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema]});
+
+const DeviceSchema = {
+  name: 'Device', 
+  primaryKey: 'uuid',
+  primaryKey: 'platform',
+  properties: {
+    uuid: 'string',
+    platform: 'string',
+    apnsToken:{type: 'string', optional: true},  // apns device token
+    followed: {type: 'list', objectType:'AppRecord'},
+    activitedAt: {type: 'date', default: new Date()},
+    createdAt: {type: 'date',  default: new Date()},
+    updatedAt: {type: 'date',  default: new Date()},
+  }
+}
+
+var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema, DeviceSchema], version:5});
 
 
 function RealmDB() {
@@ -131,6 +147,93 @@ RealmDB.prototype.getAppInfos = function (platform, bundleID, page, count) {
   })
   return mappedArray;
 }
+/// action: 1 for follow, 0 for unfollow.
+RealmDB.prototype.updateDevice = function (device, bundleID, action) {
+  return new Promise(function(resolve, reject) {
+    var result;
+    realm.write(() => {
+      console.log('begin write');
+      result = realm.create('Device', device, true);
+      if (bundleID === 'undefined') {
+        console.log('end write');
+        return;
+      }
+      var records = realm.objects('AppRecord').filtered('bundleID = $0 AND platform = $1', bundleID, 'ios');
+      if (records.length == 0) { 
+        return;
+      }
+      var contain = result.followed.filtered('bundleID = $0', bundleID).length > 0;
+      if (action === '1') {
+        // if this record not in the followed list, then push it.
+        if (!contain) {
+          result.followed.push(records[0]);
+        }
+      }
+      if (action === '0') {
+        // otherwise, remove it from the list
+        if (contain) {
+          var index = result.followed.findIndex(function(obj, index, collection) {
+            if (obj.bundleID === bundleID) {
+              return true;
+            }
+            return false;
+          })
+          result.followed.splice(index, 1);
+        }
+      }
+    });
+    resolve(result);
+  });
+}
+
+RealmDB.prototype.getFolloweds = function (deviceID, platform) {
+
+  var records = realm.objects('Device').filtered('uuid = $0 AND platform = $1', deviceID, platform);
+  if (records.length > 0) {
+    var device = records[0];
+    var followeds = device.followed;
+    // for set property values out a transaction.
+    var mappedArray = followeds.map(function(record) {
+      return JSON.parse(JSON.stringify(record));
+    })
+    return mappedArray;
+  } else {
+    return [];
+  }
+}
+
+var db = new RealmDB();
+var appRecord = {};
+appRecord.bundleID = 'com.lashou.com';
+appRecord.platform = 'ios';
+appRecord.version = '0.1'
+appRecord.name = 'grout'
+appRecord.icon = 'xxx.pg'
+
+
+// db.updateAppRecord(appRecord);
+// var device = {};
+// device.uuid = '2';
+// device.platform = 'ios';
+
+// db.updateDevice(device)
+// .then(function(result) {
+//   console.log(JSON.stringify(result));
+// }, function(error) {
+//   console.log(error);
+// })
+
+// db.updateApnsDevice(db, 'com.xxx.com')
+// .then(function(result) {
+//   console.log(result);
+// }, function(error) {
+//   console.log(error);
+// })
+
+
+// var r = db.getFollowedDevices('com.lashou.com');
+// console.log('bottom line');
+// console.log(r);
 
 
 module.exports = RealmDB;

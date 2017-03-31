@@ -26,8 +26,28 @@ module.exports = {
   renderManifist: function(guid, basePath) {
     var input = path.join(fl.manifestDir, util.format('%s.plist', guid));
     return Manifest.render(input, basePath);      
+  },
+  registerDevice: function (device) {
+    return db.updateDevice(device);
+  },
+  updateDevice: function(device) {
+    return db.updateDevice(device);
+  },
+  updateFollowedRecords: function(deviceID, bundleID, action) {
+    var device = {uuid: deviceID, platform: 'ios'};
+    return db.updateDevice(device, bundleID, action);
+  },
+  getAllFolloweds: function(deviceID) {
+    return allFolloweds(deviceID);
   }
 };
+
+function allFolloweds(deviceID) {
+  return new Promise(function(resolve, reject) {
+    var records = db.getFolloweds(deviceID, 'ios');
+    resolve(records);
+  });
+}
 
 function allRecords()  {
   // usaully, a company may not have more than 20 apps.

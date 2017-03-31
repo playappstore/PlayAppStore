@@ -9,6 +9,7 @@ var os = require('os');
 var multer  = require('multer')
 // omit the options object, the files will be kept in memory and never written to disk
 var upload = multer({ dest: 'tmp_file/' })
+var bodyParser = require('body-parser')
 var FileHelper = require('./file-helper.js');
 const fl = new FileHelper();
 
@@ -56,7 +57,6 @@ app.get('/apps/:platform', function(req, res) {
   }, function(err) {
       res.send('fail,' + err);
   })
-  
 })
 
 var route = ['/apps/:platform/:bundleID', '/apps/:platform/:bundleID/:page', '/apps/:platform/:bundleID/:page/:count'];
@@ -110,6 +110,75 @@ function mapApps(apps) {
   })
   return mapedApps;
 }
+
+var jsonParser = bodyParser.json()
+app.post('/devices', jsonParser, function (req, res) {
+  if (!req.body) return res.sendStatus(400)
+  var device = {};
+  device['uuid'] = req.body.uuid;
+  device['platform'] = req.body.platform;
+  console.log(device);
+  var promise = IPA.registerDevice(device);
+  promise.then(function(result) {
+    res.send(result);
+  }, function(error) {
+    res.send('fail: '+ error); 
+  })
+})
+
+app.get('/records/:platform/followed', function(req, res) {
+  var token = req.header('Authorization');
+  var platform = req.params.platform;
+  var promise;
+  if (platform === 'ios') {
+    promise = IPA.getAllFolloweds(token);
+  }
+  promise.then(function(records) {
+    return mapApps(records);
+  })
+  .then(function(records) {
+    res.send(records);
+  }, function(error) {
+    res.send('fail: ' + error);
+  })
+})
+
+var router = '/records/:platform/:bundleID/follow';
+app.put(router, function(req, res) {
+  var token = req.header('Authorization')
+  if (typeof(token) !== 'string' ) {
+    res.sendStatus(403);
+  }
+  var bundleID = req.params.bundleID;
+  var platform = req.params.platform;
+  var promise;
+  if (platform === 'ios') {
+    promise = IPA.updateFollowedRecords(token, bundleID, '1');
+  }
+  promise.then(function(result) {
+    res.sendStatus(204);
+  }, function(error) {
+    res.send('fail: ' + error);
+  })
+})
+app.delete(router, function(req, res) {
+  var token = req.header('Authorization')
+  if (typeof(token) !== 'string' ) {
+    res.sendStatus(403);
+  }
+  var bundleID = req.params.bundleID;
+  var platform = req.params.platform;
+  var promise;
+  if (platform === 'ios') {
+    promise = IPA.updateFollowedRecords(token, bundleID, '0');
+  }
+  promise.then(function(result) {
+    res.sendStatus(204);
+  }, function(error) {
+    res.send('fail: ' + error);
+  })
+})
+
 
 var port = process.env.PORT || 1337;
 var ipAddress = Cert.getIP();
