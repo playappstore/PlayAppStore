@@ -20,8 +20,11 @@ module.exports = {
   getRecords: function () {
     return allRecords();
   },
+  getAllInfos: function(page, count) {
+    return allInfos(page, count);
+  },
   getAllVersions: function (bundleID, page, count) {
-    return allInfos(bundleID, page, count);
+    return allVersions(bundleID, page, count);
   },
   renderManifist: function(guid, basePath) {
     var input = path.join(fl.manifestDir, util.format('%s.plist', guid));
@@ -58,11 +61,19 @@ function allRecords()  {
     resolve(records);
   });
 }
-function allInfos(bundleID, page, count)  {
+function allInfos(page, count) {
+  var page = 1;
+  var count = 20;
+  return new Promise(function(resolve, reject) {
+    var infos = db.getAppInfos('ios', page, count);
+    resolve(infos);
+  })
+}
+function allVersions(bundleID, page, count)  {
   var page = 1;
   var count = 100;
   return new Promise(function(resolve, reject) {
-    var records = db.getAppInfos('ios', bundleID);
+    var records = db.getAppVersions('ios', bundleID);
     resolve(records);
   });
 }
@@ -122,10 +133,21 @@ function publishIpa(file) {
       info['objectId'] = uuidV4();
       info['manifest'] = path.basename(manifestPath);
       info['size'] = size;
-
       return db.updateAppInfo(info);
     })
+    .then(push(info))
 } 
+function push(info) {
+  console.log('begin push');
+  new Promise(function(resolve, reject) {
+    var tokens = db.getDeviceTokens(info);
+    console.log(tokens);
+
+  });
+  console.log('check if async');
+ 
+  return info;
+}
 
 function parseIpa(filename) {
 

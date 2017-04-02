@@ -18,8 +18,8 @@ const AppIconSchema = {
     platform: 'string', // ios or android
     icon: 'string', // icon path
     name: {type: 'string', optional: true},
-    createAt: {type: 'date',  default: new Date()},
-    updateAt: {type: 'date',  default: new Date()},
+    createdAt: {type: 'date',  default: new Date()},
+    updatedAt: {type: 'date',  default: new Date()},
   }
 };
 
@@ -33,15 +33,15 @@ const AppRecordSchema = {
     version: 'string',
     name: 'string',
     icon: 'string', // icon path
-    createAt: {type: 'date',  default: new Date()},
-    updateAt: {type: 'date',  default: new Date()},
+    createdAt: {type: 'date',  default: new Date()},
+    updatedAt: {type: 'date',  default: new Date()},
   }
 };
 
 const AppInfoSchema = {
   name: 'AppInfo',
   properties: {
-    objectId: 'string',
+    objectID: 'string',
     bundleID:  'string', 
     version: 'string',
     build: {type: 'string', optional: true}, // build version 
@@ -51,8 +51,8 @@ const AppInfoSchema = {
     package: 'string', // package download url
     platform: 'string', // ios or android
     manifest: {type: 'string', optional: true}, // ios only, for itms-service download 
-    createAt: {type: 'date',  default: new Date()},
-    updateAt: {type: 'date',  default: new Date()},
+    createdAt: {type: 'date',  default: new Date()},
+    updatedAt: {type: 'date',  default: new Date()},
   }
 };
 
@@ -72,7 +72,7 @@ const DeviceSchema = {
   }
 }
 
-var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema, DeviceSchema], version:5});
+var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema, DeviceSchema], version:6});
 
 
 function RealmDB() {
@@ -119,7 +119,7 @@ RealmDB.prototype.findAppIcon = function(app) {
     return "";
   }
 }
-RealmDB.prototype.getRecords = function (platform) {
+RealmDB.prototype.getRecords = function(platform) {
 
   var filter = util.format('platform = "%s"', platform);
   console.log(filter);
@@ -132,7 +132,7 @@ RealmDB.prototype.getRecords = function (platform) {
   return mappedArray;
 }
 
-RealmDB.prototype.getAppInfos = function (platform, bundleID, page, count) {
+RealmDB.prototype.getAppVersions = function(platform, bundleID, page, count) {
   page = typeof page  !== 'undefined' ? page : 1;
   count = typeof count !== 'undefined' ? count : 10;
 
@@ -147,8 +147,20 @@ RealmDB.prototype.getAppInfos = function (platform, bundleID, page, count) {
   })
   return mappedArray;
 }
+RealmDB.prototype.getAppInfos = function(platform, page, count) {
+  page = typeof page  !== 'undefined' ? page : 1;
+  count = typeof count !== 'undefined' ? count : 10;
+  var infos = realm.objects('AppInfo').filtered('platform = $0', platform);
+  // for pagination
+  var start = (page-1)*count;
+  var firstInfos = infos.slice(start, count);
+  var mappedArray = firstInfos.map(function(info) {
+    return JSON.parse(JSON.stringify(info));
+  })
+  return mappedArray;
+}
 /// action: 1 for follow, 0 for unfollow.
-RealmDB.prototype.updateDevice = function (device, bundleID, action) {
+RealmDB.prototype.updateDevice = function(device, bundleID, action) {
   return new Promise(function(resolve, reject) {
     var result;
     realm.write(() => {
@@ -186,7 +198,7 @@ RealmDB.prototype.updateDevice = function (device, bundleID, action) {
   });
 }
 
-RealmDB.prototype.getFolloweds = function (deviceID, platform) {
+RealmDB.prototype.getFolloweds = function(deviceID, platform) {
 
   var records = realm.objects('Device').filtered('uuid = $0 AND platform = $1', deviceID, platform);
   if (records.length > 0) {
@@ -200,6 +212,16 @@ RealmDB.prototype.getFolloweds = function (deviceID, platform) {
   } else {
     return [];
   }
+}
+RealmDB.prototype.getDeviceTokens = function(info) {
+  // use info's bundleID and platform
+  var records = realm.objects('Device').filtered('platform = $0 AND followed.bundleID = $1', info.platform, info.bundleID);
+  var mappedArray = records.map(function(device) {
+    if (typeof(device.apnsToken) === 'string') {
+      return device.apnsToken;
+    }
+  })
+  return mappedArray;
 }
 
 var db = new RealmDB();

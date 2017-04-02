@@ -12,7 +12,41 @@ var upload = multer({ dest: 'tmp_file/' })
 var bodyParser = require('body-parser')
 var FileHelper = require('./file-helper.js');
 const fl = new FileHelper();
+var program = require('commander');
+// var version = pkg.version;
 
+/**
+ * Install a before function; AOP.
+ */
+
+function before(obj, method, fn) {
+  var old = obj[method];
+
+  obj[method] = function() {
+    fn.call(this);
+    old.apply(this, arguments);
+  };
+}
+
+
+before(program, 'outputHelp', function() {
+  this.allowUnknownOption();
+});
+program
+    .version('0.0.1')
+    .usage('[option] [dir]')
+    .option('-p, --port <port-number>', 'set port for server (defaults is 1337)')
+    .option('-h, --host <host>', 'set host for server (defaults is your LAN ip)')
+    .option('-c, --options <options>', 'set the config json file path')
+    .parse(process.argv);
+
+if (program.options) {
+  if (!fs.existsSync(program.options)) {
+    console.log('wrong config path!');
+  }
+  var options = require(program.options);
+  console.log('key : ' + options.key);
+}
 var app = express();
 
 // Parse Server plays nicely with the rest of your web routes
@@ -39,7 +73,7 @@ app.post('/apps', upload.single('package'), function (req, res) {
   });
 })
 
-app.get('/apps/:platform', function(req, res) {
+app.get('/records/:platform', function(req, res) {
 
   var promise;
   if(req.params.platform === 'ios') {
@@ -59,17 +93,25 @@ app.get('/apps/:platform', function(req, res) {
   })
 })
 
-var route = ['/apps/:platform/:bundleID', '/apps/:platform/:bundleID/:page', '/apps/:platform/:bundleID/:page/:count'];
+
+var route = ['/apps/:platform', '/apps/:platform/:bundleID', '/apps/:platform/:bundleID/:page', '/apps/:platform/:bundleID/:page/:count'];
 app.get(route, function(req, res) {
   var page = parseInt(req.params.page ? req.params.page : 1);
   var count = parseInt(req.params.count ? req.params.count : 10);
-  var bundleID = req.params.bundleID;
   var promise;
   if (req.params.platform === 'ios') {
-    promise = IPA.getAllVersions(bundleID, page, count);
+    if (typeof(req.params.bundleID) === 'string') {
+      promise = IPA.getAllVersions(bundleID, page, count);
+    } else {
+      promise = IPA.getAllInfos(page, count);
+    }
   }
   if (req.params.platform === 'android') {
-    promise = APK.getAllVersions(bundleID, page, count);
+    if (typeof(req.params.bundleID) === 'string') {
+      promise = APK.getAllVersions(bundleID, page, count);
+    } else {
+      promise = APK.getAllInfos(page, cout);
+    }
   }
   promise.then(function(apps) {
     return mapApps(apps);
@@ -94,7 +136,7 @@ app.get('/plist/:guid', function(req, res) {
 
 function mapApps(apps) {
   var mapedApps = apps.map(function(app) {
-    app.icon = path.join(baseUrl, 'icon', app.icon);
+    app.icon = path.join(ImageUrl, 'icon', app.icon);
     // app.icon = util.format('%s/icon/%s', baseUrl, app.icon);
     if (app.hasOwnProperty('package')) {
       app.package = path.join(baseUrl, 'app', app.package);
@@ -115,8 +157,11 @@ var jsonParser = bodyParser.json()
 app.post('/devices', jsonParser, function (req, res) {
   if (!req.body) return res.sendStatus(400)
   var device = {};
-  device['uuid'] = req.body.uuid;
-  device['platform'] = req.body.platform;
+  device.uuid = req.body.uuid;
+  device.platform = req.body.platform;
+  if (typeof(req.body.apnsToken) === 'string') {
+    device.apnsToken = req.body.apnsToken; 
+  }
   console.log(device);
   var promise = IPA.registerDevice(device);
   promise.then(function(result) {
@@ -181,8 +226,10 @@ app.delete(router, function(req, res) {
 
 
 var port = process.env.PORT || 1337;
+var imagePort = port + 1;
 var ipAddress = Cert.getIP();
-const baseUrl =  util.format('https://%s:%d/', ipAddress, port)
+const baseUrl =  util.format('https://%s:%d/', ipAddress, port);
+const ImageUrl = util.format('http://%s:%d/', ipAddress, imagePort);
 var certsOptions;;
 var certsPath;
 Cert.configCerts(ipAddress, function (options, path) {
@@ -200,8 +247,13 @@ app.get('/public/diy', function(req, res) {
 });
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
-
 console.log('please visit this url to install ca cert: ' + baseUrl + 'public/diy');
+
+var httpServer = require('http').createServer(app);
+httpServer.listen(imagePort, function() {
+  console.log('please visit this url to download icons : ' + ImageUrl);
+});
+
 var httpsServer = require('https').createServer(certsOptions, app);
 httpsServer.listen(port, function() {
     console.log('playappstore running on: ' + baseUrl );
