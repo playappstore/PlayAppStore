@@ -244,22 +244,21 @@ Cert.configCerts(ipAddress, function (options, path) {
   certsPath = path;
 })
 
-app.use('/', express.static(path.join(path.join(__dirname, '/../'), 'Web')));
+app.use('/', express.static(path.join(__dirname, 'Web')));
 app.use('/cer', express.static(certsPath));
 app.use('/app', express.static(fl.appDir));
 app.use('/icon', express.static(fl.iconDir));
 
 // enable to visit this page to install customize cert
-app.get('/public/diy', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/cert.html'));
+app.get('/diy', function(req, res) {
+  res.sendFile(path.join(__dirname, '/Web/cert.html'));
 });
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
-console.log('please visit this url to install ca cert: ' + baseUrl + 'public/diy');
+console.log('please visit this url to install ca cert: ' + baseUrl + 'diy');
 
 var httpServer = require('http').createServer(app);
 httpServer.listen(imagePort, function() {
-  console.log('please visit this url to download icons : ' + ImageUrl);
 });
 
 var httpsServer = require('https').createServer(certsOptions, app);
