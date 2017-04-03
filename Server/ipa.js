@@ -23,8 +23,8 @@ module.exports = {
   getAllInfos: function(page, count) {
     return allInfos(page, count);
   },
-  getAllVersions: function (bundleID, page, count) {
-    return allVersions(bundleID, page, count);
+  getAllVersions: function (bundleId, page, count) {
+    return allVersions(bundleId, page, count);
   },
   renderManifist: function(guid, basePath) {
     var input = path.join(fl.manifestDir, util.format('%s.plist', guid));
@@ -36,9 +36,9 @@ module.exports = {
   updateDevice: function(device) {
     return db.updateDevice(device);
   },
-  updateFollowedRecords: function(deviceID, bundleID, action) {
+  updateFollowedRecords: function(deviceID, bundleId, action) {
     var device = {uuid: deviceID, platform: 'ios'};
-    return db.updateDevice(device, bundleID, action);
+    return db.updateDevice(device, bundleId, action);
   },
   getAllFolloweds: function(deviceID) {
     return allFolloweds(deviceID);
@@ -69,11 +69,9 @@ function allInfos(page, count) {
     resolve(infos);
   })
 }
-function allVersions(bundleID, page, count)  {
-  var page = 1;
-  var count = 100;
+function allVersions(bundleId, page, count)  {
   return new Promise(function(resolve, reject) {
-    var records = db.getAppVersions('ios', bundleID);
+    var records = db.getAppVersions('ios', bundleId, page, count);
     resolve(records);
   });
 }
@@ -101,6 +99,7 @@ function publishIpa(file) {
     .then(values => {
       var tmpIconPath = values[0];
       info = values[1];
+      console.log(info);
       var iconPath = db.findAppIcon(info);
       if (iconPath == '') {
         console.log('not hit icon');
@@ -135,7 +134,7 @@ function publishIpa(file) {
       info['size'] = size;
       return db.updateAppInfo(info);
     })
-    .then(push(info))
+    //.then(push(info))
 } 
 function push(info) {
   console.log('begin push');
@@ -159,9 +158,9 @@ function parseIpa(filename) {
       var info = {}
       info["platform"] = "ios"
       info["build"] = data.CFBundleVersion,
-      info["bundleID"] = data.CFBundleIdentifier,
+      info["bundleId"] = data.CFBundleIdentifier,
       info["version"] = data.CFBundleShortVersionString,
-      info["name"] = data.CFBundleName
+      info["name"] = data.CFBundleDisplayName
       resolve(info)
     });
   });

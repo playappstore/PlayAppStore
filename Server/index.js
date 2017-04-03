@@ -13,6 +13,7 @@ var bodyParser = require('body-parser')
 var FileHelper = require('./file-helper.js');
 const fl = new FileHelper();
 var program = require('commander');
+var dateFormat = require('dateformat');
 // var version = pkg.version;
 
 /**
@@ -40,21 +41,17 @@ program
     .option('-c, --options <options>', 'set the config json file path')
     .parse(process.argv);
 
-if (program.options) {
-  if (!fs.existsSync(program.options)) {
+if (typeof(program.options) === 'string') {
+  if (fs.existsSync(program.options)) {
     console.log('wrong config path!');
   }
   var options = require(program.options);
   console.log('key : ' + options.key);
 }
+
 var app = express();
 
-// Parse Server plays nicely with the rest of your web routes
-app.get('/', function(req, res) {
-  res.status(200).send('I dream of being a website!');
-});
-
-app.post('/apps', upload.single('package'), function (req, res) {
+app.post('/records', upload.single('package'), function (req, res) {
   // req.file is the `package` file
   var file = req.file;
   var filepath = file.originalname;
@@ -94,23 +91,26 @@ app.get('/records/:platform', function(req, res) {
 })
 
 
-var route = ['/apps/:platform', '/apps/:platform/:bundleID', '/apps/:platform/:bundleID/:page', '/apps/:platform/:bundleID/:page/:count'];
+var route = ['/apps/:platform/:bundleId', '/apps/:platform/:bundleId/:page', '/apps/:platform/:bundleId/:page/:count'];
 app.get(route, function(req, res) {
   var page = parseInt(req.params.page ? req.params.page : 1);
   var count = parseInt(req.params.count ? req.params.count : 10);
+  console.log('page : ' + page + 'count : ' + count);
   var promise;
   if (req.params.platform === 'ios') {
-    if (typeof(req.params.bundleID) === 'string') {
-      promise = IPA.getAllVersions(bundleID, page, count);
+    var bundleId = req.params.bundleId;
+    if (typeof(bundleId) === 'string') {
+      promise = IPA.getAllVersions(bundleId, page, count);
     } else {
-      promise = IPA.getAllInfos(page, count);
+      // promise = IPA.getAllInfos(page, count);
     }
   }
   if (req.params.platform === 'android') {
-    if (typeof(req.params.bundleID) === 'string') {
-      promise = APK.getAllVersions(bundleID, page, count);
+    var bundleId = req.params.bundleId;
+    if (typeof(req.params.bundleId) === 'string') {
+      promise = APK.getAllVersions(bundleId, page, count);
     } else {
-      promise = APK.getAllInfos(page, cout);
+      // promise = APK.getAllInfos(page, cout);
     }
   }
   promise.then(function(apps) {
@@ -128,6 +128,7 @@ app.get('/plist/:guid', function(req, res) {
   promise.then(function(buffer) {
     res.set('Content-Type', 'text/plain; charset=utf-8');
     res.set('Access-Control-Allow-Origin','*');
+    console.log('visit plist');
     res.send(buffer);
   }, function(error) {
     res.send('fail,' + err);
@@ -136,15 +137,21 @@ app.get('/plist/:guid', function(req, res) {
 
 function mapApps(apps) {
   var mapedApps = apps.map(function(app) {
-    app.icon = path.join(ImageUrl, 'icon', app.icon);
+    app.icon = ImageUrl + path.join('icon', app.icon);
     // app.icon = util.format('%s/icon/%s', baseUrl, app.icon);
     if (app.hasOwnProperty('package')) {
-      app.package = path.join(baseUrl, 'app', app.package);
+      app.package = baseUrl + path.join('app', app.package);
+    }
+    if (app.hasOwnProperty('createdAt')) {
+      app.createdAt = dateFormat(app.createdAt, 'yyyy-mm-dd HH:MM');
+    }
+    if (app.hasOwnProperty('updatedAt')) {
+      app.updatedAt = dateFormat(app.updatedAt, 'yyyy-mm-dd HH:MM');
     }
     if (app.hasOwnProperty('manifest')) {
       if (app.platform === 'ios') {
         var manifest = path.basename(app.manifest, '.plist')
-        manifest = path.join(baseUrl, 'plist', manifest);
+        manifest = baseUrl + path.join('plist', manifest);
         app.manifest = util.format('itms-services://?action=download-manifest&url=%s', manifest);
       }
     }
@@ -188,17 +195,17 @@ app.get('/records/:platform/followed', function(req, res) {
   })
 })
 
-var router = '/records/:platform/:bundleID/follow';
+var router = '/records/:platform/:bundleId/follow';
 app.put(router, function(req, res) {
   var token = req.header('Authorization')
   if (typeof(token) !== 'string' ) {
     res.sendStatus(403);
   }
-  var bundleID = req.params.bundleID;
+  var bundleId = req.params.bundleId;
   var platform = req.params.platform;
   var promise;
   if (platform === 'ios') {
-    promise = IPA.updateFollowedRecords(token, bundleID, '1');
+    promise = IPA.updateFollowedRecords(token, bundleId, '1');
   }
   promise.then(function(result) {
     res.sendStatus(204);
@@ -211,11 +218,11 @@ app.delete(router, function(req, res) {
   if (typeof(token) !== 'string' ) {
     res.sendStatus(403);
   }
-  var bundleID = req.params.bundleID;
+  var bundleId = req.params.bundleId;
   var platform = req.params.platform;
   var promise;
   if (platform === 'ios') {
-    promise = IPA.updateFollowedRecords(token, bundleID, '0');
+    promise = IPA.updateFollowedRecords(token, bundleId, '0');
   }
   promise.then(function(result) {
     res.sendStatus(204);
@@ -237,6 +244,7 @@ Cert.configCerts(ipAddress, function (options, path) {
   certsPath = path;
 })
 
+app.use('/', express.static(path.join(path.join(__dirname, '/../'), 'Web')));
 app.use('/cer', express.static(certsPath));
 app.use('/app', express.static(fl.appDir));
 app.use('/icon', express.static(fl.iconDir));

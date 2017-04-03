@@ -9,11 +9,11 @@ Realm.defaultPath = os.homedir() + "/.playappstore/realm/default.realm"
 
 const AppIconSchema = {
   name: 'AppIcon',
-  primaryKey: 'bundleID',
+  primaryKey: 'bundleId',
   primaryKey: 'version',
   primaryKey: 'platform',
   properties: {
-    bundleID:  'string', // 
+    bundleId:  'string', // 
     version: 'string',
     platform: 'string', // ios or android
     icon: 'string', // icon path
@@ -25,10 +25,10 @@ const AppIconSchema = {
 
 const AppRecordSchema = {
   name: 'AppRecord',
-  primaryKey: 'bundleID',
+  primaryKey: 'bundleId',
   primaryKey: 'platform',
   properties: {
-    bundleID:  'string', // 
+    bundleId:  'string', // 
     platform: 'string', // ios or android
     version: 'string',
     name: 'string',
@@ -40,9 +40,10 @@ const AppRecordSchema = {
 
 const AppInfoSchema = {
   name: 'AppInfo',
+  primaryKey: 'objectId',
   properties: {
-    objectID: 'string',
-    bundleID:  'string', 
+    objectId: 'string',
+    bundleId:  'string', 
     version: 'string',
     build: {type: 'string', optional: true}, // build version 
     name: 'string', // app name
@@ -72,8 +73,7 @@ const DeviceSchema = {
   }
 }
 
-var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema, DeviceSchema], version:6});
-
+var realm = new Realm({schema: [AppIconSchema, AppRecordSchema, AppInfoSchema, DeviceSchema]});
 
 function RealmDB() {
 }
@@ -110,8 +110,7 @@ RealmDB.prototype.updateAppInfo = function(app) {
 }
 RealmDB.prototype.findAppIcon = function(app) {
       
-  var filter = util.format('bundleID = "%s" AND version = "%s"', app.bundleID, app.version);
-  console.log(filter);
+  var filter = util.format('bundleId = "%s" AND version = "%s"', app.bundleId, app.version);
   var icons = realm.objects('AppIcon').filtered(filter);
   if (icons.length > 0) {
     return icons[0].icon;
@@ -124,21 +123,20 @@ RealmDB.prototype.getRecords = function(platform) {
   var filter = util.format('platform = "%s"', platform);
   console.log(filter);
   var records = realm.objects('AppRecord').filtered(filter);
-  var copy = records.slice();
   // for set property values out a transaction.
-  var mappedArray = copy.map(function(record) {
+  var mappedArray = records.map(function(record) {
     return JSON.parse(JSON.stringify(record));
   })
   return mappedArray;
 }
 
-RealmDB.prototype.getAppVersions = function(platform, bundleID, page, count) {
+RealmDB.prototype.getAppVersions = function(platform, bundleId, page, count) {
   page = typeof page  !== 'undefined' ? page : 1;
   count = typeof count !== 'undefined' ? count : 10;
 
-  var filter = util.format('platform = "%s" AND bundleID = "%s"', platform, bundleID);
+  var filter = util.format('platform = "%s" AND bundleId = "%s"', platform, bundleId);
   console.log(filter);
-  var infos = realm.objects('AppInfo').filtered(filter);
+  var infos = realm.objects('AppInfo').filtered(filter).sorted('updatedAt', true);
   // for pagination
   var start = (page-1)*count;
   var firstInfos = infos.slice(start, count);
@@ -160,21 +158,21 @@ RealmDB.prototype.getAppInfos = function(platform, page, count) {
   return mappedArray;
 }
 /// action: 1 for follow, 0 for unfollow.
-RealmDB.prototype.updateDevice = function(device, bundleID, action) {
+RealmDB.prototype.updateDevice = function(device, bundleId, action) {
   return new Promise(function(resolve, reject) {
     var result;
     realm.write(() => {
       console.log('begin write');
       result = realm.create('Device', device, true);
-      if (bundleID === 'undefined') {
+      if (bundleId === 'undefined') {
         console.log('end write');
         return;
       }
-      var records = realm.objects('AppRecord').filtered('bundleID = $0 AND platform = $1', bundleID, 'ios');
+      var records = realm.objects('AppRecord').filtered('bundleId = $0 AND platform = $1', bundleId, 'ios');
       if (records.length == 0) { 
         return;
       }
-      var contain = result.followed.filtered('bundleID = $0', bundleID).length > 0;
+      var contain = result.followed.filtered('bundleId = $0', bundleId).length > 0;
       if (action === '1') {
         // if this record not in the followed list, then push it.
         if (!contain) {
@@ -185,7 +183,7 @@ RealmDB.prototype.updateDevice = function(device, bundleID, action) {
         // otherwise, remove it from the list
         if (contain) {
           var index = result.followed.findIndex(function(obj, index, collection) {
-            if (obj.bundleID === bundleID) {
+            if (obj.bundleId === bundleId) {
               return true;
             }
             return false;
@@ -214,8 +212,8 @@ RealmDB.prototype.getFolloweds = function(deviceID, platform) {
   }
 }
 RealmDB.prototype.getDeviceTokens = function(info) {
-  // use info's bundleID and platform
-  var records = realm.objects('Device').filtered('platform = $0 AND followed.bundleID = $1', info.platform, info.bundleID);
+  // use info's bundleId and platform
+  var records = realm.objects('Device').filtered('platform = $0 AND followed.bundleId = $1', info.platform, info.bundleId);
   var mappedArray = records.map(function(device) {
     if (typeof(device.apnsToken) === 'string') {
       return device.apnsToken;
@@ -224,13 +222,13 @@ RealmDB.prototype.getDeviceTokens = function(info) {
   return mappedArray;
 }
 
-var db = new RealmDB();
-var appRecord = {};
-appRecord.bundleID = 'com.lashou.com';
-appRecord.platform = 'ios';
-appRecord.version = '0.1'
-appRecord.name = 'grout'
-appRecord.icon = 'xxx.pg'
+// var db = new RealmDB();
+// var appRecord = {};
+// appRecord.bundleId = 'com.lashou.com';
+// appRecord.platform = 'ios';
+// appRecord.version = '0.1'
+// appRecord.name = 'grout'
+// appRecord.icon = 'xxx.pg'
 
 
 // db.updateAppRecord(appRecord);

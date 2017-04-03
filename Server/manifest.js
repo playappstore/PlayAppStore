@@ -45,7 +45,7 @@ function renderManifest(input, basePath) {
 
       var template = data.toString();
       var rendered = mustache.render(template, {
-        basePath: path.join(basePath, 'app'),
+        basePath: basePath + 'app'
       });
       resolve(rendered);     
     });
