@@ -48,6 +48,7 @@
 
 #pragma mark - Actions
 - (void)testTheCAAvailabilitableImmidately {
+    [self validURLStringWithIPAddress:self.ipTextField.text];
     NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
     PASNetwrokManager *manager = [PASNetwrokManager defaultManager];
     [manager getWithUrlString:str success:^(id response) {
@@ -62,7 +63,7 @@
     }];
 }
 
-- (void)exitButtonClicked:(UITextField *)textField {
+- (void)exitButtonClicked {
     if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
         
         [self validURLStringWithIPAddress:self.ipTextField.text];
@@ -111,7 +112,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 999 && buttonIndex == 1) {
-        [self openScheme:@"https://45.77.13.248:1337/public/diy"];
+        NSString *openString =[NSString stringWithFormat:@"%@diy",[[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost]] ;
+        [self openScheme:openString];
         self.hadTested = YES;
     }
     if (alertView.tag == 888 && buttonIndex == 1) {
@@ -153,7 +155,7 @@
     //closeButton
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(exitButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(exitButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).offset(33);
