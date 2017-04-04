@@ -1,16 +1,21 @@
 {
-  "name": "play",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "playappstore",
+  "version": "0.0.2",
+  "description": "PlayAppStore is a web service for quickly publising and downloading your own company's iOS apps and Android apps OTA.",
+  "main": "index.js",
+  "bin": {
+    "playappstore": "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "adm-zip": "^0.4.7",
     "apk-parser3": "^0.1.7",
+    "apn": "^2.1.4",
+    "body-parser": "^1.17.1",
     "dateformat": "^2.0.0",
     "express": "^4.14.1",
     "ipa-extract-info": "^1.2.2",
@@ -20,6 +25,7 @@
     "prettysize": "*",
     "realm": "^1.1.1",
     "underscore": "^1.8.3",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "commander": "^2.9.0"
   }
 }

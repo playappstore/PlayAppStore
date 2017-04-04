@@ -7,7 +7,7 @@ var util = require('util')
 var extract = require('ipa-extract-info');
 var Manifest = require('./manifest.js');
 var pretty = require('prettysize');
-var tmp_dir = path.join(__dirname, 'tmp_file');
+var tmp_dir = require('os').homedir() + "/.playappstore/tmp_file/"
 var DB = require('./realmDB.js');
 var db = new DB();
 var FileHelper = require('./file-helper.js');
@@ -20,14 +20,37 @@ module.exports = {
   getRecords: function () {
     return allRecords();
   },
-  getAllVersions: function (bundleID, page, count) {
-    return allInfos(bundleID, page, count);
+  getAllInfos: function(page, count) {
+    return allInfos(page, count);
+  },
+  getAllVersions: function (bundleId, page, count) {
+    return allVersions(bundleId, page, count);
   },
   renderManifist: function(guid, basePath) {
     var input = path.join(fl.manifestDir, util.format('%s.plist', guid));
     return Manifest.render(input, basePath);      
+  },
+  registerDevice: function (device) {
+    return db.updateDevice(device);
+  },
+  updateDevice: function(device) {
+    return db.updateDevice(device);
+  },
+  updateFollowedRecords: function(deviceID, bundleId, action) {
+    var device = {uuid: deviceID, platform: 'ios'};
+    return db.updateDevice(device, bundleId, action);
+  },
+  getAllFolloweds: function(deviceID) {
+    return allFolloweds(deviceID);
   }
 };
+
+function allFolloweds(deviceID) {
+  return new Promise(function(resolve, reject) {
+    var records = db.getFolloweds(deviceID, 'ios');
+    resolve(records);
+  });
+}
 
 function allRecords()  {
   // usaully, a company may not have more than 20 apps.
@@ -38,11 +61,17 @@ function allRecords()  {
     resolve(records);
   });
 }
-function allInfos(bundleID, page, count)  {
+function allInfos(page, count) {
   var page = 1;
-  var count = 100;
+  var count = 20;
   return new Promise(function(resolve, reject) {
-    var records = db.getAppInfos('ios', bundleID);
+    var infos = db.getAppInfos('ios', page, count);
+    resolve(infos);
+  })
+}
+function allVersions(bundleId, page, count)  {
+  return new Promise(function(resolve, reject) {
+    var records = db.getAppVersions('ios', bundleId, page, count);
     resolve(records);
   });
 }
@@ -72,7 +101,6 @@ function publishIpa(file) {
       info = values[1];
       var iconPath = db.findAppIcon(info);
       if (iconPath == '') {
-        console.log('not hit icon');
         iconPath = fl.iconDir + util.format('%s.png', uuidV4());
       }
       return fl.rename(tmpIconPath, iconPath);
@@ -89,23 +117,32 @@ function publishIpa(file) {
     })
     .then(function(appRecord) {
       var appPath = path.join(fl.appDir, util.format('%s.ipa', uuidV4()));
-      console.log('app path : ' + appPath);
       return fl.rename(filepath, appPath);
     }) 
     .then(function(ipaPath) {
       info['package'] = path.basename(ipaPath);
       var manifestPath = path.join(fl.manifestDir, util.format('%s.plist', uuidV4()));
-      console.log('manifest path : ' + manifestPath);
       return Manifest.generate(info, manifestPath);      
     })
     .then(function(manifestPath) {
       info['objectId'] = uuidV4();
       info['manifest'] = path.basename(manifestPath);
       info['size'] = size;
-
       return db.updateAppInfo(info);
     })
+    //.then(push(info))
 } 
+function push(info) {
+  console.log('begin push');
+  new Promise(function(resolve, reject) {
+    var tokens = db.getDeviceTokens(info);
+    console.log(tokens);
+
+  });
+  console.log('check if async');
+ 
+  return info;
+}
 
 function parseIpa(filename) {
 
@@ -117,9 +154,9 @@ function parseIpa(filename) {
       var info = {}
       info["platform"] = "ios"
       info["build"] = data.CFBundleVersion,
-      info["bundleID"] = data.CFBundleIdentifier,
+      info["bundleId"] = data.CFBundleIdentifier,
       info["version"] = data.CFBundleShortVersionString,
-      info["name"] = data.CFBundleName
+      info["name"] = data.CFBundleDisplayName
       resolve(info)
     });
   });
@@ -163,15 +200,5 @@ function extractIpaIcon(filename) {
     }
   })
 }
-
-
-// var pro = allInfos('com.lashou.StartupCycle.BusinessMembers');
-// pro.then(function(result) {
-//   console.log(result);
-// }, function(error) {
-//   console.log(error);
-
-// })
-
 
 
