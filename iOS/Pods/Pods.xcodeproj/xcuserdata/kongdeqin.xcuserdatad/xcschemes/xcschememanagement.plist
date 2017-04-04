@@ -9,12 +9,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DownloadButton-DownloadButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DownloadButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PlayAppStoreSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -39,20 +59,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YYModel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15D5D929ED22714338A2A5A703121B57</key>
+		<key>1F53003C44E17F4E78B733385CAB3716</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2925578A44E1AACF2F22B7D10157EF59</key>
+		<key>20A0DDDB3649657BDCE0CE65545A67CA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>390DBBD7BF5DD14089AD95025D207EFF</key>
+		<key>2DDC7076537E44B399FB22F19608C68B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +87,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77D952C88EB1901681F5A18548A9213B</key>
+		<key>59788E38481AE25A1C199D39EDF3BA7C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6E029A2AC86BFC500AD78EA2EF6191B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7459EBFEC8C329E4D68E913A2965D3C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9333FDBD138CBFCB10665133664BE29F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C34C83EEDA8F3DCCFE43D6F3692DC519</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -73,6 +118,11 @@
 			<true/>
 		</dict>
 		<key>D52144DE9D7255DE912490FF5A806573</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E14A62900910444707A5504D25EC98DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

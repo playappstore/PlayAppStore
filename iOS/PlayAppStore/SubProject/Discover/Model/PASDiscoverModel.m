@@ -9,5 +9,8 @@
 #import "PASDiscoverModel.h"
 
 @implementation PASDiscoverModel
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"bundleID"  : @"bundleId"};
+}
 
 @end

@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "BEMCheckBox.h"
+@class PASDiscoverModel;
 @interface PASDiscoverCollectionViewCell : UICollectionViewCell<BEMCheckBoxDelegate>
+
+@property (nonatomic ,copy) void (^favoriteClicked)(BOOL selected);
 //应用logo
 @property (nonatomic ,strong) UIImageView *PAS_AppLogoImageView;
 //应用名称
 @property (nonatomic ,strong) UILabel *PAS_AppNameLabel;
 //收藏按钮
 @property (nonatomic ,strong)BEMCheckBox *checkBox;
-@property (nonatomic ,copy) void (^favoriteClicked)(BOOL selected);
+
 @end

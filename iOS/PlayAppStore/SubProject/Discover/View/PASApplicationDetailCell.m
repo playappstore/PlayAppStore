@@ -7,6 +7,7 @@
 //
 
 #import "PASApplicationDetailCell.h"
+#import "PASDiscoverModel.h"
 
 @interface PASApplicationDetailCell ()
 
@@ -53,14 +54,14 @@
     [self.contentView addSubview:self.grayLine1];
     [self setupViewConstraints];
     
-    [self configData];
 }
 
-- (void)configData {
-    self.title.text = @"What's New";
-    self.des1.text = @"XXXXXXXXXXXXXXXX";
-    self.des2.text = @"EEEEEEEEEEEEEEEE";
-    self.des3.text = @"IIIIIIIIIIIIIIIIII";
+
+- (void)configWithModel:(PASDiscoverModel *)model {
+    self.title.text = @"What's new";
+    self.des1.text = model.build;
+    self.des2.text = model.updatedAt;
+    self.des3.text = model.changelog;
 }
 
 #pragma mark - 添加约束

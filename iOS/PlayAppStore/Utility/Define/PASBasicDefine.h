@@ -19,6 +19,13 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define kDefaultWindowSize [UIScreen mainScreen].bounds.size
 
+#define PASLocalizedString(key, value)  [[PASLocalizableManager shareInstance] stringWithKey:key]
+
+#define kNSUserDefaultMainAddress @"MainIPAddress"
+#define kNSUserDefaultMainPort @"MainPort"
+#define kNSUserDefaultMainHost @"MainHost"
+
+
 
 
 #endif /* PASBasicDefine_h */

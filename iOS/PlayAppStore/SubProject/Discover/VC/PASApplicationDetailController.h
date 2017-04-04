@@ -7,7 +7,10 @@
 //
 
 #import "PASViewController.h"
+#import "PASDiscoverModel.h"
 
 @interface PASApplicationDetailController : PASViewController
+
+@property (nonatomic, strong) PASDiscoverModel *model;
 
 @end

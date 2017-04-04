@@ -24,14 +24,16 @@
 + (PASNetwrokManager *)defaultManager;
 
 
-+ (void)postWithUrlString:(NSString *)urlString
+- (void)postWithUrlString:(NSString *)urlString
                parameters:(id)parameters
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError *error))failure;
 
 
-+ (void)getWithUrlString:(NSString *)urlString
+- (void)getWithUrlString:(NSString *)urlString
                  success:(void (^)(id response))success
                  failure:(void (^)(NSError *error))failure;
+
+- (void)cancelRequest;
 
 @end

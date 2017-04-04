@@ -7,7 +7,9 @@
 //
 
 #import "PASViewController.h"
+#import "PASDiscoverModel.h"
 
 @interface PASDescoverListViewController : PASViewController
-
+@property (nonatomic ,copy) NSString *bundleID;
+@property (nonatomic ,copy) NSString *name;
 @end
