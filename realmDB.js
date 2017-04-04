@@ -100,7 +100,6 @@ RealmDB.prototype.updateAppRecord = function(app) {
 RealmDB.prototype.updateAppInfo = function(app) {
   return new Promise(function(resolve, reject) {
     var appInfo;
-        console.log(app);
     realm.write(() => {
       appInfo = realm.create('AppInfo', app, true);
     });
@@ -121,7 +120,6 @@ RealmDB.prototype.findAppIcon = function(app) {
 RealmDB.prototype.getRecords = function(platform) {
 
   var filter = util.format('platform = "%s"', platform);
-  console.log(filter);
   var records = realm.objects('AppRecord').filtered(filter);
   // for set property values out a transaction.
   var mappedArray = records.map(function(record) {
@@ -135,7 +133,6 @@ RealmDB.prototype.getAppVersions = function(platform, bundleId, page, count) {
   count = typeof count !== 'undefined' ? count : 10;
 
   var filter = util.format('platform = "%s" AND bundleId = "%s"', platform, bundleId);
-  console.log(filter);
   var infos = realm.objects('AppInfo').filtered(filter).sorted('updatedAt', true);
   // for pagination
   var start = (page-1)*count;
@@ -162,10 +159,8 @@ RealmDB.prototype.updateDevice = function(device, bundleId, action) {
   return new Promise(function(resolve, reject) {
     var result;
     realm.write(() => {
-      console.log('begin write');
       result = realm.create('Device', device, true);
       if (bundleId === 'undefined') {
-        console.log('end write');
         return;
       }
       var records = realm.objects('AppRecord').filtered('bundleId = $0 AND platform = $1', bundleId, 'ios');
@@ -221,39 +216,5 @@ RealmDB.prototype.getDeviceTokens = function(info) {
   })
   return mappedArray;
 }
-
-// var db = new RealmDB();
-// var appRecord = {};
-// appRecord.bundleId = 'com.lashou.com';
-// appRecord.platform = 'ios';
-// appRecord.version = '0.1'
-// appRecord.name = 'grout'
-// appRecord.icon = 'xxx.pg'
-
-
-// db.updateAppRecord(appRecord);
-// var device = {};
-// device.uuid = '2';
-// device.platform = 'ios';
-
-// db.updateDevice(device)
-// .then(function(result) {
-//   console.log(JSON.stringify(result));
-// }, function(error) {
-//   console.log(error);
-// })
-
-// db.updateApnsDevice(db, 'com.xxx.com')
-// .then(function(result) {
-//   console.log(result);
-// }, function(error) {
-//   console.log(error);
-// })
-
-
-// var r = db.getFollowedDevices('com.lashou.com');
-// console.log('bottom line');
-// console.log(r);
-
 
 module.exports = RealmDB;

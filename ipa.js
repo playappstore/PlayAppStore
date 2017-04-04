@@ -7,7 +7,7 @@ var util = require('util')
 var extract = require('ipa-extract-info');
 var Manifest = require('./manifest.js');
 var pretty = require('prettysize');
-var tmp_dir = path.join(__dirname, 'tmp_file');
+var tmp_dir = require('os').homedir() + "/.playappstore/tmp_file/"
 var DB = require('./realmDB.js');
 var db = new DB();
 var FileHelper = require('./file-helper.js');
@@ -99,10 +99,8 @@ function publishIpa(file) {
     .then(values => {
       var tmpIconPath = values[0];
       info = values[1];
-      console.log(info);
       var iconPath = db.findAppIcon(info);
       if (iconPath == '') {
-        console.log('not hit icon');
         iconPath = fl.iconDir + util.format('%s.png', uuidV4());
       }
       return fl.rename(tmpIconPath, iconPath);
@@ -119,13 +117,11 @@ function publishIpa(file) {
     })
     .then(function(appRecord) {
       var appPath = path.join(fl.appDir, util.format('%s.ipa', uuidV4()));
-      console.log('app path : ' + appPath);
       return fl.rename(filepath, appPath);
     }) 
     .then(function(ipaPath) {
       info['package'] = path.basename(ipaPath);
       var manifestPath = path.join(fl.manifestDir, util.format('%s.plist', uuidV4()));
-      console.log('manifest path : ' + manifestPath);
       return Manifest.generate(info, manifestPath);      
     })
     .then(function(manifestPath) {
@@ -204,15 +200,5 @@ function extractIpaIcon(filename) {
     }
   })
 }
-
-
-// var pro = allInfos('com.lashou.StartupCycle.BusinessMembers');
-// pro.then(function(result) {
-//   console.log(result);
-// }, function(error) {
-//   console.log(error);
-
-// })
-
 
 

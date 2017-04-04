@@ -1,6 +1,6 @@
 var path = require('path');
 var fs = require('fs');
-var parentCertFolder = path.join(__dirname, '.playappstore', 'certs');
+var parentCertFolder = require('os').homedir() + "/.playappstore/certs"
 var child_process = require('child_process');
 var underscore = require('underscore');
 
@@ -32,20 +32,16 @@ module.exports = {
 
 
 function makeCAAndCert(ip) {
-  var certFolder = path.join(parentCertFolder, ip);
-  console.log(certFolder);
+  var certFolder = path.join(parentCertFolder, ip, '/');
   var key;
   var cert;
   var keyPath = path.join(certFolder, 'private.key');
   var certPath = path.join(certFolder, 'cert.cer');
-  console.log(keyPath, certPath);
   try {
     key = fs.readFileSync(keyPath, 'utf8');
     cert = fs.readFileSync(certPath, 'utf8');
   } catch (e) {
-    var result = child_process.execSync('sh  ' + path.join(__dirname, 'bin', 'make-root-ca-and-certificates.sh') + ' ' + ip).output;
-    // var result = exec('sh  ' + path.join(__dirname, 'bin', 'make-root-ca-and-certificates.sh') + ' ' + ip).output;
-    console.log(result);
+    var result = child_process.execSync('sh  ' + path.join(__dirname, 'bin', 'make-root-ca-and-certificates.sh') + ' ' + ip + ' ' + certFolder).output;
     key = fs.readFileSync(keyPath, 'utf8');
     cert = fs.readFileSync(certPath, 'utf8');
   }

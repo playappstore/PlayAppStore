@@ -1,8 +1,6 @@
 #!/bin/bash
 ip=$1
-cer_dir=".playappstore/certs/"$ip"/"
-# echo $ip
-# echo $cer_dir
+cer_dir=$2
 mkdir -p "$cer_dir"
 
 # get rid of output

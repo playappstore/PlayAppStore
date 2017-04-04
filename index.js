@@ -8,7 +8,7 @@ var fs = require('fs');
 var os = require('os');
 var multer  = require('multer')
 // omit the options object, the files will be kept in memory and never written to disk
-var upload = multer({ dest: 'tmp_file/' })
+var upload = multer({ dest: os.homedir() + '/.playappstore/tmp_file/' })
 var bodyParser = require('body-parser')
 var FileHelper = require('./file-helper.js');
 const fl = new FileHelper();
@@ -80,7 +80,6 @@ app.get('/records/:platform', function(req, res) {
     promise = APK.getRecords();
   }
   promise.then(function(apps) {
-      console.log('got records');
       return mapApps(apps);
   })
   .then(function(apps) {
@@ -95,7 +94,6 @@ var route = ['/apps/:platform/:bundleId', '/apps/:platform/:bundleId/:page', '/a
 app.get(route, function(req, res) {
   var page = parseInt(req.params.page ? req.params.page : 1);
   var count = parseInt(req.params.count ? req.params.count : 10);
-  console.log('page : ' + page + 'count : ' + count);
   var promise;
   if (req.params.platform === 'ios') {
     var bundleId = req.params.bundleId;
@@ -128,7 +126,6 @@ app.get('/plist/:guid', function(req, res) {
   promise.then(function(buffer) {
     res.set('Content-Type', 'text/plain; charset=utf-8');
     res.set('Access-Control-Allow-Origin','*');
-    console.log('visit plist');
     res.send(buffer);
   }, function(error) {
     res.send('fail,' + err);
@@ -169,7 +166,6 @@ app.post('/devices', jsonParser, function (req, res) {
   if (typeof(req.body.apnsToken) === 'string') {
     device.apnsToken = req.body.apnsToken; 
   }
-  console.log(device);
   var promise = IPA.registerDevice(device);
   promise.then(function(result) {
     res.send(result);
