@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var express = require('express');
 var IPA = require('./ipa.js');
 var APK = require('./apk.js');
