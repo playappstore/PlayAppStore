@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PASViewController : UIViewController
+#import "QMUICommonViewController.h"
+@interface PASViewController : QMUICommonViewController
 
 @property (nonatomic, weak) UIView *navLine;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
