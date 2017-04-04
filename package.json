@@ -1,6 +1,6 @@
 {
   "name": "playappstore",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "PlayAppStore is a web service for quickly publising and downloading your own company's iOS apps and Android apps OTA.",
   "main": "index.js",
   "bin": {
