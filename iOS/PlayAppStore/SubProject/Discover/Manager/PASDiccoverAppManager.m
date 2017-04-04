@@ -9,7 +9,7 @@
 #import "PASDiccoverAppManager.h"
 #import "PASConfiguration.h"
 #import "PASDataProvider.h"
-
+#import "PASNetwrokManager.h"
 @interface PASDiccoverAppManager ()
 
 @property (nonatomic, strong) PASDataProvider *dataProvider;
@@ -22,44 +22,52 @@
 {
     if (self = [super init])
     {
-        PASConfiguration *config = [PASConfiguration shareInstance];
-//        NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
-        NSString *strURL = @"https://45.77.13.248:1337/apps/ios";
-
-        config.baseURL = [NSURL URLWithString:strURL];
-        _dataProvider = [[PASDataProvider alloc] initWithConfiguration:config];
+      
     }
     return self;
 }
+- (void)pasconfiguration {
+
+    PASConfiguration *config = [PASConfiguration shareInstance];
+    NSString *strURL = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
+    config.baseURL = [NSURL URLWithString:strURL];
+    _dataProvider = [[PASDataProvider alloc] initWithConfiguration:config];
+}
 
 - (void)refreshAllApps {
+    NSString *str = [NSString stringWithFormat:@"%@records/ios",[[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost]];
     NSMutableArray *modelList = [[NSMutableArray alloc] init];
-    [_dataProvider getAllAppsWithParameters:nil completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-        if (error) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(requestAllAppsFailureWithError:)]) {
-                [self.delegate requestAllAppsFailureWithError:error];
-            }
-            return ;
-        }
-        
-        if ([responseObject isKindOfClass:[NSArray class]]) {
-            NSArray *listArr =[NSArray safeArrayFromObject:responseObject];
+    [[PASNetwrokManager defaultManager] getWithUrlString:str success:^(id response) {
+       
+        if ([response isKindOfClass:[NSArray class]]) {
+            NSArray *listArr =[NSArray safeArrayFromObject:response];
             for (NSDictionary *dic in listArr) {
                 PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dic];
                 [modelList safeAddObject:model];
             }
             self.appListArr = modelList;
         }
-
+        
         if (self.delegate && [self.delegate respondsToSelector:@selector(requestAllAppsSuccessed)]) {
             [self.delegate requestAllAppsSuccessed];
         }
+
+        
+    } failure:^(NSError *error) {
+        
+        if (error) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(requestAllAppsFailureWithError:)]) {
+                [self.delegate requestAllAppsFailureWithError:error];
+            }
+        }
     }];
+   
 }
 
 
 //One App all builds
 - (void)refreshWithBundleID:(NSString *)bundleID {
+    [self pasconfiguration];
     NSMutableArray *modelList = [[NSMutableArray alloc] init];
     [_dataProvider getAllBuildsWithParameters:nil bundleID:bundleID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
@@ -83,6 +91,7 @@
 }
 
 - (void)refreshWithBundleID:(NSString *)bundleID buildID:(NSString *)buildID {
+    [self pasconfiguration];
     NSMutableArray *modelList = [NSMutableArray arrayWithCapacity:10];
     [_dataProvider getBuildDetailWithBundleID:bundleID buildID:buildID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
