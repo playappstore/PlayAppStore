@@ -52,7 +52,8 @@
 }
 - (void)requestAllAppsFailureWithError:(NSError *)error {
     [_hubView hidden];
-    [MBHUDHelper showWarningWithText:@"您的网络地址不可达"];
+    [PASMBView showErrorPVAddedTo:self.collectionView message:@"您的网络地址不可达"];
+//    [MBHUDHelper showWarningWithText:@"您的网络地址不可达"];
 }
 - (void)initView {
     
