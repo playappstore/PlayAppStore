@@ -37,11 +37,14 @@
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNav];
+    self.title = PASLocalizedString(@"Server address", nil);
+    self.navigationItem.leftBarButtonItem = [QMUINavigationButton closeBarButtonItemWithTarget:self action:@selector(exitButtonClicked) tintColor:[UIColor whiteColor]];
     [self addSubviews];
     [self judegeWhetherHadValue];
 }
-
+- (void)handleCloseButtonEvent {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewDidDisappear:(BOOL)animated {
     [[PASNetwrokManager defaultManager] cancelRequest];
 }
@@ -120,7 +123,7 @@
         [self testTheCAAvailabilitableImmidately];
     }
     if (buttonIndex == 0) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self handleCloseButtonEvent];
     }
 }
 

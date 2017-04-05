@@ -14,7 +14,7 @@
 #import "PASPushNotificationController.h"
 #import "PASDesignerController.h"
 #import "PASAcknowledgementController.h"
-
+#import "PASNavigationViewController.h"
 
 
 
@@ -55,8 +55,9 @@
         case 100:
         {
             //server address
-            PASServerAddressController *listViewC = [[PASServerAddressController alloc] init];
-            [self presentViewController:listViewC animated:YES completion:nil];
+             PASServerAddressController *listViewC = [[PASServerAddressController alloc] init];
+            [self.navigationController pushViewController:listViewC animated:YES];
+           
         }
             break;
             
