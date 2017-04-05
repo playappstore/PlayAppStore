@@ -70,6 +70,7 @@
 		D315E10E1E65141900195B92 /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D315E10D1E65141900195B92 /* images-2.jpeg */; };
 		D32106EF1E778EFF001AE9A5 /* PASMBView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32106EE1E778EFF001AE9A5 /* PASMBView.m */; };
 		D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D383468F1E66733000A0343F /* PASFollowTableViewCell.m */; };
+		D3A04E661E949A560073D971 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A04E651E949A560073D971 /* QMUIConfigurationTemplate.m */; };
 		D3C46B471E6F9B1F00AEBD77 /* PASFollowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C46B461E6F9B1F00AEBD77 /* PASFollowManager.m */; };
 		D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */; };
 		D3EB06BA1E66B95B008002F1 /* PASDiscoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB06B91E66B95B008002F1 /* PASDiscoverModel.m */; };
@@ -209,6 +210,8 @@
 		D32106EE1E778EFF001AE9A5 /* PASMBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASMBView.m; sourceTree = "<group>"; };
 		D383468E1E66733000A0343F /* PASFollowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowTableViewCell.h; sourceTree = "<group>"; };
 		D383468F1E66733000A0343F /* PASFollowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowTableViewCell.m; sourceTree = "<group>"; };
+		D3A04E641E949A560073D971 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
+		D3A04E651E949A560073D971 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
 		D3C46B451E6F9B1F00AEBD77 /* PASFollowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowManager.h; sourceTree = "<group>"; };
 		D3C46B461E6F9B1F00AEBD77 /* PASFollowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowManager.m; sourceTree = "<group>"; };
 		D3D2BA761E66C5FC008BE837 /* PAS_3DTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAS_3DTouch.h; sourceTree = "<group>"; };
@@ -400,6 +403,7 @@
 		A52E373D1E58441B00EB1B5C /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D3A04E631E949A560073D971 /* Configuration */,
 				8DBA3BAA1E647CD3001D9FF4 /* Categorys */,
 				8DBA3BA41E647C64001D9FF4 /* Define */,
 				A52E37A01E5AC48700EB1B5C /* Network */,
@@ -739,6 +743,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D3A04E631E949A560073D971 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				D3A04E641E949A560073D971 /* QMUIConfigurationTemplate.h */,
+				D3A04E651E949A560073D971 /* QMUIConfigurationTemplate.m */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		D3C46B411E6F9AE000AEBD77 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -895,6 +908,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A04E661E949A560073D971 /* QMUIConfigurationTemplate.m in Sources */,
 				8DBA3BB41E647DC2001D9FF4 /* PASDescoverListViewController.m in Sources */,
 				D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */,
 				A52E375A1E59869E00EB1B5C /* NSString+Format.m in Sources */,
