@@ -47,5 +47,8 @@
 "Please enter the port address" = "Please enter the port address";
 "Processing" = "Processing...";
 "Acknowledgement" = "Acknowledgement";
+"NoFollowApp" = "NoFollowApp";
+"ToFollowApp" = "ToFollowApp";
+
 
 

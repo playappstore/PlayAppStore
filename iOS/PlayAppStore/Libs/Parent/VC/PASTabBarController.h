@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PASTabBarController : UITabBarController
+#import "QMUITabBarViewController.h"
+@interface PASTabBarController : QMUITabBarViewController
 
 @end

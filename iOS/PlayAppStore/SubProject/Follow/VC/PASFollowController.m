@@ -41,7 +41,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     }else {
         //没有收藏的应用
         [_followTableView reloadData];
-        [self showEmptyViewWithImage:[UIImage imageNamed:@"kong.png"] text:@"哈哈哈哈哈" detailText:@"哈啊" buttonTitle:@"赶紧去关注吧！" buttonAction:@selector(emptyButtonClicked)];
+        [self showEmptyViewWithImage:[UIImage imageNamed:@"kong.png"] text:PASLocalizedString(@"NoFollowApp", nil) detailText:@"" buttonTitle:PASLocalizedString(@"ToFollowApp", nil) buttonAction:@selector(emptyButtonClicked)];
     }
 }
 - (void)emptyButtonClicked {
