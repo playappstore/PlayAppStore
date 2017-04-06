@@ -164,6 +164,7 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
   
+    NSLog(@"scrollView.contentOffset.y:%f",scrollView.contentOffset.y);
     if (scrollView.contentOffset.y >self.headerView.height) {
         return;
     }
@@ -174,13 +175,20 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     }else {
         ory = self.headerView.snap.size.height - 64;
     }
-    if (offsetY > (NAVBAR_CHANGE_POINT-44)) {
-        UIImage *snap = [self.headerView.snap qmui_imageWithClippedRect:CGRectMake(0, ory, [UIScreen mainScreen].bounds.size.width, 64)];
-        [self setNavigationBarBackgroundImage:snap];
-    } else {
-        UIImage *image = [UIImage qmui_imageWithColor:[UIColor clearColor]];
-        [self setNavigationBarBackgroundImage:image];
-    }
+//    if (offsetY > (NAVBAR_CHANGE_POINT-44)) {
+//        UIImage *snap = [self.headerView.snap qmui_imageWithClippedRect:CGRectMake(0, ory, [UIScreen mainScreen].bounds.size.width, 64)];
+//        [self setNavigationBarBackgroundImage:snap];
+//    } else {
+        if (offsetY > 0) {
+            UIImage *snap = [self.headerView.snap qmui_imageWithClippedRect:CGRectMake(0, ory, [UIScreen mainScreen].bounds.size.width, 64)];
+            [self setNavigationBarBackgroundImage:snap];
+        }else {
+            UIImage *image = [UIImage qmui_imageWithColor:[UIColor clearColor]];
+            [self setNavigationBarBackgroundImage:image];
+
+        }
+        
+//    }
 }
 
 - (void)setNavigationBarBackgroundImage:(UIImage *)image {
