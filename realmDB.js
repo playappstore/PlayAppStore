@@ -142,6 +142,16 @@ RealmDB.prototype.getAppVersions = function(platform, bundleId, page, count) {
   })
   return mappedArray;
 }
+
+RealmDB.prototype.getAppDetail = function(platform, bundleId, objectId) {
+ 
+  var infos = realm.objects('AppInfo').filtered('platform = $0 AND bundleId = $1 AND objectId = $2', platform, bundleId, objectId);
+  // for pagination
+  var mappedArray = infos.map(function(info) {
+    return JSON.parse(JSON.stringify(info));
+  })
+  return mappedArray;
+}
 RealmDB.prototype.getAppInfos = function(platform, page, count) {
   page = typeof page  !== 'undefined' ? page : 1;
   count = typeof count !== 'undefined' ? count : 10;

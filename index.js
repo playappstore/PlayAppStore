@@ -91,10 +91,9 @@ app.get('/records/:platform', function(req, res) {
 })
 
 
-var route = ['/apps/:platform/:bundleId', '/apps/:platform/:bundleId/:page', '/apps/:platform/:bundleId/:page/:count'];
-app.get(route, function(req, res) {
-  var page = parseInt(req.params.page ? req.params.page : 1);
-  var count = parseInt(req.params.count ? req.params.count : 10);
+app.get('/apps/:platform/:bundleId', function(req, res) {
+  var page = parseInt(req.query.page ? req.query.page : 1);
+  var count = parseInt(req.query.count ? req.query.count : 10);
   var promise;
   if (req.params.platform === 'ios') {
     var bundleId = req.params.bundleId;
@@ -108,6 +107,31 @@ app.get(route, function(req, res) {
     var bundleId = req.params.bundleId;
     if (typeof(req.params.bundleId) === 'string') {
       promise = APK.getAllVersions(bundleId, page, count);
+    } else {
+      // promise = APK.getAllInfos(page, cout);
+    }
+  }
+  promise.then(function(apps) {
+    return mapApps(apps);
+  })
+  .then(function(apps) {
+    res.send(apps);
+  }, function(err) {
+    res.send('fail,' + err);
+  })  
+});
+app.get('/apps/:platform/:bundleId/:objectId', function(req, res) {
+  var promise;
+  if (req.params.platform === 'ios') {
+    var bundleId = req.params.bundleId;
+    var objectId = req.params.objectId;
+    promise = IPA.getAppDetail(bundleId, objectId);
+    
+  }
+  if (req.params.platform === 'android') {
+    var bundleId = req.params.bundleId;
+    if (typeof(req.params.bundleId) === 'string') {
+      promise = APK.getAppDetail(bundleId, page, count);
     } else {
       // promise = APK.getAllInfos(page, cout);
     }
