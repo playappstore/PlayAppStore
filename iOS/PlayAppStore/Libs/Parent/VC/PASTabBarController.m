@@ -40,6 +40,7 @@
         controller.title = PASLocalizedString(title, nil);
         
         PASNavigationViewController *naviController = [[PASNavigationViewController alloc] initWithRootViewController:controller];
+        controller.hidesBottomBarWhenPushed = NO;
         [viewControllers addObject:naviController];
         
         // create UITabBarItem

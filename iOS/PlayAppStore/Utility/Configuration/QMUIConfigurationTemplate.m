@@ -17,7 +17,7 @@
     
     // === 初始化默认值 === //
     
-//    [QMUICMI initDefaultConfiguration];
+    [QMUICMI initDefaultConfiguration];
     
     
     // === 修改配置值 === //
@@ -89,11 +89,11 @@
     // NavBarBackgroundImage
 //    QMUICMI.navBarShadowImage = [UIImage new];                                                // NavBarShadowImage
 //    QMUICMI.navBarBarTintColor = [UIColor whiteColor];                                               // NavBarBarTintColor
-//    QMUICMI.navBarTintColor = UIColorWhite;                                         // NavBarTintColor
+    QMUICMI.navBarTintColor = UIColorWhite;                                         // NavBarTintColor
     QMUICMI.navBarTitleColor = [UIColor whiteColor];                                     // NavBarTitleColor
     //- QMUICMI.navBarTitleFont = UIFontBoldMake(17);                                   // NavBarTitleFont
     //- QMUICMI.navBarBackButtonTitlePositionAdjustment = UIOffsetZero;                 // NavBarBarBackButtonTitlePositionAdjustment
-//    QMUICMI.navBarBackIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(12, 20) tintColor:NavBarTintColor];    // NavBarBackIndicatorImage
+    QMUICMI.navBarBackIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(12, 20) tintColor:[UIColor whiteColor]];    // NavBarBackIndicatorImage
     QMUICMI.navBarCloseButtonImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:[UIColor whiteColor]];     // NavBarCloseButtonImage
     
     //- QMUICMI.navBarLoadingMarginRight = 3;                                           // NavBarLoadingMarginRight
