@@ -71,6 +71,8 @@
 		D32106EF1E778EFF001AE9A5 /* PASMBView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32106EE1E778EFF001AE9A5 /* PASMBView.m */; };
 		D38346901E66733000A0343F /* PASFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D383468F1E66733000A0343F /* PASFollowTableViewCell.m */; };
 		D3A04E661E949A560073D971 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A04E651E949A560073D971 /* QMUIConfigurationTemplate.m */; };
+		D3A04E6A1E961C0E0073D971 /* PASDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A04E691E961C0E0073D971 /* PASDetailHeaderView.m */; };
+		D3A04E6D1E961CC30073D971 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A04E6C1E961CC30073D971 /* UIImage+ImageEffects.m */; };
 		D3C46B471E6F9B1F00AEBD77 /* PASFollowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C46B461E6F9B1F00AEBD77 /* PASFollowManager.m */; };
 		D3D2BA781E66C5FC008BE837 /* PAS_3DTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D2BA771E66C5FC008BE837 /* PAS_3DTouch.m */; };
 		D3EB06BA1E66B95B008002F1 /* PASDiscoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EB06B91E66B95B008002F1 /* PASDiscoverModel.m */; };
@@ -212,6 +214,10 @@
 		D383468F1E66733000A0343F /* PASFollowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowTableViewCell.m; sourceTree = "<group>"; };
 		D3A04E641E949A560073D971 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		D3A04E651E949A560073D971 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
+		D3A04E681E961C0E0073D971 /* PASDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASDetailHeaderView.h; sourceTree = "<group>"; };
+		D3A04E691E961C0E0073D971 /* PASDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASDetailHeaderView.m; sourceTree = "<group>"; };
+		D3A04E6B1E961CC30073D971 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		D3A04E6C1E961CC30073D971 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D3C46B451E6F9B1F00AEBD77 /* PASFollowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASFollowManager.h; sourceTree = "<group>"; };
 		D3C46B461E6F9B1F00AEBD77 /* PASFollowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASFollowManager.m; sourceTree = "<group>"; };
 		D3D2BA761E66C5FC008BE837 /* PAS_3DTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAS_3DTouch.h; sourceTree = "<group>"; };
@@ -264,6 +270,8 @@
 		8DBA3BAA1E647CD3001D9FF4 /* Categorys */ = {
 			isa = PBXGroup;
 			children = (
+				D3A04E6B1E961CC30073D971 /* UIImage+ImageEffects.h */,
+				D3A04E6C1E961CC30073D971 /* UIImage+ImageEffects.m */,
 				8DBA3BAB1E647CD3001D9FF4 /* CornerRadiusCategory */,
 				8DBA3BAE1E647CD3001D9FF4 /* UIView+ViewAddtions.h */,
 				8DBA3BAF1E647CD3001D9FF4 /* UIView+ViewAddtions.m */,
@@ -676,6 +684,8 @@
 				A5DAB44C1E601598006B0CFA /* PASQRCodeActionSheet.m */,
 				D3EB06BB1E66BD0E008002F1 /* PASDiscoverCollectionViewCell.h */,
 				D3EB06BC1E66BD0E008002F1 /* PASDiscoverCollectionViewCell.m */,
+				D3A04E681E961C0E0073D971 /* PASDetailHeaderView.h */,
+				D3A04E691E961C0E0073D971 /* PASDetailHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -931,6 +941,7 @@
 				A52E37701E598B5C00EB1B5C /* NSObject+Safe.m in Sources */,
 				A52E37311E58411C00EB1B5C /* PASViewController.m in Sources */,
 				A52E374F1E5984D800EB1B5C /* NSArray+Safe.m in Sources */,
+				D3A04E6D1E961CC30073D971 /* UIImage+ImageEffects.m in Sources */,
 				A52E375E1E59878100EB1B5C /* NSData+PASAdd.m in Sources */,
 				8DBA3B9B1E647B82001D9FF4 /* BEMAnimationManager.m in Sources */,
 				D32106EF1E778EFF001AE9A5 /* PASMBView.m in Sources */,
@@ -967,6 +978,7 @@
 				8DBA3B9E1E647B82001D9FF4 /* BEMPathManager.m in Sources */,
 				A52E37A31E5AC4BE00EB1B5C /* PASNetwrokManager.m in Sources */,
 				A52E37761E598BA300EB1B5C /* NSMutableSet+Safe.m in Sources */,
+				D3A04E6A1E961C0E0073D971 /* PASDetailHeaderView.m in Sources */,
 				A52E377C1E598C6200EB1B5C /* NSUserDefaults+Safe.m in Sources */,
 				A5DAB4471E600F7F006B0CFA /* UIImage+Category.m in Sources */,
 			);
