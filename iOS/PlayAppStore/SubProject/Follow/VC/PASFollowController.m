@@ -18,6 +18,8 @@
 #import "PASFollowManager.h"
 #import "MJRefresh.h"
 #import "PASApplication.h"
+#import "AppDelegate.h"
+#import "PASTabBarController.h"
 NSString * const cellRes1 = @"PASDisListTableViewCell1";
 NSString * const cellRes2 = @"PASFollowTableViewCell";
 @interface PASFollowController ()<UITableViewDataSource,UITableViewDelegate>
@@ -46,7 +48,10 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
 }
 - (void)emptyButtonClicked {
 
-}
+   AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    PASTabBarController *tabbar =(PASTabBarController *)app.window.rootViewController;
+    tabbar.selectedIndex = 0;
+ }
 - (void)dealloc {
     
     if (self.weakProgress) {

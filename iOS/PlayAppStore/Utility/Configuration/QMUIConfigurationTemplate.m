@@ -84,7 +84,7 @@
     //- QMUICMI.navBarButtonFont = UIFontMake(17);                                      // NavBarButtonFont
     //- QMUICMI.navBarButtonFontBold = UIFontBoldMake(17);                              // NavBarButtonFontBold
 //    QMUICMI.navBarBackgroundImage = [UIImageMake(@"navigationbar_background") resizableImageWithCapInsets:UIEdgeInsetsMake(0, 2, 0, 2)];
-    QMUICMI.navBarBackgroundImage = [UIImage qmui_imageWithColor:PASMainColor];
+    QMUICMI.navBarBackgroundImage = [UIImage qmui_imageWithColor:PASMainColor size:CGSizeMake(SCREEN_WIDTH, 64) cornerRadius:0];
     
     // NavBarBackgroundImage
 //    QMUICMI.navBarShadowImage = [UIImage new];                                                // NavBarShadowImage
@@ -94,7 +94,7 @@
     //- QMUICMI.navBarTitleFont = UIFontBoldMake(17);                                   // NavBarTitleFont
     //- QMUICMI.navBarBackButtonTitlePositionAdjustment = UIOffsetZero;                 // NavBarBarBackButtonTitlePositionAdjustment
 //    QMUICMI.navBarBackIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(12, 20) tintColor:NavBarTintColor];    // NavBarBackIndicatorImage
-//    QMUICMI.navBarCloseButtonImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor];     // NavBarCloseButtonImage
+    QMUICMI.navBarCloseButtonImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:[UIColor whiteColor]];     // NavBarCloseButtonImage
     
     //- QMUICMI.navBarLoadingMarginRight = 3;                                           // NavBarLoadingMarginRight
     //- QMUICMI.navBarAccessoryViewMarginLeft = 5;                                      // NavBarAccessoryViewMarginLeft

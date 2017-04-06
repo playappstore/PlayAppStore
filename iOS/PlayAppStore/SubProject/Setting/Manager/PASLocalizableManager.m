@@ -33,7 +33,7 @@ static NSBundle *bundle = nil;
                 // 获取系统当前语言版本
                 NSArray *languagesArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
                 languageString = languagesArray.firstObject;
-                [[NSUserDefaults standardUserDefaults] setValue:languageString forKey:@"userLanguage"];
+                [[NSUserDefaults standardUserDefaults] setValue:languageString forKey:PASLanguageKey];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
             // 避免缓存会出现 zh-Hans-CN 及其他语言的的情况
@@ -69,7 +69,7 @@ static NSBundle *bundle = nil;
 
 // 中文类型数组
 - (NSArray *)chinese {
-    return @[@"zh-Hans", @"zh-Hant", @"zh-Hans-US"];
+    return @[@"zh-Hans", @"zh-Hant", @"zh-Hans-US",@"zh-Hans-CN"];
 }
 
 // 获取应用当前语言
