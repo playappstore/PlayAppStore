@@ -10,7 +10,7 @@
 #import "PASTabBarController.h"
 #import "PAS_3DTouch.h"
 #import "PASLocalizableManager.h"
-
+#import "QMUIConfigurationTemplate.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +20,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // 启动QMUI的配置模板
+    [QMUIConfigurationTemplate setupConfigurationTemplate];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [self initRootTabController];

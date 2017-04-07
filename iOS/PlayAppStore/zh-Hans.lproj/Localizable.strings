@@ -48,5 +48,7 @@
 "Please enter the port address" = "请输入端口地址";
 "Processing" = "正在请求数据";
 "Acknowledgement" = "鸣谢";
+"NoFollowApp" = "您还没有关注应用";
+"ToFollowApp" = "赶紧去关注吧！";
 
 

@@ -35,7 +35,7 @@
                      duration:(NSTimeInterval)duration;
 /**
  提示错误信息
- 提示图片为一个叉号 3秒后制动消失
+ 提示图片为一个叉号 2秒后制动消失
  @param view               加载在视图view上
  @param message            提示信息
  */

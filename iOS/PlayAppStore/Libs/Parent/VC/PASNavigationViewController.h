@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PASNavigationViewController : UINavigationController
+#import "QMUINavigationController.h"
+@interface PASNavigationViewController : QMUINavigationController
 
 @end
