@@ -35,7 +35,7 @@ before(program, 'outputHelp', function() {
   this.allowUnknownOption();
 });
 program
-    .version('0.0.3')
+    .version('0.0.4')
     .usage('[option] [dir]')
     .option('-p, --port <port-number>', 'set port for server (defaults is 1337)')
     .option('-h, --host <host>', 'set host for server (defaults is your LAN ip)')
