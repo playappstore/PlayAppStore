@@ -12,5 +12,5 @@
 @interface PASApplicationDetailController : PASViewController
 
 @property (nonatomic, strong) PASDiscoverModel *model;
-
+@property (nonatomic ,strong) UIImage *logoImage;
 @end

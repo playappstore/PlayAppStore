@@ -56,7 +56,9 @@
         {
             //server address
              PASServerAddressController *listViewC = [[PASServerAddressController alloc] init];
-            [self.navigationController pushViewController:listViewC animated:YES];
+            PASNavigationViewController * nav = [[PASNavigationViewController alloc] initWithRootViewController:listViewC];
+            
+            [self presentViewController:nav animated:YES completion:nil];
            
         }
             break;

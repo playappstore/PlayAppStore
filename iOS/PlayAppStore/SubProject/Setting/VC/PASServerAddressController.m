@@ -43,7 +43,7 @@
     [self judegeWhetherHadValue];
 }
 - (void)handleCloseButtonEvent {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)viewDidDisappear:(BOOL)animated {
     [[PASNetwrokManager defaultManager] cancelRequest];
