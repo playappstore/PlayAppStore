@@ -63,7 +63,8 @@ function loadMoreVersion(el) {
 	var bundleID = thisVersionInfo.attr('bundleId');
 	var page = thisVersionInfo.attr('nextPage');
 	$.ajax({
-		url:"/apps/"+currentPlatform+"/"+bundleID+"/"+page,	
+		url:"/apps/"+currentPlatform+"/"+bundleID,
+		data: { page: page},
 		success: function(version){
 			if (version.error) {
 				return;
