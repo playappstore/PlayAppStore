@@ -205,6 +205,7 @@
 		A5FBDA5F1E70424C00273A85 /* PASAcknowledgementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASAcknowledgementController.h; sourceTree = "<group>"; };
 		A5FBDA601E70424C00273A85 /* PASAcknowledgementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASAcknowledgementController.m; sourceTree = "<group>"; };
 		AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.release.xcconfig"; sourceTree = "<group>"; };
+		C562347E5A875F001981A7B4 /* Pods-PlayAppStore.fastlane-release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayAppStore.fastlane-release.xcconfig"; path = "Pods/Target Support Files/Pods-PlayAppStore/Pods-PlayAppStore.fastlane-release.xcconfig"; sourceTree = "<group>"; };
 		D315E10D1E65141900195B92 /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-2.jpeg"; sourceTree = "<group>"; };
 		D32106ED1E778EFF001AE9A5 /* PASMBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASMBView.h; sourceTree = "<group>"; };
 		D32106EE1E778EFF001AE9A5 /* PASMBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASMBView.m; sourceTree = "<group>"; };
@@ -716,6 +717,7 @@
 			children = (
 				1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */,
 				AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */,
+				C562347E5A875F001981A7B4 /* Pods-PlayAppStore.fastlane-release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -814,8 +816,8 @@
 				TargetAttributes = {
 					A52E36E21E5823E100EB1B5C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = LWY3F6V55K;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 62PEK7K8Z5;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1005,6 +1007,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		498815EC1E97769700F16467 /* Fastlane-Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Fastlane-Release";
+		};
+		498815ED1E97769700F16467 /* Fastlane-Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C562347E5A875F001981A7B4 /* Pods-PlayAppStore.fastlane-release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 62PEK7K8Z5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
+				INFOPLIST_FILE = PlayAppStore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.playappstore.ios.enterprise;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0ddb145c-5535-4b51-bca5-6ae9285e45d1";
+				PROVISIONING_PROFILE_SPECIFIER = playappstoreEnterprise;
+			};
+			name = "Fastlane-Release";
+		};
 		A52E36F81E5823E100EB1B5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1102,17 +1166,17 @@
 			baseConfigurationReference = 1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LWY3F6V55K;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 62PEK7K8Z5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.yaocaibao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.playappstore.ios.enterprise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0ddb145c-5535-4b51-bca5-6ae9285e45d1";
+				PROVISIONING_PROFILE_SPECIFIER = playappstoreEnterprise;
 			};
 			name = Debug;
 		};
@@ -1121,15 +1185,17 @@
 			baseConfigurationReference = AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LWY3F6V55K;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 62PEK7K8Z5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.yaocaibao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.playappstore.ios.enterprise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0ddb145c-5535-4b51-bca5-6ae9285e45d1";
+				PROVISIONING_PROFILE_SPECIFIER = playappstoreEnterprise;
 			};
 			name = Release;
 		};
@@ -1141,6 +1207,7 @@
 			buildConfigurations = (
 				A52E36F81E5823E100EB1B5C /* Debug */,
 				A52E36F91E5823E100EB1B5C /* Release */,
+				498815EC1E97769700F16467 /* Fastlane-Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1150,6 +1217,7 @@
 			buildConfigurations = (
 				A52E36FB1E5823E100EB1B5C /* Debug */,
 				A52E36FC1E5823E100EB1B5C /* Release */,
+				498815ED1E97769700F16467 /* Fastlane-Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,82 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+OUTPUT_DIRECTORY = ENV['HOME'] + "/Desktop/fastlane-autobuild/"
+PRE_BUILD_NUMBER = '1.0'
+SCHEME_NAME = "PlayAppStore"
+
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+  end
+
+
+
+  desc "Submit a new Beta Build to Server"
+  lane :build do |options|
+
+
+    api_env = "Release"
+    configuration = "Release"
+
+    version = get_version_number()
+    build_number = Time.new.localtime.strftime("%Y%m%d%H%M") + "-" + configuration
+
+    output_name = "PlayAppStore" + "-" + version + build_number + ".ipa"
+
+    # pod update
+    sh "cd .. && pod update"
+
+    # identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    # update_app_identifier(
+    #    xcodeproj: "PlayAppStore.xcodeproj", 
+    #    plist_path: "PlayAppStore/Info.plist", 
+    #    app_identifier: identifier
+    #  )
+
+    # skip_build_archive = false
+    gym(scheme: SCHEME_NAME,
+        configuration: configuration,
+        export_method: "enterprise",
+        output_directory: OUTPUT_DIRECTORY,
+        output_name: output_name,
+        silent: true,
+        clean: true)
+        # include_symbols: false,
+        # codesigning_identity: ENV['codesigning_identity'],
+        # provisioning_profile_path: ENV['provisioning_profile_path']) 
+        # Build your app - more options available
+    # pilot
+
+  end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+  end
+
+  error do |lane, exception|
+
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
