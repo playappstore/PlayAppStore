@@ -122,9 +122,11 @@ function publishIpa(file) {
     })
     .then(function(iconPath) {
       info['icon'] = path.basename(iconPath);
+      info['primaryKey'] = util.format('[B:%s][P:%s][V:%s]', info['bundleId'], info['platform'], info['version']);
       return db.updateAppIcon(info);
     })
     .then(function(appIcon) {
+      info['primaryKey'] = util.format('[B:%s][P:%s]', info['bundleId'], info['platform']);
       return db.updateAppRecord(info);
     })
     .then(function(appRecord) {

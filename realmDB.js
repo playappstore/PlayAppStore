@@ -9,10 +9,9 @@ Realm.defaultPath = os.homedir() + "/.playappstore/realm/default.realm"
 
 const AppIconSchema = {
   name: 'AppIcon',
-  primaryKey: 'bundleId',
-  primaryKey: 'version',
-  primaryKey: 'platform',
+  primaryKey: 'primaryKey',
   properties: {
+    primaryKey: 'string', // compound primaryKey, format like [B:bundleId][P:platform][V:version]
     bundleId:  'string', // 
     version: 'string',
     platform: 'string', // ios or android
@@ -25,9 +24,9 @@ const AppIconSchema = {
 
 const AppRecordSchema = {
   name: 'AppRecord',
-  primaryKey: 'bundleId',
-  primaryKey: 'platform',
+  primaryKey: 'primaryKey',
   properties: {
+    primaryKey: 'string', // compound primaryKey, format like [B:bundleId][P:platform]
     bundleId:  'string', // 
     platform: 'string', // ios or android
     version: 'string',
@@ -61,7 +60,6 @@ const AppInfoSchema = {
 const DeviceSchema = {
   name: 'Device', 
   primaryKey: 'uuid',
-  primaryKey: 'platform',
   properties: {
     uuid: 'string',
     platform: 'string',
@@ -89,6 +87,8 @@ RealmDB.prototype.updateAppIcon = function(app) {
 }
 RealmDB.prototype.updateAppRecord = function(app) {
   return new Promise(function(resolve, reject) {
+    console.log('update record');
+    console.log(app);
     var appRecord;
     realm.write(() => {
       appRecord = realm.create('AppRecord', app, true);

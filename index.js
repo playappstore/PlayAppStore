@@ -35,7 +35,7 @@ before(program, 'outputHelp', function() {
   this.allowUnknownOption();
 });
 program
-    .version('0.0.1')
+    .version('0.0.3')
     .usage('[option] [dir]')
     .option('-p, --port <port-number>', 'set port for server (defaults is 1337)')
     .option('-h, --host <host>', 'set host for server (defaults is your LAN ip)')
@@ -81,6 +81,7 @@ app.get('/records/:platform', function(req, res) {
     promise = APK.getRecords();
   }
   promise.then(function(apps) {
+    console.log(apps);
       return mapApps(apps);
   })
   .then(function(apps) {

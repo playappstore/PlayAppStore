@@ -54,7 +54,6 @@ function publishApk(file) {
       info = values[1];
       var iconPath = db.findAppIcon(info);
       if (iconPath == '') {
-        console.log('not hit icon');
         iconPath = fl.iconDir + util.format('%s.png', uuidV4());
       }
       return fl.rename(tmpIconPath, iconPath);
@@ -64,9 +63,11 @@ function publishApk(file) {
     })
     .then(function(iconPath) {
       info['icon'] = path.basename(iconPath);
+      info['primaryKey'] = util.format('[B:%s][P:%s][V:%s]', info['bundleId'], info['platform'], info['version']);
       return db.updateAppIcon(info);
     })
     .then(function(appIcon) {
+      info['primaryKey'] = util.format('[B:%s][P:%s]', info['bundleId'], info['platform']);
       return db.updateAppRecord(info);
     })
     .then(function(appRecord) {
