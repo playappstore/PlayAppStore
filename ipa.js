@@ -26,6 +26,9 @@ module.exports = {
   getAllVersions: function (bundleId, page, count) {
     return allVersions(bundleId, page, count);
   },
+  getAppDetail: function(bundleId, objectId) {
+    return appDetail(bundleId, objectId);
+  },
   renderManifist: function(guid, basePath) {
     var input = path.join(fl.manifestDir, util.format('%s.plist', guid));
     return Manifest.render(input, basePath);      
@@ -75,6 +78,15 @@ function allVersions(bundleId, page, count)  {
     resolve(records);
   });
 }
+function appDetail(bundleId, objectId) {
+
+  return new Promise(function(resolve, reject) {
+    var records = db.getAppDetail('ios', bundleId, objectId);
+    resolve(records);
+  });
+
+}
+
 
 // map icon, package, manifest property.
 function mapIpas(apps) {
@@ -110,9 +122,11 @@ function publishIpa(file) {
     })
     .then(function(iconPath) {
       info['icon'] = path.basename(iconPath);
+      info['primaryKey'] = util.format('[B:%s][P:%s][V:%s]', info['bundleId'], info['platform'], info['version']);
       return db.updateAppIcon(info);
     })
     .then(function(appIcon) {
+      info['primaryKey'] = util.format('[B:%s][P:%s]', info['bundleId'], info['platform']);
       return db.updateAppRecord(info);
     })
     .then(function(appRecord) {
