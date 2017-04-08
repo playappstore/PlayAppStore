@@ -826,8 +826,8 @@
 				TargetAttributes = {
 					A52E36E21E5823E100EB1B5C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 62PEK7K8Z5;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = LWY3F6V55K;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1067,8 +1067,8 @@
 			baseConfigurationReference = C562347E5A875F001981A7B4 /* Pods-PlayAppStore.fastlane-release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 62PEK7K8Z5;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LWY3F6V55K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
@@ -1076,8 +1076,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.playappstore.ios.enterprise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ddb145c-5535-4b51-bca5-6ae9285e45d1";
-				PROVISIONING_PROFILE_SPECIFIER = playappstoreEnterprise;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = "Fastlane-Release";
 		};
@@ -1178,8 +1178,8 @@
 			baseConfigurationReference = 1517C3818EBE5746F40499B8 /* Pods-PlayAppStore.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 62PEK7K8Z5;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LWY3F6V55K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
@@ -1187,8 +1187,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.playappstore.ios.enterprise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ddb145c-5535-4b51-bca5-6ae9285e45d1";
-				PROVISIONING_PROFILE_SPECIFIER = playappstoreEnterprise;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1197,8 +1197,8 @@
 			baseConfigurationReference = AB78191139A817CC55A0C4BA /* Pods-PlayAppStore.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 62PEK7K8Z5;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LWY3F6V55K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayAppStore/Utility/Define/PlayAppStorePrefixHeader.pch";
 				INFOPLIST_FILE = PlayAppStore/Info.plist;
@@ -1206,8 +1206,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.playappstore.ios.enterprise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ddb145c-5535-4b51-bca5-6ae9285e45d1";
-				PROVISIONING_PROFILE_SPECIFIER = playappstoreEnterprise;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
