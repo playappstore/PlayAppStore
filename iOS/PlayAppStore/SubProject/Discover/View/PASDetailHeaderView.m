@@ -59,28 +59,28 @@ static CGFloat height = 160;
         [self.top setOffset:0];
         self.height.mas_equalTo(height);
     }
-    UIImage *image = self.backImage;
-    if ([UIScreen mainScreen].bounds.size.width/image.size.width *image.size.height > self.bgImageView.frame.size.height) {
-        
-        image = [image qmui_imageWithScaleToSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width/image.size.width *image.size.height) contentMode:UIViewContentModeScaleAspectFill];
-        if (self.bgImageView.frame.size.height <= height) {
-            
-            image = [image qmui_imageWithClippedRect: CGRectMake(0, (image.size.height - height)/2.0, [UIScreen mainScreen].bounds.size.width, height)];
-        }else {
-            image = [image qmui_imageWithClippedRect: CGRectMake(0, (image.size.height - self.bgImageView.frame.size.height)/2.0, [UIScreen mainScreen].bounds.size.width, self.bgImageView.frame.size.height)];
-        }
-        
-        
-    }else {
-        
-        image = [image qmui_imageWithScaleToSize:CGSizeMake(self.bgImageView.frame.size.height/image.size.height*image.size.width, self.frame.size.height) contentMode:UIViewContentModeScaleAspectFill];
-        image = [image qmui_imageWithClippedRect: CGRectMake((image.size.width - [UIScreen mainScreen].bounds.size.width)/2.0, 0, [UIScreen mainScreen].bounds.size.width, self.bgImageView.frame.size.height)];
-        
-    }
-    
-    image = [image applyDarkEffect];
-    
-    self.bgImageView.image = image;
+//    UIImage *image = self.backImage;
+//    if ([UIScreen mainScreen].bounds.size.width/image.size.width *image.size.height > self.bgImageView.frame.size.height) {
+//        
+//        image = [image qmui_imageWithScaleToSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width/image.size.width *image.size.height) contentMode:UIViewContentModeScaleAspectFill];
+//        if (self.bgImageView.frame.size.height <= height) {
+//            
+//            image = [image qmui_imageWithClippedRect: CGRectMake(0, (image.size.height - height)/2.0, [UIScreen mainScreen].bounds.size.width, height)];
+//        }else {
+//            image = [image qmui_imageWithClippedRect: CGRectMake(0, (image.size.height - self.bgImageView.frame.size.height)/2.0, [UIScreen mainScreen].bounds.size.width, self.bgImageView.frame.size.height)];
+//        }
+//        
+//        
+//    }else {
+//        
+//        image = [image qmui_imageWithScaleToSize:CGSizeMake(self.bgImageView.frame.size.height/image.size.height*image.size.width, self.frame.size.height) contentMode:UIViewContentModeScaleAspectFill];
+//        image = [image qmui_imageWithClippedRect: CGRectMake((image.size.width - [UIScreen mainScreen].bounds.size.width)/2.0, 0, [UIScreen mainScreen].bounds.size.width, self.bgImageView.frame.size.height)];
+//        
+//    }
+//    
+//    image = [image applyDarkEffect];
+//    
+//    self.bgImageView.image = image;
     
 }
 
@@ -89,6 +89,7 @@ static CGFloat height = 160;
     
     self.bgImageView = [UIImageView new];
     self.bgImageView.backgroundColor = [UIColor clearColor];
+    self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.bgImageView.clipsToBounds = YES;
     self.iconImageView = [UIImageView new];
     self.iconImageView.backgroundColor = [UIColor clearColor];
@@ -149,8 +150,8 @@ static CGFloat height = 160;
     
     
     
-    image = [image qmui_imageWithScaleToSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width/image.size.width *image.size.height) contentMode:UIViewContentModeScaleAspectFill];
-    image = [image qmui_imageWithClippedRect: CGRectMake(0, (image.size.height - 160)/2.0, [UIScreen mainScreen].bounds.size.width, 160)];
+//    image = [image qmui_imageWithScaleToSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width/image.size.width *image.size.height) contentMode:UIViewContentModeScaleAspectFill];
+//    image = [image qmui_imageWithClippedRect: CGRectMake(0, (image.size.height - 160)/2.0, [UIScreen mainScreen].bounds.size.width, 160)];
     image = [image applyDarkEffect];
     
     self.bgImageView.image = image;

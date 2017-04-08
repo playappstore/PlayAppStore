@@ -39,9 +39,11 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
 
         [_hubView hidden];
        _hubView = [PASMBView showPVAddedTo:self.followTableView message:PASLocalizedString(@"Processing", nil)];
+        [self hideEmptyView];
         [self requestFollowApps];
     }else {
         //没有收藏的应用
+        _dataDic = nil;
         [_followTableView reloadData];
         [self showEmptyViewWithImage:[UIImage imageNamed:@"kong.png"] text:PASLocalizedString(@"NoFollowApp", nil) detailText:@"" buttonTitle:PASLocalizedString(@"ToFollowApp", nil) buttonAction:@selector(emptyButtonClicked)];
     }
@@ -114,6 +116,13 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         _dataDic = dataDic;
         [_followTableView reloadData];
         [_followTableView.mj_header endRefreshing];
+        if (_dataDic.allKeys.count == 0) {
+            [self showEmptyViewWithImage:[UIImage imageNamed:@"kong.png"] text:PASLocalizedString(@"NoFollowApp", nil) detailText:@"" buttonTitle:PASLocalizedString(@"ToFollowApp", nil) buttonAction:@selector(emptyButtonClicked)];
+        }else {
+        
+            [self hideEmptyView];
+        
+        }
         [_hubView hidden];
     } fail:^(NSString *code, NSString *message) {
         
