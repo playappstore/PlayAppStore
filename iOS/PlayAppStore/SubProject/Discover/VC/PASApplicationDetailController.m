@@ -16,10 +16,12 @@
 #import "PASDetailHeaderView.h"
 #import "QMUINavigationController.h"
 #import "UIImage+QMUI.h"
+#import "PASApplication.h"
+#import "PAS_DownLoadingApps.h"
 static NSInteger NAVBAR_CHANGE_POINT = 120;
 
 @interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
-
+@property (nonatomic ,weak) NSProgress *weakProgress;
 @property (nonatomic, strong) PASDetailHeaderView *headerView;
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) PASQRCodeActionSheet *qrCodeView;
@@ -50,7 +52,7 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
 - (void)initTableView {
 
     self.detailTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    PASDetailHeaderView *headerView = [[PASDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 300)];
+    PASDetailHeaderView *headerView = [[PASDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 280)];
     headerView.logoImage = self.logoImage;
     self.headerView = headerView;
     [headerView addScrollview:self.detailTableView];
@@ -59,10 +61,73 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     self.detailTableView.dataSource = self;
     [self.view addSubview:self.detailTableView];
 
+    
+    __weak PASApplicationDetailController *weakself = self;
+    
+    headerView.downloadClicked = ^(PKDownloadButtonState state) {
+        if (state == kPKDownloadButtonState_Pending) {
+            //点击下载按钮
+            [weakself downLoadAppWithBundleIdentifier:weakself.model.bundleID manifestURL:[NSURL URLWithString:weakself.model.url] bundleVersion:weakself.model.version PKDownloadButton:headerView.downloadButton];
+        }else if (state == kPKDownloadButtonState_Downloaded){
+            
+            //打开应用
+            
+            PASApplication *app = [[PASApplication alloc] initWithBundleIdentifier:weakself.model.bundleID manifestURL:[NSURL URLWithString:weakself.model.url] bundleVersion:weakself.model.version];
+            [app launch];
+            
+        }
+    };
+
+}
+- (void)downLoadAppWithBundleIdentifier:(NSString *)bundleIdentifier
+                            manifestURL:(NSURL *)manifestURL
+                          bundleVersion:(NSString *)bundleVersion
+                       PKDownloadButton:(PKDownloadButton *)downloadButton{
+    PASApplication *app = [[PASApplication alloc] initWithBundleIdentifier:bundleIdentifier manifestURL:manifestURL bundleVersion:bundleVersion];
+    NSProgress *progress;
+    [app installWithProgress:&progress completion:^(BOOL finished, NSError *error) {
+        
+        //        NSLog(@"完成");
+        downloadButton.stopDownloadButton.progress =1;
+        downloadButton.state = kPKDownloadButtonState_Downloaded;
+        
+    }];
+    if (progress) {
+        
+        _weakProgress = progress;
+        [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(downloadButton)];
+    }
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"fractionCompleted"]) {
+        NSProgress *progress = (NSProgress *)object;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //            NSLog(@"progress: %@", @(progress.fractionCompleted));
+            
+            PKDownloadButton *downloadButton = (__bridge PKDownloadButton*)context;
+            if (progress.fractionCompleted >0) {
+                //大于0的时候开始走进度
+                downloadButton.state = kPKDownloadButtonState_Downloading;
+                //假如开始安装
+                
+//                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.updatedAt};
+//                [[PAS_DownLoadingApps sharedInstance].appDic setObject:dataDic forKey:_downloadingModel.name];
+                
+            }
+            downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
+        });
+    }else {
+        
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        
+    }
 }
 - (void)dealloc {
 
     [self.headerView headerRemoveOber];
+    if (self.weakProgress) {
+        [_weakProgress removeObserver:self forKeyPath:@"fractionCompleted"];
+    }
 }
 
 #pragma mark - PASAppManagerDelegate

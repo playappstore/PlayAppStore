@@ -98,6 +98,28 @@ static CGFloat height = 160;
     self.label.textColor = [UIColor blackColor];
     self.label.textAlignment = NSTextAlignmentCenter;
     
+    
+    //下载按钮
+    _downloadButton = [[PKDownloadButton alloc] init];
+    _downloadButton.backgroundColor = [UIColor clearColor];
+    [self.downloadButton.downloadedButton cleanDefaultAppearance];
+    [self.downloadButton.downloadedButton setTitle:NSLocalizedString(@"OPEN", nil) forState:UIControlStateNormal];
+    [self.downloadButton.downloadedButton setTitleColor:[UIColor defaultDwonloadButtonBlueColor] forState:UIControlStateNormal];
+    [self.downloadButton.downloadedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    self.downloadButton.stopDownloadButton.tintColor = [UIColor blackColor];
+    self.downloadButton.stopDownloadButton.filledLineStyleOuter = NO;
+    self.downloadButton.startDownloadButton.contentEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 30);
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",PASLocalizedString(@"DOWNLOAD", nil)] attributes:@{ NSForegroundColorAttributeName : [UIColor defaultDwonloadButtonBlueColor],NSFontAttributeName : [UIFont systemFontOfSize:14.f]}];
+    [self.downloadButton.startDownloadButton setAttributedTitle:title forState:UIControlStateNormal];
+    self.downloadButton.pendingView.tintColor = [UIColor defaultDwonloadButtonBlueColor];
+    self.downloadButton.stopDownloadButton.tintColor = [UIColor defaultDwonloadButtonBlueColor];
+    self.downloadButton.pendingView.radius = 14.f;
+    self.downloadButton.pendingView.emptyLineRadians = 1.f;
+    self.downloadButton.pendingView.spinTime = 3.f;
+    self.downloadButton.delegate = self;
+    [self addSubview:_downloadButton];
+    
+    
     [self addSubview:self.bgImageView];
     [self addSubview:self.iconImageView];
     [self addSubview:self.label];
@@ -121,6 +143,11 @@ static CGFloat height = 160;
         make.left.right.offset(0);
     }];
     
+    [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.label.mas_bottom).offset(10);
+        make.height.mas_equalTo(30);
+        make.centerX.equalTo(self);
+    }];
  
 }
 -(void)setLogoImage:(UIImage *)logoImage {
@@ -148,6 +175,33 @@ static CGFloat height = 160;
 
 
 }
+- (void)downloadButtonTapped:(PKDownloadButton *)downloadButton
+                currentState:(PKDownloadButtonState)state {
+    switch (state) {
+        case kPKDownloadButtonState_StartDownload:
+            self.downloadButton.state = kPKDownloadButtonState_Pending;
+            if (self.downloadClicked) {
+                self.downloadClicked (self.downloadButton.state);
+            }
+            break;
+        case kPKDownloadButtonState_Pending:
+            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            break;
+        case kPKDownloadButtonState_Downloading:
+            //            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            break;
+        case kPKDownloadButtonState_Downloaded:
+            if (self.downloadClicked) {
+                self.downloadClicked (self.downloadButton.state);
+            }
+            //            self.imageView.hidden = YES;
+            break;
+        default:
+            NSAssert(NO, @"unsupported state");
+            break;
+    }
+}
+
 - (void)headerRemoveOber {
 
      [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];

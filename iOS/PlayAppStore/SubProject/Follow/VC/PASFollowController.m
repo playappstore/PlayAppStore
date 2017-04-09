@@ -263,12 +263,24 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         
     }else {
    
+        NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section];
+        PASDisListTableViewCell *cell = (PASDisListTableViewCell*)[tableView cellForRowAtIndexPath:index];
         PASDiscoverModel *model = [dataArr objectAtIndex:indexPath.row - 1];
+        
         PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
         detailController.model = model;
+        detailController.logoImage = cell.logoImageView.image;
         [self.navigationController pushViewController:detailController animated:YES];
     }
 }
+- (BOOL)shouldCustomNavigationBarTransitionWhenPushDisappearing {
+    return YES;
+}
+
+- (BOOL)shouldCustomNavigationBarTransitionWhenPopAppearing {
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
