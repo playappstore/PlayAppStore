@@ -179,8 +179,10 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    PASDisListTableViewCell *cell = (PASDisListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
     detailController.model = [_appManager.appListArr objectAtIndex:indexPath.row];
+    detailController.logoImage = cell.logoImageView.image;
     [self.navigationController pushViewController:detailController animated:YES];
 
 }

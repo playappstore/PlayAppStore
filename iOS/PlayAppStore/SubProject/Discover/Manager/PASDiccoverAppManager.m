@@ -92,25 +92,49 @@
 
 - (void)refreshWithBundleID:(NSString *)bundleID buildID:(NSString *)buildID {
     [self pasconfiguration];
-    NSMutableArray *modelList = [NSMutableArray arrayWithCapacity:10];
-    [_dataProvider getBuildDetailWithBundleID:bundleID buildID:buildID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-        if (error) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(requestBuildDetailFailureWithError:)]) {
-                [self.delegate requestBuildDetailFailureWithError:error];
+    NSString *str = [NSString stringWithFormat:@"%@apps/ios/%@/%@",[[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost],bundleID,buildID];
+    NSMutableArray *modelList = [[NSMutableArray alloc] init];
+    [[PASNetwrokManager defaultManager] getWithUrlString:str success:^(id response) {
+     
+        NSLog(@"%@",response);
+        if ([response isKindOfClass:[NSArray class]]) {
+            NSArray *dataarr = response;
+            for (int i = 0; i < dataarr.count; i++) {
+                PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:dataarr[i]];
+                [modelList safeAddObject:model];
+
             }
-            return ;
-        }
-        
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:responseObject];
-            [modelList safeAddObject:model];
         }
         self.appListArr = modelList;
-        
         if (self.delegate && [self.delegate respondsToSelector:@selector(requestBuildDetailSuccessed)]) {
             [self.delegate requestBuildDetailSuccessed];
         }
+        
+    } failure:^(NSError *error) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(requestBuildDetailFailureWithError:)]) {
+            [self.delegate requestBuildDetailFailureWithError:error];
+        }
+
+        
     }];
+//    [_dataProvider getBuildDetailWithBundleID:bundleID buildID:buildID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+//        if (error) {
+//            if (self.delegate && [self.delegate respondsToSelector:@selector(requestBuildDetailFailureWithError:)]) {
+//                [self.delegate requestBuildDetailFailureWithError:error];
+//            }
+//            return ;
+//        }
+//        
+//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+//            PASDiscoverModel *model = [PASDiscoverModel yy_modelWithDictionary:responseObject];
+//            [modelList safeAddObject:model];
+//        }
+        self.appListArr = modelList;
+//
+//        if (self.delegate && [self.delegate respondsToSelector:@selector(requestBuildDetailSuccessed)]) {
+//            [self.delegate requestBuildDetailSuccessed];
+//        }
+//    }];
 }
 
 
