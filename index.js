@@ -52,7 +52,13 @@ if (typeof(program.options) === 'string') {
 
 var app = express();
 
-app.post('/records', upload.single('package'), function (req, res) {
+app.post('/apps', upload.single('package'), function (req, res) {
+  var token = req.header('MasterKey')
+  if (token !== masterKey) {
+    res.sendStatus(403);
+    return;
+  }
+
   // req.file is the `package` file
   var file = req.file;
   var filepath = file.originalname;
@@ -253,6 +259,9 @@ app.delete(router, function(req, res) {
   })
 })
 
+// masterKey for post apps 
+const masterKey = process.env.masterKey || 'playappstore';
+console.log('please set request header field "MasterKey" to %s when publish a new app', masterKey);
 
 var port = process.env.PORT || 1337;
 var imagePort = port + 1;
