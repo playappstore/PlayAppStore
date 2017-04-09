@@ -15,7 +15,7 @@ var FileHelper = require('./file-helper.js');
 const fl = new FileHelper();
 var program = require('commander');
 var dateFormat = require('dateformat');
-// var version = pkg.version;
+const pkgVersion = require('./package.json').version;
 
 /**
  * Install a before function; AOP.
@@ -35,7 +35,7 @@ before(program, 'outputHelp', function() {
   this.allowUnknownOption();
 });
 program
-    .version('0.0.4')
+    .version(pkgVersion)
     .usage('[option] [dir]')
     .option('-p, --port <port-number>', 'set port for server (defaults is 1337)')
     .option('-h, --host <host>', 'set host for server (defaults is your LAN ip)')
