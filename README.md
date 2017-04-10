@@ -6,6 +6,18 @@
 
 PlayAppStore is a web service for quickly publising and downloading your own company's iOS apps and Android apps OTA. This project is heavily inspired by the [ipapk-server](https://github.com/zhao0/ipapk-server) repo. It provides you a chance to make it easy for TestFlight Beta Testing.
 
+## Why called PlayAppStore
+
+<p align="left">
+
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_01.png" width="320" height="568"/>
+
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_02.png" width="320" height="568"/>
+
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_02.png" width="320" height="568"/>
+
+</p>
+
 ## Features
 
 - [x] Auto generate sefl-signing HTTPS server for iOS OTA itms-services. 
