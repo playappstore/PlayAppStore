@@ -12,8 +12,8 @@ var FileHelper = require('./file-helper.js');
 var fl = new FileHelper();
 
 module.exports = {
-  publish : function (file) {
-    return publishApk(file);
+  publish : function (file, info) {
+    return publishApk(file, info);
   },
   getRecords: function () {
     return allRecords();
@@ -41,7 +41,7 @@ function allInfos(bundleID, page, count)  {
   });
 }
 
-function publishApk(file) {
+function publishApk(file, extraInfo) {
 
    // 1. save icon 2. parse info 3. save apk 
     var filepath = file.path;
@@ -79,7 +79,8 @@ function publishApk(file) {
       info['package'] = path.basename(ipaPath);
       info['objectId'] = uuidV4();
       info['size'] = size;
-      return db.updateAppInfo(info);
+      var appInfo = Object.assign(info, extraInfo);
+      return db.updateAppInfo(appInfo);
     })
 }
 
