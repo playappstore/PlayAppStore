@@ -52,6 +52,7 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
 - (void)initTableView {
 
     self.detailTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     PASDetailHeaderView *headerView = [[PASDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 280)];
     headerView.logoImage = self.logoImage;
     self.headerView = headerView;
@@ -135,6 +136,7 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     [DejalBezelActivityView removeViewAnimated:NO];
     PASDiscoverModel *model = [_appManager.appListArr safeObjectAtIndex:0];
     self.headerView.label.text = model.name;
+    [self.detailTableView reloadData];
 //    self.headerView.titleImageView.image = [UIImage imageNamed:model.url];
 //    self.headerView.wholeImageView.image = self.headerView.titleImageView.image;
 //    self.headerView.titleLabel.text = model.name;
@@ -214,17 +216,17 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
         return cell;
     } else {
         PASApplicationDetailCell *cell = [PASApplicationDetailCell cellCreatedWithTableView:tableView];
-        [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0]];
+        [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0] index:indexPath.section];
         return cell;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? 60 : 120;
+    return indexPath.section == 0 ? 44 : 70;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

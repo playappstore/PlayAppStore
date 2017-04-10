@@ -57,11 +57,19 @@
 }
 
 
-- (void)configWithModel:(PASDiscoverModel *)model {
-    self.title.text = @"What's new";
-    self.des1.text = model.build;
-    self.des2.text = model.updatedAt;
-    self.des3.text = model.changelog;
+- (void)configWithModel:(PASDiscoverModel *)model index:(int)index{
+    if (index == 1) {
+         self.title.text = @"Changelog";
+        
+        self.des1.text = model.changelog;
+    }else {
+         self.title.text = @"LastCommitMessage";
+       
+        self.des1.text = model.lastCommitMsg;
+    }
+
+//    self.des2.text = model.updatedAt;
+//    self.des3.text = model.changelog;
 }
 
 #pragma mark - 添加约束
