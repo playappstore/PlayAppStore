@@ -59,15 +59,30 @@ app.post('/apps', upload.single('package'), function (req, res) {
     return;
   }
 
+  var info = {};
+ 
+  if (req.body.changelog) {
+    info['changelog'] = req.body.changelog;
+  }
+  if (req.body.description) {
+    info['description'] = req.body.description;
+  }
+  if (req.body.lastCommitMsg) {
+    info['lastCommitMsg'] = req.body.lastCommitMsg;
+  }
+  if (req.body.jenkinsChangelog) {
+    info['jenkinsChangelog'] = req.body.jenkinsChangelog;
+  }
+
   // req.file is the `package` file
   var file = req.file;
   var filepath = file.originalname;
   var promise;
   if (path.extname(filepath) === ".ipa") {
-    promise = IPA.publish(file);
+    promise = IPA.publish(file, info);
   }
   if (path.extname(filepath) === ".apk") {
-    promise = APK.publish(file);
+    promise = APK.publish(file, info);
   }
   promise.then(function(app) {
     res.send(app);

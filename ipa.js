@@ -14,8 +14,8 @@ var FileHelper = require('./file-helper.js');
 var fl = new FileHelper();
 
 module.exports = {
-  publish : function (file) {
-    return publishIpa(file);
+  publish : function (file, info) {
+    return publishIpa(file, info);
   },
   getRecords: function () {
     return allRecords();
@@ -102,7 +102,7 @@ function mapIpas(apps) {
 }
 
 
-function publishIpa(file) {
+function publishIpa(file, extraInfo) {
     // 1. save icon 2. parse info.plist 3. save ipa
     var filepath = file.path;
     var size =  pretty(file.size);
@@ -142,7 +142,8 @@ function publishIpa(file) {
       info['objectId'] = uuidV4();
       info['manifest'] = path.basename(manifestPath);
       info['size'] = size;
-      return db.updateAppInfo(info);
+      var appInfo = Object.assign(info, extraInfo);
+      return db.updateAppInfo(appInfo);
     })
     //.then(push(info))
 } 
