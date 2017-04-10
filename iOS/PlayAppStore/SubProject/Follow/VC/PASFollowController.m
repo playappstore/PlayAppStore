@@ -228,7 +228,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes1];
     PASDiscoverModel *model = [dataArr objectAtIndex:indexPath.row - 1];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.updatedAt version:model.version changelog:model.changelog iconUrl:model.icon];
+    [cell setValueWithUploadTime:model.updatedAt version:model.version size:model.size changelog:model.changelog iconUrl:model.icon];
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     __weak PASFollowController *weakself = self;

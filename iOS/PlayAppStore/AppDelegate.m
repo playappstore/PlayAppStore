@@ -20,10 +20,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     // 启动QMUI的配置模板
     [QMUIConfigurationTemplate setupConfigurationTemplate];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self initRootTabController];
     [self add3DTouch];
 
