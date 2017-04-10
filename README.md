@@ -10,9 +10,11 @@ PlayAppStore is a web service for quickly publising and downloading your own com
 
 <p align="left">
 
-<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_01.png" width="320" height="568"/>
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_01.png" width="220" height="391"/>
 
-<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_02.png" width="320" height="568"/>
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_02.png" width="220" height="391"/>
+
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_02.png" width="220" height="391"/>
 
 </p>
 
