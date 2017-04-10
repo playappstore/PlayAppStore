@@ -77,11 +77,14 @@ Follow this [guideline](iOS/README.md) to do the build manually.
 
 Just under development, will release as fast as we can.
 
+### For Web Side
+
+Just visit this url `https://ip:port/` in your mobile browser.
+
 ## Docs & Community
 
 * Visit the [wiki](https://github.com/playappstore/playappstore/wiki) for all REST full api.
 * Please fell free to submit pull request, also submit a [issue](https://github.com/playappstore/playappstore/issue/new) if you have any questions.
-
 
 
 ## Contributors
