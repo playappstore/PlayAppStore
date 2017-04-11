@@ -15,7 +15,7 @@ var FileHelper = require('./file-helper.js');
 const fl = new FileHelper();
 var program = require('commander');
 var dateFormat = require('dateformat');
-// var version = pkg.version;
+const pkgVersion = require('./package.json').version;
 
 /**
  * Install a before function; AOP.
@@ -35,7 +35,7 @@ before(program, 'outputHelp', function() {
   this.allowUnknownOption();
 });
 program
-    .version('0.0.4')
+    .version(pkgVersion)
     .usage('[option] [dir]')
     .option('-p, --port <port-number>', 'set port for server (defaults is 1337)')
     .option('-h, --host <host>', 'set host for server (defaults is your LAN ip)')
@@ -52,16 +52,37 @@ if (typeof(program.options) === 'string') {
 
 var app = express();
 
-app.post('/records', upload.single('package'), function (req, res) {
+app.post('/apps', upload.single('package'), function (req, res) {
+  var token = req.header('MasterKey')
+  if (token !== masterKey) {
+    res.sendStatus(403);
+    return;
+  }
+
+  var info = {};
+ 
+  if (req.body.changelog) {
+    info['changelog'] = req.body.changelog;
+  }
+  if (req.body.description) {
+    info['description'] = req.body.description;
+  }
+  if (req.body.lastCommitMsg) {
+    info['lastCommitMsg'] = req.body.lastCommitMsg;
+  }
+  if (req.body.jenkinsChangelog) {
+    info['jenkinsChangelog'] = req.body.jenkinsChangelog;
+  }
+
   // req.file is the `package` file
   var file = req.file;
   var filepath = file.originalname;
   var promise;
   if (path.extname(filepath) === ".ipa") {
-    promise = IPA.publish(file);
+    promise = IPA.publish(file, info);
   }
   if (path.extname(filepath) === ".apk") {
-    promise = APK.publish(file);
+    promise = APK.publish(file, info);
   }
   promise.then(function(app) {
     res.send(app);
@@ -81,7 +102,6 @@ app.get('/records/:platform', function(req, res) {
     promise = APK.getRecords();
   }
   promise.then(function(apps) {
-    console.log(apps);
       return mapApps(apps);
   })
   .then(function(apps) {
@@ -253,6 +273,9 @@ app.delete(router, function(req, res) {
   })
 })
 
+// masterKey for post apps 
+const masterKey = process.env.masterKey || 'playappstore';
+console.log('please set request header field "MasterKey" to %s when publish a new app', masterKey);
 
 var port = process.env.PORT || 1337;
 var imagePort = port + 1;

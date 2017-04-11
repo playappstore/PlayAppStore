@@ -22,7 +22,7 @@ function generateManifest(app, output) {
       var template = data.toString();
       var rendered = mustache.render(template, {
         name: app['name'],
-        bundleID: app['bundleID'],
+        bundleID: app['bundleId'],
         path:  util.format('{{{basePath}}}/%s', app['package']),
         version: app['version'],
       });

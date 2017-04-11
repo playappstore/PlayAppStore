@@ -44,7 +44,11 @@ const AppInfoSchema = {
     objectId: 'string',
     bundleId:  'string', 
     version: 'string',
+    description: {type: 'string', optional: true}, // short des for the app.
     build: {type: 'string', optional: true}, // build version 
+    changelog: {type: 'string', optional: true}, // changelog 
+    lastCommitMsg: {type: 'string', optional: true}, // last git commit message
+    jenkinsChangelog: {type: 'string', optional: true}, // changelog from jenkins since last build
     name: 'string', // app name
     icon: 'string', // icon path
     size: 'string', // package size
@@ -87,8 +91,6 @@ RealmDB.prototype.updateAppIcon = function(app) {
 }
 RealmDB.prototype.updateAppRecord = function(app) {
   return new Promise(function(resolve, reject) {
-    console.log('update record');
-    console.log(app);
     var appRecord;
     realm.write(() => {
       appRecord = realm.create('AppRecord', app, true);
@@ -137,8 +139,14 @@ RealmDB.prototype.getAppVersions = function(platform, bundleId, page, count) {
   // for pagination
   var start = (page-1)*count;
   var firstInfos = infos.slice(start, count);
+
+  var fields = ['objectId', 'bundleId', 'changelog', 'version', 'build', 'name', 'icon', 'size', 'platform', 'manifest', 'package', 'createdAt', 'updatedAt'];
   var mappedArray = firstInfos.map(function(info) {
-    return JSON.parse(JSON.stringify(info));
+    var app = {};
+    fields.forEach(function(key) {
+      app[key] = info[key];
+    });
+    return app;
   })
   return mappedArray;
 }
@@ -146,9 +154,13 @@ RealmDB.prototype.getAppVersions = function(platform, bundleId, page, count) {
 RealmDB.prototype.getAppDetail = function(platform, bundleId, objectId) {
  
   var infos = realm.objects('AppInfo').filtered('platform = $0 AND bundleId = $1 AND objectId = $2', platform, bundleId, objectId);
-  // for pagination
+  var fields = ['objectId', 'bundleId', 'changelog', 'lastCommitMsg', 'jenkinsChangelog', 'version', 'build', 'name', 'icon', 'size', 'platform', 'manifest', 'package', 'createdAt', 'updatedAt'];
   var mappedArray = infos.map(function(info) {
-    return JSON.parse(JSON.stringify(info));
+    var app = {};
+    fields.forEach(function(key) {
+      app[key] = info[key];
+    });
+    return app;
   })
   return mappedArray;
 }
