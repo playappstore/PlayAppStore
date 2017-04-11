@@ -140,7 +140,7 @@ RealmDB.prototype.getAppVersions = function(platform, bundleId, page, count) {
   var start = (page-1)*count;
   var firstInfos = infos.slice(start, count);
 
-  var fields = ['objectId', 'bundleId', 'changelog', 'version', 'build', 'name', 'icon', 'size', 'platform', 'manifest', 'createdAt', 'updatedAt'];
+  var fields = ['objectId', 'bundleId', 'changelog', 'version', 'build', 'name', 'icon', 'size', 'platform', 'manifest', 'package', 'createdAt', 'updatedAt'];
   var mappedArray = firstInfos.map(function(info) {
     var app = {};
     fields.forEach(function(key) {
@@ -154,7 +154,7 @@ RealmDB.prototype.getAppVersions = function(platform, bundleId, page, count) {
 RealmDB.prototype.getAppDetail = function(platform, bundleId, objectId) {
  
   var infos = realm.objects('AppInfo').filtered('platform = $0 AND bundleId = $1 AND objectId = $2', platform, bundleId, objectId);
-  var fields = ['objectId', 'bundleId', 'changelog', 'lastCommitMsg', 'jenkinsChangelog', 'version', 'build', 'name', 'icon', 'size', 'platform', 'manifest', 'createdAt', 'updatedAt'];
+  var fields = ['objectId', 'bundleId', 'changelog', 'lastCommitMsg', 'jenkinsChangelog', 'version', 'build', 'name', 'icon', 'size', 'platform', 'manifest', 'package', 'createdAt', 'updatedAt'];
   var mappedArray = infos.map(function(info) {
     var app = {};
     fields.forEach(function(key) {
