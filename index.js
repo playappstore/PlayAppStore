@@ -102,7 +102,6 @@ app.get('/records/:platform', function(req, res) {
     promise = APK.getRecords();
   }
   promise.then(function(apps) {
-    console.log(apps);
       return mapApps(apps);
   })
   .then(function(apps) {
