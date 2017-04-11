@@ -18,6 +18,7 @@
 #import "UIImage+QMUI.h"
 #import "PASApplication.h"
 #import "PAS_DownLoadingApps.h"
+#import "UITableView+QMUI.h"
 static NSInteger NAVBAR_CHANGE_POINT = 120;
 
 @interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
@@ -52,7 +53,8 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
 - (void)initTableView {
 
     self.detailTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.detailTableView.tableFooterView = [UIView new];
+//    self.detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     PASDetailHeaderView *headerView = [[PASDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 280)];
     headerView.logoImage = self.logoImage;
     self.headerView = headerView;
@@ -61,8 +63,10 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     self.detailTableView.delegate = self;
     self.detailTableView.dataSource = self;
     [self.view addSubview:self.detailTableView];
-
     
+    [self.detailTableView registerClass:[PASApplicationDetailCell class] forCellReuseIdentifier:@"PASApplicationDetailCell"];
+
+    [self setDownLoadButtonStateModel:self.model];
     __weak PASApplicationDetailController *weakself = self;
     
     headerView.downloadClicked = ^(PKDownloadButtonState state) {
@@ -79,6 +83,28 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
         }
     };
 
+}
+- (void)setDownLoadButtonStateModel:(PASDiscoverModel*)model{
+    
+    NSDictionary *app =  [PAS_DownLoadingApps sharedInstance].appDic;
+    NSArray *appNameArr = app.allKeys;
+    
+    if ([appNameArr containsObject:model.name]) {
+        
+        NSDictionary *dataDic =[app objectForKey:model.name];
+        if ([[dataDic objectForKey:@"version"] isEqualToString:model.version]&&[[dataDic objectForKey:@"bundleID"] isEqualToString:model.bundleID]&&[[dataDic objectForKey:@"uploadTime"] isEqualToString:model.updatedAt]) {
+            
+            NSProgress *progress = [dataDic objectForKey:@"progress"];
+            self.weakProgress = progress;
+            self.headerView.downloadButton.state = kPKDownloadButtonState_Downloading;
+            self.headerView.downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
+            [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(self.headerView.downloadButton)];
+        }
+    }else {
+        
+        self.headerView.downloadButton.state = kPKDownloadButtonState_StartDownload;
+        
+    }
 }
 - (void)downLoadAppWithBundleIdentifier:(NSString *)bundleIdentifier
                             manifestURL:(NSURL *)manifestURL
@@ -217,16 +243,25 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     } else {
         PASApplicationDetailCell *cell = [PASApplicationDetailCell cellCreatedWithTableView:tableView];
         [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0] index:indexPath.section];
+
         return cell;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? 44 : 70;
+//    return indexPath.section == 0 ? 44 : 70;
+    if (indexPath.section == 0) {
+        return 44;
+    }
+    static NSString *cellIdentifier = @"PASApplicationDetailCell";
+    return [self.detailTableView qmui_heightForCellWithIdentifier:cellIdentifier cacheByIndexPath:indexPath configuration:^(id cell) {
+         [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0] index:indexPath.section];
+    }];
+
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

@@ -198,6 +198,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
             
             _downloadingModel = model;
             NSProgress *progress = [dataDic objectForKey:@"progress"];
+            self.weakProgress = progress;
             cell.downloadButton.state = kPKDownloadButtonState_Downloading;
             cell.downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
             [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(cell.downloadButton)];

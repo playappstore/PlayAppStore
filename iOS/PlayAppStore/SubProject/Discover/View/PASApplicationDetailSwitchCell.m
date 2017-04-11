@@ -84,7 +84,7 @@
     UISwitch *connectSwitch = [UISwitch new];
     connectSwitch.onTintColor = RGBCodeColor(0x26BEFD);
 
-//    connectSwitch.tintColor = [UIColor purpleColor];
+    connectSwitch.tintColor = [UIColor whiteColor];
     [connectSwitch addTarget:self action:@selector(connectSwitchChanged:) forControlEvents:UIControlEventValueChanged];
     [self.contentView addSubview:connectSwitch];
     
