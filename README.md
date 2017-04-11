@@ -4,13 +4,28 @@
   [![NPM Downloads][downloads-image]][downloads-url]
 
 
-PlayAppStore is a web service for quickly publising and downloading your own company's iOS apps and Android apps OTA. This project is heavily inspired by the [ipapk-server](https://github.com/zhao0/ipapk-server) repo. It provides you a chance to make it easy for TestFlight Beta Testing.
+PlayAppStore is a web service for quickly publising and downloading your own company's iOS apps and Android apps OTA. This project is heavily inspired by the [ipapk-server](https://github.com/zhao0/ipapk-server) repo. It provides you a chance to make it easy for  Beta Testing.
+
+## Why called PlayAppStore
+
+We blieved that the best way to install an app for beta testing is via a package management app like the iPhone's App Store app or the Android's Play Store app, so we dicided to develop these two native apps for different platform to do the same things, and named this project PlayAppStore :-D  
+
+Here is a preview for iOS side:
+
+<p align="left">
+
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_01.png" width="280" height="498"/>
+
+<img src="https://raw.githubusercontent.com/playappstore/playappstore/develop/assets/ios_screenshot_02.png" width="280" height="498"/>
+
+</p>
 
 ## Features
 
 - [x] Auto generate sefl-signing HTTPS server for iOS OTA itms-services. 
 - [x] Support both web client-side and mobile client-side.
 - [x] Full information such as changelog.
+- [x] Push notification for new build.
 
 ## Requirements
 
@@ -46,17 +61,30 @@ $ playappstore
 To publish an app is very simple, here is an example to request with curl:
 
 ```
-$ curl 'https://ip:port/apps' -F "package=@path" -F "changelog=some feature" --insecure
-
+$ curl 'https://ip:port/apps' -F "package=@path" -F "changelog=some feature" --header "MasterKey: playappstore" --insecure
 ```
 
 Note that you should change the `ip` and `port` variables with your owns, and the path variable must be the file path where the ipa or apk is.
+
+### For iOS Side
+
+For some code sign reasons, we could not provide you the downloadable ipa package, and we also could not publish this project to the App Store cause the use of private api.
+
+Follow this [guideline](iOS/README.md) to do the build manually.
+
+
+### For Android Side
+
+Just under development, will release as fast as we can.
+
+### For Web Side
+
+Just visit this url `https://ip:port/` in your mobile browser.
 
 ## Docs & Community
 
 * Visit the [wiki](https://github.com/playappstore/playappstore/wiki) for all REST full api.
 * Please fell free to submit pull request, also submit a [issue](https://github.com/playappstore/playappstore/issue/new) if you have any questions.
-
 
 
 ## Contributors
