@@ -267,20 +267,24 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
 {
   
     NSLog(@"scrollView.contentOffset.y:%f",scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y >self.headerView.height) {
+    if (scrollView.contentOffset.y >138) {
+         self.title = self.model.name;
+    }else {
+         self.title = @"";
+    }
+    if (scrollView.contentOffset.y >100) {
         return;
     }
     CGFloat offsetY = scrollView.contentOffset.y;
     CGFloat ory = 0;
     if ((self.headerView.snap.size.height - 64)> offsetY) {
         ory = offsetY;
+       
     }else {
         ory = self.headerView.snap.size.height - 64;
+       
     }
-//    if (offsetY > (NAVBAR_CHANGE_POINT-44)) {
-//        UIImage *snap = [self.headerView.snap qmui_imageWithClippedRect:CGRectMake(0, ory, [UIScreen mainScreen].bounds.size.width, 64)];
-//        [self setNavigationBarBackgroundImage:snap];
-//    } else {
+    
         if (offsetY > 0) {
             UIImage *snap = [self.headerView.snap qmui_imageWithClippedRect:CGRectMake(0, ory, [UIScreen mainScreen].bounds.size.width, 64)];
             [self setNavigationBarBackgroundImage:snap];
@@ -289,8 +293,6 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
             [self setNavigationBarBackgroundImage:image];
 
         }
-        
-//    }
 }
 
 - (void)setNavigationBarBackgroundImage:(UIImage *)image {

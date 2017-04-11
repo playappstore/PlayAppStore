@@ -51,7 +51,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 
 - (void)initData {
     
-    self.navigationItem.title = self.name;
+    self.title = self.name;
     [self.appManager refreshWithBundleID:self.bundleID];
      _hubView = [PASMBView showPVAddedTo:self.listTableView message:PASLocalizedString(@"Processing", nil)];
 
