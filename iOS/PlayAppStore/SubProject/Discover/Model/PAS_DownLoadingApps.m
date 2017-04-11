@@ -32,6 +32,7 @@ static PAS_DownLoadingApps *_instance;
     [[NSUserDefaults standardUserDefaults] setObject:dataArr forKey:@"Pas_followApps"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
 -(NSMutableArray *)followApps {
 
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"Pas_followApps"];

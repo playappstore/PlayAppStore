@@ -38,6 +38,7 @@
                   success:(void (^)(id))success
                   failure:(void (^)(NSError *))failure
 {
+    
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager POST:urlString
        parameters:parameters
