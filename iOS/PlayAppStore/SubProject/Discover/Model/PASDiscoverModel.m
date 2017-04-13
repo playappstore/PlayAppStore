@@ -10,7 +10,8 @@
 
 @implementation PASDiscoverModel
 + (NSDictionary *)modelCustomPropertyMapper {
-    return @{@"bundleID"  : @"bundleId"};
+    return @{@"bundleID"  : @"bundleId",
+             @"url":@"manifest"};
 }
 
 @end

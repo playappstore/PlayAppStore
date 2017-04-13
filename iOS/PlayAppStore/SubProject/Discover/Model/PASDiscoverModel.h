@@ -14,6 +14,7 @@
 //应用ID
 @property (nonatomic ,copy) NSString *bundleID;
 @property (nonatomic ,copy) NSString *changelog;
+@property (nonatomic ,copy) NSString *lastCommitMsg;
 @property (nonatomic ,copy) NSString *guid;
 //应用LOGO
 @property (nonatomic ,copy) NSString *icon;

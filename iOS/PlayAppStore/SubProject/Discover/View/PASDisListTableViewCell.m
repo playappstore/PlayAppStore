@@ -133,11 +133,12 @@
 
 - (void)setValueWithUploadTime:(NSString *)uploadTime
                        version:(NSString *)version
+                       size:(NSString *)size
                      changelog:(NSString *)changelog
                        iconUrl:(NSString *)iconUrl  {
 
-    self.upDataTimeLabel.text = [NSString stringWithFormat:@"更新时间：%@", uploadTime];
-    self.versionsLabel.text = [NSString stringWithFormat:@"版本：%@", version];
+    self.upDataTimeLabel.text = [NSString stringWithFormat:@"%@", uploadTime];
+    self.versionsLabel.text = [NSString stringWithFormat:@"%@ %@，%@",PASLocalizedString(@"Version", nil), version,size];
     self.describeLabel.text = changelog;
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:iconUrl]];
 

@@ -51,7 +51,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
 
 - (void)initData {
     
-    self.navigationItem.title = self.name;
+    self.title = self.name;
     [self.appManager refreshWithBundleID:self.bundleID];
      _hubView = [PASMBView showPVAddedTo:self.listTableView message:PASLocalizedString(@"Processing", nil)];
 
@@ -153,7 +153,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
     PASDiscoverModel *model = [_appManager.appListArr objectAtIndex:indexPath.row];
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.updatedAt version:model.version changelog:model.changelog iconUrl:model.icon];
+    [cell setValueWithUploadTime:model.updatedAt version:model.version size:model.size changelog:model.changelog iconUrl:model.icon];
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     
@@ -198,6 +198,7 @@ NSString * const cellRes = @"PASDisListTableViewCell";
             
             _downloadingModel = model;
             NSProgress *progress = [dataDic objectForKey:@"progress"];
+            self.weakProgress = progress;
             cell.downloadButton.state = kPKDownloadButtonState_Downloading;
             cell.downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
             [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(cell.downloadButton)];

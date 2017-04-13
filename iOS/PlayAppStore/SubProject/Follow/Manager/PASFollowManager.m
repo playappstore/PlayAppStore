@@ -10,6 +10,7 @@
 #import "PASConfiguration.h"
 #import "PASDataProvider.h"
 #import "PASDiscoverModel.h"
+#import "PASNetwrokManager.h"
 @interface PASFollowManager ()
 
 @property (nonatomic, strong) PASDataProvider *dataProvider;
@@ -41,16 +42,19 @@
         dispatch_group_async(group, queue, ^{
             
             __weak PASFollowManager *weakSelf = self;
-            [_dataProvider getAllBuildsWithParameters:nil bundleID:bundleID completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                if (error) {
-                    weakSelf.failCount ++;
-                    
-                }else {
-                [weakSelf handleRequestWithResponseObject:responseObject];
-                
-                }
+            NSString *str = [NSString stringWithFormat:@"%@apps/ios/%@",[[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost],bundleID];
+            
+            [[PASNetwrokManager defaultManager] getWithUrlString:str success:^(id response) {
+               [weakSelf handleRequestWithResponseObject:response];
                 dispatch_group_leave(group);
+
+                
+            } failure:^(NSError *error) {
+                weakSelf.failCount ++;
+                dispatch_group_leave(group);
+                
             }];
+
             
         });
         dispatch_group_enter(group);

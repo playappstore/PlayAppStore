@@ -13,6 +13,6 @@
 
 + (instancetype)cellCreatedWithTableView:(UITableView *)tableView;
 
-- (void)configWithModel:(PASDiscoverModel *)model;
+- (void)configWithModel:(PASDiscoverModel *)model index:(int)index;
 
 @end

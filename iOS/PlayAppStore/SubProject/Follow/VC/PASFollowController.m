@@ -35,18 +35,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     
-    if ([PAS_DownLoadingApps sharedInstance].followApps.count) {
-
-        [_hubView hidden];
-       _hubView = [PASMBView showPVAddedTo:self.followTableView message:PASLocalizedString(@"Processing", nil)];
-        [self hideEmptyView];
-        [self requestFollowApps];
-    }else {
-        //没有收藏的应用
-        _dataDic = nil;
-        [_followTableView reloadData];
-        [self showEmptyViewWithImage:[UIImage imageNamed:@"kong.png"] text:PASLocalizedString(@"NoFollowApp", nil) detailText:@"" buttonTitle:PASLocalizedString(@"ToFollowApp", nil) buttonAction:@selector(emptyButtonClicked)];
-    }
+    
 }
 - (void)emptyButtonClicked {
 
@@ -62,12 +51,29 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initData];
     [self initView];
+    [self initData];
+    
 }
 - (void)initData {
-  
+    [self initViewData];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"Pas_followApps" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
+}
+- (void)initViewData {
+
+    if ([PAS_DownLoadingApps sharedInstance].followApps.count) {
+        
+        [_hubView hidden];
+        _hubView = [PASMBView showPVAddedTo:self.followTableView message:PASLocalizedString(@"Processing", nil)];
+        [self hideEmptyView];
+        [self requestFollowApps];
+    }else {
+        //没有收藏的应用
+        _dataDic = nil;
+        [_followTableView reloadData];
+        [self showEmptyViewWithImage:[UIImage imageNamed:@"kong.png"] text:PASLocalizedString(@"NoFollowApp", nil) detailText:@"" buttonTitle:PASLocalizedString(@"ToFollowApp", nil) buttonAction:@selector(emptyButtonClicked)];
+    }
 }
 - (void)initView {
     
@@ -170,10 +176,13 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
             }
             downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
         });
+    }else if ([keyPath isEqualToString:@"Pas_followApps"]) {
+        
+        [self initViewData];
+
     }else {
-        
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-        
+    
+         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 - (void)setDownLoadButtonStateWithCell:(PASDisListTableViewCell *)cell model:(PASDiscoverModel*)model{
@@ -228,7 +237,7 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
     PASDisListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellRes1];
     PASDiscoverModel *model = [dataArr objectAtIndex:indexPath.row - 1];
     //给cell赋值显示
-    [cell setValueWithUploadTime:model.updatedAt version:model.version changelog:model.changelog iconUrl:model.icon];
+    [cell setValueWithUploadTime:model.updatedAt version:model.version size:model.size changelog:model.changelog iconUrl:model.icon];
     //设置下载按钮的状态
     [self setDownLoadButtonStateWithCell:cell model:model];
     __weak PASFollowController *weakself = self;
@@ -263,12 +272,24 @@ NSString * const cellRes2 = @"PASFollowTableViewCell";
         
     }else {
    
+        NSIndexPath *index = [NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section];
+        PASDisListTableViewCell *cell = (PASDisListTableViewCell*)[tableView cellForRowAtIndexPath:index];
         PASDiscoverModel *model = [dataArr objectAtIndex:indexPath.row - 1];
+        
         PASApplicationDetailController *detailController = [[PASApplicationDetailController alloc] init];
         detailController.model = model;
+        detailController.logoImage = cell.logoImageView.image;
         [self.navigationController pushViewController:detailController animated:YES];
     }
 }
+- (BOOL)shouldCustomNavigationBarTransitionWhenPushDisappearing {
+    return YES;
+}
+
+- (BOOL)shouldCustomNavigationBarTransitionWhenPopAppearing {
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

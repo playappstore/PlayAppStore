@@ -16,10 +16,13 @@
 #import "PASDetailHeaderView.h"
 #import "QMUINavigationController.h"
 #import "UIImage+QMUI.h"
+#import "PASApplication.h"
+#import "PAS_DownLoadingApps.h"
+#import "UITableView+QMUI.h"
 static NSInteger NAVBAR_CHANGE_POINT = 120;
 
 @interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
-
+@property (nonatomic ,weak) NSProgress *weakProgress;
 @property (nonatomic, strong) PASDetailHeaderView *headerView;
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) PASQRCodeActionSheet *qrCodeView;
@@ -50,7 +53,9 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
 - (void)initTableView {
 
     self.detailTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    PASDetailHeaderView *headerView = [[PASDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 300)];
+    self.detailTableView.tableFooterView = [UIView new];
+//    self.detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    PASDetailHeaderView *headerView = [[PASDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 280)];
     headerView.logoImage = self.logoImage;
     self.headerView = headerView;
     [headerView addScrollview:self.detailTableView];
@@ -58,11 +63,98 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     self.detailTableView.delegate = self;
     self.detailTableView.dataSource = self;
     [self.view addSubview:self.detailTableView];
+    
+    [self.detailTableView registerClass:[PASApplicationDetailCell class] forCellReuseIdentifier:@"PASApplicationDetailCell"];
 
+    [self setDownLoadButtonStateModel:self.model];
+    __weak PASApplicationDetailController *weakself = self;
+    
+    headerView.downloadClicked = ^(PKDownloadButtonState state) {
+        if (state == kPKDownloadButtonState_Pending) {
+            //点击下载按钮
+            [weakself downLoadAppWithBundleIdentifier:weakself.model.bundleID manifestURL:[NSURL URLWithString:weakself.model.url] bundleVersion:weakself.model.version PKDownloadButton:headerView.downloadButton];
+        }else if (state == kPKDownloadButtonState_Downloaded){
+            
+            //打开应用
+            
+            PASApplication *app = [[PASApplication alloc] initWithBundleIdentifier:weakself.model.bundleID manifestURL:[NSURL URLWithString:weakself.model.url] bundleVersion:weakself.model.version];
+            [app launch];
+            
+        }
+    };
+
+}
+- (void)setDownLoadButtonStateModel:(PASDiscoverModel*)model{
+    
+    NSDictionary *app =  [PAS_DownLoadingApps sharedInstance].appDic;
+    NSArray *appNameArr = app.allKeys;
+    
+    if ([appNameArr containsObject:model.name]) {
+        
+        NSDictionary *dataDic =[app objectForKey:model.name];
+        if ([[dataDic objectForKey:@"version"] isEqualToString:model.version]&&[[dataDic objectForKey:@"bundleID"] isEqualToString:model.bundleID]&&[[dataDic objectForKey:@"uploadTime"] isEqualToString:model.updatedAt]) {
+            
+            NSProgress *progress = [dataDic objectForKey:@"progress"];
+            self.weakProgress = progress;
+            self.headerView.downloadButton.state = kPKDownloadButtonState_Downloading;
+            self.headerView.downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
+            [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(self.headerView.downloadButton)];
+        }
+    }else {
+        
+        self.headerView.downloadButton.state = kPKDownloadButtonState_StartDownload;
+        
+    }
+}
+- (void)downLoadAppWithBundleIdentifier:(NSString *)bundleIdentifier
+                            manifestURL:(NSURL *)manifestURL
+                          bundleVersion:(NSString *)bundleVersion
+                       PKDownloadButton:(PKDownloadButton *)downloadButton{
+    PASApplication *app = [[PASApplication alloc] initWithBundleIdentifier:bundleIdentifier manifestURL:manifestURL bundleVersion:bundleVersion];
+    NSProgress *progress;
+    [app installWithProgress:&progress completion:^(BOOL finished, NSError *error) {
+        
+        //        NSLog(@"完成");
+        downloadButton.stopDownloadButton.progress =1;
+        downloadButton.state = kPKDownloadButtonState_Downloaded;
+        
+    }];
+    if (progress) {
+        
+        _weakProgress = progress;
+        [progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionInitial context:(__bridge void * _Nullable)(downloadButton)];
+    }
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"fractionCompleted"]) {
+        NSProgress *progress = (NSProgress *)object;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //            NSLog(@"progress: %@", @(progress.fractionCompleted));
+            
+            PKDownloadButton *downloadButton = (__bridge PKDownloadButton*)context;
+            if (progress.fractionCompleted >0) {
+                //大于0的时候开始走进度
+                downloadButton.state = kPKDownloadButtonState_Downloading;
+                //假如开始安装
+                
+//                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.updatedAt};
+//                [[PAS_DownLoadingApps sharedInstance].appDic setObject:dataDic forKey:_downloadingModel.name];
+                
+            }
+            downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
+        });
+    }else {
+        
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        
+    }
 }
 - (void)dealloc {
 
     [self.headerView headerRemoveOber];
+    if (self.weakProgress) {
+        [_weakProgress removeObserver:self forKeyPath:@"fractionCompleted"];
+    }
 }
 
 #pragma mark - PASAppManagerDelegate
@@ -70,6 +162,7 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     [DejalBezelActivityView removeViewAnimated:NO];
     PASDiscoverModel *model = [_appManager.appListArr safeObjectAtIndex:0];
     self.headerView.label.text = model.name;
+    [self.detailTableView reloadData];
 //    self.headerView.titleImageView.image = [UIImage imageNamed:model.url];
 //    self.headerView.wholeImageView.image = self.headerView.titleImageView.image;
 //    self.headerView.titleLabel.text = model.name;
@@ -149,36 +242,49 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
         return cell;
     } else {
         PASApplicationDetailCell *cell = [PASApplicationDetailCell cellCreatedWithTableView:tableView];
-        [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0]];
+        [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0] index:indexPath.section];
+
         return cell;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? 60 : 120;
+//    return indexPath.section == 0 ? 44 : 70;
+    if (indexPath.section == 0) {
+        return 44;
+    }
+    static NSString *cellIdentifier = @"PASApplicationDetailCell";
+    return [self.detailTableView qmui_heightForCellWithIdentifier:cellIdentifier cacheByIndexPath:indexPath configuration:^(id cell) {
+         [cell configWithModel:[_appManager.appListArr safeObjectAtIndex:0] index:indexPath.section];
+    }];
+
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
   
     NSLog(@"scrollView.contentOffset.y:%f",scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y >self.headerView.height) {
+    if (scrollView.contentOffset.y >138) {
+         self.title = self.model.name;
+    }else {
+         self.title = @"";
+    }
+    if (scrollView.contentOffset.y >100) {
         return;
     }
     CGFloat offsetY = scrollView.contentOffset.y;
     CGFloat ory = 0;
     if ((self.headerView.snap.size.height - 64)> offsetY) {
         ory = offsetY;
+       
     }else {
         ory = self.headerView.snap.size.height - 64;
+       
     }
-//    if (offsetY > (NAVBAR_CHANGE_POINT-44)) {
-//        UIImage *snap = [self.headerView.snap qmui_imageWithClippedRect:CGRectMake(0, ory, [UIScreen mainScreen].bounds.size.width, 64)];
-//        [self setNavigationBarBackgroundImage:snap];
-//    } else {
+    
         if (offsetY > 0) {
             UIImage *snap = [self.headerView.snap qmui_imageWithClippedRect:CGRectMake(0, ory, [UIScreen mainScreen].bounds.size.width, 64)];
             [self setNavigationBarBackgroundImage:snap];
@@ -187,8 +293,6 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
             [self setNavigationBarBackgroundImage:image];
 
         }
-        
-//    }
 }
 
 - (void)setNavigationBarBackgroundImage:(UIImage *)image {

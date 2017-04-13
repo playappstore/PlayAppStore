@@ -31,9 +31,10 @@
 @property (nonatomic ,assign) BOOL downloadButtonEnable;
 @property (nonatomic ,copy) void (^downloadClicked)(PKDownloadButtonState state);
 - (void)setValueWithUploadTime:(NSString *)uploadTime
-                    version:(NSString *)version
+                       version:(NSString *)version
+                          size:(NSString *)size
                      changelog:(NSString *)changelog
-                       iconUrl:(NSString *)iconUrl ;
+                       iconUrl:(NSString *)iconUrl;
 
 
 
