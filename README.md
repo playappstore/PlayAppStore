@@ -46,7 +46,7 @@ Options:
 
 -h, --help                output usage information
 -V, --version             output the version number
--p, --port <port-number>  set port for server (defaults is 1337)
+-p, --port <port-number>  set port for server (defaults is 9090)
 -h, --host <host>         set host for server (defaults is your LAN ip)
 ```
 
