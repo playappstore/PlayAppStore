@@ -71,14 +71,14 @@ a {
 
 .all_version{ height:0;  margin:0.8rem 0.3rem; margin-bottom:0rem;  display:block;  overflow:hidden;}
 .show_version{ height:auto;}
-.all_version li{ padding:0.4rem; color:#989898; background:#eee; border-radius:0.5rem; margin-bottom:0.6rem;height: 4rem;}
+.all_version li{position: relative; padding:0.4rem; color:#989898; background:#eee; border-radius:0.5rem; margin-bottom:0.6rem; height: 4rem;}
 .all_version>li p{ line-height: 1.2rem}
 .all_version>li span{ font-size:0.8rem; color:#aaa;}
 
 .all_version>li img{ float:left; width:4rem; height:4rem; margin-right:0.8rem; /*border:1px solid #ccc*/; border-radius:20%; box-sizing:border-box;}
 .all_version>li.select{ background:#0076cc;}
 .all_version>li.select span{ color:#fff;}
-.all_version>li .down_btn{margin: -2rem 0 ; float:right; width:5rem; height:2.6rem; font-size:1.2rem;  border:0.12rem solid #0076cc; border-radius:0.4rem; outline:none;  background:#fff; color:#0076cc; text-align:center; line-height:2.6rem;}
+.all_version>li .down_btn{margin: 1.1rem !important; position: absolute; right: 0; top: 0; float:right; width:5rem; height:2.6rem; font-size:1.2rem;  border:0.12rem solid #0076cc; border-radius:0.4rem; outline:none;  background:#fff; color:#0076cc; text-align:center; line-height:2.6rem;}
 
 .changelog {display: block;overflow:hidden; text-overflow:ellipsis; }
 #moreButton {text-align: center;height: 2rem;}
