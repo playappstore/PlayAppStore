@@ -168,7 +168,7 @@ app.get('/apps/:platform/:bundleId/:objectId', function(req, res) {
 });
 
 app.get('/plist/:guid', function(req, res) {
-  var promise = IPA.renderManifist(req.params.guid, baseUrl);
+  var promise = IPA.renderManifist(req.params.guid, HTTPSServerUrl);
   promise.then(function(buffer) {
     res.set('Content-Type', 'text/plain; charset=utf-8');
     res.set('Access-Control-Allow-Origin','*');
@@ -180,10 +180,10 @@ app.get('/plist/:guid', function(req, res) {
 
 function mapApps(apps) {
   var mapedApps = apps.map(function(app) {
-    app.icon = ImageUrl + path.join('icon', app.icon);
-    // app.icon = util.format('%s/icon/%s', baseUrl, app.icon);
+    app.icon = HTTPServerUrl + path.join('icon', app.icon);
     if (app.hasOwnProperty('package')) {
-      app.package = baseUrl + path.join('app', app.package);
+      // only useable for android, and currently switch to http server.
+      app.package = HTTPServerUrl + path.join('app', app.package);
     }
     if (app.hasOwnProperty('createdAt')) {
       app.createdAt = dateFormat(app.createdAt, 'yyyy-mm-dd HH:MM');
@@ -194,7 +194,7 @@ function mapApps(apps) {
     if (app.hasOwnProperty('manifest')) {
       if (app.platform === 'ios') {
         var manifest = path.basename(app.manifest, '.plist')
-        manifest = baseUrl + path.join('plist', manifest);
+        manifest = HTTPSServerUrl + path.join('plist', manifest);
         app.manifest = util.format('itms-services://?action=download-manifest&url=%s', manifest);
       }
     }
@@ -277,12 +277,12 @@ app.delete(router, function(req, res) {
 const masterKey = process.env.masterKey || 'playappstore';
 console.log('please set request header field "MasterKey" to %s when publish a new app', masterKey);
 
-var port = process.env.PORT || 1337;
+var port = process.env.PORT || 9090;
 var imagePort = port + 1;
 var ipAddress = Cert.getIP();
-const baseUrl =  util.format('https://%s:%d/', ipAddress, port);
-const ImageUrl = util.format('http://%s:%d/', ipAddress, imagePort);
-var certsOptions;;
+const HTTPSServerUrl =  util.format('https://%s:%d/', ipAddress, port);
+const HTTPServerUrl = util.format('http://%s:%d/', ipAddress, imagePort);
+var certsOptions;
 var certsPath;
 Cert.configCerts(ipAddress, function (options, path) {
   certsOptions = options;
@@ -300,7 +300,7 @@ app.get('/diy', function(req, res) {
 });
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
-console.log('please visit this url to install ca cert: ' + baseUrl + 'diy');
+console.log('please visit this url to install ca cert: ' + HTTPSServerUrl + 'diy');
 
 var httpServer = require('http').createServer(app);
 httpServer.listen(imagePort, function() {
@@ -308,5 +308,7 @@ httpServer.listen(imagePort, function() {
 
 var httpsServer = require('https').createServer(certsOptions, app);
 httpsServer.listen(port, function() {
-    console.log('playappstore running on: ' + baseUrl );
+  console.log('playappstore running on: ' + HTTPSServerUrl );
+}).on('error', function(err) {
+  console.log('create https server fail, reason :' + err);
 });
