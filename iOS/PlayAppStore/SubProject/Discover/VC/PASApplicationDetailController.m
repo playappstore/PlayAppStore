@@ -19,7 +19,6 @@
 #import "PASApplication.h"
 #import "PAS_DownLoadingApps.h"
 #import "UITableView+QMUI.h"
-static NSInteger NAVBAR_CHANGE_POINT = 120;
 
 @interface PASApplicationDetailController () <UITableViewDelegate, UITableViewDataSource, PASApplicationDetailSwitchCellDelegate, PASShareActivityDelegate, PASDiccoverAppManagerDelegate>
 @property (nonatomic ,weak) NSProgress *weakProgress;
@@ -136,9 +135,7 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
                 //大于0的时候开始走进度
                 downloadButton.state = kPKDownloadButtonState_Downloading;
                 //假如开始安装
-                
-//                NSDictionary *dataDic = @{@"version":_downloadingModel.version,@"bundleID":_downloadingModel.bundleID,@"progress":progress,@"uploadTime":_downloadingModel.updatedAt};
-//                [[PAS_DownLoadingApps sharedInstance].appDic setObject:dataDic forKey:_downloadingModel.name];
+    
                 
             }
             downloadButton.stopDownloadButton.progress = progress.fractionCompleted ;
@@ -163,10 +160,6 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     PASDiscoverModel *model = [_appManager.appListArr safeObjectAtIndex:0];
     self.headerView.label.text = model.name;
     [self.detailTableView reloadData];
-//    self.headerView.titleImageView.image = [UIImage imageNamed:model.url];
-//    self.headerView.wholeImageView.image = self.headerView.titleImageView.image;
-//    self.headerView.titleLabel.text = model.name;
-//    [self.detailTableView reloadData];
 }
 - (void)requestBuildDetailFailureWithError:(NSError *)error {
     //
@@ -327,23 +320,6 @@ static NSInteger NAVBAR_CHANGE_POINT = 120;
     self.detailTableView.rowHeight = UITableViewAutomaticDimension;
     self.detailTableView.estimatedRowHeight = 60;
 }
-
-//- (UITableView *)detailTableView {
-//    if (!_detailTableView) {
-//        _detailTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//        _detailTableView.delegate = self;
-//        _detailTableView.dataSource = self;
-//        _detailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    }
-//    return _detailTableView;
-//}
-//- (PASApplicationDetailHeadView *)headerView {
-//    if (!_headerView) {
-//        _headerView = [[PASApplicationDetailHeadView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
-//    }
-//    return _headerView;
-//}
-
 - (PASDiccoverAppManager *)appManager {
     if (!_appManager) {
         _appManager = [[PASDiccoverAppManager alloc] init];

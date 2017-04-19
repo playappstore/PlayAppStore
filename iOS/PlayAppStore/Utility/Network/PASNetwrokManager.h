@@ -16,6 +16,7 @@
 // 下载失败的block
 @property (nonatomic, copy) void (^failure) (NSError *error);
 
+@property (nonatomic, copy, nullable) NSSet <NSString *> *acceptableContentTypes;
 /**
  *  管理网络请求类的单例
  *

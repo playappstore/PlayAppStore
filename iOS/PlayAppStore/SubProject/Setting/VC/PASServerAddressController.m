@@ -20,14 +20,12 @@
 @interface PASServerAddressController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) PASSettingAdderssView *ipView;
-@property (nonatomic, strong) PASSettingAdderssView *portView;
 @property (nonatomic, strong) TPKeyboardAvoidingScrollView *scrollView;
 
 @property (nonatomic, strong) UITextField *ipTextField;
 @property (nonatomic, strong) UITextField *portTextField;
 @property (nonatomic, strong) UIButton *testCAButton;
-
-@property (nonatomic) NSInteger hadTested;
+@property (nonatomic ,copy) NSString *orIpStr;
 
 
 @end
@@ -41,6 +39,8 @@
     self.navigationItem.leftBarButtonItem = [QMUINavigationButton closeBarButtonItemWithTarget:self action:@selector(exitButtonClicked) tintColor:[UIColor whiteColor]];
     [self addSubviews];
     [self judegeWhetherHadValue];
+    _orIpStr = self.ipTextField.text;
+    
 }
 - (void)handleCloseButtonEvent {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -51,43 +51,60 @@
 
 #pragma mark - Actions
 - (void)testTheCAAvailabilitableImmidately {
-    [self validURLStringWithIPAddress:self.ipTextField.text];
-    NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
+    [self.ipTextField resignFirstResponder];
+    [self testTheCAAvailabilitableImmidatelyClose:NO];
+    [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
+   
+}
+- (void)testTheCAAvailabilitableImmidatelyClose:(BOOL)close {
+    NSString *str = [NSString stringWithFormat:@"%@records/ios",[self validURLStringWithIPAddress:self.ipTextField.text]] ;
     PASNetwrokManager *manager = [PASNetwrokManager defaultManager];
     [manager getWithUrlString:str success:^(id response) {
         NSLog(@"response is %@", response);
-        self.hadTested = YES;
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
+        PASMBView *pv = [PASMBView showSuccessPVAddedTo:self.scrollView message:@"success" ];
+        pv.completionBlock = ^{
+            if (close) {
+                [self handleCloseButtonEvent];
+            }
+        };
+        [self saveIpDressWithStr:[self validURLStringWithIPAddress:self.ipTextField.text]];
+        
     } failure:^(NSError *error) {
         NSLog(@"error is %@", error);
-#warning 怎么知道安装了新证书
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You should Install CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
-            alert.tag = 999;
-            [alert show];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You should Install CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
+        alert.tag = 999;
+        [alert show];
     }];
 }
-
 - (void)exitButtonClicked {
-    if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
+    if (self.ipTextField.text.length <= 6) {
+        //没有填写完整的ip
         
-        [self validURLStringWithIPAddress:self.ipTextField.text];
-        
-        if (self.hadTested) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You Test your CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
-            alert.tag = 888;
-            [alert show];
-        }
-        
-    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"Please fill in the full IP address with the port", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
         [alert show];
+
+    }else if ([_orIpStr isEqualToString:self.ipTextField.text]){
+   
+        //没有编辑过，且原先地址验证通过过
+        [self dismissViewControllerAnimated:YES completion:nil];
+    
+    }else if (![_orIpStr isEqualToString:self.ipTextField.text]) {
+    
+        //当前ip地址没有验证过
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:PASLocalizedString(@"You Test your CA first", nil) message:nil delegate:self cancelButtonTitle:PASLocalizedString(@"Cancel", nil) otherButtonTitles:PASLocalizedString(@"Confirm", nil), nil];
+        alert.tag = 888;
+        [alert show];
+
+    
     }
 }
 
 - (void)textFieldEndEdit {
-    if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
+    if (self.ipTextField.text.length > 6 ) {
+//    if (self.ipTextField.text.length > 6 && self.portTextField.text.length >0) {
         self.testCAButton.enabled = YES;
         [self updateTestButtonState];
     } else {
@@ -96,31 +113,81 @@
     }
 }
 
-- (void)validURLStringWithIPAddress:(NSString *)ipAddress {
+- (NSString *)validURLStringWithIPAddress:(NSString *)ipAddress {
     
-    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"/" withString:@""];
-    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"http:" withString:@""];
-    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"http" withString:@""];
-    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"s:" withString:@""];
-    ipAddress = [ipAddress stringByReplacingOccurrencesOfString:@"s" withString:@""];
+    NSURL *isValidatIP = [self smartURLForString:ipAddress];
+    ipAddress = [NSString stringWithFormat:@"%@",isValidatIP];
    
-    [[NSUserDefaults standardUserDefaults] setObject:ipAddress forKey:kNSUserDefaultMainAddress];
-    [[NSUserDefaults standardUserDefaults] setObject:self.portView.cardNumTextField.text forKey:kNSUserDefaultMainPort];
-    NSString *str = [NSString stringWithFormat:@"https://%@:%@/", ipAddress, self.portTextField.text];
+    NSString *str;
+    if ([ipAddress hasSuffix:@"/"]) {
+            
+        str = [NSString stringWithFormat:@"%@", ipAddress];
+       
+    }else {
+        
+        str = [NSString stringWithFormat:@"%@/", ipAddress];
+        
+    }
+    return str;
+        
+}
+- (void)saveIpDressWithStr:(NSString *)str {
+ 
+    _orIpStr = self.ipTextField.text;
     [[NSUserDefaults standardUserDefaults] setObject:str forKey:kNSUserDefaultMainHost];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
+    
 
+
+}
+- (NSURL *)smartURLForString:(NSString *)str
+{
+    NSURL *     result;
+    NSString *  trimmedStr;
+    NSRange     schemeMarkerRange;
+    NSString *  scheme;
+    
+    assert(str != nil);
+    
+    result = nil;
+    
+    trimmedStr = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ( (trimmedStr != nil) && (trimmedStr.length != 0) ) {
+        schemeMarkerRange = [trimmedStr rangeOfString:@"://"];
+        
+        if (schemeMarkerRange.location == NSNotFound) {
+            result = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", trimmedStr]];
+        } else {
+            scheme = [trimmedStr substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
+            assert(scheme != nil);
+            
+            if ( ([scheme compare:@"http"  options:NSCaseInsensitiveSearch] == NSOrderedSame)
+                || ([scheme compare:@"https" options:NSCaseInsensitiveSearch] == NSOrderedSame) ) {
+                result = [NSURL URLWithString:trimmedStr];
+            } else {
+                // It looks like this is some unsupported URL scheme.
+            }
+        }
+    }
+    
+    return result;
+}
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 999 && buttonIndex == 1) {
         NSString *openString =[NSString stringWithFormat:@"%@diy",[[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost]] ;
         [self openScheme:openString];
-        self.hadTested = YES;
     }
     if (alertView.tag == 888 && buttonIndex == 1) {
-        [self testTheCAAvailabilitableImmidately];
+        [self testTheCAAvailabilitableImmidatelyClose:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.label.text = NSLocalizedString(@"Loading...", @"HUD loading title");
+        
+        [hud.button setTitle:NSLocalizedString(@"Cancel", @"HUD cancel button title") forState:UIControlStateNormal];
+        [hud.button addTarget:self action:@selector(handleCloseButtonEvent) forControlEvents:UIControlEventTouchUpInside];
     }
     if (buttonIndex == 0) {
         [self handleCloseButtonEvent];
@@ -143,30 +210,6 @@
 }
 
 #pragma mark - Setter && Getter
-- (void)loadNav {
-    UILabel *titleLable = [[UILabel alloc] init];
-    titleLable.text = PASLocalizedString(@"Server address", nil);
-    titleLable.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:titleLable];
-    [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top).offset(33);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.width.equalTo(@200);
-        make.height.equalTo(@17);
-    }];
-    
-    //closeButton
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(exitButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backButton];
-    [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top).offset(33);
-        make.leading.mas_equalTo(self.view.mas_leading).offset(15);
-        make.width.equalTo(@13);
-        make.height.equalTo(@21);
-    }];
-}
 
 - (void)addSubviews {
     
@@ -175,13 +218,9 @@
     [self.view addSubview:self.scrollView];
     
     [self.scrollView addSubview:self.ipView];
-    [self.scrollView addSubview:self.portView];
     
     self.ipTextField = _ipView.cardNumTextField;
-    self.portTextField = _portView.cardNumTextField;
     [self.ipTextField addTarget:self action:@selector(textFieldEndEdit) forControlEvents:UIControlEventEditingChanged];
-    [self.portTextField addTarget:self action:@selector(textFieldEndEdit) forControlEvents:UIControlEventEditingChanged];
-    
     
     [self.scrollView addSubview:self.testCAButton];
     
@@ -191,16 +230,13 @@
 - (void)layoutSubviews
 {
     [self layoutIPView];
-    [self layoutPortView];
     [self layoutTestButton];
 }
 
 - (void)judegeWhetherHadValue {
-    NSString *ip =  [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainAddress];
-    NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainPort];
-    if (ip.length > 6 && port.length > 0) {
+    NSString *ip =  [[NSUserDefaults standardUserDefaults] objectForKey:kNSUserDefaultMainHost];
+    if (ip.length > 6 ) {
         self.ipTextField.text = ip;
-        self.portTextField.text = port;
         self.testCAButton.enabled = YES;
         [self updateTestButtonState];
     } else {
@@ -225,20 +261,13 @@
     }];
 }
 
-- (void)layoutPortView {
-    [self.portView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.view.mas_width);
-        make.height.equalTo(@(88/2.0f));
-        make.top.equalTo(self.ipView.mas_bottom).offset(10);
-    }];
-}
 
 - (void)layoutTestButton {
     [self.testCAButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left).offset(20);
         make.right.mas_equalTo(self.view.mas_right).offset(-20);
         make.height.equalTo(@(88/2.0f));
-        make.top.equalTo(self.portView.mas_bottom).offset(30);
+        make.top.equalTo(self.ipView.mas_bottom).offset(30);
     }];
 }
 - (PASSettingAdderssView *)ipView {
@@ -246,13 +275,6 @@
         _ipView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:PASLocalizedString(@"IP Address:", nil) placeHolder:PASLocalizedString(@"Please enter the server IP address", nil) isNeedTopSpitLine:YES];
     }
     return _ipView;
-}
-
-- (PASSettingAdderssView *)portView {
-    if (!_portView) {
-        _portView = [[PASSettingAdderssView alloc] initWithFrame:CGRectZero title:PASLocalizedString(@"Port:", nil) placeHolder:PASLocalizedString(@"Please enter the port address", nil) isNeedTopSpitLine:NO];
-    }
-    return _portView;
 }
 
 - (UIButton *)testCAButton {

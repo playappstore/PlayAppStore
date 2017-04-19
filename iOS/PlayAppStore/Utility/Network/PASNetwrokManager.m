@@ -57,7 +57,10 @@
 {
     NSString *string = [NSString stringWithFormat:@"%@", urlString];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    if (self.acceptableContentTypes) {
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    }
+//
     [manager GET:string parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
