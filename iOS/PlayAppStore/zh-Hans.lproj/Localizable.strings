@@ -44,7 +44,7 @@
 "Please fill in the full IP address with the port" = "请填写完整的IP地址与端口";
 "IP Address:" = "IP地址:";
 "Port:" = "端口:";
-"Please enter the server IP address" = "请输入服务器IP地址";
+"Please enter the server address" = "请输入服务器地址";
 "Please enter the port address" = "请输入端口地址";
 "Processing" = "正在请求数据";
 "Acknowledgement" = "鸣谢";

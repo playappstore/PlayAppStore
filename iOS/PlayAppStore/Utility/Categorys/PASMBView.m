@@ -39,20 +39,20 @@
                                          duration:(NSTimeInterval)duration {
     
     UIWindow *keyw = [UIApplication sharedApplication].keyWindow;
-    return [PASMBView showPVAddedTo:keyw status:message image:[[UIImage imageNamed:@"success"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] delays:duration];
+    return [PASMBView showPVAddedTo:keyw status:message image:[[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] delays:duration];
     
     
 }
 + (instancetype)showSuccessPVAddedTo:(UIView *)view message:(NSString *)message {
     
-    return [PASMBView showPVAddedTo:view status:message image:[[UIImage imageNamed:@"success"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] delays:delay];
+    return [PASMBView showPVAddedTo:view status:message image:[[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] delays:delay];
     
 }
 + (instancetype)showSuccessPVAddedTo:(UIView *)view
                              message:(NSString *)message
                             duration:(NSTimeInterval)duration {
     
-    return [PASMBView showPVAddedTo:view status:message image:[[UIImage imageNamed:@"success"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]delays:duration];
+    return [PASMBView showPVAddedTo:view status:message image:[[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]delays:duration];
 }
 + (instancetype)showErrorPVAddedTo:(UIView *)view message:(NSString *)message  {
     

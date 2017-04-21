@@ -28,7 +28,7 @@
 "Designer PlayAppStore" = "Designer PlayAppStore";
 "Follow us on twitter" = "Follow us on twitter";
 "more" = "More";
-"DOWNLOAD" = "DOWNLOAD";
+"DOWNLOAD" = "GET";
 "OPEN" = "OPEN";
 "Language setting" = "Language setting";
 "Server address" = "Server address";
@@ -47,7 +47,7 @@
 "Please enter the port address" = "Please enter the port address";
 "Processing" = "Processing...";
 "Acknowledgement" = "Acknowledgement";
-"NoFollowApp" = "NoFollowApp";
+"NoFollowApp" = "NOTHING";
 "ToFollowApp" = "ToFollowApp";
 "Version" = "Version";
 
