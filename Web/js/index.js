@@ -130,6 +130,6 @@ $(function(){
 	});
 	
 	// 二维码
-	$('.qrcode_pic').attr('src',"http://qr.topscan.com/api.php?m=5&text="+location.href);
+	$('.qrcode_pic').attr('src',"https://pan.baidu.com/share/qrcode?w=150&h=150&url="+location.href);
 	switchPlatform('ios');
 });
