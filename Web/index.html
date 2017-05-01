@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
-<head>
+<head>  
 <meta charset="UTF-8">
-<title>app下载</title>
+<title>playappstore</title>
 <!--H5页面窗口自动调整到设备宽度，并禁止用户缩放页面-->
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 <!--将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式  -->  
@@ -13,6 +13,8 @@
     <meta name="format-detection" content="email=no" />
     <!--winphone系统a、input标签被点击时产生的半透明灰色背景怎么去掉-->
     <meta name="msapplication-tap-highlight" content="no">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> 
     <link rel="stylesheet" href="css/index.css">
     <script src="js/zepto.min.js"></script>
     <script src="js/touch.js"></script>
@@ -35,14 +37,16 @@
 	});
   </script>
 </head>
-<body>
+<body>  
+  
 <div class="wrapper">
+    <div class="nav"><h3>PlayAppStore</h3></div>
 	<header class="header">
-    	<h2>PlayAppStore</h2><br>
+        
         <a class="attention" href="/cer/my-root-ca.cer">如果出现【无法验证服务器身份】或【无法链接到】，请点击链接安装证书</a>
     </header>
     <div class="app_wrapper">
-        <ul class="platform_wrapper"><span><span class="platform_title selected_title">iOS</span><span class="platform_title">Android</span></span>
+        <ul class="platform_wrapper"><span class="spanL spanR"><span class="platform_title selected_title">iOS</span><span class="platform_title">Android</span></span>
         </ul>
         <div class="moreAppButton"><span>加载更多</span></div>
     </div>
