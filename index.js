@@ -37,18 +37,10 @@ before(program, 'outputHelp', function() {
 program
     .version(pkgVersion)
     .usage('[option] [dir]')
-    .option('-p, --port <port-number>', 'set port for server (defaults is 1337)')
+    .option('-p, --port <port-number>', 'set port for server (defaults is 9090)')
     .option('-h, --host <host>', 'set host for server (defaults is your LAN ip)')
-    .option('-c, --options <options>', 'set the config json file path')
+    .option('-c, --config <config-file>', 'set the config json file path')
     .parse(process.argv);
-
-if (typeof(program.options) === 'string') {
-  if (fs.existsSync(program.options)) {
-    console.log('wrong config path!');
-  }
-  var options = require(program.options);
-  console.log('key : ' + options.key);
-}
 
 var app = express();
 
@@ -180,10 +172,10 @@ app.get('/plist/:guid', function(req, res) {
 
 function mapApps(apps) {
   var mapedApps = apps.map(function(app) {
-    app.icon = HTTPServerUrl + path.join('icon', app.icon);
+    app.icon = HTTPSServerUrl + path.join('icon', app.icon);
+    
     if (app.hasOwnProperty('package')) {
-      // only useable for android, and currently switch to http server.
-      app.package = HTTPServerUrl + path.join('app', app.package);
+      app.package = HTTPSServerUrl + path.join('app', app.package);
     }
     if (app.hasOwnProperty('createdAt')) {
       app.createdAt = dateFormat(app.createdAt, 'yyyy-mm-dd HH:MM');
@@ -273,37 +265,69 @@ app.delete(router, function(req, res) {
   })
 })
 
-// masterKey for post apps 
-const masterKey = process.env.masterKey || 'playappstore';
+var ssl_certificate;
+var ssl_certificate_key;
+var host;
+var port;
+var masterKeyHolder;
+if (typeof(program.config) === 'string') {
+  if (!fs.existsSync(program.config)) {
+    console.log('wrong config path!');
+    return;
+  }
+  var options = require(program.config);
+  ssl_certificate = options.ssl_certificate || null;
+  ssl_certificate_key = options.ssl_certificate_key || null;
+  host = options.host;
+  port = options.port || 9090;
+  masterKeyHolder = options.masterKey || 'playappstore';
+} else {
+  host = process.env.host || Cert.getIP();
+  port = process.env.PORT || 9090;
+  // masterKey for post apps 
+  masterKeyHolder = process.env.masterKey || 'playappstore';
+}
+const masterKey = masterKeyHolder;
+
 console.log('please set request header field "MasterKey" to %s when publish a new app', masterKey);
 
-var port = process.env.PORT || 9090;
-var imagePort = port + 1;
-var ipAddress = Cert.getIP();
-const HTTPSServerUrl =  util.format('https://%s:%d/', ipAddress, port);
-const HTTPServerUrl = util.format('http://%s:%d/', ipAddress, imagePort);
+// may remove the http server in the future.
+var httpPort = 9091;
+const HTTPServerUrl = util.format('http://%s:%d/', host, httpPort);
+
+const HTTPSServerUrl =  util.format('https://%s:%d/', host, port);
+
 var certsOptions;
-var certsPath;
-Cert.configCerts(ipAddress, function (options, path) {
-  certsOptions = options;
-  certsPath = path;
-})
+// only generate the self-signed certificate when the user didn't have one.
+if (ssl_certificate == null || ssl_certificate_key == null) {
+  var certsPath;
+  Cert.configCerts(host, function (options, path) {
+    certsOptions = options;
+    certsPath = path;
+  })
+  app.use('/cer', express.static(certsPath));
+  // enable to visit this page to install customize cert
+  app.get('/diy', function(req, res) {
+    res.sendFile(path.join(__dirname, '/Web/cert.html'));
+  });
+  console.log('please visit this url to install ca cert: ' + HTTPSServerUrl + 'diy');
+} else {
+  certsOptions = {
+    key: fs.readFileSync(ssl_certificate_key),
+    cert: fs.readFileSync(ssl_certificate)
+  }
+}
+
 
 app.use('/', express.static(path.join(__dirname, 'Web')));
-app.use('/cer', express.static(certsPath));
 app.use('/app', express.static(fl.appDir));
 app.use('/icon', express.static(fl.iconDir));
 
-// enable to visit this page to install customize cert
-app.get('/diy', function(req, res) {
-  res.sendFile(path.join(__dirname, '/Web/cert.html'));
-});
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
-console.log('please visit this url to install ca cert: ' + HTTPSServerUrl + 'diy');
 
 var httpServer = require('http').createServer(app);
-httpServer.listen(imagePort, function() {
+httpServer.listen(httpPort, function() {
 });
 
 var httpsServer = require('https').createServer(certsOptions, app);
