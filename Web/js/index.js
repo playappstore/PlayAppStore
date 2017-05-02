@@ -30,7 +30,7 @@ function loadApps(){
 							'<span class="app_name">'+val.name+
 							'</span><span class="version_number">'+val.version+'</span><br>'+
 							'<span>更新:</span>'+
-							'<span class="update_time">'+val.createdAt+'</span>'+
+							'<span class="update_time">'+val.updatedAt+'</span>'+
 							'<br><span class="changelog">'+(val.changelog ? val.changelog : "")+'</span>'+
 						'</div>'+
 						// '<a class="down_btn" href="'+val.url+'">下载</a>'+
