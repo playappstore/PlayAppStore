@@ -85,6 +85,7 @@ RealmDB.prototype.updateAppIcon = function(app) {
     var appIcon;
     realm.write(() => {
       appIcon = realm.create('AppIcon', app, true);
+      appIcon.updatedAt = new Date();
     });
     resolve(appIcon);
   });
@@ -94,6 +95,7 @@ RealmDB.prototype.updateAppRecord = function(app) {
     var appRecord;
     realm.write(() => {
       appRecord = realm.create('AppRecord', app, true);
+      appRecord.updatedAt = new Date();
     });
     resolve(appRecord);
   });
@@ -104,6 +106,7 @@ RealmDB.prototype.updateAppInfo = function(app) {
     var appInfo;
     realm.write(() => {
       appInfo = realm.create('AppInfo', app, true);
+      appInfo.updatedAt = new Date();
     });
     resolve(appInfo);
   });
