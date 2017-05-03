@@ -34,7 +34,9 @@ openssl genrsa \
   2> $blackhole
 
 # Create a request from your Device, which your Root CA will sign
-openssl req -new \
+openssl req \
+  -new \
+  -nodes \
   -key "$cer_dir"private.key \
   -out "$cer_dir"csr.req \
   -subj "/C=US/ST=Utah/L=Provo/O=PLAYAPPSTORE Tech Inc/CN=${ip}" \
@@ -44,6 +46,19 @@ openssl req -new \
 
 # Sign the request from Device with your Root CA
 # -CAserial certs/ca/my-root-ca.srl
+# CONFIG=$(cat /System/Library/OpenSSL/openssl.cnf)$'\n'$"[SAN]"$'\n'$"subjectAltName=DNS:localhost"
+# echo "$CONFIG" > "$cer_dir"openssl.cnf
+# -config "$cer_dir"openssl.cnf \
+# fix a bug that the self-signed cert missing the SubjectAltName on Chrome 58.
+echo "authorityKeyIdentifier=keyid,issuer\n" \
+"basicConstraints=CA:FALSE\n" \
+"keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment\n" \
+"subjectAltName = @alt_names\n" \
+"[alt_names]\n" \
+"DNS.1 = localhost\n" \
+"IP.1 = 127.0.0.1\n" \
+"IP.2 = ${ip}" > "$cer_dir"v3.cnf
+
 openssl x509 \
   -req -in "$cer_dir"csr.req \
   -CA "$cer_dir"my-root-ca.cer \
@@ -51,7 +66,5 @@ openssl x509 \
   -CAcreateserial \
   -sha256 \
   -out "$cer_dir"cert.cer \
+  -extfile "$cer_dir"v3.cnf \
   -days 500
-
-
-
