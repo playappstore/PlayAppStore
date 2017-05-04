@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var uuidV4 = require('uuid/v4');
 var parentCertFolder = require('os').homedir() + "/.playappstore/certs"
 var child_process = require('child_process');
 var underscore = require('underscore');
@@ -23,7 +24,8 @@ module.exports = {
   configCerts: function (ip, callback) {
       var options = makeCAAndCert(ip);
       var dirPath = path.join(parentCertFolder, ip);
-      callback(options, dirPath);
+      var caPath = path.join(parentCertFolder, 'ca/certs/my-root-ca.cer');
+      callback(options, dirPath, caPath);
 
       //return makeCAAndCert(ip);
   }
@@ -41,7 +43,8 @@ function makeCAAndCert(ip) {
     key = fs.readFileSync(keyPath, 'utf8');
     cert = fs.readFileSync(certPath, 'utf8');
   } catch (e) {
-    var result = child_process.execSync('sh  ' + path.join(__dirname, 'bin', 'make-root-ca-and-certificates.sh') + ' ' + ip + ' ' + certFolder).output;
+    var uuid = uuidV4()
+    var result = child_process.execSync('sh  ' + path.join(__dirname, 'bin', 'make-root-ca-and-certificates.sh') + ' ' + ip + ' ' + parentCertFolder + ' ' + uuid).output;
     key = fs.readFileSync(keyPath, 'utf8');
     cert = fs.readFileSync(certPath, 'utf8');
   }

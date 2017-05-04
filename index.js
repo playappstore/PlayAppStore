@@ -300,12 +300,12 @@ const HTTPSServerUrl =  util.format('https://%s:%d/', host, port);
 var certsOptions;
 // only generate the self-signed certificate when the user didn't have one.
 if (ssl_certificate == null || ssl_certificate_key == null) {
-  var certsPath;
-  Cert.configCerts(host, function (options, path) {
+  var caPath;
+  Cert.configCerts(host, function (options, certDirPath, caCertPath) {
     certsOptions = options;
-    certsPath = path;
+    caPath = caCertPath;
   })
-  app.use('/cer', express.static(certsPath));
+  app.use('/cer/rootca.cer', express.static(caPath));
   // enable to visit this page to install customize cert
   app.get('/diy', function(req, res) {
     res.sendFile(path.join(__dirname, '/Web/cert.html'));
