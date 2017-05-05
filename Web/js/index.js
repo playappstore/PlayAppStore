@@ -70,11 +70,19 @@ function loadMoreVersion(el) {
 				return;
 			}
 			$.each(version,function(index,val){
+				var downloadUri = null;
+				if (currentPlatform == 'ios') {
+					downloadUri = val.manifest;
+				} else if (currentPlatform == 'android') {
+					downloadUri = val.package;
+				} else {
+					downloadUri = val.package;
+				}
 				var versionLists = 
 				'<li data="'+val.manifest+'" >'+
 					'<img src="'+val.icon+'" alt="">'+
 					'<p><span class="app_name">'+val.name+'</span><span class="version_number">'+val.version+'  '+val.build+'</span></p><p><span>更新：</span><span class="update_time">'+val.updatedAt+'</span></p><p><span class="changelog">'+(val.changelog ? val.changelog : "")+'</span></p>'+
-					'<a class="down_btn" href="'+val.manifest+'">下载</a>'+
+					'<a class="down_btn" href="'+downloadUri+'">下载</a>'+
 				'</li>';
 				thisVersionInfo.append(versionLists);
 			});
