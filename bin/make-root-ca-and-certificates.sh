@@ -115,7 +115,8 @@ basicConstraints=CA:FALSE
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment\n" > "$cer_dir"/ca.cnf
 
 
-
+# Sign the request from Device with your Root CA
+# use ca command due to a bug that the self-signed cert missing the SubjectAltName on Chrome 58.
 openssl ca \
 -config "$cer_dir"/ca.cnf \
 -keyfile "$cadir"/private/my-root-ca.key \

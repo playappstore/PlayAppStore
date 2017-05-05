@@ -25,7 +25,7 @@ Here is a preview for iOS side:
 - [x] Auto generate sefl-signing HTTPS server for iOS OTA itms-services. 
 - [x] Support both web client-side and mobile client-side.
 - [x] Full information such as changelog.
-- [x] Push notification for new build.
+- [ ] Push notification for new build.
 
 ## Requirements
 
@@ -44,10 +44,11 @@ $ playappstore [option]
 
 Options:
 
--h, --help                output usage information
--V, --version             output the version number
--p, --port <port-number>  set port for server (defaults is 9090)
--h, --host <host>         set host for server (defaults is your LAN ip)
+-h, --help                 output usage information
+-V, --version              output the version number
+-p, --port <port-number>   set port for server (defaults is 9090)
+-h, --host <host>          set host for server (defaults is your LAN ip)
+-h, --config <config-file> set the config json file path
 ```
 
 ## Quick Start 
@@ -58,13 +59,21 @@ The quickest way to get started with playappstore is to utilize the default para
 $ playappstore
 ```
 
+In this situation, we will auto generate self-signed certificate for you. Otherwise, if you already have a certificate, it is recommend to config the certificate with a json file:
+
+```
+$ playappstore -c "path/to/config.json"
+```
+You can see the details of the config file from this [wiki](https://github.com/playappstore/PlayAppStore/wiki/Config-file-example).
+
+
 To publish an app is very simple, here is an example to request with curl:
 
 ```
-$ curl 'https://ip:port/apps' -F "package=@path" -F "changelog=some feature" --header "MasterKey: playappstore" --insecure
+$ curl 'https://host:port/apps' -F "package=@path" -F "changelog=some feature" --header "MasterKey: playappstore" --insecure
 ```
 
-Note that you should change the `ip` and `port` variables with your owns, and the path variable must be the file path where the ipa or apk is.
+Note that you should change the `host` and `port` variables with your owns, and the path variable must be the file path where the ipa or apk is.
 
 ### For iOS Side
 
@@ -79,7 +88,7 @@ Just under development, will release as fast as we can.
 
 ### For Web Side
 
-Just visit this url `https://ip:port/` in your mobile browser.
+Just visit this url `https://host:port/` in your mobile browser.
 
 ## Docs & Community
 
