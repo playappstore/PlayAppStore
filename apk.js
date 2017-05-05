@@ -5,7 +5,7 @@ var uuidV4 = require('uuid/v4');
 var util = require('util')
 var apkParser3 = require("apk-parser3");
 var pretty = require('prettysize');
-var tmp_dir = path.join(__dirname, 'tmp_file');
+var tmp_dir = require('os').homedir() + "/.playappstore/tmp_file"
 var DB = require('./realmDB.js');
 var db = new DB();
 var FileHelper = require('./file-helper.js');
@@ -101,7 +101,7 @@ function parseApk(filename) {
         var info = {
           "name":data["application-label"].replace(/'/g,""),
           "build":package.versionCode,
-          "bundleID":package.name,
+          "bundleId":package.name,
           "version":package.versionName,
           "platform":"android"
         }
