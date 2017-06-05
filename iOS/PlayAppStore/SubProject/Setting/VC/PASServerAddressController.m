@@ -247,7 +247,7 @@
 
 - (void)updateTestButtonState {
     if (self.testCAButton.enabled) {
-        self.testCAButton.backgroundColor = RGBCodeColor(0x2abfff);
+        self.testCAButton.backgroundColor = RGBCodeColor(0xEEE5DE);
     } else {
         self.testCAButton.backgroundColor = RGBCodeColor(0xcccccc);
     }
