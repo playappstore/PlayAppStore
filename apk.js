@@ -18,8 +18,11 @@ module.exports = {
   getRecords: function () {
     return allRecords();
   },
-  getAllVersions: function (bundleID, page, count) {
-    return allInfos(bundleID, page, count);
+  getAllInfos: function(page, count) {
+    return allInfos(page, count);
+  },
+  getAllVersions: function (bundleId, page, count) {
+    return allVersions(bundleId, page, count);
   }
 };
 
@@ -37,6 +40,12 @@ function allInfos(bundleID, page, count)  {
   var count = 100;
   return new Promise(function(resolve, reject) {
     var records = db.getAppInfos('android', bundleID);
+    resolve(records);
+  });
+}
+function allVersions(bundleId, page, count)  {
+  return new Promise(function(resolve, reject) {
+    var records = db.getAppVersions('android', bundleId, page, count);
     resolve(records);
   });
 }
